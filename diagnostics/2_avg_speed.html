@@ -236,21 +236,21 @@
             
             ctx.strokeStyle = '#e67e22';
             ctx.lineWidth = 1;
-            ctx.setLineDash();
+            ctx.setLineDash([]);
             ctx.beginPath(); ctx.moveTo(midPointX, 20); ctx.lineTo(midPointX, canvas.height - 20); ctx.stroke();
             ctx.font = 'italic 11px sans-serif'; ctx.fillStyle = '#e67e22';
             ctx.fillText('Середина пути (S / 2)', midPointX - 55, 15);
 
             ctx.strokeStyle = '#2ecc71';
             ctx.lineWidth = 4;
-            ctx.setLineDash([]);
             ctx.beginPath(); ctx.moveTo(trackRight, 20); ctx.lineTo(trackRight, canvas.height - 20); ctx.stroke();
             ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#27ae60';
             ctx.fillText('ФИНИШ', trackRight - 20, 15);
 
+            // ИСПРАВЛЕНО: Теперь везде строго прописан ctx.stroke()
             ctx.lineWidth = 24; ctx.strokeStyle = '#cbd5e1';
             ctx.beginPath(); ctx.moveTo(trackLeft, carY1); ctx.lineTo(trackRight, carY1); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); stroke();
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); ctx.stroke();
             ctx.lineWidth = 1;
         }
 
@@ -343,3 +343,4 @@
     </script>
 </body>
 </html>
+
