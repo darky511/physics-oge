@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный лист диагностики ОГЭ: Механика</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 30px 20px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 35px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        header h1 { margin: 0 0 10px 0; color: #2c3e50; font-size: 26px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 15px; }
+        
+        /* Карточка каждого пункта ФИПИ */
+        .task-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #e2e8f0; position: relative; }
+        .code-badge { background: #3498db; color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .task-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #34495e; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; }
+        .task-text { font-size: 15px; margin-bottom: 18px; font-weight: 500; }
+        
+        /* Варианты ответов */
+        .options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .option-item { background: #f8fafc; border: 1.5px solid #e2e8f0; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.2s; font-weight: 500; text-align: left; width: 100%; display: block; }
+        .option-item:hover { border-color: #3498db; background: #f1f5f9; }
+        
+        /* Динамическая подсветка ответов */
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        /* Раскрывающееся решение */
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 18px; border-radius: 4px; margin-top: 15px; animation: slideDown 0.35s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 8px 0; color: #166534; font-size: 15px; }
+        .solution-box p { margin: 0; font-size: 14px; color: #1e293b; line-height: 1.6; }
+        
+        /* Спец-оформление формул */
+        .formula { font-style: italic; font-family: 'Times New Roman', Times, serif; font-weight: bold; font-size: 15px; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Диагностическая карта ОГЭ: Механические явления</h1>
+        <p>Интерактивный лист проверки теоретических и практических знаний для учеников-отличников</p>
+    </header>
+
+    <!-- Код 1.1 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.1</div>
+        <div class="task-title">Механическое движение. Материальная точка. Система отсчёта</div>
+        <div class="task-text">В каком из приведенных ниже случаев тело можно считать материальной точкой?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Фигурист выполняет произвольную программу на льду Олимпиады</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.1')">Астроном рассчитывает расстояние от Земли до Марса</button>
+            <button class="option-item" onclick="handleWrong(this)">Инженер измеряет габариты шестерни редуктора станка</button>
+        </div>
+        <div class="solution-box" id="sol1.1">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Тело можно считать материальной точкой только тогда, когда его размерами и формой в условиях данной задачи можно пренебречь. Расстояние между Землей и Марсом огромно по сравнению с их радиусами, поэтому их геометрическая форма не влияет на расчёт расстояния. В случае с фигуристом или шестернёй размеры и взаимное расположение частей тел имеют решающее значение.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.2 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.2</div>
+        <div class="task-title">Равномерное и неравномерное движение. Средняя скорость</div>
+        <div class="task-text">Поезд двигался первую треть всего ВРЕМЕНИ поездки со скоростью 30 км/ч, а оставшиеся две трети ВРЕМЕНИ — со скоростью 60 км/ч. Чему равна средняя скорость поезда на всем пути?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">45 км/ч</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.2')">50 км/ч</button>
+            <button class="option-item" onclick="handleWrong(this)">40 км/ч</button>
+        </div>
+        <div class="solution-box" id="sol1.2">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Внимание на ловушку ОГЭ! Если бы путь делился пополам, мы бы считали среднее гармоническое. Но здесь пополам или на части делится <strong>ВРЕМЯ</strong>. <br>
+            Формула средней скорости: <span class="formula">v_ср = S_все / t_все = (S_1 + S_2) / t</span>. <br>
+            Распишем пути: <span class="formula">S_1 = v_1 • (t/3)</span>, а <span class="formula">S_2 = v_2 • (2t/3)</span>. <br>
+            Тогда: <span class="formula">v_ср = (v_1 • t/3 + v_2 • 2t/3) / t = (v_1 + 2•v_2) / 3</span>. <br>
+            Подставляем: <span class="formula">(30 + 2 • 60) / 3 = 150 / 3 = 50 км/ч</span>. В случае деления времени работает среднее взвешенное арифметическое!</p>
+        </div>
+    </div>
+
+    <!-- Код 1.3 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.3</div>
+        <div class="task-title">Равномерное прямолинейное движение. Уравнение координаты</div>
+        <div class="task-text">Движение двух материальных точек описывается уравнениями: x_1 = 15 + 2•t и x_2 = 55 - 3•t. Через какое время и в какой точке оси Х они встретятся?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Через 10 с в точке х = 25 м</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Через 5 с в точке х = 35 м</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.3')">Через 8 с в точке х = 31 м</button>
+        </div>
+        <div class="solution-box" id="sol1.3">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В момент встречи координаты тел обязаны совпасть: <span class="formula">x_1 = x_2</span>.<br>
+            Приравниваем правые части уравнений: <span class="formula">15 + 2•t = 55 - 3•t</span>.<br>
+            Переносим слагаемые с временем влево, числа вправо: <span class="formula">5•t = 40 => t = 8 секунд</span> (время встречи).<br>
+            Подставим полученное время в любое исходное уравнение, например, в первое: <span class="formula">x = 15 + 2 • 8 = 31 метр</span> (координата встречи).</p>
+        </div>
+    </div>
+
+    <!-- Код 1.4 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.4</div>
+        <div class="task-title">Равноускоренное прямолинейное движение. Проекция перемещения</div>
+        <div class="task-text">Автомобиль начинает разгон из состояния покоя с постоянным ускорением. За первую секунду он проходит путь, равный S. Какой путь автомобиль пройдет за третью секунду своего разгона?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">3 • S</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.4')">5 • S</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">9 • S</button>
+        </div>
+        <div class="solution-box" id="sol1.4">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Для тела, разгоняющегося из состояния покоя без начальной скорости (<span class="formula">v_0 = 0</span>), работает классическое физическое **правило Галилея**: пути, проходимые телом за последовательные равные промежутки времени, относятся друг к другу как ряд последовательных нечетных чисел.<br>
+            <span class="formula">S_1 : S_2 : S_3 : ... = 1 : 3 : 5 : 7 : ...</span><br>
+            Поскольку за 1-ю секунду путь равен <span class="formula">1•S</span>, то за 2-ю секунду тело пройдет путь <span class="formula">3•S</span>, а за 3-ю секунду — ровно <span class="formula">5•S</span>.</p>
+        </div>
+    </div>
+    <!-- Код 1.5 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.5</div>
+        <div class="task-title">Свободное падение тел</div>
+        <div class="task-text">Тяжелый стальной шар подбросили вертикально вверх со скоростью v_0. Чему равен модуль ускорения шара в наивысшей точке его подъема, когда он на мгновение остановился? Сопротивлением воздуха пренебречь.</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Нулю</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.5')">Примерно 10 м/с² (равно g)</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Увеличивается в два раза по сравнению со стартом</button>
+        </div>
+        <div class="solution-box" id="sol1.5">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Самый частый капкан на ОГЭ! Школьники думают: раз скорость в верхней точке на миг стала нулём, то и ускорение исчезло. Но это не так. <br>
+            На всём протяжении полёта на шарик действует только одна сила — сила тяжести. По второму закону Ньютона ускорение тела всегда сонаправлено с силой. Значит, в любой точке полёта (включая верхнюю точку) ускорение тела неизменно, направлено вниз и равно ускорению свободного падения <span class="formula">g ≈ 10 м/с²</span>. Если бы ускорение вверху стало нулём, шар бы застыл в воздухе навсегда.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.6 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.6</div>
+        <div class="task-title">Движение тела по окружности. Центростремительное ускорение</div>
+        <div class="task-text">Материальная точка равномерно движется по окружности радиуса R со скоростью v. Как изменится её центростремительное ускорение, если радиус окружности уменьшить в 2 раза, а скорость движения увеличить в 2 раза?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Увеличится в 4 раза</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Не изменится</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.6')">Увеличится в 8 раз</button>
+        </div>
+        <div class="solution-box" id="sol1.6">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Вспомним базовую формулу центростремительного ускорения из кодификатора: <span class="formula">a_ц = v² / R</span>.<br>
+            Проанализируем изменения величин: скорость <span class="formula">v</span> увеличивается в 2 раза, но в формуле она стоит в квадрате, значит числитель увеличится в <span class="formula">2² = 4 раза</span>. Радиус <span class="formula">R</span> в знаменателе уменьшается в 2 раза, что приводит к дополнительному увеличению всей дроби в 2 раза.<br>
+            Итоговое изменение ускорения: <span class="formula">4 • 2 = 8 раз</span>. Ускорение увеличится в 8 раз.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.7 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.7</div>
+        <div class="task-title">Масса. Плотность вещества</div>
+        <div class="task-text">Имеются два сплошных кубика. Первый кубик сделан из стали, а второй — из меди. Ребро второго кубика в 2 раза больше ребра первого. Во сколько раз масса второго кубика больше массы первого? (Плотность стали — 7800 кг/м³, плотность меди — 8900 кг/м³). Рассчитай округленно.</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Примерно в 2.3 раза</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Примерно в 4.5 раза</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.7')">Примерно в 9.1 раз</button>
+        </div>
+        <div class="solution-box" id="sol1.7">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Масса тела вычисляется по формуле: <span class="formula">m = &rho; • V</span>. <br>
+            Вспомним геометрию: объем куба зависит от его ребра в кубе: <span class="formula">V = a³</span>. Если ребро второго кубика в 2 раза больше, то его объем больше первого в <span class="formula">2³ = 8 раз</span>!<br>
+            Составим отношение масс: <span class="formula">m_2 / m_1 = (&rho;_меди • V_2) / (&rho;_стали • V_1) = (8900 • 8 • V_1) / (7800 • V_1) = (8900 • 8) / 7800 ≈ 9.12</span>.<br>
+            Таким образом, за счет кубической зависимости объема масса меди возрастает более чем в 9 раз.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.8 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.8</div>
+        <div class="task-title">Сила. Сложение сил</div>
+        <div class="task-text">На тело действуют три силы, направленные вдоль одной прямой: F_1 = 10 Н (вправо), F_2 = 15 Н (влево) и F_3 = 8 Н (вправо). Чему равен модуль равнодействующей силы и куда она направлена?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">33 Н, направлена влево</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.8')">3 Н, направлена вправо</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">3 Н, направлена влево</button>
+        </div>
+        <div class="solution-box" id="sol1.8">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Сила — величина векторная. Выберем координатную ось Х, направленную вправо. <br>
+            Тогда силы, направленные вправо, запишутся со знаком плюс, а влево — со знаком минус. <br>
+            Находим проекцию равнодействующей силы: <span class="formula">F_равн = F_1 − F_2 + F_3 = 10 − 15 + 8 = +3 Н</span>. <br>
+            Так как знак получился положительным, модуль силы равен 3 Н, а направлена она в сторону выбранной оси, то есть вправо.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.9 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.9</div>
+        <div class="task-title">Явление инерции. Первый закон Ньютона</div>
+        <div class="task-text">Система отсчета связана с легковым автомобилем. В каком случае эту систему отсчета можно считать инерциальной (ИСО)?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Автомобиль резко тормозит перед светофором</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.9')">Автомобиль движется равномерно и прямолинейно по трассе</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Автомобиль входит в крутой поворот на постоянной скорости</button>
+        </div>
+        <div class="solution-box" id="sol1.9">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>По определению Первого закона Ньютона, инерциальными системами отсчета (ИСО) называются такие системы, в которых тела сохраняют состояние покоя или равномерного прямолинейного движения, если на них не действуют силы. Любая система отсчета, движущаяся без ускорения (равномерно и прямолинейно) относительно Земли, также считается ИСО. При торможении или повороте возникает ускорение, поэтому такие системы неинерциальны.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.10 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.10</div>
+        <div class="task-title">Второй закон Ньютона</div>
+        <div class="task-text">К телу массой 2 кг, находящемуся на гладком горизонтальном столе, приложили силу 10 Н под углом 60 градусов к горизонту. Чему равно горизонтальное ускорение тела? (cos 60° = 0.5, sin 60° = 0.86)</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">5 м/с²</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.10')">2.5 м/с²</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">4.3 м/с²</button>
+        </div>
+        <div class="solution-box" id="sol1.10">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Движение тела происходит по горизонтальной плоскости стола, поэтому ускорение вызывается не всей силой <span class="formula">F</span>, а только её горизонтальной проекцией на ось Х. <br>
+            Проекция силы на горизонтальную ось: <span class="formula">F_x = F • cos 60°</span>. <br>
+            Применим Второй закон Ньютона для проекций: <span class="formula">F_x = m • a_x  =>  F • cos 60° = m • a</span>. <br>
+            Выразим и посчитаем ускорение: <span class="formula">a = (F • cos 60°) / m = (10 • 0.5) / 2 = 5 / 2 = 2.5 м/с²</span>.</p>
+        </div>
+    </div>
+    <!-- Код 1.11 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.11</div>
+        <div class="task-title">Третий закон Ньютона</div>
+        <div class="task-text">Огромный груженый самосвал сталкивается с маленькой легковой машиной. С чьей стороны сила воздействия во время удара была больше?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Со стороны тяжелого самосвала</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.11')">Силы абсолютно одинаковы по модулю</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Со стороны легкого легкового автомобиля</button>
+        </div>
+        <div class="solution-box" id="sol1.11">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Классическая проверка понимания Третьего закона Ньютона! Силы, с которыми два тела взаимодействуют друг на друга, всегда **равны по модулю и противоположны по направлению**: <span class="formula">F_1 = −F_2</span>. <br>
+            Вне зависимости от масс сталкивающихся тел, самосвал бьет легковую машину точно с такой же по силе реакцией, с какой легковая машина бьет самосвал. Разница в катастрофических разрушениях легковой машины объясняется тем, что при одинаковой силе удара её маленькая масса получает колоссальное, разрушительное ускорение по Второму закону Ньютона (<span class="formula">a = F / m</span>).</p>
+        </div>
+    </div>
+
+    <!-- Код 1.12 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.12</div>
+        <div class="task-title">Сила трения скольжения и покоя</div>
+        <div class="task-text">Тяжелый шкаф массой 50 кг стоит на полу. Коэффициент трения покоя между шкафом и полом равен 0.4. Человек толкает шкаф горизонтальной силой 100 Н, но шкаф не сдвигается с места. Чему равна сила трения, действующая на шкаф? (g ≈ 10 м/с²).</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">200 Н</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.12')">100 Н</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">0 Н</button>
+        </div>
+        <div class="solution-box" id="sol1.12">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Главная ловушка в задачах на силу трения! Большинство отличников автоматически берут формулу <span class="formula">F_тр = &mu; • N = &mu; • m • g</span> и получают <span class="formula">0.4 • 50 • 10 = 200 Н</span>. Но это формула для трения <strong>СКОЛЬЖЕНИЯ</strong> или максимального трения покоя! <br>
+            Поскольку шкаф остался <strong>неподвижен</strong>, силы по горизонтали уравновешивают друг друга. Сила трения покоя в данный момент в точности равна внешней силе, толкающей шкаф. Раз человек толкает шкаф с силой 100 Н, то и сила трения покоя сопротивляется ровно на 100 Н. Если бы она была 200 Н, шкаф бы сам поехал на человека!</p>
+        </div>
+    </div>
+
+    <!-- Код 1.13 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.13</div>
+        <div class="task-title">Закон Гука. Деформация тел</div>
+        <div class="task-text">Пружину жесткостью к = 400 Н/м растянули на 2 см. Какая сила упругости возникла в пружине?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">800 Н</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">80 Н</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.13')">8 Н</button>
+        </div>
+        <div class="solution-box" id="sol1.13">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Применяем Закон Гука для упругих деформаций: <span class="formula">F_упр = k • &Delta;x</span>. <br>
+            Критически важно перевести величины в систему СИ: удлинение пружины <span class="formula">&Delta;x = 2 см = 0.02 метра</span>. <br>
+            Подставляем числовые значения: <span class="formula">F_упр = 400 Н/м • 0.02 м = 8 Н</span>.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.14 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.14</div>
+        <div class="task-title">Закон всемирного тяготения. Сила тяжести</div>
+        <div class="task-text">Космический корабль удалился от поверхности Земли на расстояние, равное двум радиусам Земли (h = 2•R). Во сколько раз уменьшилась сила тяжести, действующая на корабль со стороны Земли, по сравнению со стартом на поверхности?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Уменьшилась в 2 раза</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">Уменьшилась в 4 раза</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.14')">Уменьшилась в 9 раз</button>
+        </div>
+        <div class="solution-box" id="sol1.14">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Закон всемирного тяготения гласит, что сила притяжения обратно пропорциональна **квадрату расстояния между центрами тел**.<br>
+            На поверхности Земли расстояние от корабля до центра планеты равно радиусу: <span class="formula">r_1 = R</span>.<br>
+            При подъеме на высоту <span class="formula">h = 2•R</span> новое расстояние до центра Земли станет: <span class="formula">r_2 = R + h = R + 2•R = 3•R</span> (расстояние увеличилось в 3 раза).<br>
+            Так как сила зависит от квадрата расстояния, она уменьшится в <span class="formula">3² = 9 раз</span>.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.15 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.15</div>
+        <div class="task-title">Импульс тела. Изменение импульса</div>
+        <div class="task-text">Теннисный мяч массой m летит горизонтально со скоростью v, ударяется о жесткую вертикальную стенку и упруго отскакивает назад с такой же по модулю скоростью. Чему равен модуль изменения импульса мяча за время удара?</div>
+        <div class="options-container">
+            <button class="option-btn option-item" onclick="handleWrong(this)">Нулю</button>
+            <button class="option-btn option-item" onclick="handleWrong(this)">m • v</button>
+            <button class="option-btn option-item" onclick="handleCorrect(this, 'sol1.15')">2 • m • v</button>
+        </div>
+        <div class="solution-box" id="sol1.15">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Импульс — векторная величина (<span class="formula">p = m • v</span>). Направим ось Х вдоль первоначального полета мяча. <br>
+            Начальный импульс мяча в проекции на ось Х: <span class="formula">p_1x = m • v</span>. <br>
+            Так как мяч отскочил назад, вектор его конечной скорости направлен против оси, то есть конечный импульс: <span class="formula">p_2x = −m • v</span>. <br>
+            Изменение импульса — это разность между конечным и начальным состояниями: <span class="formula">&Delta;p = p_2x − p_1x = −m • v − m • v = −2•m•v</span>. <br>
+            Модуль изменения импульса равен <span class="formula">2•m•v</span>. Физически стенка не просто остановила мяч (на это ушел импульс m•v), но и толкнула его обратно (еще m•v).</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Функция обработки неверного ответа
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    // Функция обработки верного ответа (подсветка + открытие решения ниже)
+    function handleCorrect(element, solutionId) {
+        // Подсвечиваем саму кнопку правильного ответа зеленой рамкой
+        element.classList.add('correct');
+        
+        // Находим и плавно раскрываем блок решения под вопросом
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        
+        // Блокируем остальные неверные варианты в этой карточке, чтобы зафиксировать успех
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            }
+        });
+    }
+</script>
+</body>
+</html>
