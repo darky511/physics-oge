@@ -18,14 +18,15 @@
         
         /* Спойлер подсказки */
         .spoiler-container { margin-bottom: 10px; flex-shrink: 0; }
-        .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; }
-        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 10px; border-radius: 0 0 6px 6px; }
+        .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; align-items: center; }
+        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 15px; border-radius: 0 0 6px 6px; }
         
-        /* Внутренности формул и SVG */
-        .formula-flex { display: flex; align-items: center; justify-content: space-around; font-size: 13px; }
-        .vector { position: relative; display: inline-block; padding-top: 2px; font-style: italic; font-family: "Times New Roman", Times, serif; font-size: 15px; }
-        .vector::after { content: "→"; position: absolute; top: -7px; left: 1px; font-size: 9px; }
-        .sub { font-size: 10px; vertical-align: sub; font-family: 'Segoe UI', sans-serif; font-style: normal; }
+        /* Внутренности формул и подписей */
+        .formula-flex { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+        .formula-text-block { font-size: 14px; line-height: 1.8; color: #2c3e50; }
+        .vector-text { position: relative; display: inline-block; font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 17px; margin-right: 2px; }
+        .vector-text::before { content: "→"; position: absolute; top: -10px; left: 1px; font-size: 10px; font-style: normal; }
+        .sub-text { font-size: 11px; vertical-align: sub; font-family: 'Segoe UI', sans-serif; font-style: normal; font-weight: bold; }
         
         /* Рабочая зона: пульт слева, холст справа */
         .main-workspace { display: flex; gap: 15px; flex-grow: 1; min-height: 0; }
@@ -67,47 +68,56 @@
             <button class="option-btn" onclick="wrongAnswer()">Горизонтальную прямую линию</button>
         </div>
     </div>
-
-    <!-- Исходно свернутый блок подсказки -->
+    <!-- Спойлер подсказки с исправленной прорисовкой векторов -->
     <div class="spoiler-container">
-        <button class="spoiler-btn" onclick="toggleSpoiler()"><span>💡 Показать подсказку с формулами и векторами</span> <span id="spoilerArrow">▼</span></button>
+        <button class="spoiler-btn" onclick="toggleSpoiler()">
+            <span>💡 Показать подсказку с формулами и векторами</span> 
+            <span id="spoilerArrow">▼</span>
+        </button>
         <div class="spoiler-content" id="spoilerContent">
             <div class="formula-flex">
-                <div>
-                    <strong>Формулы сложения скоростей:</strong><br><br>
-                    Закон: <span class="vector">v<span class="sub">абс</span></span> = <span class="vector">v<span class="sub">отн</span></span> + <span class="vector">v<span class="sub">пер</span></span><br>
-                    Для фуры: <span class="vector">v<span class="sub">отн</span></span> = <span class="vector">v<span class="sub">груза</span></span> − <span class="vector">v<span class="sub">фуры</span></span>
+                <div class="formula-text-block">
+                    <strong>Закон сложения скоростей:</strong><br>
+                    <span class="vector-text">v<span class="sub-text">абс</span></span> = 
+                    <span class="vector-text">v<span class="sub-text">отн</span></span> + 
+                    <span class="vector-text">v<span class="sub-text">пер</span></span>
+                    <br><br>
+                    <strong>Переход в СО движущейся фуры:</strong><br>
+                    <span class="vector-text">v<span class="sub-text">отн</span></span> = 
+                    <span class="vector-text">v<span class="sub-text">груза</span></span> − 
+                    <span class="vector-text">v<span class="sub-text">фуры</span></span>
                 </div>
-                <!-- Векторное изображение скоростей (SVG) -->
-                <svg width="220" height="90" style="background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
-                    <g transform="translate(30, 70)">
-                        <span style="font-family:sans-serif; font-size:10px;">
-                            <!-- Оси -->
-                            <line x1="0" y1="0" x2="160" y2="0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2"/>
-                            <line x1="0" y1="0" x2="0" y2="-55" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2"/>
-                            <!-- Вектор скорости падения v_груза -->
-                            <line x1="0" y1="0" x2="0" y2="-45" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow-red)"/>
-                            <text x="-5" y="-50" fill="#e74c3c" font-weight="bold" font-style="italic">v_груза (вниз)</text>
-                            <!-- Вектор минус v_фуры -->
-                            <line x1="0" y1="0" x2="120" y2="0" stroke="#2ecc71" stroke-width="2" marker-end="url(#arrow-green)"/>
-                            <text x="40" y="12" fill="#27ae60" font-weight="bold">−v_фуры (относительно авто)</text>
-                            <!-- Результирующая скорость v_отн -->
-                            <line x1="0" y1="0" x2="120" y2="-45" stroke="#f1c40f" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow-gold)"/>
-                            <text x="65" y="-30" fill="#b7791f" font-weight="bold">v_отн (под углом)</text>
-                        </span>
-                    </g>
-                    <!-- Маркеры стрелок -->
+                
+                <!-- Полностью переработанный, чистый и рабочий SVG-чертеж -->
+                <svg width="340" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
                     <defs>
-                        <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#e74c3c"/></marker>
-                        <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#2ecc71"/></marker>
-                        <marker id="arrow-gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#f1c40f"/></marker>
+                        <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#e74c3c"/></marker>
+                        <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2ecc71"/></marker>
+                        <marker id="arr-gold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f1c40f"/></marker>
                     </defs>
+                    <!-- Векторная группа координат и стрелок -->
+                    <g font-family="Arial, sans-serif" font-size="11px" font-weight="bold">
+                        <!-- Пунктирный прямоугольник для правила сложения -->
+                        <path d="M 240,25 L 80,25 L 80,95" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" fill="none"/>
+                        
+                        <!-- Вектор скорости падения груза (вниз) -->
+                        <line x1="240" y1="25" x2="240" y2="95" stroke="#e74c3c" stroke-width="2.5" marker-end="url(#arr-red)"/>
+                        <text x="248" y="65" fill="#e74c3c">v_груза (падение вниз)</text>
+                        
+                        <!-- Вектор переносной скорости со знаком минус (влево) -->
+                        <line x1="240" y1="95" x2="80" y2="95" stroke="#2ecc71" stroke-width="2.5" marker-end="url(#arr-green)"/>
+                        <text x="95" y="112" fill="#27ae60">−v_фуры (увлекает назад)</text>
+                        
+                        <!-- Результирующий вектор относительной скорости (диагональ) -->
+                        <line x1="240" y1="25" x2="84" y2="93" stroke="#f1c40f" stroke-width="2.5" marker-end="url(#arr-gold)"/>
+                        <text x="65" y="18" fill="#b7791f">v_отн (движение по параболе)</text>
+                    </g>
                 </svg>
             </div>
         </div>
     </div>
+
     <div class="main-workspace">
-        <!-- 3. Панель управления слева (вертикальная область) -->
         <div class="sidebar-controls">
             <div class="control-block">
                 <label>Действия с симуляцией:</label>
@@ -134,13 +144,11 @@
             </div>
         </div>
 
-        <!-- Поле анимации справа -->
         <div class="canvas-container" id="canvasHolder">
             <canvas id="simCanvas"></canvas>
         </div>
     </div>
 
-    <!-- Модальное окно правильного ответа -->
     <div class="modal" id="successModal">
         <div class="modal-content">
             <div class="modal-header">🎉 Ответ верный! Великолепно!</div>
@@ -154,7 +162,6 @@
             <button class="close-modal-btn" onclick="closeModal()">Понятно!</button>
         </div>
     </div>
-
     <script>
         const canvas = document.getElementById('simCanvas');
         const ctx = canvas.getContext('2d');
@@ -173,7 +180,6 @@
 
         let roadY = 0;
 
-        // Автоподгонка внутреннего разрешения Canvas под размеры родительского контейнера
         function resizeCanvas() {
             canvas.width = holder.clientWidth;
             canvas.height = holder.clientHeight;
@@ -186,15 +192,14 @@
 
         function drawBackground() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // Небо
             ctx.fillStyle = '#87CEEB';
             ctx.fillRect(0, 0, canvas.width, roadY);
-            // Трава и дорога
             ctx.fillStyle = '#7cfc00';
             ctx.fillRect(0, roadY, canvas.width, canvas.height - roadY);
             ctx.fillStyle = '#777';
             ctx.fillRect(0, roadY + 10, canvas.width, 25);
         }
+
         function drawHelicopter() {
             let drawX = state.frame === 'earth' ? state.helicopterX : state.helicopterX - state.truckX + 180;
             ctx.fillStyle = '#e74c3c';
@@ -256,7 +261,7 @@
             if (state.package.active) {
                 state.package.y += state.package.vy;
                 state.package.x += state.package.vx;
-                state.package.vy += 0.07; // Ускорение g
+                state.package.vy += 0.07; 
 
                 state.trajectory.push({
                     x: state.package.x,
@@ -280,7 +285,6 @@
             requestAnimationFrame(simLoop);
         }
 
-        // Логика управления спойлером
         function toggleSpoiler() {
             const content = document.getElementById('spoilerContent');
             const arrow = document.getElementById('spoilerArrow');
