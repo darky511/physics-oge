@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конструктор формул: Выражение параметров</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f9; margin: 0; padding: 25px; color: #2c3e50; height: 100vh; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .container { width: 96vw; height: 95vh; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; gap: 20px; box-sizing: border-box; }
+        
+        /* Левая панель с выбором формул */
+        .sidebar { width: 260px; display: flex; flex-direction: column; gap: 10px; border-right: 1px solid #e2e8f0; padding-right: 15px; flex-shrink: 0; }
+        .sidebar h2 { font-size: 16px; margin: 0 0 10px 0; color: #34495e; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-btn { background: #f8fafc; border: 1.5px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; color: #475569; }
+        .nav-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .nav-btn.active { background: #3498db; color: white; border-color: #2980b9; }
+
+        /* Правая рабочая зона */
+        .workspace { flex-grow: 1; display: flex; flex-direction: column; height: 100%; min-width: 0; }
+        .header-task { background: #fff9e6; border-left: 5px solid #f1c40f; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; flex-shrink: 0; }
+        .header-task h3 { margin: 0 0 5px 0; font-size: 16px; color: #b45309; }
+        .header-task p { margin: 0; font-size: 13px; line-height: 1.4; font-weight: 500; }
+
+        /* Поле сборки формулы */
+        .sandbox { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; margin-bottom: 15px; }
+        .target-box { font-size: 24px; font-weight: bold; margin-bottom: 25px; background: #e2e8f0; padding: 8px 20px; border-radius: 8px; font-family: 'Times New Roman', Times, serif; font-style: italic; }
+        
+        /* Дисплей конструирования */
+        .display-line { display: flex; align-items: center; gap: 8px; min-height: 55px; background: white; border: 2px solid #94a3b8; width: 80%; border-radius: 8px; padding: 0 15px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.03); justify-content: center; margin-bottom: 30px; font-family: 'Times New Roman', Times, serif; font-style: italic; font-size: 26px; font-weight: bold; }
+        
+        /* Кнопки-кирпичики */
+        .keyboard { display: flex; gap: 10px; justify-content: center; wrap: wrap; width: 90%; }
+        .brick { background: white; border: 1.5px solid #cbd5e1; padding: 10px 18px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.15s; font-family: 'Times New Roman', Times, serif; font-style: italic; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .brick:hover { border-color: #3498db; background: #f0f9ff; transform: translateY(-1px); }
+        .brick:active { transform: translateY(0); }
+        .brick.action { font-family: 'Segoe UI', sans-serif; font-style: normal; background: #e2e8f0; border-color: #cbd5e1; }
+        .brick.clear { background: #fee2e2; border-color: #fca5a5; color: #991b1b; font-family: 'Segoe UI', sans-serif; font-style: normal; }
+        .brick.clear:hover { background: #fca5a5; }
+
+        /* Всплывающее окно объяснения */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 2000; }
+        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 500px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); animation: scaleUp 0.25s ease; }
+        @keyframes scaleUp { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-header { font-size: 20px; color: #27ae60; font-weight: bold; margin-bottom: 12px; }
+        .modal-text { font-size: 14px; line-height: 1.5; color: #34495e; margin-bottom: 15px; }
+        .modal-text strong { color: #2c3e50; }
+        .close-btn { background: #27ae60; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Левое меню выбора тем -->
+    <div class="sidebar">
+        <h2>Разделы ОГЭ:</h2>
+        <button class="nav-btn active" onclick="switchFormula(0)">1. Механика: Ускорение</button>
+        <button class="nav-btn" onclick="switchFormula(1)">2. Теплота: Баланс</button>
+        <button class="nav-btn" onclick="switchFormula(2)">3. Электричество: Закон Ома</button>
+        <button class="nav-btn" onclick="switchFormula(3)">4. Оптика: Оптическая сила</button>
+    </div>
+
+    <!-- Правое интерактивное поле -->
+    <div class="workspace">
+        <div class="header-task">
+            <h3 id="taskTitle">Задача на выражение параметра:</h3>
+            <p id="taskDesc">Из базовой формулы равноускоренного движения вырази начальную скорость (v₀).</p>
+        </div>
+
+        <div class="sandbox">
+            <div class="target-box" id="baseFormula">Исходная формула: v = v₀ + a • t</div>
+            
+            <!-- Куда собирается ответ -->
+            <div class="display-line" id="formulaDisplay">v₀ = </div>
+            
+            <!-- Интерактивная клавиатура элементов -->
+            <div class="keyboard" id="keyboardContainer">
+                <!-- Буквы будут генерироваться динамически через JS -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Всплывающее окно с математическим разбором без LaTeX -->
+<div class="modal" id="mathModal">
+    <div class="modal-content">
+        <div class="modal-header">🎉 Умница! Буквенная структура собрана верно!</div>
+        <div class="modal-text" id="modalExplanation">
+            <!-- Текст объяснения генерируется динамически -->
+        </div>
+        <button class="close-btn" onclick="closeModal()">Понятно, дальше!</button>
+    </div>
+</div>
+
+<script>
+    // Массив данных со всеми формулами, правильными ответами и разборами
+    const formulaDatabase = [
+        {
+            title: "1. Механика: Равноускоренное движение",
+            desc: "Дана формула скорости: v = v₀ + a • t. Вырази из неё начальную скорость (v₀).",
+            base: "Исходная формула: v = v₀ + a • t",
+            leftPart: "v₀ = ",
+            bricks: ["v", "a", "t", "+", "−", "•", "/", "(", ")"],
+            correctPattern: "v−a•t",
+            explanation: "<strong>Математическое правило:</strong><br>Чтобы найти неизвестное слагаемое (v₀), нужно из суммы (v) вычесть известное слагаемое (произведение a • t).<br><br><strong>Совет репетитора:</strong><br>Воспринимай блок (a • t) как единое неделимое число. Мы просто переносим его через знак '=' налево, меняя его исходный знак '+' на противоположный '−'."
+        },
+        {
+            title: "2. Тепловые явления: Удельная теплоёмкость",
+            desc: "Дана формула количества теплоты: Q = c • m • (t₂ − t₁). Вырази из неё массу тела (m).",
+            base: "Исходная формула: Q = c • m • (t₂ − t₁)",
+            leftPart: "m = ",
+            bricks: ["Q", "c", "t₁", "t₂", "−", "•", "/", "(", ")"],
+            correctPattern: "Q/(c•(t₂−t₁))",
+            alternativePattern: "Q/(c•(t₂−t₁))", // Добавим гибкость проверки в коде
+            explanation: "<strong>Математическое правило:</strong><br>Чтобы найти неизвестный множитель (m), нужно произведение (Q) разделить на весь комплекс известных множителей, стоявших рядом с ним.<br><br><strong>Правило 'этажей':</strong><br>Все буквы, которые умножались на искомую массу (то есть c и скобка), при переносе через знак равенства отправляются на нижний этаж — в знаменатель дроби!"
+        },
+        {
+            title: "3. Электродинамика: Сопротивление проводника",
+            desc: "Дана формула удельного сопротивления: R = &rho; • l / S. Вырази из неё площадь поперечного сечения (S).",
+            base: "Исходная формула: R = &rho; • l / S",
+            leftPart: "S = ",
+            bricks: ["R", "&rho;", "l", "•", "/", "(", ")"],
+            correctPattern: "&rho;•l/R",
+            explanation: "<strong>Математическое правило (Правило креста):</strong><br>Если искомый параметр находится в знаменателе, мы можем мысленно представить левую часть как дробь R/1. По правилу пропорции, крайние элементы по диагонали можно менять местами!<br><br><strong>Совет репетитора:</strong><br>Буквы R и S просто меняются крест-накрест своими позициями. S уходит наверх в левую часть, а R падает вниз на место знаменателя в правую часть."
+        },
+        {
+            title: "4. Геометрическая оптика: Оптическая сила",
+            desc: "Дана формула оптической силы линзы: D = 1 / F. Вырази из неё фокусное расстояние линзы (F).",
+            base: "Исходная формула: D = 1 / F",
+            leftPart: "F = ",
+            bricks: ["D", "1", "•", "/", "+", "−"],
+            correctPattern: "1/D",
+            explanation: "<strong>Математическое правило:</strong><br>Это простейшая обратная зависимость. Если D — это единица, деленная на F, то и наоборот: F — это единица, деленная на D.<br><br><strong>Совет репетитора:</strong><br>Точно так же, как в правиле креста, мы меняем местами параметр D и знаменатель F. Отличники должны делать это мгновенно, не задумываясь!"
+        }
+    ];
+
+    let currentFormulaIndex = 0;
+    let userExpression = [];
+    const display = document.getElementById('formulaDisplay');
+    const keyboard = document.getElementById('keyboardContainer');
+
+    // Функция переключения активной формулы из бокового меню
+    function switchFormula(index) {
+        currentFormulaIndex = index;
+        
+        // Обновляем подсветку кнопок в меню
+        const navButtons = document.querySelectorAll('.nav-btn');
+        navButtons.forEach((btn, i) => {
+            if(i === index) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+
+        // Сбрасываем рабочее поле конструктора
+        userExpression = [];
+        renderKeyboard();
+        updateDisplay();
+    }
+
+    // Отрисовка клавиатуры под текущую формулу
+    function renderKeyboard() {
+        keyboard.innerHTML = '';
+        const currentData = formulaDatabase[currentFormulaIndex];
+
+        // Генерируем кнопки букв и знаков
+        currentData.bricks.forEach(symbol => {
+            const btn = document.createElement('button');
+            btn.className = 'brick';
+            btn.innerHTML = symbol;
+            btn.onclick = () => addSymbol(symbol);
+            keyboard.appendChild(btn);
+        });
+
+        // Добавляем служебную кнопку "Стереть символ"
+        const backBtn = document.createElement('button');
+        backBtn.className = 'brick action';
+        backBtn.innerText = '←';
+        backBtn.onclick = removeLastSymbol;
+        keyboard.appendChild(backBtn);
+
+        // Добавляем служебную кнопку "Очистить всё"
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'brick clear';
+        clearBtn.innerText = 'Очистить';
+        clearBtn.onclick = clearAll;
+        keyboard.appendChild(clearBtn);
+    }
+
+    function addSymbol(symbol) {
+        userExpression.push(symbol);
+        updateDisplay();
+        checkAnswer();
+    }
+
+    function removeLastSymbol() {
+        userExpression.pop();
+        updateDisplay();
+    }
+
+    function clearAll() {
+        userExpression = [];
+        updateDisplay();
+    }
+
+    // Обновление текстовой строки на экране сборки
+    function updateDisplay() {
+        const currentData = formulaDatabase[currentFormulaIndex];
+        document.getElementById('taskTitle').innerText = currentData.title;
+        document.getElementById('taskDesc').innerText = currentData.desc;
+        document.getElementById('baseFormula').innerText = currentData.base;
+        
+        // Преобразуем массив символов пользователя в строку на экране
+        display.innerHTML = currentData.leftPart + userExpression.join(' ');
+    }
+
+    // Проверка собранного ответа без учёта пробелов
+    function checkAnswer() {
+        const currentData = formulaDatabase[currentFormulaIndex];
+        const userStr = userExpression.join('');
+
+        // Жесткая сверка шаблона строки
+        if (userStr === currentData.correctPattern) {
+            openModal(currentData.explanation);
+        }
+    }
+
+    function openModal(text) {
+        document.getElementById('modalExplanation').innerHTML = text;
+        document.getElementById('mathModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('mathModal').style.display = 'none';
+        
+        // Переводим на следующую формулу автоматически, если она есть
+        if (currentFormulaIndex < formulaDatabase.length - 1) {
+            switchFormula(currentFormulaIndex + 1);
+        }
+    }
+
+    // Инициализация при первой загрузке страницы
+    switchFormula(0);
+</script>
+</body>
+</html>
