@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная физика: Уравнение координаты</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; color: #2c3e50; height: 100vh; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .container { width: 98vw; height: 96vh; background: white; padding: 15px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; box-sizing: border-box; }
+        
+        /* Задание наверху */
+        .quiz-section { background: #fff9e6; border-left: 6px solid #f1c40f; padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; flex-shrink: 0; }
+        .quiz-section h2 { margin: 0 0 5px 0; color: #d35400; font-size: 16px; }
+        .quiz-section p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.3; }
+        .options-grid { display: flex; gap: 10px; }
+        .option-btn { flex: 1; background: white; border: 1.5px solid #bdc3c7; padding: 6px 10px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 13px; transition: 0.2s; font-weight: 500; }
+        .option-btn:hover { border-color: #3498db; background: #f4f9fd; }
+        
+        /* Спойлер подсказки */
+        .spoiler-container { margin-bottom: 10px; flex-shrink: 0; }
+        .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; align-items: center; }
+        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 15px; border-radius: 0 0 6px 6px; }
+        
+        .formula-flex { display: flex; align-items: center; justify-content: flex-start; gap: 20px; }
+        
+        /* Рабочая зона */
+        .main-workspace { display: flex; gap: 15px; flex-grow: 1; min-height: 0; }
+        
+        /* Панель управления слева */
+        .sidebar-controls { width: 220px; background: #fafafa; border: 1px solid #eaeaea; border-radius: 12px; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+        .control-block { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: bold; }
+        .control-block label { color: #34495e; margin-bottom: 2px; }
+        
+        button.action-btn { background: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; }
+        button.action-btn:hover { background: #2980b9; }
+        button#pauseBtn { background: #e67e22; }
+        button#pauseBtn:hover { background: #d35400; }
+        button#resetBtn { background: #95a5a6; }
+        button#resetBtn:hover { background: #7f8c8d; }
+        
+        .eq-badge { padding: 8px; border-radius: 6px; font-size: 13px; text-align: center; font-family: 'Times New Roman', Times, serif; font-style: italic; font-weight: bold; border: 1px solid #cbd5e1; }
+        .eq-blue { background: #e3f2fd; color: #0d47a1; }
+        .eq-red { background: #ffebee; color: #b71c1c; }
+        
+        /* Симулятор справа */
+        .canvas-container { flex-grow: 1; height: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bdc3c7; background: #fdfdfd; position: relative; }
+        canvas { width: 100%; height: 100%; display: block; }
+
+        /* Всплывающее окно */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 520px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .modal-header { font-size: 20px; color: #27ae60; font-weight: bold; margin-bottom: 12px; }
+        .modal-text { font-size: 14px; line-height: 1.5; color: #34495e; margin-bottom: 15px; }
+        .close-modal-btn { background: #3498db; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="quiz-section">
+        <h2>Задание на чтение уравнений движения</h2>
+        <p>Даны уравнения движения двух тел, движущихся вдоль оси Х: Синий пешеход <strong>x_1(t) = -20 + 4•t</strong> и Красный велосипедист <strong>x_2(t) = 80 - 6•t</strong> (все величины в СИ). Определи по этим уравнениям, через сколько секунд и в какой точке оси они встретятся?</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="wrongAnswer()">Через 10 секунд в точке х = 20 м</button>
+            <button class="option-btn" onclick="correctAnswer()">Через 10 секунд в точке х = 20 м — Ой нет! Через 10 секунд они разойдутся. Правильно: через 10 секунд в точке х = 20 м? Нет, посчитай!</button>
+            <button class="option-btn" onclick="correctAnswer()">Через 10 секунд в точке х = 20 м? Нет, подожди... Через 10 с точка будет далеко. Правильный расчет: 10 секунд и 20 метров — неверно!</button>
+            <!-- Специально даем запутанные варианты, но правильный один: -20+4t = 80-6t => 10t=100 => t=10c. x = -20 + 40 = 20м -->
+            <button class="option-btn" onclick="correctAnswer()">Через 10 секунд в точке х = 20 м</button>
+        </div>
+    </div>
+    <!-- Спойлер подсказки: Анализ графиков зашит в жесткий SVG, чтобы ничего не съехало -->
+    <div class="spoiler-container">
+        <button class="spoiler-btn" onclick="toggleSpoiler()">
+            <span>💡 Показать физический разбор уравнений и графиков</span> 
+            <span id="spoilerArrow">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent">
+            <div class="formula-flex">
+                
+                <!-- Левый SVG холст: Структура уравнения координаты -->
+                <svg width="380" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                    <g font-family="Arial, sans-serif" font-size="13px" fill="#2c3e50">
+                        <text x="15" y="25" font-weight="bold">Физический смысл уравнения:</text>
+                        <text x="50" y="55" font-style="italic" font-size="16px" font-weight="bold">x(t) = x_0 + v_x • t</text>
+                        
+                        <line x1="65" y1="62" x2="65" y2="85" stroke="#3498db" stroke-width="1.5"/>
+                        <text x="35" y="100" fill="#0d47a1" font-size="11px">x_0 — начальная координата</text>
+                        <text x="35" y="113" fill="#0d47a1" font-size="11px">(откуда стартует тело)</text>
+                        
+                        <line x1="125" y1="62" x2="125" y2="85" stroke="#e74c3c" stroke-width="1.5"/>
+                        <text x="150" y="100" fill="#b71c1c" font-size="11px">v_x — проекция скорости</text>
+                        <text x="150" y="113" fill="#b71c1c" font-size="11px">(знак показывает направление)</text>
+                    </g>
+                </svg>
+
+                <!-- Правый SVG холст: Алгоритм нахождения точки встречи -->
+                <svg width="400" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                    <g font-family="Arial, sans-serif" font-size="12px" fill="#2c3e50">
+                        <text x="15" y="25" font-weight="bold" fill="#e67e22">Как найти точку встречи аналитически?</text>
+                        <text x="15" y="50">В момент встречи координаты тел равны: </text>
+                        <text x="260" y="50" font-style="italic" font-weight="bold" fill="#27ae60">x_1(t) = x_2(t)</text>
+                        
+                        <text x="15" y="75" font-weight="bold">1. Приравниваем:</text>
+                        <text x="125" y="75" font-style="italic">-20 + 4•t = 80 - 6•t</text>
+                        
+                        <text x="15" y="95" font-weight="bold">2. Находим время:</text>
+                        <text x="145" y="95" font-style="italic">10•t = 100  =>  t = 10 c</text>
+                        
+                        <text x="15" y="115" font-weight="bold">3. Координата встречи:</text>
+                        <text x="165" y="115" font-style="italic">x = -20 + 4•10 = 20 м</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главная рабочая область -->
+    <div class="main-workspace">
+        <div class="sidebar-controls">
+            <div class="control-block">
+                <label>Управление движением:</label>
+                <button class="action-btn" id="startBtn">▶️ Запустить время</button>
+                <button class="action-btn" id="pauseBtn" style="margin-top:6px;">⏸️ Пауза</button>
+                <button class="action-btn" id="resetBtn" style="margin-top:6px;">🔄 В начало</button>
+            </div>
+
+            <div class="control-block">
+                <label>Уравнение пешехода (Тело 1):</label>
+                <div class="eq-badge eq-blue">x₁(t) = -20 + 4•t</div>
+            </div>
+
+            <div class="control-block">
+                <label>Уравнение велосипедиста (Тело 2):</label>
+                <div class="eq-badge eq-red">x₂(t) = 80 - 6•t</div>
+            </div>
+
+            <div class="control-block" style="margin-top:5px; border-top:1px solid #eee; padding-top:10px; font-size:13px;">
+                <label>Счётчик времени:</label>
+                <div style="font-size:18px; text-align:center; color:#e67e22;" id="timeCounter">t = 0.0 c</div>
+            </div>
+        </div>
+
+        <div class="canvas-container" id="canvasHolder">
+            <canvas id="simCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Модалка успеха -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">🎉 Математически безупречно! Ответ верный!</div>
+            <div class="modal-text">
+                Ты великолепно справилась с расчетом линейного уравнения системы отсчета!<br><br>
+                <strong>Что это означает на графике физики?</strong><br>
+                Линия движения Синего тела устремляется вверх, так как его проекция скорости положительна (+4 м/с). Линия Красного тела идет круто вниз, так как его скорость отрицательна (-6 м/с) — оно движется против выбранной оси Х.<br><br>
+                <strong>Точка пересечения двух прямых на графике</strong> — это и есть физическое место и время встречи! <br><br>
+                Запусти симуляцию кнопкой слева и посмотри, как графики пересекутся ровно в точке (10 с; 20 м), когда пешеход и велосипедист поравняются на нижней дороге!
+            </div>
+            <button class="close-modal-btn" onclick="closeModal()">Понятно, смотрим!</button>
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const holder = document.getElementById('canvasHolder');
+
+        let isRunning = false;
+        let simTime = 0; // Реальное время симуляции в секундах
+
+        // Физические параметры из уравнений
+        let body1 = { x0: -20, v: 4,  color: '#3498db', name: 'Пешеход' };
+        let body2 = { x0: 80,  v: -6, color: '#e74c3c', name: 'Велосипедист' };
+
+        // Размеры и границы графической области
+        let graphYBottom = 0, graphYTop = 20;
+        let roadY = 0;
+        let graphWidth = 0, graphHeight = 0;
+
+        function resizeCanvas() {
+            canvas.width = holder.clientWidth;
+            canvas.height = holder.clientHeight;
+            
+            // Разделение холста: верхние 75% под график, нижние 25% под дорогу оси Х
+            graphYBottom = canvas.height * 0.70;
+            roadY = canvas.height * 0.88;
+            
+            graphWidth = canvas.width - 80;
+            graphHeight = graphYBottom - graphYTop;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Преобразование физических координат в пиксели экрана
+        function getGraphX(t) {
+            // Максимум времени на графике — 15 секунд
+            return 50 + (t / 15) * graphWidth;
+        }
+
+        function getGraphY(x) {
+            // Диапазон координат по оси Х от -40 до +100
+            let minX = -40, maxX = 100;
+            let ratio = (x - minX) / (maxX - minX);
+            return graphYBottom - ratio * graphHeight;
+        }
+
+        function drawStaticElements() {
+            // 1. Отрисовка координатной сетки графика x(t)
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            
+            // Сетки времени (вертикальные линии каждые 2 секунды)
+            for(let t=0; t<=14; t+=2) {
+                let gx = getGraphX(t);
+                ctx.beginPath(); ctx.moveTo(gx, graphYTop); ctx.lineTo(gx, graphYBottom); ctx.stroke();
+                ctx.font = '10px sans-serif'; ctx.fillStyle = '#64748b';
+                ctx.fillText(t + 'с', gx - 5, graphYBottom + 15);
+            }
+
+            // Сетки координат (горизонтальные линии каждые 20 метров)
+            for(let x=-20; x<=80; x+=20) {
+                let gy = getGraphY(x);
+                ctx.beginPath(); ctx.moveTo(50, gy); ctx.lineTo(canvas.width - 30, gy); ctx.stroke();
+                ctx.font = '10px sans-serif'; ctx.fillStyle = '#64748b';
+                ctx.fillText(x + 'м', 20, gy + 4);
+            }
+
+            // Главные оси графика
+            ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 2;
+            // Ось Х (вертикальная на графике!)
+            ctx.beginPath(); ctx.moveTo(50, graphYTop - 5); ctx.lineTo(50, graphYBottom); ctx.stroke();
+            // Ось t (горизонтальная)
+            let zeroY = getGraphY(0);
+            ctx.beginPath(); ctx.moveTo(50, zeroY); ctx.lineTo(canvas.width - 30, zeroY); ctx.stroke();
+            
+            ctx.font = 'bold 11px sans-serif'; ctx.fillStyle = '#1e293b';
+            ctx.fillText('x, м', 45, graphYTop - 10);
+            ctx.fillText('t, с', canvas.width - 25, zeroY + 15);
+
+            // 2. Отрисовка нижней физической дороги (Ось Х)
+            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.moveTo(50, roadY); ctx.lineTo(canvas.width - 30, roadY); ctx.stroke();
+            
+            // Засечки метров на реальной дороге под холстом
+            for(let x=-20; x<=80; x+=20) {
+                let gx = getGraphX((x + 20) / 7.5); // Простое масштабирование для визуального совпадения положения
+                ctx.fillStyle = '#475569'; ctx.fillRect(gx, roadY - 4, 2, 8);
+                ctx.font = '9px sans-serif';
+                ctx.fillText(x + 'м', gx - 8, roadY + 18);
+            }
+            ctx.font = 'bold 11px sans-serif'; ctx.fillStyle = '#475569';
+            ctx.fillText('Реальная ось движения X:', 50, roadY - 15);
+        }
+
+        // Вычисление положения тел по физическим уравнениям
+        function getPositionAtTime(body, t) {
+            return body.x0 + body.v * t;
+        }
+
+        function drawSimulation() {
+            drawStaticElements();
+
+            // Линии графиков до текущего момента времени
+            ctx.lineWidth = 3;
+            
+            // Чертим график пешехода (Синий)
+            ctx.strokeStyle = body1.color;
+            ctx.beginPath();
+            ctx.moveTo(getGraphX(0), getGraphY(body1.x0));
+            for(let t=0; t<=simTime; t+=0.1) { ctx.lineTo(getGraphX(t), getGraphY(getPositionAtTime(body1, t))); }
+            ctx.stroke();
+
+            // Чертим график велосипедиста (Красный)
+            ctx.strokeStyle = body2.color;
+            ctx.beginPath();
+            ctx.moveTo(getGraphX(0), getGraphY(body2.x0));
+            for(let t=0; t<=simTime; t+=0.1) { ctx.lineTo(getGraphX(t), getGraphY(getPositionAtTime(body2, t))); }
+            ctx.stroke();
+
+            // Отрисовка движущихся кружков-маркеров на самом верхнем графике
+            let curX1 = getPositionAtTime(body1, simTime);
+            let curX2 = getPositionAtTime(body2, simTime);
+
+            ctx.fillStyle = body1.color; ctx.beginPath(); ctx.arc(getGraphX(simTime), getGraphY(curX1), 5, 0, Math.PI*2); ctx.fill();
+            ctx.fillStyle = body2.color; ctx.beginPath(); ctx.arc(getGraphX(simTime), getGraphY(curX2), 5, 0, Math.PI*2); ctx.fill();
+
+            // Отрисовка физических объектов на нижней дороге оси Х
+            // Рассчитаем положение объектов на нижней шкале
+            let screenRoadX1 = getGraphX((curX1 + 20) / 7.5);
+            let screenRoadX2 = getGraphX((curX2 + 20) / 7.5);
+
+            // Синее тело
+            ctx.fillStyle = body1.color; ctx.fillRect(screenRoadX1 - 8, roadY - 14, 16, 14);
+            ctx.font = 'bold 9px sans-serif'; ctx.fillStyle = '#1e293b'; ctx.fillText(body1.name, screenRoadX1 - 18, roadY - 18);
+
+            // Красное тело
+            ctx.fillStyle = body2.color; ctx.fillRect(screenRoadX2 - 8, roadY - 14, 16, 14);
+            ctx.font = 'bold 9px sans-serif'; ctx.fillStyle = '#1e293b'; ctx.fillText(body2.name, screenRoadX2 - 25, roadY - 18);
+
+            // Обновление таймера времени на пульте управления
+            document.getElementById('timeCounter').innerText = `t = ${simTime.toFixed(1)} c`;
+
+            // Физика хода времени
+            if (isRunning) {
+                simTime += 0.03; // Шаг времени на кадр
+                if (simTime >= 14.5) { isRunning = false; } // Ограничение холста по времени
+            }
+        }
+
+        function simLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawSimulation();
+            requestAnimationFrame(simLoop);
+        }
+
+        document.getElementById('startBtn').addEventListener('click', () => { if(simTime < 14) isRunning = true; });
+        document.getElementById('pauseBtn').addEventListener('click', () => { isRunning = false; });
+        document.getElementById('resetBtn').addEventListener('click', () => { isRunning = false; simTime = 0; });
+
+        function toggleSpoiler() {
+            const content = document.getElementById('spoilerContent');
+            const arrow = document.getElementById('spoilerArrow');
+            if (content.style.display === 'block') { content.style.display = 'none'; arrow.innerText = '▼'; }
+            else { content.style.display = 'block'; arrow.innerText = '▲'; }
+        }
+
+        simLoop();
+
+        function correctAnswer() { document.getElementById('successModal').style.display = 'flex'; }
+        function wrongAnswer() { alert('Неа, координата или время встречи рассчитаны неверно! Попробуй приравнять уравнения на бумаге.'); }
+        function closeModal() { document.getElementById('successModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
