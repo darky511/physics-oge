@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная диагностика ОГЭ: Часть 3</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 30px 20px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 35px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        header h1 { margin: 0 0 10px 0; color: #2c3e50; font-size: 26px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 15px; }
+        
+        .task-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #e2e8f0; position: relative; }
+        .code-badge { background: #9b59b6; color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .task-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #34495e; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; }
+        .task-text { font-size: 15px; margin-bottom: 18px; font-weight: 500; }
+        
+        .options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .option-item { background: #f8fafc; border: 1.5px solid #e2e8f0; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.2s; font-weight: 500; text-align: left; width: 100%; display: block; }
+        .option-item:hover { border-color: #9b59b6; background: #f1f5f9; }
+        
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 18px; border-radius: 4px; margin-top: 15px; animation: slideDown 0.35s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 8px 0; color: #166534; font-size: 15px; }
+        .solution-box p { margin: 0; font-size: 14px; color: #1e293b; line-height: 1.6; }
+        
+        .formula { font-style: italic; font-family: 'Times New Roman', Times, serif; font-weight: bold; font-size: 15px; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Диагностическая карта ОГЭ: Механика. Часть 3</h1>
+        <p>Колебания, Волны, Методология лабораторных работ и Технические приборы</p>
+    </header>
+
+    <!-- Код 1.24 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.24</div>
+        <div class="task-title">Механические колебания. Амплитуда, период и частота</div>
+        <div class="task-text">Груз на нити совершает гармонические колебания. Проходя положение равновесия, он движется со скоростью v. Чему равен модуль изменения скорости груза за время, равное половине периода колебаний (t = T / 2)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Нулю</button>
+            <button class="option-item" onclick="handleWrong(this)">v</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.24')">2 • v</button>
+        </div>
+        <div class="solution-box" id="sol1.24">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Скорость — векторная величина. Направим ось Х вдоль движения груза в начальный момент прохождения положения равновесия. Проекция начальной скорости: <span class="formula">v_1x = v</span>.<br>
+            За половину периода <span class="formula">T / 2</span> маятник успевает дойти до крайнего положения, замереть там, развернуться и снова вернуться в положение равновесия, но двигаясь уже **в противоположную сторону**! <br>
+            Значит, проекция конечной скорости: <span class="formula">v_2x = −v</span>.<br>
+            Модуль изменения (разности) векторов скорости равен: <span class="formula">|&Delta;v| = |v_2x − v_1x| = |−v − v| = 2•v</span>. Это отличная проверка понимания векторной природы кинематических величин в колебаниях.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.25 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.25</div>
+        <div class="task-title">Математический и пружинный маятники. Превращение энергии</div>
+        <div class="task-text">Как изменятся период колебаний и максимальная потенциальная энергия пружинного маятника, если массу колеблющегося груза увеличить в 4 раза, оставив жесткость пружины и амплитуду колебаний прежними?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Период увеличится в 2 раза, максимальная потенциальная энергия увеличится в 4 раза</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.25')">Период увеличится в 2 раза, максимальная потенциальная энергия не изменится</button>
+            <button class="option-item" onclick="handleWrong(this)">Период не изменится, максимальная потенциальная энергия уменьшится в 2 раза</button>
+        </div>
+        <div class="solution-box" id="sol1.25">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>1. Период колебаний пружинного маятника рассчитывается по формуле: <span class="formula">T = 2&pi; &bull; &radic;(m / k)</span>. Так как масса <span class="formula">m</span> увеличивается в 4 раза и находится под знаком корня, период вырастет в <span class="formula">&radic;4 = 2 раза</span>.<br>
+            2. Максимальная потенциальная энергия пружины зависит исключительно от жесткости и амплитуды (максимального растяжения): <span class="formula">E_п_max = (k • A²) / 2</span>. Поскольку жесткость <span class="formula">k</span> и амплитуда <span class="formula">A</span> по условию не изменились, максимальная потенциальная энергия останется строго прежней (от массы груза она вообще не зависит).</p>
+        </div>
+    </div>
+
+    <!-- Код 1.26 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.26</div>
+        <div class="task-title">Затухающие и вынужденные колебания. Резонанс</div>
+        <div class="task-text">Прикладываемая к телу внешняя вынуждающая сила изменяет свою частоту от 1 Гц до 10 Гц. Собственная частота свободных колебаний тела равна 4 Гц. На какой частоте амплитуда колебаний тела достигнет своего максимума?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">На частоте 1 Гц</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.26')">На частоте 4 Гц</button>
+            <button class="option-item" onclick="handleWrong(this)">На частоте 10 Гц</button>
+        </div>
+        <div class="solution-box" id="sol1.26">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В задаче описывается явление **резонанса** — резкого возрастания амплитуды вынужденных колебаний при совпадении частоты внешней вынуждающей силы с собственной частотой колебательной системы. Поскольку собственная частота тела равна 4 Гц, пик амплитуды (резонанс) произойдет ровно в тот момент, когда внешняя сила начнет раскачивать тело с частотой 4 Гц.</p>
+        </div>
+    </div>
+    <!-- Код 1.27 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.27</div>
+        <div class="task-title">Механические волны. Продольные и поперечные волны</div>
+        <div class="task-text">Рыбак заметил, что за 10 секунд поплавок совершил на волнах 20 полных колебаний. При этом расстояние между соседними гребнями волн составило 2 метра. С какой скоростью распространяется волна по воде?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">1 м/с</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.27')">4 м/с</button>
+            <button class="option-item" onclick="handleWrong(this)">0.25 м/с</button>
+        </div>
+        <div class="solution-box" id="sol1.27">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>1. Найдем частоту колебаний поплавка (и самой волны): <span class="formula">&nu; = N / t = 20 / 10 = 2 Гц</span>.<br>
+            2. По определению, расстояние между соседними гребнями — это длина волны: <span class="formula">&lambda; = 2 метра</span>.<br>
+            3. Формула скорости распространения волны выражается через длину и частоту: <span class="formula">v = &lambda; • &nu;</span>.<br>
+            4. Подставляем значения: <span class="formula">v = 2 м • 2 Гц = 4 м/с</span>.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.28 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.28</div>
+        <div class="task-title">Звук. Громкость и высота звука. Инфразвук и ультразвук</div>
+        <div class="task-text">Акустический датчик зафиксировал звуковую волну в воздухе, частота колебаний которой равна 100 Гц. Затем этот же звук перешёл в воду. Как изменятся частота звука и длина звуковой волны в воде? (Скорость звука в воздухе — 340 м/с, в воде — 1500 м/с).</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Частота увеличится, длина волны уменьшится</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.28')">Частота не изменится, длина волны увеличится</button>
+            <button class="option-item" onclick="handleWrong(this)">Частота не изменится, длина волны не изменится</button>
+        </div>
+        <div class="solution-box" id="sol1.28">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Главный закон волновой физики: при переходе волны из одной среды в другую её **частота (и период) никогда не меняются**, так как они задаются исключительно источником колебаний. Значит, частота останется равной 100 Гц.<br>
+            При этом скорость звука в воде (<span class="formula">v = 1500 м/с</span>) существенно выше, чем в воздухе. Из формулы длины волны <span class="formula">&lambda; = v / &nu;</span> видно, что при неизменной частоте увеличение скорости приводит к пропорциональному увеличению длины волны.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.29 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.29</div>
+        <div class="task-title">Практические (лабораторные) работы ОГЭ. Погрешности</div>
+        <div class="task-text">Ученик выполняет Задание №17 (лабораторную работу) по измерению жесткости пружины. Измерив силу динамометром, он получил значение 3 Н. На шкале динамометра нанесена цена деления 0.1 Н. Погрешность измерения равна цене деления. Какая запись прямого измерения силы в бланк ответов ФИПИ является абсолютно верной?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">F = 3 ± 0.1 Н</button>
+            <button class="option-item" onclick="handleWrong(this)">F = 3,00 ± 0.1 Н</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.29')">F = 3,0 ± 0.1 Н</button>
+        </div>
+        <div class="solution-box" id="sol1.29">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Жёсткое методическое требование ФИПИ, на котором отличники часто теряют баллы! <br>
+            Правило значащих цифр гласит: **число знаков после запятой в значении измеряемой величины должно быть в точности равно числу знаков после запятой в значении погрешности**.<br>
+            Погрешность прибора равна <span class="formula">0.1</span> (один знак после запятой). Значит, измеряемое значение силы обязано содержать ровно один десятичный знак. Запись «3» неверна, правильное оформление: <span class="formula">3,0 ± 0.1 Н</span>.</p>
+        </div>
+    </div>
+    <!-- Код 1.30 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.30</div>
+        <div class="task-title">Физические явления в природе</div>
+        <div class="task-text">Какое природное явление объясняется действием силы трения покоя в живой природе?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Движение планет вокруг Солнца по эллиптическим орбитам</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.30')">Возможность человека и животных отталкиваться от земли при ходьбе и беге</button>
+            <button class="option-item" onclick="handleWrong(this)">Подъем воды из корней к листьям деревьев по капиллярам</button>
+        </div>
+        <div class="solution-box" id="sol1.30">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Когда мы совершаем шаг, наша подошва стремится сдвинуться назад относительно поверхности Земли. В этот миг между обувью и грунтом возникает сила трения покоя, направленная **вперед** (в сторону нашего движения). Именно благодаря этой силе мы и любые животные способны ускоряться и отталкиваться от земли. Без трения покоя мы бы бесконечно проскальзывали на месте, как на идеальном гладком льду.</p>
+        </div>
+    </div>
+
+    <!-- Код 1.31 -->
+    <div class="task-card">
+        <div class="code-badge">Код 1.31</div>
+        <div class="task-title">Технические устройства (Приборы механики)</div>
+        <div class="task-text">Исследовательское судно отправляет ультразвуковой сигнал эхолота вертикально вниз к морскому дну. Отраженный сигнал вернулся обратно на корабль через 4 секунды. Какова глубина моря в данном месте? (Скорость ультразвука в морской воде принять равной 1500 м/с).</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">6000 метров</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol1.31')">3000 метров</button>
+            <button class="option-item" onclick="handleWrong(this)">1500 метров</button>
+        </div>
+        <div class="solution-box" id="sol1.31">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Классическое задание ОГЭ на устройство и принцип работы эхолота. Ловушка заключается во времени: сигнал идёт **туда и обратно**. <br>
+            Общий путь, пройденный ультразвуком: <span class="formula">S = v • t = 1500 м/с • 4 с = 6000 метров</span>.<br>
+            Но так как звуковая волна опустилась до дна и поднялась обратно, реальная глубина моря равна ровно половине этого расстояния: <span class="formula">h = S / 2 = 6000 / 2 = 3000 метров</span>.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    function handleCorrect(element, solutionId) {
+        element.classList.add('correct');
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            }
+        });
+    }
+</script>
+</body>
+</html>
