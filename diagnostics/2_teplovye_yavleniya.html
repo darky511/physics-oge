@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный лист диагностики ОГЭ: Тепловые явления</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #fcefe9; margin: 0; padding: 30px 20px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 35px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        header h1 { margin: 0 0 10px 0; color: #d35400; font-size: 26px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 15px; }
+        
+        .task-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #f3d9cb; position: relative; }
+        .code-badge { background: #e67e22; color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .task-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #34495e; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; }
+        .task-text { font-size: 15px; margin-bottom: 18px; font-weight: 500; }
+        
+        .options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .option-item { background: #fdfbfb; border: 1.5px solid #e2e8f0; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.2s; font-weight: 500; text-align: left; width: 100%; display: block; }
+        .option-item:hover { border-color: #e67e22; background: #fff5f0; }
+        
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 18px; border-radius: 4px; margin-top: 15px; animation: slideDown 0.35s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 8px 0; color: #166534; font-size: 15px; }
+        .solution-box p { margin: 0; font-size: 14px; color: #1e293b; line-height: 1.6; }
+        
+        .formula { font-style: italic; font-family: 'Times New Roman', Times, serif; font-weight: bold; font-size: 15px; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Диагностическая карта ОГЭ: Тепловые явления</h1>
+        <p>Комплексный интерактивный лист проверки кодификатора ФИПИ для отличников</p>
+    </header>
+
+    <!-- Код 2.1 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.1</div>
+        <div class="task-title">Основные положения МКТ. Модели состояний вещества. Кристаллические и аморфные тела</div>
+        <div class="task-text">Кусок пластилина и кусок льда нагревают. Лёд при строго определённой температуре начинает плавиться, сохраняя её неизменной до конца процесса. Пластилин же при нагревании постепенно размягчается во всём диапазоне температур. Какое физическое различие структур это доказывает?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Пластилин — кристаллическое вещество, а лёд — аморфное</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.1')">Лёд — кристаллическое тело, а пластилин — аморфное вещество</button>
+            <button class="option-item" onclick="handleWrong(this)">Оба вещества являются кристаллическими, но у них разная теплопроводность</button>
+        </div>
+        <div class="solution-box" id="sol2.1">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Главный признак кристаллических тел — наличие чёткой пространственной кристаллической решётки. Из-за этого у них всегда есть строго фиксированная температура плавления, при которой вся энергия идёт на разрушение связей решётки. Аморфные тела (пластилин, стекло, смола) не имеют решётки, их структура похожа на густые жидкости. Поэтому они не имеют конкретной точки плавления, а размягчаются постепенно во всём интервале температур.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.2 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.2</div>
+        <div class="task-title">Движение частиц. Связь скорости с температурой. Броуновское движение, диффузия</div>
+        <div class="task-text">В тёплую и холодную воду аккуратно опустили по крупинке марганцовки. В каком стакане окрашивание воды произойдет быстрее и почему?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">В холодном, так как плотность холодной воды выше</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.2')">В тёплом, так как с ростом температуры средняя скорость молекул выше, и диффузия идёт быстрее</button>
+            <button class="option-item" onclick="handleWrong(this)">В обоих стаканах скорость окрашивания будет абсолютно одинаковой</button>
+        </div>
+        <div class="solution-box" id="sol2.2">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Процесс взаимного проникновения частиц одного вещества между частицами другого называется диффузией. Скорость диффузии напрямую зависит от интенсивности хаотического теплового движения молекул. Чем выше температура вещества, тем выше средняя кинетическая энергия и скорость движения его молекул, вследствие чего они быстрее перемешиваются.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.3 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.3</div>
+        <div class="task-title">Смачивание и капиллярные явления</div>
+        <div class="task-text">Каплю воды нанесли на чистую стеклянную пластину и на пластину, покрытую тонким слоем парафина. На стекле капля растеклась тонкой лужицей, а на парафине приняла форму шарика. О чём это говорит?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Вода смачивает парафин и не смачивает стекло</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.3')">Вода смачивает стекло и не смачивает парафин</button>
+            <button class="option-item" onclick="handleWrong(this)">Стекло притягивает молекулы воздуха сильнее, чем молекулы воды</button>
+        </div>
+        <div class="solution-box" id="sol2.3">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Явление смачивания возникает, когда молекулы жидкости притягиваются к молекулам твёрдого тела сильнее, чем друг к другу. Вода смачивает стекло, поэтому стремится максимально увеличить площадь контакта и растекается. Молекулы парафина притягивают воду слабо (несмачивание), поэтому силы поверхностного натяжения воды стягивают каплю в форму шара с минимальной площадью поверхности.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.4 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.4</div>
+        <div class="task-title">Тепловое расширение и сжатие</div>
+        <div class="task-text">При прокладке железнодорожных рельсов между их стыками обязательно оставляют небольшие зазоры. Для чего это делается?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Для компенсации вибрации и уменьшения шума колес поезда</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.4')">Чтобы избежать деформации и искривления рельсов при летнем тепловом расширении</button>
+            <button class="option-item" onclick="handleWrong(this)">Чтобы рельсы не сжимались и не лопались зимой от мороза</button>
+        </div>
+        <div class="solution-box" id="sol2.4">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Большинство твердых тел при нагревании расширяются (увеличивают свои линейные размеры). Летом под палящим солнцем стальные рельсы сильно нагреваются и удлиняются. Если зазоров между стыками не будет, рельсы упрутся друг в друга и под действием гигантских сил теплового расширения изогнутся волнами, что приведет к аварии.</p>
+        </div>
+    </div>
+    <!-- Код 2.5 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.5</div>
+        <div class="task-title">Тепловое равновесие</div>
+        <div class="task-text">Два тела с разными начальными температурами (Т_1 = 80 °C и Т_2 = 20 °C) привели в соприкосновение в изолированной системе. Какой термодинамический параметр у них обязательно станет одинаковым, когда наступит тепловое равновесие?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Внутренняя энергия тел</button>
+            <button class="option-item" onclick="handleWrong(this)">Количество теплоты в телах</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.5')">Температура тел</button>
+        </div>
+        <div class="solution-box" id="sol2.5">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>По определению, тепловое равновесие — это состояние системы, при котором все макроскопические параметры системы остаются неизменными сколь угодно долго. Главным и определяющим признаком наступления теплового равновесия является выравнивание температур всех частей системы. Теплопередача прекращается ровно тогда, когда температуры тел становятся равными.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.6 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.6</div>
+        <div class="task-title">Внутренняя энергия. Работа и теплопередача</div>
+        <div class="task-text">Толстостенный цилиндр закрыли поршнем и резко нажали на него, сжав воздух внутри. Как изменятся внутренняя энергия воздуха и его температура?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Внутренняя энергия уменьшится, температура упадет</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.6')">Внутренняя энергия увеличится, температура повысится</button>
+            <button class="option-item" onclick="handleWrong(this)">Внутренняя энергия не изменится, так как тепло наружу не выходило</button>
+        </div>
+        <div class="solution-box" id="sol2.6">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Изменить внутреннюю энергию тела можно двумя путями: теплопередачей или совершением механической работы. В данном случае над газом совершают внешнюю механическую работу сжатия. Энергия движения поршня передается молекулам воздуха при соударениях, из-за чего средняя скорость молекул растет, внутренняя энергия газа увеличивается, и его температура резко идет вверх.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.7 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.7</div>
+        <div class="task-title">Виды теплопередачи: теплопроводность, конвекция, излучение</div>
+        <div class="task-text">В каком из перечисленных пространств теплопередача возможна ТОЛЬКО путем лучистого обмена (излучения)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Внутри глубокого слоя воды в океане</button>
+            <button class="option-item" onclick="handleWrong(this)">Внутри твердого металлического стержня</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.7')">В космическом вакууме</button>
+        </div>
+        <div class="solution-box" id="sol2.7">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Теплопроводность и конвекция — это процессы переноса тепла, которые принципиально требуют наличия вещества (атомов, молекул). В вакууме космоса вещества нет, поэтому ни теплопроводность, ни конвекция там физически невозможны. Единственный способ передачи тепла сквозь пустоту — излучение (электромагнитные волны, инфракрасные лучи), которому вещество для распространения не нужно. Именно так тепло Солнца доходит до Земли.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.8 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.8</div>
+        <div class="task-title">Нагревание и охлаждение. Удельная теплоёмкость</div>
+        <div class="task-text">Два металлических бруска равной массы (алюминиевый и медный) нагрели на одинаковое количество градусов. На какой брусок потребовалось потратить БОЛЬШЕЕ количество теплоты? (Удельная теплоемкость алюминия — 920 Дж/(кг•°C), меди — 400 Дж/(кг•°C)).</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.8')">На алюминиевый брусок</button>
+            <button class="option-item" onclick="handleWrong(this)">На медный брусок</button>
+            <button class="option-item" onclick="handleWrong(this)">Количество теплоты будет абсолютно одинаковым</button>
+        </div>
+        <div class="solution-box" id="sol2.8">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Формула количества теплоты при нагревании: <span class="formula">Q = c • m • &Delta;t</span>. <br>
+            Поскольку массы брусков (m) и изменение температур (&Delta;t) одинаковы, количество необходимого тепла прямо пропорционально удельной теплоемкости вещества c. Удельная теплоемкость алюминия более чем в 2 раза превышает теплоемкость меди, поэтому алюминий вбирает в себя гораздо больше тепла при нагреве.</p>
+        </div>
+    </div>
+    <!-- Код 2.9 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.9</div>
+        <div class="task-title">Уравнение теплового баланса</div>
+        <div class="task-text">В калориметр с водой при температуре 20 °C опустили раскаленный железный болт. Потери тепла в окружающую среду отсутствуют. Какое соотношение между отданным и полученным теплом верно отражает закон сохранения энергии?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Количество теплоты, полученное водой, больше тепла, отданного болтом</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.9')">Количество теплоты, отданное болтом, строго равно количеству теплоты, полученному водой</button>
+            <button class="option-item" onclick="handleWrong(this)">Сумма всех количеств теплоты в калориметре увеличивается</button>
+        </div>
+        <div class="solution-box" id="sol2.9">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В замкнутой изолированной системе (калориметре) выполняется закон сохранения энергии в тепловых процессах, который записывается в виде уравнения теплового баланса: <span class="formula">Q_полученное = Q_отданное</span>. Сколько энергии в виде тепла выделилось при остывании горячего болта, ровно столько же энергии без остатка поглотила холодная вода.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.10 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.10</div>
+        <div class="task-title">Испарение и конденсация. Кипение жидкости</div>
+        <div class="task-text">Почему, когда мы выходим летом из реки после купания, мы ощущаем сильную прохладу, даже если температура окружающего воздуха очень высокая?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Вода реки охлаждает кожу за счет высокой теплопроводности</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.10')">При испарении капель воды с кожи её покидают самые быстрые молекулы, из-за чего температура падает</button>
+            <button class="option-item" onclick="handleWrong(this)">Воздух у поверхности воды всегда имеет повышенную конвекцию</button>
+        </div>
+        <div class="solution-box" id="sol2.10">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Процесс испарения — это вылет молекул с поверхности жидкости. Преодолеть силы межмолекулярного притяжения и вырваться наружу способны только самые «быстрые» молекулы, обладающие максимальной кинетической энергией. Когда жидкость покидают самые энергичные молекулы, средняя кинетическая энергия оставшихся молекул уменьшается. А так как температура — это мера средней кинетической энергии, испаряющаяся жидкость (и кожа под ней) остывает.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.11 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.11</div>
+        <div class="task-title">Влажность воздуха</div>
+        <div class="task-text">В закрытом сосуде находится влажный воздух при неизменной температуре. Герметичный поршень сдвигают, уменьшая объем воздуха в 2 раза. Как при этом изменится относительная влажность воздуха, если исходно она составляла 40%?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Уменьшится до 20%</button>
+            <button class="option-item" onclick="handleWrong(this)">Увеличится до 100%, и начнется кипение воды</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.11')">Увеличится до 80%</button>
+        </div>
+        <div class="solution-box" id="sol2.11">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Относительная влажность воздуха рассчитывается как отношение плотности водяного пара к плотности насыщенного пара при данной температуре: <span class="formula">&phi; = (&rho;_пара / &rho;_нас) • 100%</span>. <br>
+            Поскольку температура постоянна, плотность насыщенного пара &rho;_нас зафиксирована. При уменьшении объема воздуха в 2 раза плотность водяного пара &rho;_пара возрастает ровно в 2 раза. Следовательно, относительная влажность увеличится линейно: 40% • 2 = 80%.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.12 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.12</div>
+        <div class="task-title">Плавление и кристаллизация. Удельная теплота плавления</div>
+        <div class="task-text">В калориметр, содержащий воду при 0 °C, бросают кусок льда, также имеющий температуру 0 °C. Калориметр теплоизолирован. Что произойдет в системе?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Лед начнет плавиться, забирая внутреннюю энергию у воды</button>
+            <button class="option-item" onclick="handleWrong(this)">Вода начнет кристаллизоваться (замерзать), отдавая тепло льду</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.12')">Никаких изменений не произойдет, массы воды и льда останутся прежними</button>
+        </div>
+        <div class="solution-box" id="sol2.12">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Чтобы начался процесс плавления льда, ему необходимо передавать тепло, а чтобы вода замерзала — тепло нужно отводить. Но теплопередача по законам термодинамики возможна исключительно между телами с разной температурой. Так как и у льда, и у воды начальные температуры абсолютно одинаковы (0 °C), теплообмена между ними не будет, и фазовые переходы не начнутся.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.13 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.13</div>
+        <div class="task-title">Внутренняя энергия сгорания топлива</div>
+        <div class="task-text">В печи сожгли поочередно 2 кг сухих дров (удельная теплота сгорания q = 10 МДж/кг) и 1 кг древесного угля (q = 34 МДж/кг). При сжигании какого топлива выделилось БОЛЬШЕЕ количество теплоты?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">При сжигании дров, так как их масса в 2 раза больше</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.13')">При сжигании древесного угля</button>
+            <button class="option-item" onclick="handleWrong(this)">Выделилось абсолютно одинаковое количество теплоты</button>
+        </div>
+        <div class="solution-box" id="sol2.13">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Формула теплоты сгорания топлива: <span class="formula">Q = q • m</span>. <br>
+            1. Для дров: Q_дров = 10 МДж/кг • 2 кг = 20 МДж.<br>
+            2. Для угля: Q_угля = 34 МДж/кг • 1 кг = 34 МДж.<br>
+            Несмотря на меньшую массу, древесный уголь обладает высокой удельной теплотой сгорания, поэтому тепла выделяется значительно больше.</p>
+        </div>
+    </div>
+    <!-- Код 2.14 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.14</div>
+        <div class="task-title">Принципы работы тепловых двигателей. КПД двигателя</div>
+        <div class="task-text">Тепловой двигатель за один цикл получает от нагревателя количество теплоты, равное 500 Дж, и отдает холодильнику 350 Дж. Чему равен коэффициент полезного действия (КПД) этого двигателя?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">70 %</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.14')">30 %</button>
+            <button class="option-item" onclick="handleWrong(this)">15 %</button>
+        </div>
+        <div class="solution-box" id="sol2.14">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Полезная работа теплового двигателя — это разность между теплом от нагревателя и теплом, сброшенным в холодильник: A = Q_нагр − Q_холод = 500 − 350 = 150 Дж.<br>
+            Формула КПД: &eta; = A / Q_нагр = (Q_нагр − Q_холод) / Q_нагр.<br>
+            Вычисляем отношение: &eta; = 150 / 500 = 0.3, что в процентном выражении дает ровно 30%.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.15 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.15</div>
+        <div class="task-title">Практические (лабораторные) работы по теплоте</div>
+        <div class="task-text">Ученица проводит лабораторную работу по измерению относительной влажности воздуха. С помощью какого физического прибора, входящего в стандартные комплекты ОГЭ №17, она сможет выполнить это задание?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Жидкостный термометр и калориметр с весами</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.15')">Психрометр (или два термометра) с психрометрической таблицей</button>
+            <button class="option-item" onclick="handleWrong(this)">Барометр-анероид и мерный цилиндр</button>
+        </div>
+        <div class="solution-box" id="sol2.15">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В лабораторных работах ОГЭ относительная влажность воздуха измеряется методом влажного термометра с использованием психрометра. Сухой термометр измеряет фактическую температуру воздуха, а влажный охлаждается за счет испарения воды со своего фитиля. Чем суше воздух, тем интенсивнее испарение и тем больше разность показаний термометров, по которой в специальной таблице находят влажность.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.16 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.16</div>
+        <div class="task-title">Тепловые явления в природе: бризы, роса, туман, иней</div>
+        <div class="task-text">Каким видом теплопередачи объясняется возникновение дневных морских бризов (ветров, дующих днем с прохладного моря на прогретый берег)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Чистой теплопроводностью слоев воздуха</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.16')">Конвекцией воздушных масс</button>
+            <button class="option-item" onclick="handleWrong(this)">Лучистым излучением от поверхности воды</button>
+        </div>
+        <div class="solution-box" id="sol2.16">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Днем суша прогревается солнцем быстрее, чем глубокая вода. Нагретый сушей теплый воздух расширяется, его плотность падает, и он устремляется вверх. На его место снизу устремляется более плотный и прохладный воздух со стороны моря. Этот циклический перенос тепла потоками газа называется конвекцией, которая и формирует природные ветры — бризы.</p>
+        </div>
+    </div>
+
+    <!-- Код 2.17 -->
+    <div class="task-card">
+        <div class="code-badge">Код 2.17</div>
+        <div class="task-title">Технические устройства: жидкостный термометр, термос, ДВС</div>
+        <div class="task-text">Колба термоса сделана из двойного стекла, между стенками которого полностью выкачан воздух (создан глубокий вакуум), а сами стенки покрытки зеркальным серебристым слоем. С какой физической целью выкачивают воздух?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Чтобы снизить массу термоса и защитить внутреннее стекло от ударов</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.17')">Чтобы полностью заблокировать потери тепла за счет теплопроводности и конвекции</button>
+            <button class="option-item" onclick="handleWrong(this)">Чтобы остановить инфракрасное лучистое излучение от горячего чая</button>
+        </div>
+        <div class="solution-box" id="sol2.17">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Устройство термоса направлено на минимизацию всех трех видов теплопередачи:<br>
+            1. Отсутствие воздуха (вакуум) полностью ликвидирует перенос тепла молекулами, то есть ликвидирует теплопроводность и конвекцию.<br>
+            2. Зеркальное напыление на стенках нужно для борьбы с третьим видом — излучением: серебристые поверхности отражают инфракрасные лучи обратно внутрь колбы.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Функция обработки неверного выбора
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    // Функция обработки правильного выбора
+    function handleCorrect(element, solutionId) {
+        element.classList.add('correct');
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            }
+        });
+    }
+</script>
+</body>
+</html>
