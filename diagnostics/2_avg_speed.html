@@ -21,13 +21,8 @@
         .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; align-items: center; }
         .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 15px; border-radius: 0 0 6px 6px; }
         
-        /* Формулы и SVG-чертеж */
-        .formula-flex { display: flex; align-items: center; justify-content: flex-start; gap: 40px; }
-        .formula-text-block { font-size: 14px; line-height: 1.8; color: #2c3e50; min-width: 280px; }
-        .phys-font { font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: bold; }
-        .fraction { display: inline-block; vertical-align: middle; text-align: center; font-size: 13px; margin: 0 4px; }
-        .fraction span { display: block; padding: 0 3px; }
-        .fraction .numerator { border-bottom: 1px solid #2c3e50; }
+        /* Разметка формул через один общий флекс-контейнер */
+        .formula-flex { display: flex; align-items: center; justify-content: flex-start; gap: 20px; }
         
         /* Рабочая зона */
         .main-workspace { display: flex; gap: 15px; flex-grow: 1; min-height: 0; }
@@ -44,7 +39,6 @@
         button#resetBtn { background: #95a5a6; }
         button#resetBtn:hover { background: #7f8c8d; }
         
-        /* Информационные плашки на пульте */
         .info-badge { padding: 6px; border-radius: 6px; font-size: 11px; margin-top: 3px; text-align: center; }
         .badge-blue { background: #e3f2fd; color: #0d47a1; border: 1px solid #bbdefb; }
         .badge-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
@@ -53,7 +47,7 @@
         .canvas-container { flex-grow: 1; height: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bdc3c7; background: #f8fafc; position: relative; }
         canvas { width: 100%; height: 100%; display: block; }
 
-        /* Модалка успеха */
+        /* Всплывающее окно */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 520px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
         .modal-header { font-size: 20px; color: #27ae60; font-weight: bold; margin-bottom: 12px; }
@@ -73,7 +67,7 @@
             <button class="option-btn" onclick="wrongAnswer()">Больше 40 м/с (ближе к быстрому участку)</button>
         </div>
     </div>
-    <!-- Панель подсказки -->
+    <!-- Спойлер подсказки: Абсолютно все формулы и чертеж перенесены внутрь жестких SVG-координат -->
     <div class="spoiler-container">
         <button class="spoiler-btn" onclick="toggleSpoiler()">
             <span>💡 Показать физический вывод и разбор формулы</span> 
@@ -81,41 +75,69 @@
         </button>
         <div class="spoiler-content" id="spoilerContent">
             <div class="formula-flex">
-                <div class="formula-text-block">
-                    <strong>Базовое определение:</strong> 
-                    <span class="phys-font">v<span style="font-size:10px; vertical-align:sub;">ср</span></span> = 
-                    <div class="fraction"><span class="numerator"><span class="phys-font">S<span style="font-size:10px; vertical-align:sub;">все</span></span></span><span><span class="phys-font">t<span style="font-size:10px; vertical-align:sub;">все</span></span></span></div> = 
-                    <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span><span class="phys-font">t<sub>1</sub> + t<sub>2</sub></span></span></div>
-                    <br>
-                    Поскольку путь разбит на две равные части по 
-                    <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2</span></div>, распишем время: 
-                    <span class="phys-font">t<sub>1</sub></span> = <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2<span class="phys-font">v<sub>1</sub></span></span></div>, 
-                    <span class="phys-font">t<sub>2</sub></span> = <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2<span class="phys-font">v<sub>2</sub></span></span></div>
-                    <br>
-                    <strong>Итоговая рабочая формула ОГЭ:</strong> 
-                    <span class="phys-font">v<span style="font-size:10px; vertical-align:sub;">ср</span></span> = 
-                    <div class="fraction"><span class="numerator">2 &bull; <span class="phys-font">v<sub>1</sub> &bull; v<sub>2</sub></span></span><span><span class="phys-font">v<sub>1</sub> + v<sub>2</sub></span></span></div> 
-                    <span style="color:#e67e22; font-weight:bold;">(Среднее гармоническое)</span>
-                </div>
                 
-                <!-- Чистый SVG чертеж распределения путей -->
-                <svg width="380" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                <!-- Левый SVG холст: Только формулы с гарантированными линиями деления -->
+                <svg width="360" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                    <g font-family="Arial, sans-serif" font-size="13px" fill="#2c3e50">
+                        <!-- Блок базового определения -->
+                        <text x="15" y="30" font-weight="bold">Базовое определение:</text>
+                        <text x="170" y="30" font-style="italic" font-weight="bold">v_ср =</text>
+                        
+                        <text x="215" y="20" font-style="italic">S_все</text>
+                        <line x1="210" y1="25" x2="250" y2="25" stroke="#2c3e50" stroke-width="1.5"/>
+                        <text x="218" y="38" font-style="italic">t_все</text>
+                        
+                        <text x="260" y="30" font-style="italic">=</text>
+                        
+                        <text x="285" y="20" font-style="italic">S</text>
+                        <line x1="275" y1="25" x2="335" y2="25" stroke="#2c3e50" stroke-width="1.5"/>
+                        <text x="278" y="38" font-style="italic">t_1 + t_2</text>
+
+                        <!-- Блок расчёта времени -->
+                        <text x="15" y="65">Если путь разбит пополам:</text>
+                        <text x="180" y="65" font-style="italic">t_1 =</text>
+                        <text x="210" y="55" font-style="italic">S / 2</text>
+                        <line x1="205" y1="60" x2="240" y2="60" stroke="#2c3e50" stroke-width="1.2"/>
+                        <text x="218" y="73" font-style="italic">v_1</text>
+                        
+                        <text x="250" y="65" font-style="italic">,  t_2 =</text>
+                        <text x="290" y="55" font-style="italic">S / 2</text>
+                        <line x1="285" y1="60" x2="320" y2="60" stroke="#2c3e50" stroke-width="1.2"/>
+                        <text x="298" y="73" font-style="italic">v_2</text>
+
+                        <!-- Формула средней скорости (ПЕРЕИМЕНОВАНО) -->
+                        <text x="15" y="105" font-weight="bold" fill="#2c3e50">Формула средней скорости:</text>
+                        <text x="210" y="105" font-style="italic" font-weight="bold">v_ср =</text>
+                        
+                        <text x="252" y="96" font-style="italic" font-weight="bold">2 • v_1 • v_2</text>
+                        <line x1="248" y1="101" x2="332" y2="101" stroke="#2c3e50" stroke-width="2"/>
+                        <text x="268" y="114" font-style="italic" font-weight="bold">v_1 + v_2</text>
+                    </g>
+                </svg>
+
+                <!-- Правый SVG холст: Чертеж участков дорог с многострочным текстом -->
+                <svg width="420" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
                     <g font-family="Arial, sans-serif" font-size="11px" font-weight="bold">
-                        <line x1="30" y1="55" x2="350" y2="55" stroke="#94a3b8" stroke-width="3"/>
-                        <circle cx="30" cy="55" r="5" fill="#3498db"/>
-                        <circle cx="190" cy="55" r="5" fill="#e67e22"/>
-                        <circle cx="350" cy="55" r="5" fill="#2ecc71"/>
+                        <!-- Линия трассы -->
+                        <line x1="30" y1="60" x2="390" y2="60" stroke="#94a3b8" stroke-width="3"/>
+                        <circle cx="30" cy="60" r="5" fill="#3498db"/>
+                        <circle cx="210" cy="60" r="5" fill="#e67e22"/>
+                        <circle cx="390" cy="60" r="5" fill="#2ecc71"/>
                         
-                        <text x="95" y="45" fill="#3498db" text-anchor="middle">1-я половина пути (S / 2)</text>
-                        <text x="270" y="45" fill="#e67e22" text-anchor="middle">2-я половина пути (S / 2)</text>
+                        <!-- Обозначения участков пути -->
+                        <text x="120" y="50" fill="#3498db" text-anchor="middle">1-я половина пути (S / 2)</text>
+                        <text x="300" y="50" fill="#e67e22" text-anchor="middle">2-я половина пути (S / 2)</text>
                         
-                        <text x="95" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₁ (маленькая)</text>
-                        <text x="95" y="98" fill="#e74c3c" text-anchor="middle">Время t₁ — БОЛЬШОЕ 🕒</text>
+                        <!-- Скорости и время -->
+                        <text x="120" y="82" fill="#1e293b" text-anchor="middle">Скорость: v_1 (маленькая)</text>
+                        <text x="120" y="100" fill="#e74c3c" text-anchor="middle">Время t_1 — БОЛЬШОЕ 🕒</text>
                         
-                        <text x="270" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₂ (большая)</text>
-                        <text x="270" y="98" fill="#27ae60" text-anchor="middle">Время t₂ — маленькое ⚡</text>
+                        <text x="300" y="82" fill="#1e293b" text-anchor="middle">Скорость: v_2 (большая)</text>
+                        <text x="300" y="100" fill="#27ae60" text-anchor="middle">Время t_2 — маленькое ⚡</text>
                         
-                        <text x="190" y="20" fill="#475569" text-anchor="middle" font-size="10px" font-style="italic">Тело дольше едет с маленькой скоростью, поэтому v_ср всегда смещена к меньшей!</text>
+                        <!-- Подсказка разбита на две строки, чтобы гарантированно поместиться -->
+                        <text x="210" y="20" fill="#475569" text-anchor="middle" font-size="10px" font-style="italic">Тело дольше едет по времени с маленькой скоростью,</text>
+                        <text x="210" y="33" fill="#475569" text-anchor="middle" font-size="10px" font-style="italic">поэтому средняя скорость всегда смещена к меньшей!</text>
                     </g>
                 </svg>
             </div>
@@ -133,12 +155,12 @@
             </div>
 
             <div class="control-block">
-                <label id="v1Label">Скорость v₁: 20 м/с</label>
+                <label id="v1Label">Скорость v_1: 20 м/с</label>
                 <input type="range" id="v1Speed" min="10" max="40" value="20" step="5" style="cursor:pointer;">
             </div>
 
             <div class="control-block">
-                <label id="v2Label">Скорость v₂: 60 м/с</label>
+                <label id="v2Label">Скорость v_2: 60 м/с</label>
                 <input type="range" id="v2Speed" min="45" max="90" value="60" step="5" style="cursor:pointer;">
             </div>
 
@@ -154,16 +176,16 @@
         </div>
     </div>
 
-    <!-- Модалка с объяснением ловушки -->
+    <!-- Модалка: Текст полностью очищен от знаков доллара и латеха -->
     <div class="modal" id="successModal">
         <div class="modal-content">
-            <div class="modal-header">🎉 Абсолютно верно! Твой балл ОГЭ защищён!</div>
+            <div class="modal-header">🎉 Ответ верный! Великолепно!</div>
             <div class="modal-text">
-                Средняя скорость на разделенном пути <strong>всегда меньше среднего арифметического</strong>.<br><br>
-                <strong>Почему так происходит «на пальцах»?</strong><br>
-                Поскольку первая половина пути медленная, машина ползет по ней <strong>очень долго по времени</strong>. А вторую половину пути она пролетает со свистом за короткий миг.<br><br>
-                В итоге автомобиль большую часть <strong>суммарного времени движения</strong> ехал именно с маленькой скоростью $v_1$! Поэтому реальная средняя скорость всегда «притягивается» в сторону меньшего значения.<br><br>
-                Запусти гонку кнопкой слева и посмотри: зеленый автомобиль-призрак (который едет с постоянной средней арифметической скоростью $40\text{ м/с}$) легко обгоняет реальную синюю машину!
+                Средняя скорость на разделенном пополам пути <strong>всегда меньше простого среднего арифметического</strong>.<br><br>
+                <strong>Объясняем «на пальцах» без формул:</strong><br>
+                Поскольку первая половина пути медленная, машина ползет по ней очень долго по времени. А быструю вторую половину пути она пролетает за короткий миг.<br><br>
+                В результате автомобиль большую часть от общего времени поездки двигался именно с маленькой скоростью v_1! Поэтому итоговая средняя скорость сильно притягивается вниз, к меньшей скорости.<br><br>
+                Запусти гонку кнопкой слева и посмотри: зеленая машина-призрак (которая едет со стабильной скоростью 40 м/с) легко обгоняет реальную синюю машину!
             </div>
             <button class="close-modal-btn" onclick="closeModal()">Понятно, запускаем!</button>
         </div>
@@ -183,10 +205,7 @@
             get vHarm() { return (2 * this.v1 * this.v2) / (this.v1 + this.v2); }
         };
 
-        let cars = {
-            realX: 40,      
-            ghostX: 40      
-        };
+        let cars = { realX: 40, ghostX: 40 };
 
         let trackLeft = 40;
         let trackRight = 0;
@@ -215,15 +234,13 @@
         function drawTrack() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Середина пути
             ctx.strokeStyle = '#e67e22';
             ctx.lineWidth = 1;
-            ctx.setLineDash([4, 4]);
+            ctx.setLineDash();
             ctx.beginPath(); ctx.moveTo(midPointX, 20); ctx.lineTo(midPointX, canvas.height - 20); ctx.stroke();
             ctx.font = 'italic 11px sans-serif'; ctx.fillStyle = '#e67e22';
             ctx.fillText('Середина пути (S / 2)', midPointX - 55, 15);
 
-            // Финишая линия
             ctx.strokeStyle = '#2ecc71';
             ctx.lineWidth = 4;
             ctx.setLineDash([]);
@@ -231,10 +248,9 @@
             ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#27ae60';
             ctx.fillText('ФИНИШ', trackRight - 20, 15);
 
-            // Асфальтовые дорожки (ИСПРАВЛЕНО: добавлен префикс ctx)
             ctx.lineWidth = 24; ctx.strokeStyle = '#cbd5e1';
             ctx.beginPath(); ctx.moveTo(trackLeft, carY1); ctx.lineTo(trackRight, carY1); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); stroke();
             ctx.lineWidth = 1;
         }
 
@@ -253,7 +269,6 @@
 
             let baseStep = trackLength / 320; 
             
-            // Логика движения Реальной машины
             if (cars.realX < trackRight) {
                 if (cars.realX < midPointX) {
                     cars.realX += baseStep * (physics.v1 / physics.vArith);
@@ -263,7 +278,6 @@
                 if (cars.realX > trackRight) cars.realX = trackRight;
             }
 
-            // Логика движения Призрака
             if (cars.ghostX < trackRight) {
                 cars.ghostX += baseStep;
                 if (cars.ghostX > trackRight) cars.ghostX = trackRight;
@@ -290,14 +304,14 @@
 
         document.getElementById('v1Speed').addEventListener('input', (e) => {
             physics.v1 = parseInt(e.target.value);
-            document.getElementById('v1Label').innerText = `Скорость v₁: ${physics.v1} м/с`;
+            document.getElementById('v1Label').innerText = `Скорость v_1: ${physics.v1} м/с`;
             updateBadges();
             if(!isRunning) resetRace();
         });
 
         document.getElementById('v2Speed').addEventListener('input', (e) => {
             physics.v2 = parseInt(e.target.value);
-            document.getElementById('v2Label').innerText = `Скорость v₂: ${physics.v2} м/с`;
+            document.getElementById('v2Label').innerText = `Скорость v_2: ${physics.v2} м/с`;
             updateBadges();
             if(!isRunning) resetRace();
         });
