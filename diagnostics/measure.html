@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажёр ОГЭ: Перевод величин в систему СИ</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 30px 20px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 35px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #d1dbe5; }
+        header h1 { margin: 0 0 10px 0; color: #2c3e50; font-size: 24px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 14px; }
+        
+        /* Блоки разделов физики */
+        .section-title { font-size: 18px; font-weight: bold; color: #1e293b; margin: 35px 0 15px 0; padding-bottom: 5px; border-bottom: 2px solid #94a3b8; }
+        
+        /* Карточки задач */
+        .task-card { background: white; padding: 22px; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.03); margin-bottom: 20px; border: 1px solid #d1dbe5; position: relative; }
+        .type-badge { background: #475569; color: white; padding: 3px 9px; border-radius: 5px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .task-text { font-size: 15px; margin-bottom: 15px; font-weight: 600; color: #1e293b; }
+        
+        /* Варианты ответов */
+        .options-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .option-item { background: #fdfbfb; border: 1.5px solid #e2e8f0; padding: 11px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: 0.15s; font-weight: 500; text-align: left; width: 100%; display: block; color: #334155; }
+        .option-item:hover { border-color: #475569; background: #f8fafc; }
+        
+        /* Цвета ответов */
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        /* Раскрывающееся решение */
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 15px; border-radius: 4px; margin-top: 12px; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 6px 0; color: #166534; font-size: 14px; }
+        .solution-box p { margin: 0; font-size: 13px; color: #1e293b; line-height: 1.6; }
+        
+        .math-expr { font-weight: bold; font-family: 'Times New Roman', Times, serif; font-size: 14px; background: #e2e8f0; padding: 1px 5px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Тренажёр ОГЭ: Перевод физических величин в СИ</h1>
+        <p>Интерактивный список для проверки навыков работы с внесистемными единицами</p>
+    </header>
+    <!-- РАЗДЕЛ 1: МЕХАНИКА -->
+    <div class="section-title">1. Механические величины</div>
+
+    <div class="task-card">
+        <div class="type-badge">Скорость</div>
+        <div class="task-text">Выразите скорость тела, равную 72 км/ч, в метрах в секунду (м/с):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">72 м/с</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si1.1')">20 м/с</button>
+            <button class="option-item" onclick="handleWrong(this)">200 м/с</button>
+        </div>
+        <div class="solution-box" id="si1.1">
+            <h4>Принцип перевода:</h4>
+            <p>В 1 километре содержится 1000 метров, а в 1 часе — 3600 секунд. <br>
+            Для перевода км/ч в м/с исходное значение необходимо умножить на 1000 и разделить на 3600 (что эквивалентно делению на коэффициент 3,6): <br>
+            <span class="math-expr">72 / 3,6 = 20 м/с</span>.</p>
+        </div>
+    </div>
+
+    <div class="task-card">
+        <div class="type-badge">Время</div>
+        <div class="task-text">Период колебаний маятника равен 2,5 минутам. Переведите это время в секунды (с):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">25 с</button>
+            <button class="option-item" onclick="handleWrong(this)">250 с</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si1.2')">150 с</button>
+        </div>
+        <div class="solution-box" id="si1.2">
+            <h4>Принцип перевода:</h4>
+            <p>Основной единицей времени в системе СИ является секунда. <br>
+            В 1 минуте содержится ровно 60 секунд. <br>
+            <span class="math-expr">2,5 • 60 = 150 с</span>.</p>
+        </div>
+    </div>
+
+    <div class="task-card">
+        <div class="type-badge">Площадь</div>
+        <div class="task-text">Площадь опоры бруска составляет 50 см². Переведите её в квадратные метры (м²):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleCorrect(this, 'si1.3')">0,005 м² (или 5 • 10⁻³ м²)</button>
+            <button class="option-item" onclick="handleWrong(this)">0,5 м²</button>
+            <button class="option-item" onclick="handleWrong(this)">0,05 м²</button>
+        </div>
+        <div class="solution-box" id="si1.3">
+            <h4>Принцип перевода:</h4>
+            <p>В 1 метре содержится 100 сантиметров. Следовательно, в 1 квадратном метре содержится: <br>
+            <span class="math-expr">100 см • 100 см = 10 000 см²</span>. <br>
+            Чтобы перевести квадратные сантиметры в квадратные метры, необходимо исходное число разделить на 10 000 (или умножить на 10⁻⁴): <br>
+            <span class="math-expr">50 / 10 000 = 0,005 м²</span>.</p>
+        </div>
+    </div>
+
+
+    <!-- РАЗДЕЛ 2: ТЕПЛОТА -->
+    <div class="section-title">2. Тепловые величины</div>
+
+    <div class="task-card">
+        <div class="type-badge">Объём</div>
+        <div class="task-text">В калориметр налито 5 литров воды. Переведите этот объём в кубические метры (м³):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">0,5 м³</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si2.1')">0,005 м³ (или 5 • 10⁻³ м³)</button>
+            <button class="option-item" onclick="handleWrong(this)">0,05 м³</button>
+        </div>
+        <div class="solution-box" id="si2.1">
+            <h4>Принцип перевода:</h4>
+            <p>Основной единицей объёма в системе СИ является кубический метр. <br>
+            1 литр равен 1 кубическому дециметру (дм³). В одном кубическом метре содержится ровно 1000 литров. <br>
+            Чтобы перевести литры в кубические метры, значение делят на 1000: <br>
+            <span class="math-expr">5 / 1000 = 0,005 м³</span>.</p>
+        </div>
+    </div>
+
+    <div class="task-card">
+        <div class="type-badge">Количество теплоты</div>
+        <div class="task-text">При сгорании топлива выделилось 4,2 МДж (мегаджоуля) энергии. Выразите эту величину в Джоулях (Дж):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">4200 Дж</button>
+            <button class="option-item" onclick="handleWrong(this)">420 000 Дж</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si2.2')">4 200 000 Дж (или 4,2 • 10⁶ Дж)</button>
+        </div>
+        <div class="solution-box" id="si2.2">
+            <h4>Принцип перевода:</h4>
+            <p>Метрическая приставка «Мега» (М) означает миллион и соответствует множителю 10⁶. <br>
+            <span class="math-expr">4,2 • 1 000 000 = 4 200 000 Дж</span>.</p>
+        </div>
+    </div>
+    <!-- РАЗДЕЛ 3: ЭЛЕКТРИЧЕСТВО -->
+    <div class="section-title">3. Электрические величины</div>
+
+    <div class="task-card">
+        <div class="type-badge">Сила тока</div>
+        <div class="task-text">Ток в цепи равен 250 мА (миллиампер). Переведите это значение в Амперы (А):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">2,5 А</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si3.1')">0,25 А</button>
+            <button class="option-item" onclick="handleWrong(this)">0,025 А</button>
+        </div>
+        <div class="solution-box" id="si3.1">
+            <h4>Принцип перевода:</h4>
+            <p>Метрическая приставка «милли» (м) означает одну тысячную часть исходной величины (множитель 10⁻³). <br>
+            Чтобы перевести миллиамперы в Амперы, число необходимо разделить на 1000: <br>
+            <span class="math-expr">250 / 1000 = 0,25 А</span>.</p>
+        </div>
+    </div>
+
+    <div class="task-card">
+        <div class="type-badge">Электрический заряд</div>
+        <div class="task-text">Заряд физического тела составляет 4 мкКл (микрокулона). Выразите его в Кулонах (Кл):</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">0,004 Кл</button>
+            <button class="option-item" onclick="handleWrong(this)">0,00004 Кл</button>
+            <button class="option-item" onclick="handleCorrect(this, 'si3.2')">0,000004 Кл (или 4 • 10⁻⁶ Кл)</button>
+        </div>
+        <div class="solution-box" id="si3.2">
+            <h4>Принцип перевода:</h4>
+            <p>Метрическая приставка «микро» (мк) означает одну миллионную часть от базовой единицы (множитель 10⁻⁶). <br>
+            Для перевода в Кл исходное значение делится на 1 000 000: <br>
+            <span class="math-expr">4 / 1 000 000 = 0,000004 Кл</span>.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Функция обработки ошибочного выбора
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    // Функция обработки правильного выбора (фиксация цепи и открытие блока теории)
+    function handleCorrect(element, solutionId) {
+        element.classList.add('correct');
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        
+        // Отключаем клики по остальным кнопкам в текущей карточке задания
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.5';
+            }
+        });
+    }
+</script>
+</body>
+</html>
