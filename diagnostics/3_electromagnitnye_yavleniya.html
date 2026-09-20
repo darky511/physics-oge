@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лист диагностики ОГЭ: Электромагнитные явления</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #eef2f7; margin: 0; padding: 25px 15px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 780px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 30px; background: white; padding: 20px; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #d1dbe5; }
+        header h1 { margin: 0 0 8px 0; color: #2c3e50; font-size: 24px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 14px; }
+        
+        .task-card { background: white; padding: 22px; border-radius: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.03); margin-bottom: 22px; border: 1px solid #d1dbe5; position: relative; }
+        .code-badge { background: #2c3e50; color: white; padding: 3px 9px; border-radius: 5px; font-size: 11px; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .task-title { font-size: 15px; font-weight: bold; margin-bottom: 8px; color: #34495e; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
+        .task-text { font-size: 14px; margin-bottom: 15px; font-weight: 500; }
+        
+        .options-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .option-item { background: #fdfbfb; border: 1.5px solid #e2e8f0; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 13px; transition: 0.2s; font-weight: 500; text-align: left; width: 100%; display: block; }
+        .option-item:hover { border-color: #2c3e50; background: #f4f7fa; }
+        
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 15px; border-radius: 4px; margin-top: 12px; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 6px 0; color: #166534; font-size: 14px; }
+        .solution-box p { margin: 0; font-size: 13px; color: #1e293b; line-height: 1.5; }
+        
+        .formula { font-style: italic; font-family: 'Times New Roman', Times, serif; font-weight: bold; font-size: 14px; background: #e2e8f0; padding: 2px 5px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Диагностическая карта ОГЭ: Электромагнитные явления</h1>
+        <p>Интерактивная проверка знаний кодификатора ФИПИ для отличников (Часть 1)</p>
+    </header>
+
+    <!-- Код 3.1 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.1</div>
+        <div class="task-title">Электризация тел. Два вида электрических зарядов</div>
+        <div class="task-text">Положительно заряженную стеклянную палочку подносят, не касаясь, к изолированному незаряженному металлическому шару. Что произойдет с зарядами внутри шара?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Положительные ионы сместятся на ближнюю к палочке сторону шара</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.1')">Свободные электроны сместятся на ближнюю к палочке сторону шара, а дальняя сторона зарядится положительно</button>
+            <button class="option-item" onclick="handleWrong(this)">Заряды внутри шара останутся распределены абсолютно равномерно</button>
+        </div>
+        <div class="solution-box" id="sol3.1">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В металлах носителями свободного заряда являются только электроны, а положительные ионы прочно закреплены в узлах кристаллической решётки. Под действием электрического поля положительной палочки свободные электроны шара притягиваются к ней и скапливаются на ближней стороне. На дальней стороне возникает нехватка электронов, из-за чего она приобретает избыточный положичный заряд. Это явление называется электростатической индукцией.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.2 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.2</div>
+        <div class="task-title">Взаимодействие заряженных тел. Закон Кулона</div>
+        <div class="task-text">Два маленьких заряженных шарика находятся на некотором расстоянии друг от друга. Во сколько раз изменится сила их кулоновского взаимодействия, если заряд каждого шарика увеличить в 2 раза, а расстояние между ними увеличить в 2 раза?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Увеличится в 4 раза</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.2')">Не изменится</button>
+            <button class="option-item" onclick="handleWrong(this)">Уменьшится в 2 раза</button>
+        </div>
+        <div class="solution-box" id="sol3.2">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Закон Кулона гласит: <span class="formula">F = k • (q_1 • q_2) / r²</span>. <br>
+            Проанализируем изменения: числитель дроби за счет увеличения обоих зарядов вырастет в <span class="formula">2 • 2 = 4 раза</span>. Знаменатель дроби за счет увеличения расстояния в 2 раза вырастет в <span class="formula">2² = 4 раза</span> (так как расстояние стоит в квадрате). <br>
+            В результате числитель и знаменатель увеличатся в одинаковое число раз, дробь сократится, а сила взаимодействия останется прежней.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.3 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.3</div>
+        <div class="task-title">Закон сохранения электрического заряда</div>
+        <div class="task-text">Два одинаковых металлических шарика с зарядами +5 нКл и -11 нКл привели в соприкосновение, а затем развели на прежнее расстояние. Какими стали заряды шариков после этого?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">+5 нКл и -11 нКл</button>
+            <button class="option-item" onclick="handleWrong(this)">-6 нКл и -6 нКл</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.3')">-3 нКл и -3 нКл</button>
+        </div>
+        <div class="solution-box" id="sol3.3">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>По закону сохранения заряда в замкнутой системе суммарный заряд сохраняется: <span class="formula">Q_общ = q_1 + q_2 = (+5) + (-11) = -6 нКл</span>. <br>
+            Поскольку шарики абсолютно одинаковые по размеру, при соприкосновении этот общий избыточный заряд разделится между ними поровну: <span class="formula">q = Q_общ / 2 = -6 / 2 = -3 нКл</span> на каждом шарике.</p>
+        </div>
+    </div>
+    <!-- Код 3.4 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.4</div>
+        <div class="task-title">Электрическое поле. Напряжённость поля. Принцип суперпозиции</div>
+        <div class="task-text">В точку А, находящуюся ровно посередине между двумя равными по модулю положительными точечными зарядами (+q и +q), помещают отрицательный пробный заряд -q_0. Куда направлена равнодействующая электрическая сила, действующая на этот пробный заряд?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">К левому положительному заряду</button>
+            <button class="option-item" onclick="handleWrong(this)">К правому положительному заряду</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.4')">Она равна нулю</button>
+        </div>
+        <div class="solution-box" id="sol3.4">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Отрицательный заряд <span class="formula">-q_0</span> притягивается к левому заряду с силой <span class="formula">F_1</span>, направленной влево, и к правому заряду с силой <span class="formula">F_2</span>, направленной вправо. Так как расстояния одинаковы и модули основных зарядов равны, эти силы равны по модулю. Векторы противоположны, поэтому они полностью компенсируют друг друга, и равнодействующая сила равна нулю.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.5 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.5</div>
+        <div class="task-title">Проводники и диэлектрики в электрическом поле</div>
+        <div class="task-text">Почему заряженный металлический шар быстро разряжается, если к нему прикоснуться рукой, но долго сохраняет заряд, если подвесить его на сухой шёлковой нити?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.5')">Тело человека является проводником, а шёлк — диэлектриком</button>
+            <button class="option-item" onclick="handleWrong(this)">Шёлк притягивает заряды сильнее, чем тело человека</button>
+            <button class="option-item" onclick="handleWrong(this)">Воздух вокруг шёлка ионизируется медленнее</button>
+        </div>
+        <div class="solution-box" id="sol3.5">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Тело человека содержит растворы солей и является хорошим проводником электричества — при касании весь избыточный заряд шара свободно уходит через тело в Землю. Сухой шёлк является диэлектриком (изолятором), в нём практически нет свободных носителей заряда, поэтому он не позволяет заряду покинуть шар, изолируя его от окружения.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.6 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.6</div>
+        <div class="task-title">Постоянный ток. Сила тока. Напряжение</div>
+        <div class="task-text">Через поперечное сечение проводника за 2 минуты протекает электрический заряд 240 Кл. Чему равна сила тока в этом проводнике?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">120 А</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.6')">2 А</button>
+            <button class="option-item" onclick="handleWrong(this)">480 А</button>
+        </div>
+        <div class="solution-box" id="sol3.6">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Определение силы тока: <span class="formula">I = q / t</span>. <br>
+            Обязательно переводим время в СИ: <span class="formula">2 минуты = 2 • 60 = 120 секунд</span>. <br>
+            Подставляем числовые значения: <span class="formula">I = 240 Кл / 120 с = 2 А</span>.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.7 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.7</div>
+        <div class="task-title">Электрическое сопротивление. Удельное сопротивление проводника</div>
+        <div class="task-text">Длинный медный провод разрезали на две равные части и скрутили их вместе параллельно друг другу. Как изменилось электрическое сопротивление полученного двойного провода по сравнению с исходным?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Уменьшилось в 2 раза</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.7')">Уменьшилось в 4 раза</button>
+            <button class="option-item" onclick="handleWrong(this)">Не изменится</button>
+        </div>
+        <div class="solution-box" id="sol3.7">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Формула сопротивления провода: <span class="formula">R = &rho; • l / S</span>. <br>
+            Разрезав провод пополам, мы уменьшили длину l каждого куска в 2 раза, что уменьшило сопротивление каждого куска до R/2. Скрутив их параллельно, мы фактически увеличили площадь поперечного сечения S в 2 раза, что снижает общее сопротивление системы ещё в 2 раза. Итог: сопротивление уменьшилось в 4 раза.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.8 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.8</div>
+        <div class="task-title">Закон Ома для участка электрической цепи</div>
+        <div class="task-text">Напряжение на резисторе увеличили в 3 раза. Как при этом изменилось электрическое сопротивление самого резистора?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Увеличилось в 3 раза</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.8')">Не изменится</button>
+            <button class="option-item" onclick="handleWrong(this)">Уменьшилось в 3 раза</button>
+        </div>
+        <div class="solution-box" id="sol3.8">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Главный логический капкан ОГЭ! Сопротивление резистора физически не зависит ни от напряжения, ни от тока! Оно определяется сугубо материалом, длиной и толщиной самого проводника. При росте напряжения в 3 раза просто сила тока в цепи вырастет ровно в 3 раза, а сопротивление останется неизменным.</p>
+        </div>
+    </div>
+    <!-- Код 3.9 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.9</div>
+        <div class="task-title">Последовательное, параллельное и смешанное соединение проводников</div>
+        <div class="task-text">Три одинаковых резистора сопротивлением по 6 Ом каждый соединены так: два соединены параллельно, а третий подключен к ним последовательно. Чему равно эквивалентное сопротивление всей цепи?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">18 Ом</button>
+            <button class="option-item" onclick="handleWrong(this)">2 Ом</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.9')">9 Ом</button>
+        </div>
+        <div class="solution-box" id="sol3.9">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>1. Сначала рассчитаем блок из двух параллельных резисторов по 6 Ом. При параллельном соединении одинаковых элементов их общее сопротивление делится на их количество: <span class="formula">R_пар = 6 / 2 = 3 Ом</span>.<br>
+            2. Третий резистор (6 Ом) подключен последовательно к этому блоку. При последовательном соединении сопротивления складываются: <span class="formula">R_общ = 3 + 6 = 9 Ом</span>.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.10 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.10</div>
+        <div class="task-title">Работа и мощность электрического тока</div>
+        <div class="task-text">Два резистора с сопротивлениями R и 2•R подключены к источнику тока ПОСЛЕДОВАТЕЛЬНО. В каком из них выделяется большая электрическая мощность и во сколько раз?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">В первом резисторе (R) выделяется в 2 раза большая мощность</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.10')">Во втором резисторе (2•R) выделяется в 2 раза большая мощность</button>
+            <button class="option-item" onclick="handleWrong(this)">Мощности на резисторах будут одинаковы, так как соединение последовательное</button>
+        </div>
+        <div class="solution-box" id="sol3.10">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>При последовательном соединении сила тока (I) через оба резистора абсолютно одинакова. Для анализа мощности выберем формулу, содержащую силу тока: <span class="formula">P = I² • R</span>. Так как ток одинаков, мощность прямо пропорциональна сопротивлению. На втором резисторе сопротивление в 2 раза больше, значит и выделяемая мощность на нём будет ровно в 2 раза больше.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.11 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.11</div>
+        <div class="task-title">Закон Джоуля — Ленца</div>
+        <div class="task-text">Два резистора с сопротивлениями R и 2•R подключены к источнику постоянного напряжения ПАРАЛЛЕЛЬНО. В каком из них выделится большее количество теплоты за одно и то же время?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.11')">В первом резисторе (R) выделится в 2 раза больше тепла</button>
+            <button class="option-item" onclick="handleWrong(this)">Во втором резисторе (2•R) выделится в 2 раза больше тепла</button>
+            <button class="option-item" onclick="handleWrong(this)">Количество выделенного тепла будет строго одинаковым</button>
+        </div>
+        <div class="solution-box" id="sol3.11">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>При параллельном соединении напряжение (U) на обоих резисторах строго одинаково. Для закона Джоуля-Ленца выберем формулу через напряжение: <span class="formula">Q = (U² / R) • t</span>. Так как напряжение и время равны, количество теплоты обратно пропорционально сопротивлению! На первом резисторе сопротивление меньше в 2 раза, значит ток там будет больше в 2 раза, и тепла выделится ровно в 2 раза больше.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.12 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.12</div>
+        <div class="task-title">Опыт Эрстеда. Магнитное поле проводника с током</div>
+        <div class="task-text">Над горизонтальным проводом, по которому течет постоянный ток в направлении с юга на север, расположили магнитную стрелку компаса. В какую сторону отклонится северный конец стрелки под действием поля тока?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Отклонится строго вниз, к проводу</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.12')">Отклонится на восток (вправо от направления тока)</button>
+            <button class="option-item" onclick="handleWrong(this)">Отклонится на запад (влево от направления тока)</button>
+        </div>
+        <div class="solution-box" id="sol3.12">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Направление линий магнитной индукции определяем по правилу правой руки: направляем большой палец правой руки по току (на север), тогда четыре согнутых пальца над проводом укажут направление магнитных линий — они будут смотреть направо (на восток). Магнитная стрелка всегда выстраивается вдоль линий поля своим северным концом.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.13 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.13</div>
+        <div class="task-title">Магнитное поле постоянного магнита. Взаимодействие магнитов</div>
+        <div class="task-text">Полосовой постоянный магнит разрезали ровно посередине на две часть. Какими магнитными полюсами будут обладать полученные половинки?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Одна половинка станет чисто северным полюсом, другая — чисто южным</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.13')">Каждая из половинок станет полноценным магнитом с обоими полюсами (и северным, и южным)</button>
+            <button class="option-item" onclick="handleWrong(this)">Половинки полностью потеряют свои магнитные свойства</button>
+        </div>
+        <div class="solution-box" id="sol3.13">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В природе физически не существует изолированных магнитных зарядов (магнитных монополей). Магнетизм тел вызывается круговыми токами внутри атомов. При разламывании магнита на месте раскола мгновенно образуются новые противоположные полюса. Каждая часть сохраняет ориентацию внутренних доменов, превращаясь в отдельный двухполюсный магнит.</p>
+        </div>
+    </div>
+    <!-- Код 3.14 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.14</div>
+        <div class="task-title">Действие магнитного поля на проводник с током. Сила Ампера</div>
+        <div class="task-text">Горизонтальный проводник с током находится в горизонтальном магнитном поле, линии которого направлены от нас вглубь экрана. Ток в проводнике течет слева направо. Куда направлена сила Ампера, действующая на проводник?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.14')">Вертикально вверх</button>
+            <button class="option-item" onclick="handleWrong(this)">Вертикально вниз</button>
+            <button class="option-item" onclick="handleWrong(this)">Вправо, вдоль направления тока</button>
+        </div>
+        <div class="solution-box" id="sol3.14">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Направление силы Ампера определяется по правилу левой руки: располагаем левую руку так, чтобы линии магнитного поля входили в раскрытую ладонь (ладонь повернута к экрану лицевой стороной), четыре вытянутых пальца направляем по течению тока (направо). Тогда отставленный на 90 градусов большой палец укажет направление силы Ампера — строго вертикально вверх.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.15 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.15</div>
+        <div class="task-title">Опыты Фарадея. Электромагнитная индукция. Правило Ленца</div>
+        <div class="task-text">Полосовой магнит северным полюсом (N) вносят внутрь замкнутого медного кольца. Как поведет себя кольцо в первый момент времени?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Притянется к магниту</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.15')">Оттолкнется от магнита</button>
+            <button class="option-item" onclick="handleWrong(this)">Останется абсолютно неподвижным</button>
+        </div>
+        <div class="solution-box" id="sol3.15">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>При приближении магнита магнитный поток сквозь кольцо возрастает. По закону Фарадея в кольце возникает индукционный ток (явление электромагнитной индукции). По правилу Ленца возникающий ток своим магнитным полем стремится противодействовать причине, его вызвавшей (росту внешнего поля). Кольцо создаёт встречный северный полюс со стороны приближающегося магнита, из-за чего одноимённые полюса отталкиваются, и кольцо сдвигается от магнита.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.16 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.16</div>
+        <div class="task-title">Практические (лабораторные) работы по электричеству</div>
+        <div class="task-text">Ученик исследует зависимость сопротивления проводника от его геометрических параметров. На лабораторном столе лежат три проводника: 1) никелиновый длинный тонкий, 2) никелиновый короткий тонкий, 3) медный длинный тонкий. Какую пару проводников ему нужно взять, чтобы выявить зависимость сопротивления только от ДЛИНЫ?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Проводники 1 и 3</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.16')">Проводники 1 и 2</button>
+            <button class="option-item" onclick="handleWrong(this)">Проводники 2 и 3</button>
+        </div>
+        <div class="solution-box" id="sol3.16">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Для корректного научного исследования методом контролируемых параметров все характеристики образцов (материал и площадь сечения) должны быть абсолютно одинаковыми, а изменяться должен только один исследуемый параметр — длина. Проводники 1 и 2 сделаны из одного материала (никелин) и имеют одинаковую толщину (тонкие), но отличаются длиной. Это идеальный выбор.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.17 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.17</div>
+        <div class="task-title">Электрические и магнитные явления в природе. Полярное сияние</div>
+        <div class="task-text">Какова главная физическая причина возникновения красивого полярного (северного) сияния в верхних слоях атмосферы Земли?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Отражение солнечного света от ледяных кристаллов в облаках</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.17')">Взаимодействие заряженных частиц солнечного ветра с магнитным полем Земли и ионизация газов атмосферы</button>
+            <button class="option-item" onclick="handleWrong(this)">Мощные разряды статического электричества между грозовыми тучами</button>
+        </div>
+        <div class="solution-box" id="sol3.17">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Полярное сияние имеет сугубо электромагнитную природу. Поток заряженных высокоэнергетических частиц от Солнца (солнечный ветер) захватывается магнитным полем Земли. Сила Лоренца отклоняет эти частицы к геомагнитным полюсам (на север и юг). Врезаясь в верхние слои атмосферы, частицы ионизируют атомы кислорода и азота, заставляя их светиться люминесцентным светом.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.18 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.18</div>
+        <div class="task-title">Технические устройства: электроскоп, амперметр, вольтметр, реостат</div>
+        <div class="task-text">Как правильно подключаются измерительные приборы Амперметр и Вольтметр к исследуемому резистору в электрическую цепь?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Оба прибора подключаются параллельно резистору</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.18')">Амперметр — последовательно с резистором, Вольтметр — параллельно резистору</button>
+            <button class="option-item" onclick="handleWrong(this)">Амперметр — параллельно резистору, Вольтметр — последовательно с резистором</button>
+        </div>
+        <div class="solution-box" id="sol3.18">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Амперметр измеряет силу тока (количество заряда, проходящее сквозь элемент), поэтому его нужно включать последовательно, чтобы через него шёл тот же ток. Его сопротивление делают ничтожно малым. Вольтметр измеряет разность потенциалов (напряжение) на выводах элемента, его подключают параллельно. Чтобы вольтметр не отбирал на себя ток из основной цепи, его внутреннее сопротивление делают колоссально большим.</p>
+        </div>
+    </div>
+    <!-- Код 3.19 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.19</div>
+        <div class="task-title">Электромагнитные волны. Шкала электромагнитных волн</div>
+        <div class="task-text">Радиостанция передает сигнал на частоте радиоволн. Затем трансляция переключается на оптический диапазон (лазерный световод). Как изменилась длина электромагнитной волны при переходе от радиоволн к видимому свету?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Длина волны увеличилась</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.19')">Длина волны уменьшилась</button>
+            <button class="option-item" onclick="handleWrong(this)">Длина волны не изменилась, так как скорость света постоянна</button>
+        </div>
+        <div class="solution-box" id="sol3.19">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Все электромагнитные волны в вакууме распространяются со скоростью света <span class="formula">c ≈ 300 000 км/с</span>. Связь параметров волны: <span class="formula">&lambda; = c / &nu;</span>. Согласно шкале электромагнитных волн, радиоволны обладают самой низкой частотой и, соответственно, самой большой длиной волны (от метров до километров). Видимый свет имеет куда более высокую частоту, поэтому его длина волны ничтожно мала (доли микрометра). Длина волны уменьшилась.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.20 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.20</div>
+        <div class="task-title">Лучевая модель света. Прямолинейное распространение света</div>
+        <div class="task-text">Какое астрономическое явление служит прямым природным доказательством закона прямолинейного распространения света в однородной среде?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Радуга после летнего дождя</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.20')">Солнечные и Лунные затмения, возникновение тени</button>
+            <button class="option-item" onclick="handleWrong(this)">Мерцание звезд в ночном небе</button>
+        </div>
+        <div class="solution-box" id="sol3.20">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Образование чётких геометрических теней и полутеней возможно только тогда, когда световые лучи распространяются строго по прямым линиям. При затмениях Луна или Земля преграждают путь прямым солнечным лучам, отбрасывая в пространство конус тени. Если бы свет умел плавно огибать крупные препятствия, тени бы не возникало.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.21 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.21</div>
+        <div class="task-title">Закон отражения света. Плоское зеркало</div>
+        <div class="task-text">Луч света падает на плоское зеркало. Угол между падающим лучом и поверхностью зеркала равен 30 градусов. Чему равен угол отражения света?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">30 градусов</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.21')">60 градусов</button>
+            <button class="option-item" onclick="handleWrong(this)">90 градусов</button>
+        </div>
+        <div class="solution-box" id="sol3.21">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Внимание на формулировку — классический капкан ФИПИ по геометрической оптике! В физике угол падения и угол отражения всегда отсчитываются от перпендикуляра, восставленного к зеркалу в точке падения луча. Перпендикуляр составляет с зеркалом угол 90°. Если угол между лучом и зеркалом 30°, то угол падения равен: <span class="formula">&alpha; = 90° − 30° = 60°</span>. По закону отражения угол отражения строго равен значению угла падения, то есть тоже равен 60°.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.22 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.22</div>
+        <div class="task-title">Преломление света. Закон преломления</div>
+        <div class="task-text">Луч света переходит из воздуха в стеклянную призму. Как изменятся скорость распространения света в стекле и угол наклона луча относительно перпендикуляра (угол преломления)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Скорость увеличится, угол преломления увеличится</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.22')">Скорость уменьшится, угол преломления уменьшится (луч прижмется к перпендикуляру)</button>
+            <button class="option-item" onclick="handleWrong(this)">Скорость уменьшится, угол преломления увеличится</button>
+        </div>
+        <div class="solution-box" id="sol3.22">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Стекло является оптически более плотной средой, чем воздух. Абсолютный показатель преломления стекла показывает, во сколько раз скорость света в нём меньше, чем в вакууме/воздухе. При переходе в стекло скорость света падает. Согласно закону Снеллиуса (<span class="formula">sin &alpha; / sin &beta; = n_2 / n_1</span>), при переходе в более плотную среду угол преломления &beta; становится меньше угла падения — световой луч изламывается ближе к нормали (перпендикуляру).</p>
+        </div>
+    </div>
+
+    <!-- Код 3.23 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.23</div>
+        <div class="task-title">Дисперсия света</div>
+        <div class="task-text">Узкий пучок белого солнечного света пропускают через треугольную стеклянную призму, на экране за ней возникает разноцветная радужная полоска. Луч какого цвета преломляется (отклоняется от первоначального курса) СИЛЬНЕЕ всего?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Луч красного цвета</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.23')">Луч фиолетового цвета</button>
+            <button class="option-item" onclick="handleWrong(this)">Все цветные лучи отклоняются на абсолютно одинаковый угол</button>
+        </div>
+        <div class="solution-box" id="sol3.23">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Явление дисперсии заключается в зависимости показателя преломления вещества от частоты (цвета) световой волны. Фиолетовый свет имеет самую высокую частоту в видимом спектре, для него стекло обладает максимальным показателем преломления. Скорость фиолетового света в стекле наименьшая, поэтому он преломляется и отклоняется к основанию призмы сильнее всех. Красный свет имеет наименьшую частоту и отклоняется слабее всего.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.24 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.24</div>
+        <div class="task-title">Линзы. Оптическая сила линзы</div>
+        <div class="task-text">Фокусное расстояние собирающей линзы равно 25 см. Чему равна её оптическая сила?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">40 дптр</button>
+            <button class="option-item" onclick="handleWrong(this)">0.04 дптр</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.24')">4 дптр</button>
+        </div>
+        <div class="solution-box" id="sol3.24">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Формула оптической силы линзы из кодификатора: <span class="formula">D = 1 / F</span>. Перед подстановкой обязательно переводим фокусное расстояние в метры системы СИ: <span class="formula">F = 25 см = 0.25 метра</span>. Вычисляем: <span class="formula">D = 1 / 0.25 = 4 дптр</span>. Так как линза собирающая, её оптическая сила положительна (+4 дптр).</p>
+        </div>
+    </div>
+    <!-- Код 3.25 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.25</div>
+        <div class="task-title">Глаз как оптическая система. Оптические приборы</div>
+        <div class="task-text">Какое изображение предметов формируется на сетчатке здорового человеческого глаза?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Прямое, увеличенное, мнимое</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.25')">Перевернутое, уменьшенное, действительное</button>
+            <button class="option-item" onclick="handleWrong(this)">Прямое, уменьшенное, действительное</button>
+        </div>
+        <div class="solution-box" id="sol3.25">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Хрусталик глаза выполняет роль собирающей линзы, оптический центр которой находится близко к сетчатке. Большинство наблюдаемых объектов расположены далеко за двойным фокусным расстоянием хрусталика (d > 2F). По правилам построения лучей в собирающей линзе, в этом случае изображение получается уменьшенным, перевернутым и действительным. Мозг человека автоматически «переворачивает» картинку обратно в процессе зрительного восприятия.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.26 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.26</div>
+        <div class="task-title">Практические работы по оптике</div>
+        <div class="task-text">При проведении лабораторной работы №17 ученица поместила зажженную свечу на расстоянии двойного фокуса (d = 2•F) перед собирающей линзой. Какое по размеру изображение пламени она зафиксирует на экране за линзой?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Увеличенное в 2 раза</button>
+            <button class="option-item" onclick="handleWrong(this)">Уменьшенное в 2 раза</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.26')">Равное по размеру самому пламени свечи</button>
+        </div>
+        <div class="solution-box" id="sol3.26">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Это уникальная точка для собирающей линзы, на её свойстве равенства размеров построена одна из лабораторных работ ФИПИ. Когда предмет находится в двойном фокусе (d = 2F), его действительное перевернутое изображение формируется строго на таком же расстоянии двойного фокуса за линзой (f = 2F). Линейное увеличение линзы в этом случае равно единице, то есть размеры картинки идеально совпадают с размерами предмета.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.27 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.27</div>
+        <div class="task-title">Оптические явления в природе: радуга, мираж, цвет неба</div>
+        <div class="task-text">Какое оптическое явление в атмосфере Земли обуславливает то, что чистое безоблачное небо в дневное время кажется нам именно голубым, а не черным или белым?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Дисперсия света в каплях тумана</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.27')">Рэлеевское рассеяние солнечного света на неоднородностях и молекулах воздуха</button>
+            <button class="option-item" onclick="handleWrong(this)">Полное внутреннее отражение света от озонового слоя</button>
+        </div>
+        <div class="solution-box" id="sol3.27">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Белый свет Солнца содержит спектр всех цветов. Проходя сквозь атмосферу Земли, свет рассеивается на молекулах газов. Согласно закону Рэлея, интенсивность рассеяния обратно пропорциональна четвертой степени длины волны. Короткие волны (синий, голубой, фиолетовый цвета) рассеиваются молекулами воздуха почти в 4-5 раз эффективнее длинных красных волн. Рассеянный голубой свет заполняет небосвод, формируя его дневной цвет.</p>
+        </div>
+    </div>
+
+    <!-- Код 3.28 -->
+    <div class="task-card">
+        <div class="code-badge">Код 3.28</div>
+        <div class="task-title">Технические устройства: очки, перископ, световоды</div>
+        <div class="task-text">На каком фундаментальном физическом явлении геометрической оптики построена работа гибких медицинских эндоскопов и кабелей оптического интернета (световодов)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">На непрерывной дифракции светового луча внутри кабеля</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol3.28')">На эффекте полного внутреннего отражения света на границе сред</button>
+            <button class="option-item" onclick="handleWrong(this)">На поляризации световых волн</button>
+        </div>
+        <div class="solution-box" id="sol3.28">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Световод состоит из стеклянной жилы с высоким показателем преломления и внешней оболочки с меньшим показателем преломления. Световой луч запускается внутрь жилы под углом, превышающим предельный угол падения. Из-за этого на границе стекла и оболочки свет претерпевает полное внутреннее отражение — он вообще не преломляется наружу, а на 100% отражается обратно внутрь жилы, «запираясь» в стекле и распространяясь на огромные расстояния даже по изогнутому кабелю.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    function handleCorrect(element, solutionId) {
+        element.classList.add('correct');
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            }
+        });
+    }
+</script>
+</body>
+</html>
