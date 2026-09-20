@@ -3,190 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Физическая лаборатория</title>
+    <title>Панель управления: Диагностика ОГЭ по физике</title>
     <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-secondary: #64748b;
-            --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --accent-orange: #f59e0b;
-            --accent-green: #10b981; 
-            --accent-cyan: #06b6d4;
-            --accent-rose: #f43f5e;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 40px 20px; color: #2c3e50; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 40px; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        header h1 { margin: 0 0 10px 0; color: #1e293b; font-size: 28px; }
+        header p { margin: 0; color: #64748b; font-size: 15px; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            line-height: 1.5;
-        }
+        .section-title { font-size: 18px; font-weight: bold; color: #334155; margin: 30px 0 15px 0; padding-bottom: 5px; border-bottom: 2px solid #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Сетка плиток-кнопок */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        
+        /* Стилизация интерактивных карточек */
+        .card { background: white; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.01); position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.06); border-color: #94a3b8; }
+        
+        /* Цветовые маркеры для разных разделов физики */
+        .card::before { content: ""; position: absolute; top: 0; left: 0; width: 6px; height: 100%; }
+        .blue::before { background-color: #3498db; }
+        .orange::before { background-color: #e67e22; }
+        .purple::before { background-color: #9b59b6; }
+        .red::before { background-color: #e74c3c; }
+        .slate::before { background-color: #475569; }
+        .green::before { background-color: #2ecc71; }
 
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #0f172a;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        section {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-
-        section:hover {
-            transform: translateY(-4px);
-        }
-
-        h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
-            margin-bottom: 16px;
-        }
-
-        /* Цветовые акценты для разделов */
-        .mechanics h3 { color: var(--accent-blue); }
-        .molecule h3 { color: var(--accent-green); }
-        .electro h3 { color: var(--accent-orange); }
-        .waves h3 { color: var(--accent-cyan); }
-        .optics h3 { color: var(--accent-purple); }
-        .quantum h3 { color: var(--accent-rose); }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            margin-bottom: 12px;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            display: block;
-            padding: 8px 12px;
-            border-radius: 8px;
-            background: #f1f5f9;
-            transition: all 0.2s ease;
-        }
-
-        a:hover {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .molecule a:hover { background: var(--accent-green); }
-        .optics a:hover { background: var(--accent-purple); }
-        .electro a:hover { background: var(--accent-orange); }
-        .waves a:hover { background: var(--accent-cyan); }
-        .quantum a:hover { background: var(--accent-rose); }
-
+        .card-meta { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; margin-bottom: 6px; letter-spacing: 0.5px; }
+        .card-title { font-size: 16px; font-weight: bold; margin-bottom: 8px; color: #1e293b; }
+        .card-desc { font-size: 13px; color: #64748b; line-height: 1.4; flex-grow: 1; margin-bottom: 15px; }
+        
+        .launch-btn { background: #f1f5f9; text-align: center; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: bold; color: #475569; transition: 0.15s; }
+        .card:hover .launch-btn { background: #1e293b; color: white; }
     </style>
 </head>
 <body>
 
-    <h1>Лаборатория симуляций</h1>
-    <p class="subtitle">Интерактивные модели физических процессов</p>
+<div class="container">
+    <header>
+        <h1>📖 Интерактивный комплекс диагностики ОГЭ</h1>
+        <p>Рабочее пространство репетитора. Все диагностические модули и симуляторы в одном месте.</p>
+    </header>
 
+    <!-- БЛОК 1: ТЕСТЫ ПО КОДИФИКАТОРУ -->
+    <div class="section-title">📋 Тесты по кодификатору ФИПИ (Скролл-карты)</div>
     <div class="grid">
-        <!-- Механика -->
-        <section class="mechanics">
-            <h3>⚙️ Механика</h3>
-            <ul>
-                <li><a href="mechanics/ball.html">Свободное падение</a></li>
-                <li><a href="mechanics/math_pendulum.html">Маятник</a></li>
-                <li><a href="mechanics/inertia.html">Мера инертности (масса)</a></li>
-                <li><a href="mechanics/plotnost.html">Плотность</a></li>
-                <li><a href="mechanics/gravity.html">Сила тяжести и вес</a></li>
-                <li><a href="mechanics/guk.html">Сила упругости</a></li>
-                <li><a href="mechanics/trenie.html">Сила трения</a></li>
-                <li><a href="mechanics/davlenie.html">Давление</a></li>
-                <li><a href="mechanics/arhimed.html">Сила Архимеда</a></li>
-                <li><a href="mechanics/arhimed_new.html">Сила Архимеда 2</a></li>
-                <li><a href="mechanics/rabota_moschnost.html">Работа и мощность</a></li>
-                <li><a href="mechanics/moment_rychag_blok.html">Правило моментов. Рычаг, блок</a></li>
-                <li><a href="mechanics/kpd.html">КПД</a></li>
-                <li><a href="mechanics/poten_and_kin_energy.html">Потенциальная и кинетическая энергия</a></li>
-            </ul>
-        </section>
-
-        <!-- Молекулярная физика -->
-        <section class="molecule">
-            <h3>⚗️ Молекулярная физика</h3>
-            <ul>
-                <li><a href="molecular/vlazhnost.html">Влажность воздуха</a></li>
-                <li><a href="molecular/zakonpaskal.html">Закон Паскаля</a></li>
-                <li><a href="molecular/gidrostatdavlenie.html">Гидростатическое давление</a></li>
-                <li><a href="molecular/soobsch_sosudy.html">Сообщающиеся сосуды</a></li>
-                <li><a href="molecular/gidravl_press.html">Гидравлический пресс</a></li>
-            </ul>
-        </section>
         
-        <!-- Электродинамика -->
-        <section class="electro">
-            <h3>⚡ Электродинамика</h3>
-            <ul>
-                <li><a href="electrodynamics/em_ind.html">Эм. индукция</a></li>
-                <li><a href="electrodynamics/zakonOma.html">Закон Ома</a></li>
-                <li><a href="electrodynamics/rezonans_lc.html">Резонанс в цепи RLC</a></li>
-            </ul>
-        </section>
+        <!-- Механика 1 -->
+        <a href="diagnostics/1_mechanics_part1.html" target="_blank" class="card blue">
+            <div>
+                <div class="card-meta">Раздел 1 • Часть 1</div>
+                <div class="card-title">Механика: Кинематика и Динамика</div>
+                <div class="card-desc">Проверка кодов 1.1 – 1.15. Движение, силы, законы Ньютона, закон Гука и импульс тела.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
 
-        <!-- Колебания и волны -->
-        <section class="waves">
-            <h3>🌊 Колебания и волны</h3>
-            <ul>
-                <li><a href="waves/rezonans.html">Резонанс</a></li>
-                <li><a href="waves/garmonich_koleb.html">Сложение колебаний</a></li>
-            </ul>
-        </section>
-        
-        <!-- Оптика -->
-        <section class="optics">
-            <h3>👁️ Оптика</h3>
-            <ul>
-                <li><a href="optika/Jung_exp.html">Опыт Юнга</a></li>
-                <li><a href="optika/conv_lens.html">Линза</a></li>
-            </ul>
-        </section>
+        <!-- Механика 2 -->
+        <a href="diagnostics/1_mechanics_part2.html" target="_blank" class="card blue">
+            <div>
+                <div class="card-meta">Раздел 1 • Часть 2</div>
+                <div class="card-title">Механика: Энергия и Гидростатика</div>
+                <div class="card-desc">Проверка кодов 1.16 – 1.23. Работа, мощность, ЗСЭ, КПД блоков и рычагов, давление и закон Архимеда.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
 
-        <!-- Квантовая физика -->
-        <section class="quantum">
-            <h3>🌌 Квантовая физика</h3>
-            <!-- <ul> -->
-                <!-- <li><a href="electrodynamics/em_ind.html">Эм. индукция</a></li> -->
-            <!-- </ul> -->
-        </section>
+        <!-- Механика 3 -->
+        <a href="diagnostics/1_mechanics_part3.html" target="_blank" class="card blue">
+            <div>
+                <div class="card-meta">Раздел 1 • Часть 3</div>
+                <div class="card-title">Механика: Колебания и Волны</div>
+                <div class="card-desc">Проверка кодов 1.24 – 1.31. Маятники, звук, резонанс, природные явления и лабораторные погрешности.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
+
+        <!-- Тепловые явления -->
+        <a href="diagnostics/2_teplovye_yavleniya.html" target="_blank" class="card orange">
+            <div>
+                <div class="card-meta">Раздел 2 • Все коды</div>
+                <div class="card-title">Тепловые явления</div>
+                <div class="card-desc">Проверка кодов 2.1 – 2.17. МКТ, теплопередача, влажность, плавление, кипение, сгорание топлива и КПД ДВС.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
+
+        <!-- Электромагнитные явления -->
+        <a href="diagnostics/3_electromagnitnye_yavleniya.html" target="_blank" class="card purple">
+            <div>
+                <div class="card-meta">Раздел 3 • Все коды</div>
+                <div class="card-title">Электромагнитные явления</div>
+                <div class="card-desc">Проверка кодов 3.1 – 3.28. Закон Ома, расчет цепей, правила рук, индукция Фарадея, линзы и геометрическая оптика.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
+
+        <!-- Квантовые явления -->
+        <a href="diagnostics/4_kvantovye_yavleniya.html" target="_blank" class="card red">
+            <div>
+                <div class="card-meta">Раздел 4 • Все коды</div>
+                <div class="card-title">Квантовые явления</div>
+                <div class="card-desc">Проверка кодов 4.1 – 4.7. Опыт Резерфорда, планетарная модель, альфа- и бета-распады, полураспад и камера Вильсона.</div>
+            </div>
+            <div class="launch-btn">Запустить модуль →</div>
+        </a>
     </div>
+
+    <!-- БЛОК 2: ТРЕНАЖЕРЫ И СИМУЛЯЦИИ -->
+    <div class="section-title">🕹️ Практические симуляторы и Конструкторы</div>
+    <div class="grid">
+        
+        <!-- Физический конструктор -->
+        <a href="diagnostics/fiz_konstructor.html" target="_blank" class="card green">
+            <div>
+                <div class="card-meta">Интерактивный практикум</div>
+                <div class="card-title">Конструктор формул</div>
+                <div class="card-desc">Тренажёр вывода буквенных параметров. Отработка навыка работы с уравнениями без подстановки цифр.</div>
+            </div>
+            <div class="launch-btn">Открыть симулятор →</div>
+        </a>
+
+        <!-- Перевод мер СИ -->
+        <a href="diagnostics/measure.html" target="_blank" class="card slate">
+            <div>
+                <div class="card-meta">Математический практикум</div>
+                <div class="card-title">Перевод величин в СИ</div>
+                <div class="card-desc">Интерактивный список задач на перевод внесистемных единиц (см², литры, мА, МДж, км/ч) в систему СИ.</div>
+            </div>
+            <div class="launch-btn">Открыть тренажёр →</div>
+        </a>
+
+    </div>
+</div>
 
 </body>
 </html>
