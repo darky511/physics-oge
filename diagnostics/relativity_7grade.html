@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Диагностика ОГЭ: Относительность движения</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 0; }
+        .formula-box { background: #eef2f7; border-left: 5px solid #3498db; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-style: italic; }
+        .canvas-container { position: relative; width: 100%; background: #87CEEB; border-radius: 8px; overflow: hidden; border: 2px solid #bdc3c7; }
+        canvas { display: block; background: linear-gradient(to bottom, #87CEEB 70%, #7cfc00 70%, #7cfc00 75%, #777 75%); }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; background: #fafafa; padding: 15px; border-radius: 8px; border: 1fr solid #eee; }
+        .control-group { display: flex; flex-direction: column; gap: 8px; }
+        label { font-weight: bold; color: #34495e; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        button:hover { background: #2980b9; }
+        button:active { transform: scale(0.98); }
+        .radio-group { display: flex; gap: 15px; }
+        .diagnostic-quiz { margin-top: 25px; background: #fff3cd; border: 1px solid #ffeeba; padding: 20px; border-radius: 8px; }
+        .quiz-option { margin: 10px 0; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .result-msg { margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 4px; display: none; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Код 1.1: Относительность движения</h1>
+    
+    <div class="formula-box">
+        <strong>Важные формулы для ОГЭ:</strong><br>
+        Закон сложения скоростей: \(\vec{v}_{абс} = \vec{v}_{отн} + \vec{v}_{пер}\) <br>
+        Относительная скорость: \(\vec{v}_{отн} = \vec{v}_{тела} - \vec{v}_{со}\)
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="simCanvas" width="850" height="350"></canvas>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label>Система отсчёта (СО):</label>
+            <div class="radio-group">
+                <label><input type="radio" name="frame" value="earth" checked> Земля / Вертолёт</label>
+                <label><input type="radio" name="frame" value="truck"> Водитель фуры</label>
+            </div>
+        </div>
+        <div class="control-group" style="justify-content: center; align-items: flex-end;">
+            <button id="dropBtn">🚀 Сбросить посылку</button>
+        </div>
+        <div class="control-group" style="grid-column: span 2;">
+            <label id="speedLabel">Скорость фуры: 40 км/ч</label>
+            <input type="range" id="truckSpeed" min="10" max="80" value="40" step="5" style="width: 100%;">
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Физические параметры и состояние
+        let state = {
+            frame: 'earth', // 'earth' или 'truck'
+            truckX: 100,
+            truckSpeed: 2.5, // Пикселей за кадр
+            helicopterX: 425,
+            helicopterY: 60,
+            package: { x: 425, y: 75, vx: 0, vy: 0, dropped: false, active: false },
+            trajectory: []
+        };
+
+        // Настройки графики объектов
+        const roadY = 262;
+
+        function drawBackground() {
+            // Небо и трава закрашиваются градиентом в CSS, тут обновим очистку
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawHelicopter() {
+            let drawX = state.frame === 'earth' ? state.helicopterX : state.helicopterX - state.truckX + 200;
+            ctx.fillStyle = '#e74c3c';
+            ctx.fillRect(drawX - 25, state.helicopterY - 10, 50, 20); // Корпус
+            ctx.fillStyle = '#333';
+            ctx.fillRect(drawX - 35, state.helicopterY - 15, 70, 3);  // Винт
+            ctx.fillRect(drawX - 5, state.helicopterY - 20, 2, 5);     // Вал винта
+            ctx.font = '11px sans-serif';
+            ctx.fillStyle = '#fff';
+            ctx.fillText('МЧС', drawX - 11, state.helicopterY + 4);
+        }
+
+        function drawTruck() {
+            let drawX = state.frame === 'earth' ? state.truckX : 200;
+            ctx.fillStyle = '#2ecc71';
+            ctx.fillRect(drawX - 40, roadY - 30, 60, 30); // Кузов фуры
+            ctx.fillStyle = '#27ae60';
+            ctx.fillRect(drawX + 20, roadY - 20, 20, 20); // Кабина
+            ctx.fillStyle = '#111';
+            ctx.beginPath();
+            ctx.arc(drawX - 20, roadY, 7, 0, Math.PI * 2);
+            ctx.arc(drawX + 20, roadY, 7, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawPackage() {
+            if (!state.package.active) return;
+            let drawX = state.frame === 'earth' ? state.package.x : state.package.x - state.truckX + 200;
+            let drawY = state.package.y;
+            
+            ctx.fillStyle = '#d35400';
+            ctx.fillRect(drawX - 8, drawY - 8, 16, 16); // Коробка груза
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(drawX - 8, drawY - 8, 16, 16);
+        }
+
+        function drawTrajectory() {
+            if (state.trajectory.length < 2) return;
+            ctx.beginPath();
+            ctx.strokeStyle = '#f1c40f';
+            ctx.lineWidth = 3;
+            ctx.setLineDash([5, 5]);
+
+            for (let i = 0; i < state.trajectory.length; i++) {
+                let pt = state.trajectory[i];
+                let drawX = state.frame === 'earth' ? pt.x : pt.x - pt.truckXAtTime + 200;
+                if (i === 0) ctx.moveTo(drawX, pt.y);
+                else ctx.lineTo(drawX, pt.y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+        function updatePhysics() {
+            // Движение фуры по дороге всегда идет в СО Земли
+            state.truckX += state.truckSpeed;
+            if (state.truckX > canvas.width + 100) {
+                state.truckX = -50;
+                if(!state.package.active) state.trajectory = [];
+            }
+
+            // Физика падения посылки
+            if (state.package.active) {
+                state.package.y += state.package.vy;
+                state.package.x += state.package.vx;
+                state.package.vy += 0.1; // Гравитация g
+
+                // Запись траектории
+                state.trajectory.push({
+                    x: state.package.x,
+                    y: state.package.y,
+                    truckXAtTime: state.truckX
+                });
+
+                // Столкновение с землей/дорогой
+                if (state.package.y >= roadY) {
+                    state.package.active = false;
+                }
+            }
+        }
+
+        function simLoop() {
+            drawBackground();
+            drawTrajectory();
+            drawHelicopter();
+            drawTruck();
+            drawPackage();
+            updatePhysics();
+            requestAnimationFrame(simLoop);
+        }
+
+        // Обработка интерфейса
+        document.getElementById('truckSpeed').addEventListener('input', (e) => {
+            state.truckSpeed = parseFloat(e.target.value) * 0.0625; // Перевод в масштаб симулятора
+            document.getElementById('speedLabel').innerText = `Скорость фуры: ${e.target.value} км/ч`;
+        });
+
+        document.getElementsByName('frame').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                state.frame = e.target.value;
+            });
+        });
+
+        document.getElementById('dropBtn').addEventListener('click', () => {
+            state.package = {
+                x: state.helicopterX,
+                y: state.helicopterY + 15,
+                vx: 0, // В СО Земли вертолёт неподвижен, начальная горизонтальная скорость = 0
+                vy: 0,
+                active: true
+            };
+            state.trajectory = [];
+        });
+
+        // Запуск симулятора
+        simLoop();
+
+        // Логика диагностического теста
+        function checkAnswer(option, btn) {
+            const msg = document.getElementById('resultMsg');
+            msg.style.display = 'block';
+            if (option === 'parabola') {
+                msg.className = 'result-msg success';
+                msg.innerHTML = '🎉 Абсолютно верно! В системе отсчета водителя фуры посылка имеет начальную скорость, направленную назад, поэтому она летит по параболе. Отличный уровень физической интуиции!';
+            } else {
+                msg.className = 'result-msg error';
+                msg.innerHTML = '❌ Не совсем. Переключи тумблер симуляции на СО "Водитель фуры" и сбрось посылку еще раз. Посмотри, какую линию описывает желтый маркер траектории!';
+            }
+        }
+    </script>
+
+    <!-- Блок качественного вопроса для ученицы прямо внутри интерактива -->
+    <div class="diagnostic-quiz">
+        <h3>🤔 Интерактивное задание на проверку интуиции:</h3>
+        <p>Пилот вертолета МЧС завис неподвижно над дорогой и сбрасывает посылку. Относительно пилота посылка падает строго по прямой вертикальной линии. Какую форму траектории движения этой посылки увидит <strong>водитель мчащейся фуры</strong>?</p>
+        
+        <div class="quiz-option" onclick="checkAnswer('vertical', this)">
+            <input type="radio" name="quiz"> <span>Прямую вертикальную линию</span>
+        </div>
+        <div class="quiz-option" onclick="checkAnswer('parabola', this)">
+            <input type="radio" name="quiz"> <span>Параболическую кривую</span>
+        </div>
+        <div class="quiz-option" onclick="checkAnswer('horizontal', this)">
+            <input type="radio" name="quiz"> <span>Горизонтальную прямую</span>
+        </div>
+
+        <div id="resultMsg" class="result-msg"></div>
+    </div>
+</div>
+
+</body>
+</html>
+
