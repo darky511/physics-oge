@@ -56,7 +56,7 @@
         /* Модалка успеха */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 520px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
-        .modal-header { font-size: 20px; color: #e74c3c; font-weight: bold; margin-bottom: 12px; }
+        .modal-header { font-size: 20px; color: #27ae60; font-weight: bold; margin-bottom: 12px; }
         .modal-text { font-size: 14px; line-height: 1.5; color: #34495e; margin-bottom: 15px; }
         .close-modal-btn { background: #3498db; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; float: right; }
     </style>
@@ -73,7 +73,7 @@
             <button class="option-btn" onclick="wrongAnswer()">Больше 40 м/с (ближе к быстрому участку)</button>
         </div>
     </div>
-    <!-- Панель подсказки: Скрыта до клика, содержит строгий физический вывод и SVG-графику путей -->
+    <!-- Панель подсказки -->
     <div class="spoiler-container">
         <button class="spoiler-btn" onclick="toggleSpoiler()">
             <span>💡 Показать физический вывод и разбор формулы</span> 
@@ -98,27 +98,23 @@
                     <span style="color:#e67e22; font-weight:bold;">(Среднее гармоническое)</span>
                 </div>
                 
-                <!-- Чистый SVG чертеж распределения путей и времени -->
+                <!-- Чистый SVG чертеж распределения путей -->
                 <svg width="380" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
                     <g font-family="Arial, sans-serif" font-size="11px" font-weight="bold">
-                        <!-- Линия трассы -->
                         <line x1="30" y1="55" x2="350" y2="55" stroke="#94a3b8" stroke-width="3"/>
                         <circle cx="30" cy="55" r="5" fill="#3498db"/>
                         <circle cx="190" cy="55" r="5" fill="#e67e22"/>
                         <circle cx="350" cy="55" r="5" fill="#2ecc71"/>
                         
-                        <!-- Обозначения участков пути -->
                         <text x="95" y="45" fill="#3498db" text-anchor="middle">1-я половина пути (S / 2)</text>
                         <text x="270" y="45" fill="#e67e22" text-anchor="middle">2-я половина пути (S / 2)</text>
                         
-                        <!-- Скорости и время -->
                         <text x="95" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₁ (маленькая)</text>
                         <text x="95" y="98" fill="#e74c3c" text-anchor="middle">Время t₁ — БОЛЬШОЕ 🕒</text>
                         
                         <text x="270" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₂ (большая)</text>
                         <text x="270" y="98" fill="#27ae60" text-anchor="middle">Время t₂ — маленькое ⚡</text>
                         
-                        <!-- Сноска-вывод -->
                         <text x="190" y="20" fill="#475569" text-anchor="middle" font-size="10px" font-style="italic">Тело дольше едет с маленькой скоростью, поэтому v_ср всегда смещена к меньшей!</text>
                     </g>
                 </svg>
@@ -146,7 +142,6 @@
                 <input type="range" id="v2Speed" min="45" max="90" value="60" step="5" style="cursor:pointer;">
             </div>
 
-            <!-- Реальные аналитические показатели расчета скоростей -->
             <div class="control-block" style="margin-top:5px; border-top:1px solid #eee; padding-top:10px;">
                 <label>Физический расчет:</label>
                 <div class="info-badge badge-orange" id="vArithBadge">Наивное среднее: 40.0 м/с</div>
@@ -162,13 +157,13 @@
     <!-- Модалка с объяснением ловушки -->
     <div class="modal" id="successModal">
         <div class="modal-content">
-            <div class="modal-header">🤔 Физика против математики! Разбор ловушки:</div>
+            <div class="modal-header">🎉 Абсолютно верно! Твой балл ОГЭ защищён!</div>
             <div class="modal-text">
-                Ты абсолютно права! Средняя скорость на разделенном пути <strong>всегда меньше среднего арифметического</strong>.<br><br>
+                Средняя скорость на разделенном пути <strong>всегда меньше среднего арифметического</strong>.<br><br>
                 <strong>Почему так происходит «на пальцах»?</strong><br>
                 Поскольку первая половина пути медленная, машина ползет по ней <strong>очень долго по времени</strong>. А вторую половину пути она пролетает со свистом за короткий миг.<br><br>
                 В итоге автомобиль большую часть <strong>суммарного времени движения</strong> ехал именно с маленькой скоростью $v_1$! Поэтому реальная средняя скорость всегда «притягивается» в сторону меньшего значения.<br><br>
-                Запусти гонку и посмотри: зеленый автомобиль-призрак (который едет с постоянной средней арифметической скоростью $40\text{ м/с}$) легко обгоняет реальную синюю машину!
+                Запусти гонку кнопкой слева и посмотри: зеленый автомобиль-призрак (который едет с постоянной средней арифметической скоростью $40\text{ м/с}$) легко обгоняет реальную синюю машину!
             </div>
             <button class="close-modal-btn" onclick="closeModal()">Понятно, запускаем!</button>
         </div>
@@ -181,7 +176,6 @@
         let isRunning = false; 
         let raceFinished = false;
 
-        // Физические параметры симулятора
         let physics = {
             v1: 20,
             v2: 60,
@@ -189,11 +183,9 @@
             get vHarm() { return (2 * this.v1 * this.v2) / (this.v1 + this.v2); }
         };
 
-        // Координаты и состояние машинок
         let cars = {
-            realX: 40,      // Синяя (настоящая) машина
-            ghostX: 40,     // Зеленая (призрак со средним арифм.)
-            scale: 1        // Коэффициент пересчета метров в пиксели холста
+            realX: 40,      
+            ghostX: 40      
         };
 
         let trackLeft = 40;
@@ -209,8 +201,8 @@
             trackLength = trackRight - trackLeft;
             midPointX = trackLeft + trackLength / 2;
             
-            carY1 = canvas.height * 0.35; // Дорожка синей машины
-            carY2 = canvas.height * 0.65; // Дорожка зеленой машины
+            carY1 = canvas.height * 0.35; 
+            carY2 = canvas.height * 0.65; 
             
             if(!isRunning && !raceFinished) {
                 cars.realX = trackLeft;
@@ -223,61 +215,55 @@
         function drawTrack() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Сетка финиша и середины
-            ctx.lineWidth = 1;
-            
             // Середина пути
             ctx.strokeStyle = '#e67e22';
+            ctx.lineWidth = 1;
             ctx.setLineDash([4, 4]);
             ctx.beginPath(); ctx.moveTo(midPointX, 20); ctx.lineTo(midPointX, canvas.height - 20); ctx.stroke();
             ctx.font = 'italic 11px sans-serif'; ctx.fillStyle = '#e67e22';
             ctx.fillText('Середина пути (S / 2)', midPointX - 55, 15);
 
-            // Финишная линия
+            // Финишая линия
             ctx.strokeStyle = '#2ecc71';
-            ctx.setLineDash([]);
             ctx.lineWidth = 4;
+            ctx.setLineDash([]);
             ctx.beginPath(); ctx.moveTo(trackRight, 20); ctx.lineTo(trackRight, canvas.height - 20); ctx.stroke();
             ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#27ae60';
             ctx.fillText('ФИНИШ', trackRight - 20, 15);
 
-            // Сами дороги (серый асфальт)
-            ctx.lineWidth = 20; ctx.strokeStyle = '#cbd5e1';
-            ctx.beginPath(); ctx.moveTo(trackLeft, carY1); ctx.lineTo(trackRight, carY1); stroke();
-            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); stroke();
-            ctx.lineWidth = 1; ctx.setLineDash([]);
+            // Асфальтовые дорожки (ИСПРАВЛЕНО: добавлен префикс ctx)
+            ctx.lineWidth = 24; ctx.strokeStyle = '#cbd5e1';
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY1); ctx.lineTo(trackRight, carY1); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); ctx.stroke();
+            ctx.lineWidth = 1;
         }
 
         function drawCar(x, y, color, label) {
             ctx.fillStyle = color;
-            ctx.fillRect(x - 20, y - 10, 35, 16); // Корпус
+            ctx.fillRect(x - 20, y - 10, 35, 15); 
             ctx.fillStyle = '#333';
-            ctx.fillRect(x + 5, y - 6, 8, 10);    // Кабина
-            ctx.beginPath(); ctx.arc(x - 10, y + 8, 4, 0, Math.PI*2); ctx.arc(x + 10, y + 8, 4, 0, Math.PI*2); ctx.fill(); // Колеса
+            ctx.fillRect(x + 5, y - 6, 8, 9);    
+            ctx.beginPath(); ctx.arc(x - 10, y + 7, 4, 0, Math.PI*2); ctx.arc(x + 10, y + 7, 4, 0, Math.PI*2); ctx.fill(); 
             ctx.font = 'bold 10px sans-serif'; ctx.fillStyle = '#1e293b';
-            ctx.fillText(label, x - 20, y - 15);
+            ctx.fillText(label, x - 20, y - 14);
         }
 
         function updatePhysics() {
             if (!isRunning) return;
 
-            // Расчет масштаба: пусть вся трасса проходится призраком примерно за 6 секунд (360 кадров)
-            // Истинное экранное приращение координат привязано к расчетным скоростям
-            let baseStep = trackLength / 360; 
+            let baseStep = trackLength / 320; 
             
-            // Движение Синей машины (Реальное разделенное движение)
+            // Логика движения Реальной машины
             if (cars.realX < trackRight) {
                 if (cars.realX < midPointX) {
-                    // Первая половина пути: едет со скоростью v1
                     cars.realX += baseStep * (physics.v1 / physics.vArith);
                 } else {
-                    // Вторая половина пути: ускоряется до v2
                     cars.realX += baseStep * (physics.v2 / physics.vArith);
                 }
                 if (cars.realX > trackRight) cars.realX = trackRight;
             }
 
-            // Движение Зеленой машины (Едет с постоянной v_арифм)
+            // Логика движения Призрака
             if (cars.ghostX < trackRight) {
                 cars.ghostX += baseStep;
                 if (cars.ghostX > trackRight) cars.ghostX = trackRight;
@@ -291,14 +277,12 @@
 
         function simLoop() {
             drawTrack();
-            // Отрисовка участников гонки
             drawCar(cars.realX, carY1, '#3498db', `Реальная (v_ср = ${physics.vHarm.toFixed(1)} м/с)`);
             drawCar(cars.ghostX, carY2, '#2ecc71', `Наивная (v = ${physics.vArith.toFixed(1)} м/с)`);
             updatePhysics();
             requestAnimationFrame(simLoop);
         }
 
-        // Логика интерфейса и переключателей
         function updateBadges() {
             document.getElementById('vArithBadge').innerText = `Наивное среднее: ${physics.vArith.toFixed(1)} м/с`;
             document.getElementById('vHarmBadge').innerText = `Истинное v_ср: ${physics.vHarm.toFixed(1)} м/с`;
