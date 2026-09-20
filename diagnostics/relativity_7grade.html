@@ -19,11 +19,11 @@
         /* Спойлер подсказки */
         .spoiler-container { margin-bottom: 10px; flex-shrink: 0; }
         .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; align-items: center; }
-        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 15px; border-radius: 0 0 6px 6px; }
+        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 12px; border-radius: 0 0 6px 6px; }
         
-        /* Внутренности формул и подписей */
-        .formula-flex { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-        .formula-text-block { font-size: 14px; line-height: 1.8; color: #2c3e50; }
+        /* Изменено: flex-start вместо space-between для удержания чертежа рядом с формулами */
+        .formula-flex { display: flex; align-items: center; justify-content: flex-start; gap: 40px; }
+        .formula-text-block { font-size: 14px; line-height: 1.8; color: #2c3e50; min-width: 250px; }
         .vector-text { position: relative; display: inline-block; font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 17px; margin-right: 2px; }
         .vector-text::before { content: "→"; position: absolute; top: -10px; left: 1px; font-size: 10px; font-style: normal; }
         .sub-text { font-size: 11px; vertical-align: sub; font-family: 'Segoe UI', sans-serif; font-style: normal; font-weight: bold; }
@@ -68,7 +68,7 @@
             <button class="option-btn" onclick="wrongAnswer()">Горизонтальную прямую линию</button>
         </div>
     </div>
-    <!-- Спойлер подсказки с исправленной прорисовкой векторов -->
+    <!-- Блок подсказки: чертеж расширен и сдвинут ближе к формулам -->
     <div class="spoiler-container">
         <button class="spoiler-btn" onclick="toggleSpoiler()">
             <span>💡 Показать подсказку с формулами и векторами</span> 
@@ -88,29 +88,29 @@
                     <span class="vector-text">v<span class="sub-text">фуры</span></span>
                 </div>
                 
-                <!-- Полностью переработанный, чистый и рабочий SVG-чертеж -->
-                <svg width="340" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                <!-- Ширина увеличена до 380, внутренние элементы сдвинуты внутрь границ -->
+                <svg width="380" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
                     <defs>
                         <marker id="arr-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#e74c3c"/></marker>
                         <marker id="arr-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#2ecc71"/></marker>
                         <marker id="arr-gold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#f1c40f"/></marker>
                     </defs>
-                    <!-- Векторная группа координат и стрелок -->
+                    <!-- Координаты скорректированы, чтобы ничего не обрезалось краями SVG -->
                     <g font-family="Arial, sans-serif" font-size="11px" font-weight="bold">
-                        <!-- Пунктирный прямоугольник для правила сложения -->
-                        <path d="M 240,25 L 80,25 L 80,95" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" fill="none"/>
+                        <!-- Пунктирный прямоугольник -->
+                        <path d="M 210,25 L 30,25 L 30,95" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" fill="none"/>
                         
                         <!-- Вектор скорости падения груза (вниз) -->
-                        <line x1="240" y1="25" x2="240" y2="95" stroke="#e74c3c" stroke-width="2.5" marker-end="url(#arr-red)"/>
-                        <text x="248" y="65" fill="#e74c3c">v_груза (падение вниз)</text>
+                        <line x1="210" y1="25" x2="210" y2="95" stroke="#e74c3c" stroke-width="2.5" marker-end="url(#arr-red)"/>
+                        <text x="218" y="65" fill="#e74c3c">v_груза (падение вниз)</text>
                         
                         <!-- Вектор переносной скорости со знаком минус (влево) -->
-                        <line x1="240" y1="95" x2="80" y2="95" stroke="#2ecc71" stroke-width="2.5" marker-end="url(#arr-green)"/>
-                        <text x="95" y="112" fill="#27ae60">−v_фуры (увлекает назад)</text>
+                        <line x1="210" y1="95" x2="30" y2="95" stroke="#2ecc71" stroke-width="2.5" marker-end="url(#arr-green)"/>
+                        <text x="50" y="112" fill="#27ae60">−v_фуры (увлекает назад)</text>
                         
                         <!-- Результирующий вектор относительной скорости (диагональ) -->
-                        <line x1="240" y1="25" x2="84" y2="93" stroke="#f1c40f" stroke-width="2.5" marker-end="url(#arr-gold)"/>
-                        <text x="65" y="18" fill="#b7791f">v_отн (движение по параболе)</text>
+                        <line x1="210" y1="25" x2="34" y2="93" stroke="#f1c40f" stroke-width="2.5" marker-end="url(#arr-gold)"/>
+                        <text x="30" y="16" fill="#b7791f">v_отн (движение по параболе)</text>
                     </g>
                 </svg>
             </div>
