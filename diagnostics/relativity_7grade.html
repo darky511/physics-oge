@@ -5,98 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Интерактивная физика: Относительность движения</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; color: #2c3e50; }
-        .container { max-width: 850px; margin: 0 auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; color: #2c3e50; height: 100vh; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .container { width: 98vw; height: 96vh; background: white; padding: 15px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; box-sizing: border-box; }
         
-        /* Блок задания наверху */
-        .quiz-section { background: #fff9e6; border-left: 6px solid #f1c40f; padding: 20px; border-radius: 8px; margin-bottom: 25px; }
-        .quiz-section h2 { margin-top: 0; color: #d35400; font-size: 20px; }
-        .options-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; }
-        .option-btn { background: white; border: 2px solid #bdc3c7; padding: 12px 20px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 16px; transition: 0.2s; font-weight: 500; }
+        /* Задание наверху */
+        .quiz-section { background: #fff9e6; border-left: 6px solid #f1c40f; padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; flex-shrink: 0; }
+        .quiz-section h2 { margin: 0 0 5px 0; color: #d35400; font-size: 16px; }
+        .quiz-section p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.3; }
+        .options-grid { display: flex; gap: 10px; }
+        .option-btn { flex: 1; background: white; border: 1.5px solid #bdc3c7; padding: 6px 10px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 13px; transition: 0.2s; font-weight: 500; }
         .option-btn:hover { border-color: #3498db; background: #f4f9fd; }
         
-        /* Панель формул без LaTeX (Чистый красивый HTML/CSS) */
-        .formula-box { background: #eef2f7; border: 1px solid #d6e4f0; padding: 18px; border-radius: 8px; margin-bottom: 20px; font-size: 16px; text-align: center; font-weight: 500; }
-        .vector { position: relative; display: inline-block; padding-top: 4px; font-style: italic; font-family: "Times New Roman", Times, serif; font-size: 18px; }
-        .vector::after { content: "→"; position: absolute; top: -6px; left: 2px; font-size: 11px; }
-        .sub { font-size: 12px; vertical-align: sub; font-family: 'Segoe UI', sans-serif; font-style: normal; }
-        .divider { margin: 0 15px; color: #bdc3c7; font-weight: normal; }
+        /* Спойлер подсказки */
+        .spoiler-container { margin-bottom: 10px; flex-shrink: 0; }
+        .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; }
+        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 10px; border-radius: 0 0 6px 6px; }
         
-        /* Симулятор */
-        .canvas-container { position: relative; width: 100%; border-radius: 12px; overflow: hidden; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
-        canvas { display: block; background: linear-gradient(to bottom, #87CEEB 70%, #7cfc00 70%, #7cfc00 75%, #777 75%); }
+        /* Внутренности формул и SVG */
+        .formula-flex { display: flex; align-items: center; justify-content: space-around; font-size: 13px; }
+        .vector { position: relative; display: inline-block; padding-top: 2px; font-style: italic; font-family: "Times New Roman", Times, serif; font-size: 15px; }
+        .vector::after { content: "→"; position: absolute; top: -7px; left: 1px; font-size: 9px; }
+        .sub { font-size: 10px; vertical-align: sub; font-family: 'Segoe UI', sans-serif; font-style: normal; }
         
-        /* Пульт управления */
-        .controls { display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center; margin-top: 20px; background: #fafafa; padding: 20px; border-radius: 12px; }
-        .btn-group { display: flex; gap: 10px; }
-        button.action-btn { background: #3498db; color: white; border: none; padding: 12px 18px; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        /* Рабочая зона: пульт слева, холст справа */
+        .main-workspace { display: flex; gap: 15px; flex-grow: 1; min-height: 0; }
+        
+        /* Левая вертикальная панель */
+        .sidebar-controls { width: 220px; background: #fafafa; border: 1px solid #eaeaea; border-radius: 12px; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+        .control-block { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: bold; }
+        .control-block label { color: #34495e; margin-bottom: 2px; }
+        
+        button.action-btn { background: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; }
         button.action-btn:hover { background: #2980b9; }
         button#pauseBtn { background: #e67e22; }
         button#pauseBtn:hover { background: #d35400; }
         button#resetBtn { background: #95a5a6; }
         button#resetBtn:hover { background: #7f8c8d; }
-        .slider-group { display: flex; flex-direction: column; gap: 5px; font-weight: bold; }
-        .radio-group { display: flex; gap: 15px; font-weight: bold; }
+        .radio-item { display: flex; align-items: center; gap: 6px; font-weight: 500; margin-top: 3px; cursor: pointer; }
+        
+        /* Правая зона под симулятор */
+        .canvas-container { flex-grow: 1; height: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bdc3c7; background: #87CEEB; position: relative; }
+        canvas { width: 100%; height: 100%; display: block; }
 
-        /* Всплывающее окно (Модалка) */
+        /* Всплывающее окно */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: white; padding: 30px; border-radius: 16px; max-width: 550px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); animation: scaleUp 0.3s ease; }
-        @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .modal-header { font-size: 24px; color: #27ae60; font-weight: bold; margin-bottom: 15px; }
-        .modal-text { font-size: 16px; line-height: 1.6; color: #34495e; margin-bottom: 20px; }
-        .close-modal-btn { background: #27ae60; color: white; border: none; padding: 10px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 16px; float: right; }
+        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 500px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .modal-header { font-size: 20px; color: #27ae60; font-weight: bold; margin-bottom: 12px; }
+        .modal-text { font-size: 14px; line-height: 1.5; color: #34495e; margin-bottom: 15px; }
+        .close-modal-btn { background: #27ae60; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; float: right; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="quiz-section">
-        <h2>Задание на физическую интуицию</h2>
-        <p>Пилот вертолета МЧС завис неподвижно относительно поверхности Земли и сбрасывает коробку с гуманитарной помощью. Относительно пилота коробка падает строго по прямой вертикальной линии. Какую форму траектории движения этой же коробки увидит <strong>водитель мчащейся по шоссе фуры</strong>?</p>
+        <h2>Задание на проверку интуиции</h2>
+        <p>Вертолет МЧС завис неподвижно относительно Земли и сбрасывает коробку. Относительно пилота коробка падает строго вертикально вниз. Какую траекторию падения коробки увидит <strong>водитель мчащейся по шоссе фуры</strong>?</p>
         <div class="options-grid">
             <button class="option-btn" onclick="wrongAnswer()">Прямую вертикальную линию</button>
-            <button class="option-btn" onclick="correctAnswer()">Параболическую линию</button>
+            <button class="option-btn" onclick="correctAnswer()">Параболическую кривую линию</button>
             <button class="option-btn" onclick="wrongAnswer()">Горизонтальную прямую линию</button>
         </div>
     </div>
 
-    <!-- Красивые формулы без использования сторонних библиотек и латеха -->
-    <div class="formula-box">
-        Закон сложения скоростей: <span class="vector">v<span class="sub">абс</span></span> = <span class="vector">v<span class="sub">отн</span></span> + <span class="vector">v<span class="sub">пер</span></span> 
-        <span class="divider">|</span> 
-        Скорость относительно фуры: <span class="vector">v<span class="sub">отн</span></span> = <span class="vector">v<span class="sub">груза</span></span> − <span class="vector">v<span class="sub">фуры</span></span>
+    <!-- Исходно свернутый блок подсказки -->
+    <div class="spoiler-container">
+        <button class="spoiler-btn" onclick="toggleSpoiler()"><span>💡 Показать подсказку с формулами и векторами</span> <span id="spoilerArrow">▼</span></button>
+        <div class="spoiler-content" id="spoilerContent">
+            <div class="formula-flex">
+                <div>
+                    <strong>Формулы сложения скоростей:</strong><br><br>
+                    Закон: <span class="vector">v<span class="sub">абс</span></span> = <span class="vector">v<span class="sub">отн</span></span> + <span class="vector">v<span class="sub">пер</span></span><br>
+                    Для фуры: <span class="vector">v<span class="sub">отн</span></span> = <span class="vector">v<span class="sub">груза</span></span> − <span class="vector">v<span class="sub">фуры</span></span>
+                </div>
+                <!-- Векторное изображение скоростей (SVG) -->
+                <svg width="220" height="90" style="background:#f8fafc; border-radius:6px; border:1px solid #e2e8f0;">
+                    <g transform="translate(30, 70)">
+                        <span style="font-family:sans-serif; font-size:10px;">
+                            <!-- Оси -->
+                            <line x1="0" y1="0" x2="160" y2="0" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2"/>
+                            <line x1="0" y1="0" x2="0" y2="-55" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2"/>
+                            <!-- Вектор скорости падения v_груза -->
+                            <line x1="0" y1="0" x2="0" y2="-45" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow-red)"/>
+                            <text x="-5" y="-50" fill="#e74c3c" font-weight="bold" font-style="italic">v_груза (вниз)</text>
+                            <!-- Вектор минус v_фуры -->
+                            <line x1="0" y1="0" x2="120" y2="0" stroke="#2ecc71" stroke-width="2" marker-end="url(#arrow-green)"/>
+                            <text x="40" y="12" fill="#27ae60" font-weight="bold">−v_фуры (относительно авто)</text>
+                            <!-- Результирующая скорость v_отн -->
+                            <line x1="0" y1="0" x2="120" y2="-45" stroke="#f1c40f" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow-gold)"/>
+                            <text x="65" y="-30" fill="#b7791f" font-weight="bold">v_отн (под углом)</text>
+                        </span>
+                    </g>
+                    <!-- Маркеры стрелок -->
+                    <defs>
+                        <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#e74c3c"/></marker>
+                        <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#2ecc71"/></marker>
+                        <marker id="arrow-gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 2 L 10 5 L 0 8 z" fill="#f1c40f"/></marker>
+                    </defs>
+                </svg>
+            </div>
+        </div>
     </div>
+    <div class="main-workspace">
+        <!-- 3. Панель управления слева (вертикальная область) -->
+        <div class="sidebar-controls">
+            <div class="control-block">
+                <label>Действия с симуляцией:</label>
+                <button class="action-btn" id="dropBtn">🚀 Сбросить груз</button>
+                <button class="action-btn" id="pauseBtn" style="margin-top:6px;">⏸️ Пауза</button>
+                <button class="action-btn" id="resetBtn" style="margin-top:6px;">🔄 Сброс в начало</button>
+            </div>
 
-    <div class="canvas-container">
-        <canvas id="simCanvas" width="790" height="320"></canvas>
-    </div>
-    <div class="controls">
-        <div class="btn-group">
-            <button class="action-btn" id="dropBtn">🚀 Сбросить груз</button>
-            <button class="action-btn" id="pauseBtn">⏸️ Пауза</button>
-            <!-- Добавлена кнопка сброса -->
-            <button class="action-btn" id="resetBtn">🔄 Сброс</button>
+            <div class="control-block">
+                <label id="speedLabel">Скорость фуры: 40 км/ч</label>
+                <input type="range" id="truckSpeed" min="15" max="75" value="40" step="5" style="cursor:pointer;">
+            </div>
+
+            <div class="control-block">
+                <label>Система отсчёта (СО):</label>
+                <div class="radio-item" onclick="document.getElementById('frameEarth').click()">
+                    <input type="radio" id="frameEarth" name="frame" value="earth" checked>
+                    <span>Земля / Вертолет</span>
+                </div>
+                <div class="radio-item" onclick="document.getElementById('frameTruck').click()">
+                    <input type="radio" id="frameTruck" name="frame" value="truck">
+                    <span>Водитель фуры</span>
+                </div>
+            </div>
         </div>
 
-        <div class="slider-group">
-            <span id="speedLabel">Скорость фуры: 40 км/ч</span>
-            <input type="range" id="truckSpeed" min="15" max="75" value="40" step="5">
-        </div>
-
-        <div class="radio-group">
-            <label><input type="radio" name="frame" value="earth" checked> СО: Земля / Вертолет</label>
-            <label><input type="radio" name="frame" value="truck"> СО: Водитель фуры</label>
+        <!-- Поле анимации справа -->
+        <div class="canvas-container" id="canvasHolder">
+            <canvas id="simCanvas"></canvas>
         </div>
     </div>
 
+    <!-- Модальное окно правильного ответа -->
     <div class="modal" id="successModal">
         <div class="modal-content">
-            <div class="modal-header">🎉 Великолепно! Ответ верный!</div>
+            <div class="modal-header">🎉 Ответ верный! Великолепно!</div>
             <div class="modal-text">
-                <strong>Объясняем на пальцах:</strong><br><br>
-                Для пилота (в СО Земли) у коробки нет начальной горизонтальной скорости, она падает ровно вниз под действием силы тяжести.<br><br>
-                Но водитель фуры сам движется вперед! Поэтому в его системе отсчета всё, что неподвижно стоит на Земле (включая вертолет), стремительно <strong>летит назад</strong> с точно такой же по модулю скоростью.<br><br>
-                Когда коробка отделяется, она одновременно падает вниз (ускоренно) и летит назад относительно фуры (равномерно). Наложение этих двух движений дает идеальную <strong>параболу</strong>. Проверь это прямо сейчас в симуляторе, переключив тумблер системы отсчета!
+                <strong>Объясняем «на пальцах»:</strong><br><br>
+                Для пилота коробка просто падает строго вниз.<br><br>
+                Но водитель фуры едет вперед! В его системе отсчета вертолет и сама Земля стремительно <strong>мчатся назад</strong>. <br><br>
+                В момент сброса коробка приобретает относительную скорость, направленную назад. Складываясь с ускоренным падением вниз, траектория превращается в красивую <strong>параболу</strong>.<br><br>
+                Открой блок подсказок над симулятором, чтобы изучить векторный чертеж скоростей, и переключи тумблер СО!
             </div>
             <button class="close-modal-btn" onclick="closeModal()">Понятно!</button>
         </div>
@@ -105,57 +158,76 @@
     <script>
         const canvas = document.getElementById('simCanvas');
         const ctx = canvas.getContext('2d');
+        const holder = document.getElementById('canvasHolder');
 
         let isRunning = true; 
-
         let state = {
             frame: 'earth',
-            truckX: 80,
+            truckX: 60,
             truckSpeed: 2.5,
-            helicopterX: 395,
-            helicopterY: 50,
-            package: { x: 395, y: 65, vx: 0, vy: 0, active: false },
+            helicopterX: 0, 
+            helicopterY: 40,
+            package: { x: 0, y: 55, vx: 0, vy: 0, active: false },
             trajectory: []
         };
 
-        const roadY = 240;
+        let roadY = 0;
+
+        // Автоподгонка внутреннего разрешения Canvas под размеры родительского контейнера
+        function resizeCanvas() {
+            canvas.width = holder.clientWidth;
+            canvas.height = holder.clientHeight;
+            state.helicopterX = canvas.width / 2;
+            if(!state.package.active) state.package.x = state.helicopterX;
+            roadY = canvas.height * 0.78; 
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         function drawBackground() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Небо
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, roadY);
+            // Трава и дорога
+            ctx.fillStyle = '#7cfc00';
+            ctx.fillRect(0, roadY, canvas.width, canvas.height - roadY);
+            ctx.fillStyle = '#777';
+            ctx.fillRect(0, roadY + 10, canvas.width, 25);
         }
-
         function drawHelicopter() {
-            let drawX = state.frame === 'earth' ? state.helicopterX : state.helicopterX - state.truckX + 200;
+            let drawX = state.frame === 'earth' ? state.helicopterX : state.helicopterX - state.truckX + 180;
             ctx.fillStyle = '#e74c3c';
-            ctx.fillRect(drawX - 25, state.helicopterY - 10, 50, 20);
+            ctx.fillRect(drawX - 22, state.helicopterY - 8, 44, 16);
             ctx.fillStyle = '#333';
-            ctx.fillRect(drawX - 35, state.helicopterY - 14, 70, 3);
-            ctx.fillRect(drawX - 1, state.helicopterY - 19, 2, 5);
-            ctx.font = 'bold 10px sans-serif';
+            ctx.fillRect(drawX - 30, state.helicopterY - 12, 60, 3);
+            ctx.fillRect(drawX - 1, state.helicopterY - 16, 2, 4);
+            ctx.font = 'bold 9px sans-serif';
             ctx.fillStyle = '#fff';
-            ctx.fillText('МЧС', drawX - 11, state.helicopterY + 4);
+            ctx.fillText('МЧС', drawX - 10, state.helicopterY + 4);
         }
 
         function drawTruck() {
-            let drawX = state.frame === 'earth' ? state.truckX : 200;
+            let drawX = state.frame === 'earth' ? state.truckX : 180;
             ctx.fillStyle = '#2ecc71';
-            ctx.fillRect(drawX - 45, roadY - 30, 65, 30);
+            ctx.fillRect(drawX - 40, roadY + 2, 55, 24);
             ctx.fillStyle = '#27ae60';
-            ctx.fillRect(drawX + 20, roadY - 20, 20, 20);
+            ctx.fillRect(drawX + 15, roadY + 10, 15, 16);
             ctx.fillStyle = '#111';
             ctx.beginPath();
-            ctx.arc(drawX - 25, roadY, 7, 0, Math.PI * 2);
-            ctx.arc(drawX + 20, roadY, 7, 0, Math.PI * 2);
+            ctx.arc(drawX - 20, roadY + 26, 6, 0, Math.PI * 2);
+            ctx.arc(drawX + 15, roadY + 26, 6, 0, Math.PI * 2);
             ctx.fill();
         }
+
         function drawPackage() {
             if (!state.package.active) return;
-            let drawX = state.frame === 'earth' ? state.package.x : state.package.x - state.truckX + 200;
+            let drawX = state.frame === 'earth' ? state.package.x : state.package.x - state.truckX + 180;
             ctx.fillStyle = '#e67e22';
-            ctx.fillRect(drawX - 8, state.package.y - 8, 16, 16);
+            ctx.fillRect(drawX - 7, state.package.y - 7, 14, 14);
             ctx.strokeStyle = '#fff';
-            ctx.lineWidth = 1.5;
-            ctx.strokeRect(drawX - 8, state.package.y - 8, 16, 16);
+            ctx.lineWidth = 1;
+            ctx.strokeRect(drawX - 7, state.package.y - 7, 14, 14);
         }
 
         function drawTrajectory() {
@@ -165,7 +237,7 @@
             ctx.lineWidth = 3;
             for (let i = 0; i < state.trajectory.length; i++) {
                 let pt = state.trajectory[i];
-                let drawX = state.frame === 'earth' ? pt.x : pt.x - pt.truckXAtTime + 200;
+                let drawX = state.frame === 'earth' ? pt.x : pt.x - pt.truckXAtTime + 180;
                 if (i === 0) ctx.moveTo(drawX, pt.y);
                 else ctx.lineTo(drawX, pt.y);
             }
@@ -173,18 +245,18 @@
         }
 
         function updatePhysics() {
-            if (!isRunning) return; 
+            if (!isRunning) return;
 
             state.truckX += state.truckSpeed;
-            if (state.truckX > canvas.width + 60) {
-                state.truckX = -60;
+            if (state.truckX > canvas.width + 50) {
+                state.truckX = -50;
                 if(!state.package.active) state.trajectory = [];
             }
 
             if (state.package.active) {
                 state.package.y += state.package.vy;
                 state.package.x += state.package.vx;
-                state.package.vy += 0.08; 
+                state.package.vy += 0.07; // Ускорение g
 
                 state.trajectory.push({
                     x: state.package.x,
@@ -192,7 +264,7 @@
                     truckXAtTime: state.truckX
                 });
 
-                if (state.package.y >= roadY) {
+                if (state.package.y >= roadY + 10) {
                     state.package.active = false;
                 }
             }
@@ -208,17 +280,28 @@
             requestAnimationFrame(simLoop);
         }
 
-        // Кнопка Пауза / Старт
+        // Логика управления спойлером
+        function toggleSpoiler() {
+            const content = document.getElementById('spoilerContent');
+            const arrow = document.getElementById('spoilerArrow');
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                arrow.innerText = '▼';
+            } else {
+                content.style.display = 'block';
+                arrow.innerText = '▲';
+            }
+        }
+
         document.getElementById('pauseBtn').addEventListener('click', function() {
             isRunning = !isRunning;
             this.innerText = isRunning ? '⏸️ Пауза' : '▶️ Старт';
             this.style.background = isRunning ? '#e67e22' : '#27ae60';
         });
 
-        // Реализация кнопки Сброс
         document.getElementById('resetBtn').addEventListener('click', function() {
-            state.truckX = 80;
-            state.package = { x: 395, y: 65, vx: 0, vy: 0, active: false };
+            state.truckX = 60;
+            state.package = { x: state.helicopterX, y: state.helicopterY + 15, vx: 0, vy: 0, active: false };
             state.trajectory = [];
             isRunning = true;
             const pBtn = document.getElementById('pauseBtn');
@@ -235,6 +318,9 @@
             radio.addEventListener('change', (e) => { state.frame = e.target.value; });
         });
 
+        document.getElementById('frameEarth').addEventListener('change', () => { state.frame = 'earth'; });
+        document.getElementById('frameTruck').addEventListener('change', () => { state.frame = 'truck'; });
+
         document.getElementById('dropBtn').addEventListener('click', () => {
             state.package = { x: state.helicopterX, y: state.helicopterY + 15, vx: 0, vy: 0, active: true };
             state.trajectory = [];
@@ -242,17 +328,9 @@
 
         simLoop();
 
-        function correctAnswer() {
-            document.getElementById('successModal').style.display = 'flex';
-        }
-
-        function wrongAnswer() {
-            alert('Не совсем так! Попробуй запустить симуляцию, переключить Систему Отсчета (СО) на водителя фуры и посмотреть на реальный след движения посылки!');
-        }
-
-        function closeModal() {
-            document.getElementById('successModal').style.display = 'none';
-        }
+        function correctAnswer() { document.getElementById('successModal').style.display = 'flex'; }
+        function wrongAnswer() { alert('Неа, подумай еще или открой блок подсказок с формулами!'); }
+        function closeModal() { document.getElementById('successModal').style.display = 'none'; }
     </script>
 </body>
 </html>
