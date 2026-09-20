@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный лист диагностики ОГЭ: Квантовые явления</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f1f0f9; margin: 0; padding: 30px 20px; color: #2c3e50; line-height: 1.5; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        header { text-align: center; margin-bottom: 35px; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #dcd6f7; }
+        header h1 { margin: 0 0 10px 0; color: #6c5ce7; font-size: 26px; }
+        header p { margin: 0; color: #7f8c8d; font-size: 15px; }
+        
+        .task-card { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #dcd6f7; position: relative; }
+        .code-badge { background: #6c5ce7; color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block; margin-bottom: 12px; }
+        .task-title { font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #34495e; border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; }
+        .task-text { font-size: 15px; margin-bottom: 18px; font-weight: 500; }
+        
+        .options-container { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+        .option-item { background: #fdfdfd; border: 1.5px solid #e2e8f0; padding: 12px 18px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: 0.2s; font-weight: 500; text-align: left; width: 100%; display: block; }
+        .option-item:hover { border-color: #6c5ce7; background: #faf9ff; }
+        
+        .option-item.wrong { background: #fef2f2; border-color: #f87171; color: #991b1b; cursor: not-allowed; }
+        .option-item.correct { background: #f0fdf4; border-color: #4ade80; color: #166534; font-weight: bold; }
+        
+        .solution-box { display: none; background: #f0fdf4; border-left: 5px solid #22c55e; padding: 18px; border-radius: 4px; margin-top: 15px; animation: slideDown 0.35s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .solution-box h4 { margin: 0 0 8px 0; color: #166534; font-size: 15px; }
+        .solution-box p { margin: 0; font-size: 14px; color: #1e293b; line-height: 1.6; }
+        
+        .formula { font-style: italic; font-family: 'Times New Roman', Times, serif; font-weight: bold; font-size: 14px; background: #e2e8f0; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1>Диагностическая карта ОГЭ: Квантовые явления</h1>
+        <p>Интерактивный лист проверки финального раздела кодификатора ФИПИ по физике ядра и атома</p>
+    </header>
+
+    <!-- Код 4.1 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.1</div>
+        <div class="task-title">Радиоактивность. Альфа-, бета-, гамма-излучения. Реакции распадов</div>
+        <div class="task-text">Нестабильное ядро некоторого радиоактивного элемента претерпевает один бетта-распад (электронный распад). Как в результате этого процесса изменяются массовое число ядра и его зарядовое число (номер в таблице Менделеева)?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Массовое число уменьшается на 4, зарядовое уменьшается на 2</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol4.1')">Массовое число абсолютно не меняется, а зарядовое число увеличивается на 1</button>
+            <button class="option-item" onclick="handleWrong(this)">Массовое число увеличивается на 1, а зарядовое уменьшается на 1</button>
+        </div>
+        <div class="solution-box" id="sol4.1">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>При бетта-распаде (электронном) один из нейтронов внутри ядра превращается в протон, при этом из ядра вылетает быстрый электрон. <br>
+            Так как общее число нуклонов (протоны + нейтроны) в ядре не изменилось, верхнее **массовое число (А) остается неизменным**. <br>
+            Поскольку в ядре появился один дополнительный протон, нижнее **зарядовое число (Z) увеличивается на 1**, и элемент сдвигается на одну клетку вперед в таблице Менделеева.</p>
+        </div>
+    </div>
+
+    <!-- Код 4.2 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.2</div>
+        <div class="task-title">Опыты Резерфорда по рассеянию альфа-частиц. Планетарная модель атома</div>
+        <div class="task-text">При обстреле золотой фольги потоком тяжелых положительных альфа-частиц Резерфорд обнаружил, что абсолютное большинство частиц пролетают фольгу насквозь почти без отклонений, но единичные частицы отскакивают строго назад. Какой фундаментальный вывод об устройстве атома сделал учёный?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Атом представляет собой сплошной положительно заряженный шар, в который вкраплены электроны</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol4.2')">Атом практически весь пустой, а вся его положительная масса сосредоточена в крошечном центральном ядре</button>
+            <button class="option-item" onclick="handleWrong(this)">Внутри атома вообще нет положительных зарядов, он состоит только из нейтральных частиц</button>
+        </div>
+        <div class="solution-box" id="sol4.2">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Этот опыт полностью опроверг старую модель атома Томсона («пудинг с изюмом»). Так как большинство альфа-частиц не встретили преград, Резерфорд понял: атом «пустой», электроны летают далеко от центра. Но тот факт, что некоторые тяжелые альфа-частицы отскочили назад, доказал: в самом центре атома сидит сверхплотное, крошечное положительное ядро, обладавшее достаточной силой кулоновского отталкивания, чтобы развернуть альфа-частицу обратно.</p>
+        </div>
+    </div>
+
+    <!-- Код 4.3 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.3</div>
+        <div class="task-title">Состав атомного ядра. Изотопы</div>
+        <div class="task-text">Имеются два атома изотопов одного и того же химического элемента. Чем физически отличаются ядра этих атомов друг от друга?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">У них разное число протонов в ядре, но одинаковое число электронов на орбитах</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol4.3')">У них строго одинаковое число протонов, но разное число нейтронов в ядре</button>
+            <button class="option-item" onclick="handleWrong(this)">Они ничем не отличаются, изотопы имеют абсолютно одинаковые ядра</button>
+        </div>
+        <div class="solution-box" id="sol4.3">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>По определению, **изотопы** — это разновидности атомов одного и того же химического элемента, которые занимают одно и то же место в таблице Менделеева. Раз место одинаковое, значит, заряд ядра (число протонов) у них строго совпадает, и химические свойства идентичны. Однако они имеют разную массу, потому что в их ядрах находится **разное число нейтронов**. Например, изотопы водорода: протий (0 нейтронов), дейтерий (1 нейтрон) и тритий (2 нейтрона).</p>
+        </div>
+    </div>
+
+    <!-- Код 4.4 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.4</div>
+        <div class="task-title">Период полураспада атомных ядер</div>
+        <div class="task-text">Период полураспада радиоактивного изотопа равен 10 дням. Исходно в образце содержалось 800 мг этого вещества. Сколько миллиграммов изотопа останется НЕРАСПАВШИМСЯ через 30 дней?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">0 мг (все вещество полностью распадется)</button>
+            <button class="option-item" onclick="handleWrong(this)">200 мг</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol4.4')">100 мг</button>
+        </div>
+        <div class="solution-box" id="sol4.4">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Период полураспада — это строгое время, за которое распадается ровно половина от имеющихся радиоактивных ядер. <br>
+            Пройдем процесс по шагам (30 дней — это три периода полураспада по 10 дней):<br>
+            1. Через первые 10 дней останется половина: <span class="formula">800 / 2 = 400 мг</span>.<br>
+            2. Через следующие 10 дней (итого 20 дней) останется половина от 400 мг: <span class="formula">400 / 2 = 200 мг</span>.<br>
+            3. Через финальные 10 дней (итого 30 дней) останется половина от 200 мг: <span class="formula">200 / 2 = 100 мг</span>.</p>
+        </div>
+    </div>
+    <!-- Код 4.5 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.5</div>
+        <div class="task-title">Ядерные реакции. Законы сохранения зарядового и массового чисел</div>
+        <div class="task-text">В результате ядерной реакции слияния ядер дейтерия (массовое 2, зарядовое 1) и трития (массовое 3, зарядовое 1) образуется ядро гелия (массовое 4, зарядовое 2) и одна неизвестная частица Х. Пользуясь законами сохранения, определи, что это за частица Х?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Протон</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol4.5')">Нейтрон</button>
+            <button class="option-item" onclick="handleWrong(this)">Электрон</button>
+        </div>
+        <div class="solution-box" id="sol4.5">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В любой ядерной реакции строго соблюдаются два правила — законы сохранения массового (верхнего) и зарядового (нижнего) чисел. Сумма чисел до реакции должна быть равна сумме чисел после реакции.<br>
+            1. Считаем верх (массу): до реакции <span class="formula">2 + 3 = 5</span>. После реакции у гелия <span class="formula">4</span>, значит у частицы Х массовое число равно <span class="formula">5 − 4 = 1</span>.<br>
+            2. Считаем низ (заряд): до реакции <span class="formula">1 + 1 = 2</span>. После реакции у гелия <span class="formula">2</span>, значит у частицы Х зарядовое число равно <span class="formula">2 − 2 = 0</span>.<br>
+            Частица с массой 1 и зарядом 0 — это свободный <strong>нейтрон</strong>.</p>
+        </div>
+    </div>
+
+    <!-- Код 4.6 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.6</div>
+        <div class="task-title">Физические явления в природе: естественный радиационный фон, космические лучи</div>
+        <div class="task-text">Из чего складывается естественный радиационный фон Земли, которому ежесекундно подвергаются все живые организмы на планете, даже в экологически чистых районах?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Исключительно из выбросов и отходов современных атомных электростанций</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.16')">Из космического излучения и радиоактивных элементов, естественно залегающих в земной коре и строительных материалах</button>
+            <button class="option-item" onclick="handleWrong(this)">Из ультрафиолетового излучения Солнца во время магнитных бурь</button>
+        </div>
+        <div class="solution-box" id="sol2.16">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>Естественный радиационный фон — это природное явление, существовавшее на Земле всегда, задолго до появления человека. Он формируется из двух главных источников: 1) **Космические лучи**, приходящие из глубокого космоса и от Солнца; 2) **Земная радиация** от естественных изотопов (уран, радий, торий, радон, калий-40), которые изначально содержатся в горных породах, почве, гранитных фундаментах домов и даже в нашей пище.</p>
+        </div>
+    </div>
+
+    <!-- Код 4.7 -->
+    <div class="task-card">
+        <div class="code-badge">Код 4.7</div>
+        <div class="task-title">Технические устройства: спектроскоп, дозиметр, камера Вильсона</div>
+        <div class="task-text">С помощью какого физического прибора учёные могут визуально наблюдать и фотографировать траектории (треки) движения быстрых заряженных микрочастиц?</div>
+        <div class="options-container">
+            <button class="option-item" onclick="handleWrong(this)">Индивидуальный газоразрядный дозиметр</button>
+            <button class="option-item" onclick="handleCorrect(this, 'sol2.17')">Камера Вильсона</button>
+            <button class="option-item" onclick="handleWrong(this)">Оптический спектроскоп</button>
+        </div>
+        <div class="solution-box" id="sol2.17">
+            <h4>💡 Разбор и объяснение:</h4>
+            <p>В ОГЭ часто проверяют устройство **камеры Вильсона**. Её пространство заполнено пересыщенным паром спирта или воды. Когда быстрая заряженная частица пролетает сквозь камеру, она ионизирует молекулы пара на своём пути. Эти ионы мгновенно становятся центрами конденсации, и вдоль траектории частицы образуется видимая дорожка из крошечных капель тумана (трек), которую можно сфотографировать, подобно следу от самолета в небе.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleWrong(element) {
+        if (!element.classList.contains('correct')) {
+            element.classList.add('wrong');
+        }
+    }
+
+    function handleCorrect(element, solutionId) {
+        element.classList.add('correct');
+        const solutionBox = document.getElementById(solutionId);
+        if (solutionBox) {
+            solutionBox.style.display = 'block';
+        }
+        const card = element.closest('.task-card');
+        const allButtons = card.querySelectorAll('.option-item');
+        allButtons.forEach(btn => {
+            if (!btn.classList.contains('correct')) {
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.6';
+            }
+        });
+    }
+</script>
+</body>
+</html>
