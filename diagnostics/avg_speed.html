@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивная физика: Средняя скорость</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 10px; color: #2c3e50; height: 100vh; box-sizing: border-box; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .container { width: 98vw; height: 96vh; background: white; padding: 15px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); display: flex; flex-direction: column; box-sizing: border-box; }
+        
+        /* Задание наверху */
+        .quiz-section { background: #fff9e6; border-left: 6px solid #f1c40f; padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; flex-shrink: 0; }
+        .quiz-section h2 { margin: 0 0 5px 0; color: #d35400; font-size: 16px; }
+        .quiz-section p { margin: 0 0 8px 0; font-size: 13px; line-height: 1.3; }
+        .options-grid { display: flex; gap: 10px; }
+        .option-btn { flex: 1; background: white; border: 1.5px solid #bdc3c7; padding: 6px 10px; border-radius: 6px; cursor: pointer; text-align: left; font-size: 13px; transition: 0.2s; font-weight: 500; }
+        .option-btn:hover { border-color: #3498db; background: #f4f9fd; }
+        
+        /* Спойлер подсказки */
+        .spoiler-container { margin-bottom: 10px; flex-shrink: 0; }
+        .spoiler-btn { background: #eef2f7; border: 1px solid #d6e4f0; width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; color: #34495e; display: flex; justify-content: space-between; align-items: center; }
+        .spoiler-content { display: none; background: #fdfdfd; border: 1px solid #e2e8f0; border-top: none; padding: 15px; border-radius: 0 0 6px 6px; }
+        
+        /* Формулы и SVG-чертеж */
+        .formula-flex { display: flex; align-items: center; justify-content: flex-start; gap: 40px; }
+        .formula-text-block { font-size: 14px; line-height: 1.8; color: #2c3e50; min-width: 280px; }
+        .phys-font { font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 16px; font-weight: bold; }
+        .fraction { display: inline-block; vertical-align: middle; text-align: center; font-size: 13px; margin: 0 4px; }
+        .fraction span { display: block; padding: 0 3px; }
+        .fraction .numerator { border-bottom: 1px solid #2c3e50; }
+        
+        /* Рабочая зона */
+        .main-workspace { display: flex; gap: 15px; flex-grow: 1; min-height: 0; }
+        
+        /* Панель управления слева */
+        .sidebar-controls { width: 220px; background: #fafafa; border: 1px solid #eaeaea; border-radius: 12px; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+        .control-block { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: bold; }
+        .control-block label { color: #34495e; margin-bottom: 2px; }
+        
+        button.action-btn { background: #3498db; color: white; border: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; cursor: pointer; font-weight: bold; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; }
+        button.action-btn:hover { background: #2980b9; }
+        button#pauseBtn { background: #e67e22; }
+        button#pauseBtn:hover { background: #d35400; }
+        button#resetBtn { background: #95a5a6; }
+        button#resetBtn:hover { background: #7f8c8d; }
+        
+        /* Информационные плашки на пульте */
+        .info-badge { padding: 6px; border-radius: 6px; font-size: 11px; margin-top: 3px; text-align: center; }
+        .badge-blue { background: #e3f2fd; color: #0d47a1; border: 1px solid #bbdefb; }
+        .badge-orange { background: #fff3e0; color: #e65100; border: 1px solid #ffe0b2; }
+        
+        /* Симулятор справа */
+        .canvas-container { flex-grow: 1; height: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bdc3c7; background: #f8fafc; position: relative; }
+        canvas { width: 100%; height: 100%; display: block; }
+
+        /* Модалка успеха */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 520px; width: 90%; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .modal-header { font-size: 20px; color: #e74c3c; font-weight: bold; margin-bottom: 12px; }
+        .modal-text { font-size: 14px; line-height: 1.5; color: #34495e; margin-bottom: 15px; }
+        .close-modal-btn { background: #3498db; color: white; border: none; padding: 8px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; float: right; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="quiz-section">
+        <h2>Задание на среднюю скорость</h2>
+        <p>Автомобиль проехал первую половину всего пути со скоростью <strong>20 м/с</strong>, а оставшуюся вторую половину пути — со скоростью <strong>60 м/с</strong>. Чему равна средняя скорость автомобиля на всём пути? Попробуй ответить без вычислений на бумаге.</p>
+        <div class="options-grid">
+            <button class="option-btn" onclick="wrongAnswer()">Ровно 40 м/с (среднее арифметическое)</button>
+            <button class="option-btn" onclick="correctAnswer()">Меньше 40 м/с (ближе к медленному участку)</button>
+            <button class="option-btn" onclick="wrongAnswer()">Больше 40 м/с (ближе к быстрому участку)</button>
+        </div>
+    </div>
+    <!-- Панель подсказки: Скрыта до клика, содержит строгий физический вывод и SVG-графику путей -->
+    <div class="spoiler-container">
+        <button class="spoiler-btn" onclick="toggleSpoiler()">
+            <span>💡 Показать физический вывод и разбор формулы</span> 
+            <span id="spoilerArrow">▼</span>
+        </button>
+        <div class="spoiler-content" id="spoilerContent">
+            <div class="formula-flex">
+                <div class="formula-text-block">
+                    <strong>Базовое определение:</strong> 
+                    <span class="phys-font">v<span style="font-size:10px; vertical-align:sub;">ср</span></span> = 
+                    <div class="fraction"><span class="numerator"><span class="phys-font">S<span style="font-size:10px; vertical-align:sub;">все</span></span></span><span><span class="phys-font">t<span style="font-size:10px; vertical-align:sub;">все</span></span></span></div> = 
+                    <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span><span class="phys-font">t<sub>1</sub> + t<sub>2</sub></span></span></div>
+                    <br>
+                    Поскольку путь разбит на две равные части по 
+                    <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2</span></div>, распишем время: 
+                    <span class="phys-font">t<sub>1</sub></span> = <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2<span class="phys-font">v<sub>1</sub></span></span></div>, 
+                    <span class="phys-font">t<sub>2</sub></span> = <div class="fraction"><span class="numerator"><span class="phys-font">S</span></span><span>2<span class="phys-font">v<sub>2</sub></span></span></div>
+                    <br>
+                    <strong>Итоговая рабочая формула ОГЭ:</strong> 
+                    <span class="phys-font">v<span style="font-size:10px; vertical-align:sub;">ср</span></span> = 
+                    <div class="fraction"><span class="numerator">2 &bull; <span class="phys-font">v<sub>1</sub> &bull; v<sub>2</sub></span></span><span><span class="phys-font">v<sub>1</sub> + v<sub>2</sub></span></span></div> 
+                    <span style="color:#e67e22; font-weight:bold;">(Среднее гармоническое)</span>
+                </div>
+                
+                <!-- Чистый SVG чертеж распределения путей и времени -->
+                <svg width="380" height="130" style="background:#f8fafc; border-radius:8px; border:1px solid #cbd5e1;">
+                    <g font-family="Arial, sans-serif" font-size="11px" font-weight="bold">
+                        <!-- Линия трассы -->
+                        <line x1="30" y1="55" x2="350" y2="55" stroke="#94a3b8" stroke-width="3"/>
+                        <circle cx="30" cy="55" r="5" fill="#3498db"/>
+                        <circle cx="190" cy="55" r="5" fill="#e67e22"/>
+                        <circle cx="350" cy="55" r="5" fill="#2ecc71"/>
+                        
+                        <!-- Обозначения участков пути -->
+                        <text x="95" y="45" fill="#3498db" text-anchor="middle">1-я половина пути (S / 2)</text>
+                        <text x="270" y="45" fill="#e67e22" text-anchor="middle">2-я половина пути (S / 2)</text>
+                        
+                        <!-- Скорости и время -->
+                        <text x="95" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₁ (маленькая)</text>
+                        <text x="95" y="98" fill="#e74c3c" text-anchor="middle">Время t₁ — БОЛЬШОЕ 🕒</text>
+                        
+                        <text x="270" y="80" fill="#1e293b" text-anchor="middle">Скорость: v₂ (большая)</text>
+                        <text x="270" y="98" fill="#27ae60" text-anchor="middle">Время t₂ — маленькое ⚡</text>
+                        
+                        <!-- Сноска-вывод -->
+                        <text x="190" y="20" fill="#475569" text-anchor="middle" font-size="10px" font-style="italic">Тело дольше едет с маленькой скоростью, поэтому v_ср всегда смещена к меньшей!</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главная рабочая область -->
+    <div class="main-workspace">
+        <div class="sidebar-controls">
+            <div class="control-block">
+                <label>Управление гонкой:</label>
+                <button class="action-btn" id="startBtn">🏁 Запустить гонку</button>
+                <button class="action-btn" id="pauseBtn" style="margin-top:6px;">⏸️ Пауза</button>
+                <button class="action-btn" id="resetBtn" style="margin-top:6px;">🔄 Сбросить</button>
+            </div>
+
+            <div class="control-block">
+                <label id="v1Label">Скорость v₁: 20 м/с</label>
+                <input type="range" id="v1Speed" min="10" max="40" value="20" step="5" style="cursor:pointer;">
+            </div>
+
+            <div class="control-block">
+                <label id="v2Label">Скорость v₂: 60 м/с</label>
+                <input type="range" id="v2Speed" min="45" max="90" value="60" step="5" style="cursor:pointer;">
+            </div>
+
+            <!-- Реальные аналитические показатели расчета скоростей -->
+            <div class="control-block" style="margin-top:5px; border-top:1px solid #eee; padding-top:10px;">
+                <label>Физический расчет:</label>
+                <div class="info-badge badge-orange" id="vArithBadge">Наивное среднее: 40.0 м/с</div>
+                <div class="info-badge badge-blue" id="vHarmBadge">Истинное v_ср: 30.0 м/с</div>
+            </div>
+        </div>
+
+        <div class="canvas-container" id="canvasHolder">
+            <canvas id="simCanvas"></canvas>
+        </div>
+    </div>
+
+    <!-- Модалка с объяснением ловушки -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">🤔 Физика против математики! Разбор ловушки:</div>
+            <div class="modal-text">
+                Ты абсолютно права! Средняя скорость на разделенном пути <strong>всегда меньше среднего арифметического</strong>.<br><br>
+                <strong>Почему так происходит «на пальцах»?</strong><br>
+                Поскольку первая половина пути медленная, машина ползет по ней <strong>очень долго по времени</strong>. А вторую половину пути она пролетает со свистом за короткий миг.<br><br>
+                В итоге автомобиль большую часть <strong>суммарного времени движения</strong> ехал именно с маленькой скоростью $v_1$! Поэтому реальная средняя скорость всегда «притягивается» в сторону меньшего значения.<br><br>
+                Запусти гонку и посмотри: зеленый автомобиль-призрак (который едет с постоянной средней арифметической скоростью $40\text{ м/с}$) легко обгоняет реальную синюю машину!
+            </div>
+            <button class="close-modal-btn" onclick="closeModal()">Понятно, запускаем!</button>
+        </div>
+    </div>
+    <script>
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+        const holder = document.getElementById('canvasHolder');
+
+        let isRunning = false; 
+        let raceFinished = false;
+
+        // Физические параметры симулятора
+        let physics = {
+            v1: 20,
+            v2: 60,
+            get vArith() { return (this.v1 + this.v2) / 2; },
+            get vHarm() { return (2 * this.v1 * this.v2) / (this.v1 + this.v2); }
+        };
+
+        // Координаты и состояние машинок
+        let cars = {
+            realX: 40,      // Синяя (настоящая) машина
+            ghostX: 40,     // Зеленая (призрак со средним арифм.)
+            scale: 1        // Коэффициент пересчета метров в пиксели холста
+        };
+
+        let trackLeft = 40;
+        let trackRight = 0;
+        let trackLength = 0;
+        let midPointX = 0;
+        let carY1 = 0, carY2 = 0;
+
+        function resizeCanvas() {
+            canvas.width = holder.clientWidth;
+            canvas.height = holder.clientHeight;
+            trackRight = canvas.width - 60;
+            trackLength = trackRight - trackLeft;
+            midPointX = trackLeft + trackLength / 2;
+            
+            carY1 = canvas.height * 0.35; // Дорожка синей машины
+            carY2 = canvas.height * 0.65; // Дорожка зеленой машины
+            
+            if(!isRunning && !raceFinished) {
+                cars.realX = trackLeft;
+                cars.ghostX = trackLeft;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawTrack() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Сетка финиша и середины
+            ctx.lineWidth = 1;
+            
+            // Середина пути
+            ctx.strokeStyle = '#e67e22';
+            ctx.setLineDash([4, 4]);
+            ctx.beginPath(); ctx.moveTo(midPointX, 20); ctx.lineTo(midPointX, canvas.height - 20); ctx.stroke();
+            ctx.font = 'italic 11px sans-serif'; ctx.fillStyle = '#e67e22';
+            ctx.fillText('Середина пути (S / 2)', midPointX - 55, 15);
+
+            // Финишная линия
+            ctx.strokeStyle = '#2ecc71';
+            ctx.setLineDash([]);
+            ctx.lineWidth = 4;
+            ctx.beginPath(); ctx.moveTo(trackRight, 20); ctx.lineTo(trackRight, canvas.height - 20); ctx.stroke();
+            ctx.font = 'bold 12px sans-serif'; ctx.fillStyle = '#27ae60';
+            ctx.fillText('ФИНИШ', trackRight - 20, 15);
+
+            // Сами дороги (серый асфальт)
+            ctx.lineWidth = 20; ctx.strokeStyle = '#cbd5e1';
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY1); ctx.lineTo(trackRight, carY1); stroke();
+            ctx.beginPath(); ctx.moveTo(trackLeft, carY2); ctx.lineTo(trackRight, carY2); stroke();
+            ctx.lineWidth = 1; ctx.setLineDash([]);
+        }
+
+        function drawCar(x, y, color, label) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x - 20, y - 10, 35, 16); // Корпус
+            ctx.fillStyle = '#333';
+            ctx.fillRect(x + 5, y - 6, 8, 10);    // Кабина
+            ctx.beginPath(); ctx.arc(x - 10, y + 8, 4, 0, Math.PI*2); ctx.arc(x + 10, y + 8, 4, 0, Math.PI*2); ctx.fill(); // Колеса
+            ctx.font = 'bold 10px sans-serif'; ctx.fillStyle = '#1e293b';
+            ctx.fillText(label, x - 20, y - 15);
+        }
+
+        function updatePhysics() {
+            if (!isRunning) return;
+
+            // Расчет масштаба: пусть вся трасса проходится призраком примерно за 6 секунд (360 кадров)
+            // Истинное экранное приращение координат привязано к расчетным скоростям
+            let baseStep = trackLength / 360; 
+            
+            // Движение Синей машины (Реальное разделенное движение)
+            if (cars.realX < trackRight) {
+                if (cars.realX < midPointX) {
+                    // Первая половина пути: едет со скоростью v1
+                    cars.realX += baseStep * (physics.v1 / physics.vArith);
+                } else {
+                    // Вторая половина пути: ускоряется до v2
+                    cars.realX += baseStep * (physics.v2 / physics.vArith);
+                }
+                if (cars.realX > trackRight) cars.realX = trackRight;
+            }
+
+            // Движение Зеленой машины (Едет с постоянной v_арифм)
+            if (cars.ghostX < trackRight) {
+                cars.ghostX += baseStep;
+                if (cars.ghostX > trackRight) cars.ghostX = trackRight;
+            }
+
+            if (cars.realX >= trackRight && cars.ghostX >= trackRight) {
+                isRunning = false;
+                raceFinished = true;
+            }
+        }
+
+        function simLoop() {
+            drawTrack();
+            // Отрисовка участников гонки
+            drawCar(cars.realX, carY1, '#3498db', `Реальная (v_ср = ${physics.vHarm.toFixed(1)} м/с)`);
+            drawCar(cars.ghostX, carY2, '#2ecc71', `Наивная (v = ${physics.vArith.toFixed(1)} м/с)`);
+            updatePhysics();
+            requestAnimationFrame(simLoop);
+        }
+
+        // Логика интерфейса и переключателей
+        function updateBadges() {
+            document.getElementById('vArithBadge').innerText = `Наивное среднее: ${physics.vArith.toFixed(1)} м/с`;
+            document.getElementById('vHarmBadge').innerText = `Истинное v_ср: ${physics.vHarm.toFixed(1)} м/с`;
+        }
+
+        document.getElementById('v1Speed').addEventListener('input', (e) => {
+            physics.v1 = parseInt(e.target.value);
+            document.getElementById('v1Label').innerText = `Скорость v₁: ${physics.v1} м/с`;
+            updateBadges();
+            if(!isRunning) resetRace();
+        });
+
+        document.getElementById('v2Speed').addEventListener('input', (e) => {
+            physics.v2 = parseInt(e.target.value);
+            document.getElementById('v2Label').innerText = `Скорость v₂: ${physics.v2} м/с`;
+            updateBadges();
+            if(!isRunning) resetRace();
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            if(!raceFinished) isRunning = true;
+        });
+
+        document.getElementById('pauseBtn').addEventListener('click', () => { isRunning = false; });
+        document.getElementById('resetBtn').addEventListener('click', resetRace);
+
+        function resetRace() {
+            isRunning = false; raceFinished = false;
+            cars.realX = trackLeft; cars.ghostX = trackLeft;
+        }
+
+        function toggleSpoiler() {
+            const content = document.getElementById('spoilerContent');
+            const arrow = document.getElementById('spoilerArrow');
+            if (content.style.display === 'block') { content.style.display = 'none'; arrow.innerText = '▼'; }
+            else { content.style.display = 'block'; arrow.innerText = '▲'; }
+        }
+
+        simLoop();
+
+        function correctAnswer() { document.getElementById('successModal').style.display = 'flex'; }
+        function wrongAnswer() { alert('Не угадала! Измени настройки скоростей на пульте слева, нажми кнопку "Запустить гонку" и посмотри, кто выиграет!'); }
+        function closeModal() { document.getElementById('successModal').style.display = 'none'; }
+    </script>
+</body>
+</html>
