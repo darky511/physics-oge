@@ -392,35 +392,33 @@
         <!-- SVG чертеж графиков аквалангиста -->
         <div class="svg-container" style="max-width:440px; padding: 15px; background: #ffffff;">
             <svg viewBox="0 0 440 240" width="100%" height="100%" xmlns="http://w3.org">
-                <!-- ВЕРТИКАЛЬНЫЕ ЛИНИИ СЕТКИ (12 штук, шаг 25px) -->
-                <!-- Каждая клетка по оси t = 2 секунды. Смещение от левого края = 50px -->
-                <line x1="75" y1="20" x2="75" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="100" y1="20" x2="100" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="125" y1="20" x2="125" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="150" y1="20" x2="150" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="175" y1="20" x2="175" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" /><!-- 5-я клетка (10с) -->
-                <line x1="200" y1="20" x2="200" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="225" y1="20" x2="225" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="250" y1="20" x2="250" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="275" y1="20" x2="275" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="300" y1="20" x2="300" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" /><!-- 10-я клетка (20с) -->
-                <line x1="325" y1="20" x2="325" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" /><!-- 11-я клетка (22с) -->
-                <line x1="350" y1="20" x2="350" y2="200" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
+                <!-- ВЕРТИКАЛЬНЫЕ ЛИНИИ СЕТКИ (12 штук, шаг 25px, смещение от нуля 50px) -->
+                <line x1="75" y1="20" x2="75" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="100" y1="20" x2="100" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="125" y1="20" x2="125" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="150" y1="20" x2="150" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="175" y1="20" x2="175" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 5-я клетка (10с) -->
+                <line x1="200" y1="20" x2="200" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="225" y1="20" x2="225" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="250" y1="20" x2="250" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="275" y1="20" x2="275" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="300" y1="20" x2="300" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 10-я клетка (20с) -->
+                <line x1="325" y1="20" x2="325" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 11-я клетка (22с) -->
+                <line x1="350" y1="20" x2="350" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
 
-                <!-- ГОРИЗОНТАЛЬНЫЕ ЛИНИИ СЕТКИ (8 штук, шаг 20px) -->
-                <!-- Каждая клетка по оси H = 1 метр. Смещение от нуля вверх -->
-                <line x1="50" y1="180" x2="350" y2="180" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="50" y1="160" x2="350" y2="160" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="50" y1="140" x2="350" y2="140" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" /><!-- 3-я клетка (3м) -->
-                <line x1="50" y1="120" x2="350" y2="120" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="50" y1="100" x2="350" y2="100" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="50" y1="80" x2="350" y2="80" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" /><!-- 6-я клетка (6м) -->
-                <line x1="50" y1="60" x2="350" y2="60" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
-                <line x1="50" y1="40" x2="350" y2="40" stroke="#b2bec3" stroke-width="1" stroke-dasharray="2,2" />
+                <!-- ГОРИЗОНТАЛЬНЫЕ ЛИНИИ СЕТКИ (8 штук, шаг 20px, отсчет вверх от 200px) -->
+                <line x1="50" y1="180" x2="350" y2="180" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 1 клетка (1м) -->
+                <line x1="50" y1="160" x2="350" y2="160" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 2 клетки (2м) -->
+                <line x1="50" y1="140" x2="350" y2="140" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 3 клетки (3м) -->
+                <line x1="50" y1="120" x2="350" y2="120" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 4 клетки (4м) -->
+                <line x1="50" y1="100" x2="350" y2="100" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 5 клеток (5м) -->
+                <line x1="50" y1="80" x2="350" y2="80" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />   <!-- 6 клеток (6м) -->
+                <line x1="50" y1="60" x2="350" y2="60" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="50" y1="40" x2="350" y2="40" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
 
                 <!-- ГЛАВНЫЕ КООРДИНАТНЫЕ ОСИ -->
-                <line x1="50" y1="200" x2="390" y2="200" stroke="#000000" stroke-width="2" /> <!-- Ось t -->
-                <line x1="50" y1="20" x2="50" y2="200" stroke="#000000" stroke-width="2" />   <!-- Ось H -->
+                <line x1="50" y1="200" x2="390" y2="200" stroke="#000000" stroke-width="2" /> <!-- t -->
+                <line x1="50" y1="20" x2="50" y2="200" stroke="#000000" stroke-width="2" />   <!-- H -->
 
                 <!-- СТРЕЛКИ НА ОСЯХ -->
                 <path d="M 390 200 L 380 195 M 390 200 L 380 205" stroke="#000000" stroke-width="2" stroke-linecap="round" />
@@ -441,22 +439,22 @@
                 <line x1="175" y1="200" x2="175" y2="205" stroke="#000000" stroke-width="2" />
                 <text x="167" y="222" font-family="sans-serif" font-size="14" font-weight="bold">10</text>
 
-                <!-- СТРОИТЕЛЬСТВО ГРАФИКОВ ФУНКЦИЙ -->
-                <!-- Линия 1: Из (0,0) через узел (5 клеток; 3 клетки) вверх -->
-                <line x1="50" y1="200" x2="275" y2="92" stroke="#000000" stroke-width="1.5" />
-                <text x="280" y="95" font-family="sans-serif" font-size="14" font-weight="bold">1</text>
+                <!-- ОТРЕСОВКА ГРАФИКОВ -->
+                <!-- Линия 1: Идеально прямая из (0,0) через узел (5 клеток; 3 клетки). Точка пересечения с линией 2 ровно на (175, 140) -->
+                <line x1="50" y1="200" x2="290" y2="80" stroke="#000000" stroke-width="1.5" />
+                <text x="295" y="85" font-family="sans-serif" font-size="14" font-weight="bold">1</text>
 
-                <!-- Линия 2: Из (0; 6 клеток) в (11 клеток; 0 клеток) - Верхняя ЖИРНАЯ -->
+                <!-- Линия 2: Абсолютно прямая ЖИРНАЯ линия из (0;6) в (11 клеток; 0) -->
                 <line x1="50" y1="80" x2="325" y2="200" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                <text x="315" y="190" font-family="sans-serif" font-size="14" font-weight="bold">2</text>
+                <text x="330" y="195" font-family="sans-serif" font-size="14" font-weight="bold">2</text>
 
-                <!-- Линия 3: Из (0; 6 клеток) в (10 клеток; 0 клеток) -->
-                <line x1="50" y1="80" x2="300" y2="200" stroke="#000000" stroke-width="1.5" />
-                <text x="290" y="190" font-family="sans-serif" font-size="14" font-weight="bold">3</text>
+                <!-- КРИВАЯ ЛИНИЯ 3: Гладкая дуга Безье. Провисает под прямыми, проходя через узел (5 клеток; 2 клетки) -->
+                <path d="M 50 80 Q 165 190 325 200" fill="none" stroke="#000000" stroke-width="1.5" />
+                <text x="285" y="180" font-family="sans-serif" font-size="14" font-weight="bold">3</text>
 
-                <!-- Линия 4: Из (0; 6 клеток) в (4 клетки; 0 клеток) - Левая крутая -->
-                <line x1="50" y1="80" x2="150" y2="200" stroke="#000000" stroke-width="2.2" stroke-linecap="round" />
-                <text x="155" y="190" font-family="sans-serif" font-size="14" font-weight="bold">4</text>
+                <!-- Линия 4: Прямая из (0;6) в (4 клетки; 0) -->
+                <line x1="50" y1="80" x2="150" y2="200" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <text x="155" y="195" font-family="sans-serif" font-size="14" font-weight="bold">4</text>
             </svg>
         </div>
 
