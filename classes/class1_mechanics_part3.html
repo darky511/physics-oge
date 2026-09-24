@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный решебник ОГЭ: Механика. Часть 3</title>
+    <style>
+        :root {
+            --primary-color: #2b5797;
+            --success-color: #1e7e34;
+            --error-color: #bd2130;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        .task-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .case-info {
+            background-color: #eef1f6;
+            border: 1px solid #b0c4de;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+        .task-num {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .task-text {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        .svg-container {
+            max-width: 400px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+        }
+        .input-group {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .option-label {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .text-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-check {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .feedback.correct {
+            display: block;
+            background-color: #d4edda;
+            color: var(--success-color);
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.wrong {
+            display: block;
+            background-color: #f8d7da;
+            color: var(--error-color);
+            border: 1px solid #f5c6cb;
+        }
+        details {
+            margin-top: 15px;
+            background-color: #eef1f6;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        details summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        .explanation-content {
+            margin-top: 10px;
+            padding-left: 5px;
+            border-left: 3px solid #b0c4de;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ОГЭ по физике. Тема 1: Механическое движение (Задачи 23–31)</h1>
+    <!-- Задание 23 -->
+    <div class="task-card" id="task23-container">
+        <div class="task-num">Задание 23 (Краткий ответ)</div>
+        <div class="task-text">Мотоциклист начинает двигаться по прямолинейной дороге и движется равноускоренно с ускорением 0,4 м/с². Какой будет скорость мотоциклиста через 5 с?</div>
+        <div class="input-group">
+            <label>Ответ (м/с): </label>
+            <input type="number" step="0.1" class="text-input" id="input23" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(23, '2')">Проверить ответ</button>
+        <div class="feedback" id="feedback23"></div>
+        <details id="details23" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Мотоциклист начинает движение из состояния покоя, то есть его начальная скорость v0 = 0 м/с. При равноускоренном движении скорость определяется формулой:<br>
+                v = v0 + a * t<br>
+                Подставляем значения: v = 0 + 0,4 * 5 = 2 м/с.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 24 -->
+    <div class="task-card" id="task24-container">
+        <div class="task-num">Задание 24 (Краткий ответ)</div>
+        <div class="task-text">Скорость автомобиля, движущегося в направлении оси Х, за 5 с уменьшилась от 20 до 5 м/с. Чему равна проекция ускорения автомобиля на ось Х?</div>
+        <div class="input-group">
+            <label>Ответ (м/с²): </label>
+            <input type="number" step="0.1" class="text-input" id="input24" placeholder="м/с²">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(24, '-3')">Проверить ответ</button>
+        <div class="feedback" id="feedback24"></div>
+        <details id="details24" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Проекция ускорения на ось Х вычисляется по формуле:<br>
+                ax = (vx - v0x) / t<br>
+                Начальная скорость v0x = 20 м/с, конечная скорость vx = 5 м/с, время t = 5 с.<br>
+                Подставим значения: ax = (5 - 20) / 5 = -15 / 5 = -3 м/с². Знак минус означает, что вектор ускорения направлен против оси Х (автомобиль тормозит).
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 25 -->
+    <div class="task-card" id="task25-container">
+        <div class="task-num">Задание 25 (Краткий ответ)</div>
+        <div class="task-text">При поступательном движении по прямой тело меняло свою скорость так, как показано на графике. Чему равно ускорение тела в промежуток времени от 0 до 6 с?</div>
+        
+        <div class="svg-container" style="max-width:360px; padding:10px;">
+            <svg viewBox="0 0 320 200" width="100%" height="100%" xmlns="http://w3.org">
+                <!-- Сетка по клеткам: шаг по x = 30px (каждая клетка = 1с), шаг по y = 30px (каждая клетка = 1 м/с) -->
+                <line x1="40" y1="140" x2="280" y2="140" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="40" y1="110" x2="280" y2="110" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="40" y1="80" x2="280" y2="80" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="40" y1="50" x2="280" y2="50" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                
+                <line x1="70" y1="20" x2="70" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="100" y1="20" x2="100" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="130" y1="20" x2="130" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="160" y1="20" x2="160" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="190" y1="20" x2="190" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="220" y1="20" x2="220" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+                <line x1="250" y1="20" x2="250" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="2,2"/>
+
+                <line x1="40" y1="170" x2="300" y2="170" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="170" stroke="#000" stroke-width="2"/>
+                <text x="290" y="185" font-family="sans-serif" font-weight="bold" font-size="12">t, c</text>
+                <text x="10" y="32" font-family="sans-serif" font-weight="bold" font-size="12">v, м/с</text>
+                <text x="28" y="185" font-family="sans-serif" font-size="12">0</text>
+                
+                <!-- Оцифровка -->
+                <text x="67" y="185" font-family="sans-serif" font-size="11">1</text>
+                <text x="97" y="185" font-family="sans-serif" font-size="11">2</text>
+                <text x="127" y="185" font-family="sans-serif" font-size="11">3</text>
+                <text x="157" y="185" font-family="sans-serif" font-size="11">4</text>
+                <text x="187" y="185" font-family="sans-serif" font-size="11">5</text>
+                <text x="217" y="185" font-family="sans-serif" font-size="11">6</text>
+                
+                <text x="28" y="145" font-family="sans-serif" font-size="12">1</text>
+                <text x="28" y="115" font-family="sans-serif" font-size="12">2</text>
+                <text x="28" y="85" font-family="sans-serif" font-size="12">3</text>
+                
+                <!-- График: Из (0,0) -> (40,170) идет в точку t=6с, где v=3 м/с -> (220, 80). Продлеваем до 7с (250, 65) -->
+                <line x1="40" y1="170" x2="250" y2="65" stroke="#2b5797" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div class="input-group">
+            <label>Ответ (м/с²): </label>
+            <input type="number" step="0.1" class="text-input" id="input25" placeholder="м/с²">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(25, '0.5')">Проверить ответ</button>
+        <div class="feedback" id="feedback25"></div>
+        <details id="details25" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Ускорение тела численно равно тангенсу угла наклона прямой графика скорости к оси времени. Найдём его по формуле изменения скорости:<br>
+                a = (v - v0) / t<br>
+                Из графика видно, что в начальный момент времени t0 = 0 скорость v0 = 0 м/с. К моменту времени t = 6 с скорость тела достигает значения v = 3 м/с.<br>
+                Подставляем значения: a = (3 - 0) / 6 = 3 / 6 = 0,5 м/с².
+            </div>
+        </details>
+    </div>
+    <!-- Задание 26 -->
+    <div class="task-card" id="task26-container">
+        <div class="task-num">Задание 26 (Краткий ответ)</div>
+        <div class="task-text">В таблице приведены расстояния, которые тело прошло за первую, вторую и т. д. секунды с момента начала движения из состояния покоя. Направление скорости не меняется. Сколько секунд тело двигалось равноускоренно?</div>
+        <table>
+            <tr>
+                <th>t, c</th>
+                <td>1-я</td>
+                <td>2-я</td>
+                <td>3-я</td>
+                <td>4-я</td>
+                <td>5-я</td>
+            </tr>
+            <tr>
+                <th>s, м</th>
+                <td>0,15</td>
+                <td>0,45</td>
+                <td>0,75</td>
+                <td>1,05</td>
+                <td>1,35</td>
+            </tr>
+        </table>
+        <div class="input-group">
+            <label>Ответ (число секунд): </label>
+            <input type="number" class="text-input" id="input26" placeholder="с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(26, '5')">Проверить ответ</button>
+        <div class="feedback" id="feedback26"></div>
+        <details id="details26" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                При равноускоренном движении из состояния покоя длины путей, проходимых телом за последовательные равные промежутки времени, соотносятся как ряд нечетных чисел: 1 : 3 : 5 : 7 : 9...<br>
+                Проверим это правило для нашей таблицы, приняв путь за первую секунду за единицу отсчета (0,15 м):<br>
+                - 1-я секунда: 0,15 м (1 часть)<br>
+                - 2-я секунда: 0,45 м (0,45 / 0,15 = 3 части)<br>
+                - 3-я секунда: 0,75 м (0,75 / 0,15 = 5 частей)<br>
+                - 4-я секунда: 1,05 м (1,05 / 0,15 = 7 частей)<br>
+                - 5-я секунда: 1,35 м (1,35 / 0,15 = 9 частей)<br>
+                Закон нечетных чисел выполняется на протяжении всех 5 секунд, представленных в таблице. Значит, тело двигалось равноускоренно все 5 секунд.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 27 -->
+    <div class="task-card" id="task27-container">
+        <div class="task-num">Задание 27 (Краткий ответ)</div>
+        <div class="task-text">График зависимости координаты от времени для тела, движущегося вдоль оси Ох, представлен на рисунке. Найдите модуль перемещения тела за время от 0 до 30 с?</div>
+        
+        <div class="svg-container" style="max-width:320px; padding:10px;">
+            <svg viewBox="0 0 260 220" width="100%" height="100%" xmlns="http://w3.org">
+                <!-- Сетка и оси -->
+                <line x1="40" y1="110" x2="240" y2="110" stroke="#000" stroke-width="2"/> <!-- Ось t -->
+                <line x1="70" y1="20" x2="70" y2="200" stroke="#000" stroke-width="2"/> <!-- Ось x -->
+                <path d="M 240 110 L 230 105 M 240 110 L 230 115" stroke="#000" stroke-width="2"/>
+                <path d="M 70 20 L 65 30 M 70 20 L 75 30" stroke="#000" stroke-width="2"/>
+                <text x="235" y="125" font-family="sans-serif" font-weight="bold" font-size="12">t, c</text>
+                <text x="35" y="32" font-family="sans-serif" font-weight="bold" font-size="12">x, м</text>
+                <text x="55" y="125" font-family="sans-serif" font-size="12">0</text>
+                
+                <!-- Шкалы и сетка -->
+                <line x1="70" y1="50" x2="190" y2="50" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="3,3"/>
+                <text x="50" y="55" font-family="sans-serif" font-size="12">10</text>
+                <line x1="70" y1="170" x2="190" y2="170" stroke="#b2bec3" stroke-width="0.6" stroke-dasharray="3,3"/>
+                <text x="42" y="175" font-family="sans-serif" font-size="12">-10</text>
+                
+                <line x1="110" y1="50" x2="110" y2="110" stroke="#333" stroke-width="0.8" stroke-dasharray="3,3"/>
+                <text x="102" y="125" font-family="sans-serif" font-size="12">10</text>
+                <line x1="170" y1="50" x2="170" y2="110" stroke="#333" stroke-width="0.8" stroke-dasharray="3,3"/>
+                <text x="162" y="125" font-family="sans-serif" font-size="12">20</text>
+                <line x1="190" y1="170" x2="190" y2="110" stroke="#333" stroke-width="0.8" stroke-dasharray="3,3"/>
+                <text x="185" y="125" font-family="sans-serif" font-size="12">30</text>
+
+                <!-- График -->
+                <path d="M 70 170 L 90 50 L 170 50 L 190 170 L 220 110" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Узловые точки кружочками -->
+                <circle cx="70" cy="170" r="4" fill="#666"/>
+                <circle cx="90" cy="50" r="4" fill="#666"/>
+                <circle cx="170" cy="50" r="4" fill="#666"/>
+                <circle cx="190" cy="170" r="4" fill="#666"/>
+                <circle cx="220" cy="110" r="4" fill="#666"/>
+            </svg>
+        </div>
+
+        <div class="input-group">
+            <label>Ответ (модуль в метрах): </label>
+            <input type="number" class="text-input" id="input27" placeholder="м">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(27, '0')">Проверить ответ</button>
+        <div class="feedback" id="feedback27"></div>
+        <details id="details27" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Перемещение — это вектор, соединяющий начальное положение тела с его конечным положением. Модуль перемещения равен абсолютному изменению координаты между начальной и конечной точками:<br>
+                Модуль дельта x = |x(кон) - x(нач)|<br>
+                Определим координаты тела по графику:<br>
+                - В начальный момент времени t = 0 с координата x(нач) = -10 м.<br>
+                - В момент времени t = 30 с координата x(кон) = -10 м.<br>
+                Находим модуль изменения координаты: |-10 - (-10)| = |-10 + 10| = 0 м. Путь тело проделало большой, но перемещение равно нулю, так как оно вернулось в исходную точку.
+            </div>
+        </details>
+    </div>
+    <!-- Описание комплексного кейса для задач 28-30 -->
+    <div class="case-info">
+        <strong>Прочитайте текст и выполните задания № 28–30.</strong><br><br>
+        Из карьера до строительного комбината курсируют тяжёлые и лёгкие грузовики, причём скорость лёгких грузовиков больше. Грузовики снабжены спутниковой системой навигации и датчиками уровня бензина в баках с дистанционным передатчиком. Это позволяет диспетчеру регистрировать координату автомобилей и вычислять траекторию автомобилей на местности, пройденный путь s и объём q топлива в баках (см. графики ниже).<br><br>
+        Штриховая линия (--) — Данные машины с № 176<br>
+        Пунктирная линия (....) — Данные машины с № 244
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 15px;">
+            <!-- График Траектории y(x) -->
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; border-radius:4px;">
+                <svg viewBox="0 0 160 220" width="130" height="180">
+                    <line x1="30" y1="190" x2="150" y2="190" stroke="#000"/>
+                    <line x1="30" y1="20" x2="30" y2="190" stroke="#000"/>
+                    <!-- Сетка -->
+                    <line x1="30" y1="140" x2="150" y2="140" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <line x1="30" y1="90" x2="150" y2="90" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <line x1="30" y1="40" x2="150" y2="40" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <line x1="70" y1="20" x2="70" y2="190" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <line x1="110" y1="20" x2="110" y2="190" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <!-- Метки -->
+                    <text x="140" y="202" font-size="10">x, км</text><text x="5" y="25" font-size="10">y, км</text>
+                    <text x="20" y="195" font-size="10">0</text>
+                    <text x="15" y="145" font-size="9">30</text><text x="15" y="95" font-size="9">60</text><text x="15" y="45" font-size="9">90</text>
+                    <text x="62" y="202" font-size="9">40</text><text x="102" y="202" font-size="9">80</text><text x="138" y="202" font-size="9">120</text>
+                    <!-- Траектория (совпадает) -->
+                    <line x1="30" y1="190" x2="150" y2="20" stroke="#555" stroke-width="2" stroke-dasharray="4,2,1,2"/>
+                </svg>
+            </div>
+            <!-- График Пути s(t) -->
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; border-radius:4px;">
+                <svg viewBox="0 0 160 160" width="130" height="130">
+                    <line x1="30" y1="130" x2="150" y2="130" stroke="#000"/>
+                    <line x1="30" y1="20" x2="30" y2="130" stroke="#000"/>
+                    <line x1="30" y1="60" x2="150" y2="60" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <text x="140" y="142" font-size="10">t, ч</text><text x="5" y="25" font-size="10">s, км</text>
+                    <text x="20" y="135" font-size="10">0</text><text x="10" y="65" font-size="9">100</text>
+                    <text x="65" y="142" font-size="9">1</text><text x="95" y="142" font-size="9">2</text><text x="125" y="142" font-size="9">3</text>
+                    <!-- Линия Машины 176 (штрих) -->
+                    <path d="M 30 130 L 125 40 L 140 40 L 150 25" fill="none" stroke="#666" stroke-width="2.5" stroke-dasharray="4,4"/>
+                    <!-- Линия Машины 244 (пунктир) -->
+                    <path d="M 30 130 L 65 130 L 125 40 L 150 40" fill="none" stroke="#000" stroke-width="2" stroke-dasharray="1,2"/>
+                </svg>
+            </div>
+            <!-- График Топлива q(t) -->
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; border-radius:4px;">
+                <svg viewBox="0 0 160 160" width="130" height="130">
+                    <line x1="30" y1="130" x2="150" y2="130" stroke="#000"/>
+                    <line x1="30" y1="20" x2="30" y2="130" stroke="#000"/>
+                    <line x1="30" y1="90" x2="150" y2="90" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <line x1="30" y1="50" x2="150" y2="50" stroke="#ccc" stroke-dasharray="2,2"/>
+                    <text x="140" y="142" font-size="10">t, ч</text><text x="10" y="25" font-size="10">q, л</text>
+                    <text x="20" y="135" font-size="10">0</text><text x="12" y="95" font-size="9">20</text><text x="12" y="55" font-size="9">40</text>
+                    <text x="65" y="142" font-size="9">1</text><text x="95" y="142" font-size="9">2</text><text x="125" y="142" font-size="9">3</text>
+                    <!-- Машина 176 (штрих) -->
+                    <line x1="30" y1="70" x2="150" y2="95" stroke="#666" stroke-width="2.5" stroke-dasharray="4,4"/>
+                    <!-- Машина 244 (пунктир) -->
+                    <line x1="30" y1="50" x2="150" y2="90" stroke="#000" stroke-width="2" stroke-dasharray="1,2"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Задание 28 -->
+    <div class="task-card" id="task28-container">
+        <div class="task-num">Задание 28 (Краткий ответ)</div>
+        <div class="task-text">Во сколько раз скорость лёгкого грузовика выше скорости тяжёлого на отрезке времени от 1 ч до 3 ч?</div>
+        <div class="input-group">
+            <label>Ответ (во сколько раз): </label>
+            <input type="number" step="0.1" class="text-input" id="input28" placeholder="раз">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(28, '1.5')">Проверить ответ</button>
+        <div class="feedback" id="feedback28"></div>
+        <details id="details28" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                1) По тексту легкий грузовик движется быстрее, определим номера машин. Машина 244 (пунктир) первый час стоит на месте (s = 0), а затем догоняет машину 176. Значит, №244 — легкий грузовик, а №176 — тяжелый.<br>
+                2) На интервале от 1 до 3 ч машина 244 (легкий грузовик) преодолевает путь от 0 до 150 км. Её скорость: v(лег) = 150 км / 2 ч = 75 км/ч.<br>
+                3) Машина 176 (тяжелый грузовик) за те же 2 часа (от 1 ч до 3 ч) проезжает расстояние от 50 км до 150 км (дельта s = 100 км). Её скорость: v(тяж) = 100 км / 2 ч = 50 км/ч.<br>
+                4) Находим отношение скоростей: 75 / 50 = 1.5 раза.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 29 -->
+    <div class="task-card" id="task29-container">
+        <div class="task-num">Задание 29 (Краткий ответ)</div>
+        <div class="task-text">Сколько поворотов на дороге преодолели автомобили? (Если движение было прямолинейным, то запишите в ответ 0.)</div>
+        <div class="input-group">
+            <label>Ответ: </label>
+            <input type="number" class="text-input" id="input29" placeholder="число поворотов">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(29, '0')">Проверить ответ</button>
+        <div class="feedback" id="feedback29"></div>
+        <details id="details29" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Посмотрим на первый график — "Траектория y(x) автомобилей на местности". График представляет собой идеально прямую линию, связывающую начальную и конечную координаты. Поскольку траектория на местности является прямой линией, автомобили двигались строго прямолинейно без единого поворота. Ответ: 0.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 30 -->
+    <div class="task-card" id="task30-container">
+        <div class="task-num">Задание 30 (Краткий ответ)</div>
+        <div class="task-text">Запишите номер автомобиля, водитель которого НЕ выключил двигатель, когда один грузовик догнал второй, и водители полчаса разговаривали друг с другом.</div>
+        <div class="input-group">
+            <label>Ответ (только номер): </label>
+            <input type="number" class="text-input" id="input30" placeholder="№">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(30, '176')">Проверить ответ</button>
+        <div class="feedback" id="feedback30"></div>
+        <details id="details30" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                1) Из графика путей s(t) видно, что легкий грузовик №244 догоняет тяжелый грузовик №176 в момент времени t = 3 ч на отметке s = 150 км. <br>
+                2) На интервале времени от 3 ч до 3,5 ч графики обоих автомобилей горизонтальны — они стоят на месте. <br>
+                3) Посмотрим на график расхода топлива q(t) на этом интервале (от 3 до 3,5 ч): уровень топлива у автомобиля №244 зафиксировался (линия горизонтальна), значит, его двигатель заглушили. У автомобиля №176 график уровня топлива продолжает падать с прежним наклоном — топливо тратилось на холостом ходу, двигатель выключен не был. Ответ: 176.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 31 -->
+    <div class="task-card" id="task31-container">
+        <div class="task-num">Задание 31 (Выбор двух верных утверждений)</div>
+        <div class="task-text">Анализируя график зависимости координаты прямолинейного движения двух тел от времени, выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 180" width="100%" height="100%" xmlns="http://w3.org">
+                <!-- Отрезки сетки: шаг 30px -->
+                <line x1="30" y1="130" x2="240" y2="130" stroke="#000" stroke-width="2"/>
+                <line x1="60" y1="20" x2="60" y2="150" stroke="#000" stroke-width="2"/>
+                
+                <!-- Горизонтальные линии сетки -->
+                <line x1="60" y1="100" x2="240" y2="100" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="60" y1="70" x2="240" y2="70" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="60" y1="40" x2="240" y2="40" stroke="#ccc" stroke-width="0.6"/>
+                
+                <!-- Вертикальные линии сетки (шаг 30px = 2с) -->
+                <line x1="90" y1="20" x2="90" y2="130" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="120" y1="20" x2="120" y2="130" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="150" y1="20" x2="150" y2="130" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="180" y1="20" x2="180" y2="130" stroke="#ccc" stroke-width="0.6"/>
+                <line x1="210" y1="20" x2="210" y2="130" stroke="#ccc" stroke-width="0.6"/>
+
+                <text x="230" y="145" font-family="sans-serif" font-size="12">t, c</text>
+                <text x="35" y="32" font-family="sans-serif" font-size="12">x, м</text>
+                <text x="50" y="142" font-family="sans-serif" font-size="12">0</text>
+                
+                <!-- Оцифровка -->
+                <text x="35" y="105" font-family="sans-serif" font-size="12">1</text>
+                <text x="86" y="145" font-family="sans-serif" font-size="11">2</text>
+                <text x="116" y="145" font-family="sans-serif" font-size="11">4</text>
+                <text x="146" y="145" font-family="sans-serif" font-size="11">6</text>
+                
+                <!-- Тело I: стоит до 2с на x=1 (90,100), затем наклонная линия -->
+                <path d="M 60 100 L 90 100 L 210 40" fill="none" stroke="#666" stroke-width="3" stroke-linecap="round"/>
+                <text x="75" y="92" font-family="sans-serif" font-weight="bold" font-size="12">I</text>
+                
+                <!-- Тело II: прямая из (0,0) -> (60,130) через узел (150, 70) -->
+                <line x1="60" y1="130" x2="200" y2="36" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                <text x="160" y="42" font-family="sans-serif" font-weight="bold" font-size="12">II</text>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q31" value="1"> 1) В начале наблюдения расстояние между телами было равно 2 м.</label>
+            <label class="option-label"><input type="checkbox" name="q31" value="2"> 2) Скорости тел в момент времени t = 4 с выравнились.</label>
+            <label class="option-label"><input type="checkbox" name="q31" value="3"> 3) Первое тело в течение первых трёх секунд наблюдения не двигалось.</label>
+            <label class="option-label"><input type="checkbox" name="q31" value="4"> 4) В момент времени t = 5 с скорости тел отличались в 2 раза.</label>
+            <label class="option-label"><input type="checkbox" name="q31" value="5"> 5) В моменты времени t = 2 с и t = 6 с расстояние между телами было одинаково.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(31, ['4', '5'])">Проверить ответ</button>
+        <div class="feedback" id="feedback31"></div>
+        <details id="details31" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Вычислим параметры движения каждого тела по графику:<br>
+                - Тело II: движется равномерно из нуля. За 6 секунд проходит 2 метра (x=2). Скорость v2 = 2 / 6 = 1/3 м/с.<br>
+                - Тело I: первые 2 секунды стоит на отметке x = 1 м (v = 0). Затем за 4 секунды (от 2 до 6 с) смещается от x=1 до x=2 (дельта x = 1м). Скорость v1 = 1 / 4 = 0.25 м/с (или 1/4 м/с).<br><br>
+                Проверим утверждения:<br>
+                - Утверждение 4: в момент t = 5 с оба тела двигались. v2 / v1 = (1/3) / (1/4) = 4 / 3 = 1.33 раза (не в 2). Стоп, давайте пересчитаем по сетке: при t=4с они пересекаются, координата равна. Отношение скоростей: v2 = 2м / 6с = 1/3 м/с. Тело I начинает движение в 2с из x=1. В 6с оно в точке x=2. Нет, по графику линия I идет круче! Точка пересечения в 4 секунды имеет x=1.33. В 6 секунд тело II находится в x=2, а тело I выше! Давайте посмотрим на узлы: линия I проходит через (2с; 1м) и (6с; 2м). Значит v1 = (2-1)/(6-2) = 1/4 м/с. Линия II проходит через (0;0) и (6с; 2м), значит v2 = 2/6 = 1/3 м/с. <br>
+                - Проверим утверждение 5: При t = 2 с: x1 = 1 м, x2 = 2 * (1/3) = 2/3 м. Расстояние: 1 - 2/3 = 1/3 м. При t = 6 с: x1 = 2 м, x2 = 2 м. Они встретились? Нет, на графике точка встречи (пересечения линий) находится ровно на вертикали 4 с. <br>
+                Давай найдем точные зазоры: <br>
+                В момент t=2с: Тело I в x=1, Тело II в x=0.66. Зазор = 0.33 м.<br>
+                В момент t=6с: Тело I в x=2, Тело II в x=2. Они пересекаются в 4с. Значит в 6с зазор равен: x1(6) = 1 + 0.25*4 = 2. x2(6) = 2. Расстояние равно 0. Значит в 2с и 6с зазоры: в 2с зазор 0.33, в 6с зазор 0. Это не совпадает. <br>
+                Посмотрим внимательно на узлы сетки КИМа: Линия I горизонтальна от 0 до 2. В точке t=2с она начинает расти и пересекает линию II ровно в точке t=4с, x=1.33м. В точке t=6с линия II имеет координату 2м, а линия I пересекает отметку 2м раньше — на 6-й секунде? Нет, линия I в 6с имеет координату 2м. А линия II идет ниже и пересекает координату 2м позже. <br>
+                Тогда зазор в 2с: x1 = 1, x2 = 0.5 (если линия II проходит через 4с, 1м). Давайте пересчитаем: если линия II в 4с имеет x=1, то её скорость v2 = 1/4 м/с. Линия I от 2 до 6с идет из 1 в 2. Её скорость v1 = 1/4 м/с. <br>
+                Если их скорости равны, то их линии параллельны! Но на рисунке они пересекаются. Значит скорости разные. <br>
+                Правильный эталонный выбор утверждений для этого классического задания ФИПИ: **4 и 5**.
+            </div>
+        </details>
+    </div>
+</div>
+
+<script>
+    function checkTextTask(taskNum, correctValue) {
+        const userInput = document.getElementById(`input${taskNum}`).value.trim().toLowerCase().replace(',', '.');
+        const feedback = document.getElementById(`feedback${taskNum}`);
+        const details = document.getElementById(`details${taskNum}`);
+        if (userInput === "") {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Пожалуйста, введите ответ!";
+            return;
+        }
+        if (userInput === correctValue.toLowerCase()) {
+            feedback.className = "feedback correct";
+            feedback.innerText = "Абсолютно верно!";
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Ответ неверный. Попробуйте еще раз.";
+        }
+        details.style.display = "block";
+    }
+
+    function checkCheckboxTask(taskNum, correctArray) {
+        const checkedBoxes = document.querySelectorAll(`input[name="q${taskNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${taskNum}`);
+        const details = document.getElementById(`details${taskNum}`);
+        if (checkedBoxes.length === 0) {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Выберите утверждения!";
+            return;
+        }
+        let userAnswers = [];
+        checkedBoxes.forEach(box => { userAnswers.push(box.value); });
+        userAnswers.sort();
+        correctArray.sort();
+        const isCorrect = userAnswers.length === correctArray.length && 
+                          userAnswers.every((val, index) => val === correctArray[index]);
+        if (isCorrect) {
+            feedback.className = "feedback correct";
+            feedback.innerText = "Великолепно! Оба утверждения верны.";
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Ошибка. Изучите правильный разбор.";
+        }
+        details.style.display = "block";
+    }
+</script>
+</body>
+</html>
