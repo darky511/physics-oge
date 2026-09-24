@@ -504,6 +504,181 @@
             </div>
         </details>
     </div>
+        <!-- Задание 18 -->
+    <div class="task-card" id="task18-container">
+        <div class="task-num">Задание 18 (Краткий ответ)</div>
+        <div class="task-text">Плот движется по реке со скоростью течения 3 км/ч, человек движется перпендикулярно скорости течения со скоростью 4 км/ч относительно плота. Чему равен модуль скорости, с которой человек движется относительно берега?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" class="text-input" id="input18" placeholder="км/ч">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(18, '5')">Проверить ответ</button>
+        <div class="feedback" id="feedback18"></div>
+        <details id="details18" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Векторы скоростей человека относительно плота и самого плота направлены перпендикулярно друг другу. По закону сложения скоростей модуль результирующей скорости относительно берега находится по теореме Пифагора:<br>
+                v = корень из (4² + 3²) = корень из (16 + 9) = корень из 25 = 5 км/ч.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 19 -->
+    <div class="task-card" id="task19-container">
+        <div class="task-num">Задание 19 (Краткий ответ)</div>
+        <div class="task-text">Моторная лодка движется по реке относительно берега со скоростью 6 м/с, если плывёт по течению, и со скоростью 3 м/с, если движется против течения. С какой скоростью лодка будет двигаться в стоячей воде озера?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" step="0.1" class="text-input" id="input19" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(19, '4.5')">Проверить ответ</button>
+        <div class="feedback" id="feedback19"></div>
+        <details id="details19" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Составим уравнения движения:<br>
+                1) По течению: v_лодки + v_течения = 6<br>
+                2) Против течения: v_лодки - v_течения = 3<br>
+                Сложим эти два уравнения: 2 * v_лодки = 6 + 3, откуда 2 * v_лодки = 9. Значит, v_лодки = 4.5 м/с.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 20 -->
+    <div class="task-card" id="task20-container">
+        <div class="task-num">Задание 20 (Выбор двух верных утверждений)</div>
+        <div class="task-text">На рисунке показан график зависимости координаты тела, движущегося прямолинейно, от времени. Ось Ох совпадает с прямой, вдоль которой происходит движение. Выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 200" width="100%" height="100%" xmlns="http://w3.org">
+                <!-- Сетка ФИПИ по клеткам (шаг 20px) -->
+                <line x1="40" y1="160" x2="240" y2="160" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="160" stroke="#000" stroke-width="2"/>
+                <path d="M 240 160 L 230 155 M 240 160 L 230 165" stroke="#000" stroke-width="2"/>
+                <path d="M 40 20 L 35 30 M 40 20 L 45 30" stroke="#000" stroke-width="2"/>
+                <text x="235" y="175" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="15" y="35" font-family="serif" font-style="italic" font-size="14">x, м</text>
+                <text x="25" y="172" font-family="sans-serif" font-size="12">0</text>
+                
+                <line x1="35" y1="100" x2="40" y2="100" stroke="#000" stroke-width="1.5"/>
+                <text x="18" y="105" font-family="sans-serif" font-size="12">10</text>
+                <line x1="35" y1="40" x2="40" y2="40" stroke="#000" stroke-width="1.5"/>
+                <text x="18" y="45" font-family="sans-serif" font-size="12">20</text>
+                
+                <line x1="100" y1="160" x2="100" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="96" y="180" font-family="sans-serif" font-size="12">1</text>
+                <line x1="160" y1="160" x2="160" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="156" y="180" font-family="sans-serif" font-size="12">2</text>
+                <line x1="220" y1="160" x2="220" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="216" y="180" font-family="sans-serif" font-size="12">3</text>
+                
+                <!-- График движения -->
+                <path d="M 40 40 L 100 160 L 160 100 L 220 100" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q20" value="1"> 1) Тело в течение третьей секунды двигалось в направлении оси Ox.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="2"> 2) Тело 1 с двигалось в направлении оси Ox, затем 1 с против оси.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="3"> 3) Третью секунду наблюдения (интервал 2–3 с) тело покоилось.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="4"> 4) Скорости тел в промежутках времени 0–1 с и 1–2 с равны по модулю.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="5"> 5) Путь, пройденный телом за 3 с наблюдения, равен 30 м.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(20, ['3', '5'])">Проверить ответ</button>
+        <div class="feedback" id="feedback20"></div>
+        <details id="details20" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Разберем участки графика:<br>
+                - От 2 до 3 с координата тела остается неизменной (x = 10 м), что означает состояние покоя. Утверждение 3 верное.<br>
+                - Найдем пройденный путь за 3 секунды наблюдения: на первом интервале (0–1 с) тело переместилось из координаты 20 м в 0 м (пройдено 20 м). На втором интервале (1–2 с) — из координаты 0 м в 10 м (пройдено 10 м). На третьем интервале путь равен 0. Суммарный пройденный путь: S = 20 + 10 + 0 = 30 м. Утверждение 5 верное.
+            </div>
+        </details>
+    </div>
+
+        <!-- Задание 21 -->
+    <div class="task-card" id="task21-container">
+        <div class="task-num">Задание 21 (Выбор двух верных утверждений)</div>
+        <div class="task-text">График зависимости координаты тела на оси Ox от времени показан на рисунке. Тело всё время находится на оси Ox. Выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 180" width="100%" height="100%" xmlns="http://w3.org">
+                <line x1="20" y1="100" x2="240" y2="100" stroke="#000" stroke-width="2"/>
+                <line x1="50" y1="20" x2="50" y2="160" stroke="#000" stroke-width="2"/>
+                <path d="M 240 100 L 230 95 M 240 100 L 230 105" stroke="#000" stroke-width="2"/>
+                <path d="M 50 20 L 45 30 M 50 20 L 55 30" stroke="#000" stroke-width="2"/>
+                <text x="230" y="115" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="25" y="30" font-family="serif" font-style="italic" font-size="14">x, м</text>
+                
+                <path d="M 50 40 L 110 140 L 220 70" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <circle cx="90" cy="100" r="4" fill="#bd2130"/>
+                <text x="85" y="90" font-family="serif" font-style="italic" font-size="12">t₁</text>
+                
+                <line x1="110" y1="100" x2="110" y2="140" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="115" y="90" font-family="serif" font-style="italic" font-size="12">t₂</text>
+                
+                <circle cx="170" cy="100" r="4" fill="#bd2130"/>
+                <text x="165" y="90" font-family="serif" font-style="italic" font-size="12">t₃</text>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q21" value="1"> 1) В момент времени t₃ скорость тела максимальна по модулю.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="2"> 2) В моменты времени t₁ и t₃ скорость тела равна нулю.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="3"> 3) В момент времени t₂ тело изменило направление движения.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="4"> 4) В моменты времени t₁ и t₃ тело проходит через начало координат.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="5"> 5) В промежутке времени 0–t₃ тело движется в направлении, противоположном Ox.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(21, ['3', '4'])">Проверить ответ</button>
+        <div class="feedback" id="feedback21"></div>
+        <details id="details21" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                - До момента времени t₂ координата x уменьшается (тело идет против оси Ох), а после t₂ начинает увеличиваться (тело идет по оси Ох). Точка излома графика t₂ — это точка изменения направления движения (разворота). Утверждение 3 верное.<br>
+                - В моменты времени t₁ и t₃ координата x равна нулю, так как график пересекает горизонтальную ось времени. Это означает, что тело проходит через начало координат. Утверждение 4 верное.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 22 -->
+    <div class="task-card" id="task22-container">
+        <div class="task-num">Задание 22 (Краткий ответ)</div>
+        <div class="task-text">В таблице показаны длины отрезков пути триангла s, пройденных катером за первую, вторую, третью, четвертую и пятую секунды движения. Какой путь прошло тело на отрезке времени, когда оно двигалось равномерно?</div>
+        <table>
+            <tr>
+                <th>t, c</th>
+                <td>1-я</td>
+                <td>2-я</td>
+                <td>3-я</td>
+                <td>4-я</td>
+                <td>5-я</td>
+            </tr>
+            <tr>
+                <th>отрезок s, м</th>
+                <td>5</td>
+                <td>10</td>
+                <td>20</td>
+                <td>20</td>
+                <td>20</td>
+            </tr>
+        </table>
+        <div class="input-group">
+            <label>Ответ (в метрах): </label>
+            <input type="number" class="text-input" id="input22" placeholder="м">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(22, '60')">Проверить ответ</button>
+        <div class="feedback" id="feedback22"></div>
+        <details id="details22" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Равномерное движение характеризуется тем, что тело проходит абсолютно одинаковое расстояние за каждую секунду времени.<br>
+                - Из таблицы видно, что на 3-й, 4-й и 5-й секундах пути катер преодолевал стабильно по 20 метров.<br>
+                - Интервал равномерного движения длился ровно 3 секунды (3-я, 4-я и 5-я секунды полностью).<br>
+                - Суммарный путь на этом равномерном участке составляет: S = 20 + 20 + 20 = 60 метров.
+            </div>
+        </details>
+    </div>
+
 </div>
 
 <script>
