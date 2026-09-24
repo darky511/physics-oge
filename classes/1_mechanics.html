@@ -222,13 +222,13 @@
             <label>Ответ (две цифры подряд без пробелов, например, 12): </label>
             <input type="text" class="text-input" id="input3" placeholder="АБ">
         </div>
-        <button class="btn-check" onclick="checkTextTask(3, '22')">Проверить ответ</button>
+        <button class="btn-check" onclick="checkTextTask(3, '23')">Проверить ответ</button>
         <div class="feedback" id="feedback3"></div>
         <details id="details3" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                <strong>А) Камень на земле:</strong> Поскольку длина нити постоянна, а авиамоделист вращается на одном месте, модель описывает замкнутую кривую на постоянной высоте. Относительно земли (и камня) формой траектории будет окружность (2).<br>
-                <strong>Б) Кисть авиамоделиста:</strong> Длина привязи неизменна, кисть находится в центре вращения и синхронно поворачивается вместе с самолетом. Поскольку расстояние и радиальный угол модели в этой системе отсчета прослеживают ровный круговой цикл, формой траектории также является окружность (2).
+                <strong>А) Камень на земле:</strong> Камень неподвижен относительно земли. Относительно него самолет движется по кругу на фиксированном расстоянии в горизонтальной плоскости. Форма траектории — <strong>окружность (2)</strong>.<br>
+                <strong>Б) Кисть авиамоделиста:</strong> Кисть является центром вращения и поворачивается вместе с кордой. В системе отсчета, связанной с самой кистью, расстояние до модели постоянно, а её угловое положение не меняется. Модель неподвижна относительно кисти, а для неподвижного объекта траекторией является <strong>точка (3)</strong>.
             </div>
         </details>
     </div>
@@ -459,17 +459,17 @@
 
 
         <div class="options-group">
-            <label class="option-label"><input type="radio" name="q8" value="1"> График 1 (Красный)</label>
-            <label class="option-label"><input type="radio" name="q8" value="2"> График 2 (Зеленый)</label>
-            <label class="option-label"><input type="radio" name="q8" value="3"> График 3 (Синий)</label>
-            <label class="option-label"><input type="radio" name="q8" value="4"> График 4 (Оранжевый)</label>
+            <label class="option-label"><input type="radio" name="q8" value="1"> График 1</label>
+            <label class="option-label"><input type="radio" name="q8" value="2"> График 2</label>
+            <label class="option-label"><input type="radio" name="q8" value="3"> График 3</label>
+            <label class="option-label"><input type="radio" name="q8" value="4"> График 4</label>
         </div>
-        <button class="btn-check" onclick="checkRadioTask(8, '2')">Проверить ответ</button>
+        <button class="btn-check" onclick="checkRadioTask(8, '1')">Проверить ответ</button>
         <div class="feedback" id="feedback8"></div>
         <details id="details8" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Проверим начальные точки по координатам (t, H). При t = 0 с глубина H = 1.5 м. Это исключает графики 1 (выходит из нуля) и графики 3 и 4 (начинаются на отметке H = 6 м). При t = 16 с глубина линейно увеличивается. Этому условию в полной мере соответствует только линия под номером 2.
+                В соответствии с таблицей данных, с течением времени глубина погружения аквалангиста линейно возрастает (от 1,5 м до 7,5 м). С учетом направления координатных шкал в данном задании, правильное отображение этого процесса (линейный рост глубины от времени) иллюстрирует график под номером 1.
             </div>
         </details>
     </div>
