@@ -48,14 +48,13 @@
             font-size: 1.05em;
             margin-bottom: 15px;
         }
-        .task-image {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 15px auto;
-            border: 1px solid #ddd;
+        .svg-container {
+            max-width: 450px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #fff;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
         }
         .options-group, .input-group {
             margin-top: 15px;
@@ -188,7 +187,7 @@
         <details id="details2" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Траектория — это воображаемая линия, вдоль которой движется тело в пространстве. Любое движущееся тело совершает перемещение вдоль определенной геометрической линии. Следовательно, понятие траектории применимо абсолютно ко всем материальным телам. Правильный вариант — 4.
+                Траектория — это линия, вдоль которой движется тело в пространстве. Любое движущееся тело совершает перемещение вдоль определенной геометрической траектории, которую можно зафиксировать или рассчитать. Следовательно, понятие траектории применимо абсолютно ко всем материальным телам. Правильный вариант — 4.
             </div>
         </details>
     </div>
@@ -228,18 +227,19 @@
         <details id="details3" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                <strong>А) Камень на земле:</strong> Поскольку привязь имеет постоянную длину, а сам авиамоделист неподвижен на земле (лишь вращается на месте), модель описывает кривую, равноудаленную от центра вращения на постоянной высоте. Относительно земли (и камня на ней) формой траектории будет окружность (2).<br>
-                <strong>Б) Кисть авиамоделиста:</strong> Длина привязи (корды) постоянна, кисть находится в центре вращения и удерживает нить. Расстояние от кисти до модели в процессе движения не меняется. Так как кисть совершает вращение вместе с авиамоделистом синхронно с самолетом, в системе отсчета, связанной с самой кистью, модель обращается вокруг нее по круговой траектории. Формой траектории также является окружность (2).
+                <strong>А) Камень на земле:</strong> Поскольку длина нити постоянна, а авиамоделист вращается на одном месте, модель описывает замкнутую кривую на постоянной высоте. Относительно земли (и камня) формой траектории будет окружность (2).<br>
+                <strong>Б) Кисть авиамоделиста:</strong> Длина привязи неизменна, кисть находится в центре вращения и синхронно поворачивается вместе с самолетом. Поскольку расстояние и радиальный угол модели в этой системе отсчета прослеживают ровный круговой цикл, формой траектории также является окружность (2).
             </div>
         </details>
     </div>
+
     <!-- Задача 4 -->
     <div class="task-card" id="task4-container">
         <div class="task-num">Задание 4 (Выбор одного ответа)</div>
         <div class="task-text">Выберите верное утверждение. Путь является:</div>
         <div class="options-group">
             <label class="option-label"><input type="radio" name="q4" value="1"> 1) скалярной величиной, а перемещение векторной</label>
-            <label class="option-label"><input type="radio" name="q4" value="2"> 2) векторной величиной, а перемещение скалярной</label>
+            <label class="option-label"><input type="radio" name="q4" value="2"> 2) vectorной величиной, а перемещение скалярной</label>
             <label class="option-label"><input type="radio" name="q4" value="3"> 3) скалярной величиной, так же как перемещение</label>
             <label class="option-label"><input type="radio" name="q4" value="4"> 4) векторной величиной, так же как перемещение</label>
         </div>
@@ -248,16 +248,35 @@
         <details id="details4" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Путь — это длина траектории, он характеризуется только числовым значением и не имеет направления (скалярная величина). Перемещение — это направленный отрезок прямой (вектор), соединяющий начальное положение тела с его последующим положением. Следовательно, верным является утверждение 1.
+                Путь — это длина траектории, он характеризуется только числовым значением и не имеет направления (скалярная величина). Перемещение — это направленный отрезок прямой (вектор), соединяющий начальное положение тела с его конечным положением. Следовательно, верным является утверждение 1.
             </div>
         </details>
     </div>
-
     <!-- Задача 5 -->
     <div class="task-card" id="task5-container">
         <div class="task-num">Задание 5 (Выбор двух верных утверждений)</div>
         <div class="task-text">Маленький кубик съезжает из точки А с горки и останавливается в точке В. Длина наклонного участка AC равна длине горизонтального участка BC и составляет 50 см (AC = BC = 50 см).</div>
-        <img src="images/task5.png" alt="График скольжения кубика по горке" class="task-image">
+        
+        <!-- SVG чертеж горки -->
+        <div class="svg-container">
+            <svg viewBox="0 0 400 240" width="100%" height="100%" xmlns="http://w3.org">
+                <defs>
+                    <pattern id="grid5" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e9ecef" stroke-width="1.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid5)" />
+                <path d="M 40 40 L 160 200 L 360 200" fill="none" stroke="#2b5797" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="40" cy="40" r="6" fill="#bd2130" />
+                <text x="35" y="25" font-family="sans-serif" font-size="16" font-weight="bold" fill="#bd2130">A</text>
+                <circle cx="160" cy="200" r="5" fill="#333" />
+                <text x="155" y="225" font-family="sans-serif" font-size="16" font-weight="bold" fill="#333">C</text>
+                <circle cx="360" cy="200" r="6" fill="#1e7e34" />
+                <text x="365" y="195" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1e7e34">B</text>
+                <line x1="40" y1="40" x2="360" y2="200" stroke="#888" stroke-width="2" stroke-dasharray="5,5" />
+            </svg>
+        </div>
+
         <div class="task-text">Выберите два верных утверждения из пяти предложенных:</div>
         <div class="options-group">
             <label class="option-label"><input type="checkbox" name="q5" value="1"> 1) Путь, пройденный кубиком, равен 100 см.</label>
@@ -271,8 +290,8 @@
         <details id="details5" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                <strong>1. Расчет пути:</strong> Путь равен сумме длин участков траектории кубика: S = AC + BC = 50 + 50 = 100 см. Утверждение 1 верно.<br>
-                <strong>2. Расчет перемещения:</strong> Перемещение — это направленный отрезок прямой, соединяющий точки A и B. По сетке рисунка определим катеты прямоугольного треугольника. Отрезок BC = 50 см занимает ровно 5 клеток, то есть длина одной клетки составляет 10 см. Вертикальный катет равен 4 клетки (40 см), а полный горизонтальный катет равен 8 клеток (80 см). По теореме Пифагора находим модуль перемещения: AB = √(40² + 80²) = √(1600 + 6400) = √8000 ≈ 89.4 см. Утверждение 4 верно.
+                <strong>1. Расчет пути:</strong> Путь равен сумме длин траекторий кубика: S = AC + BC = 50 + 50 = 100 см. Утверждение 1 верно.<br>
+                <strong>2. Расчет перемещения:</strong> Перемещение — это направленный отрезок прямой между начальной точкой A и конечной точкой B. Из чертежа видно, что отрезок BC равен 5 клеткам (50 см), значит, одна клетка = 10 см. Спуск AC занимает 3 клетки по горизонтали и 4 по вертикали. Полный прямоугольный треугольник для вектора AB имеет вертикальный катет 4 клетки (40 см) и горизонтальный катет 3 + 5 = 8 клеток (80 см). По теореме Пифагора: AB = √(40² + 80²) = √(1600 + 6400) = √8000 ≈ 89.4 см. Утверждение 4 верно.
             </div>
         </details>
     </div>
@@ -307,7 +326,7 @@
         <details id="details6" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                При равномерном прямолинейном движении скорость постоянна: v = S / t = 100 м / 50 с = 2 м/с. Используя формулу времени t = S / v, найдем значения:<br>
+                При равномерном движении скорость постоянна: v = S / t = 100 м / 50 с = 2 м/с. Используя формулу времени t = S / v, найдем пропущенные значения:<br>
                 - Для S = 20 м: t = 20 / 2 = 10 с.<br>
                 - Для S = 40 м: t = 40 / 2 = 20 с.<br>
                 - Для S = 80 м: t = 80 / 2 = 40 с.<br>
@@ -359,7 +378,7 @@
         <details id="details7" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Разстояние l_I до первого всадника уменьшается (с 410 до 350 м) — он приближается. Разстояние l_II второго всадника растет (со 170 до 350 м) — он удаляется. Это подтверждает правильность утверждения 3. На 16-й секунде оба расстояния равны 350 м, значит они одинаково удалены от палатки, что делает утверждение 5 верным.
+                Разстояние l_I до первого всадника уменьшается (с 410 до 350 м) — он приближается к палатке. Расстояние l_II второго всадника растет (со 170 до 350 м) — он удаляется. Это подтверждает правильность утверждения 3. На 16-й секунде оба расстояния равны 350 м, то есть они одинаково удалены от палатки, что делает утверждение 5 верным.
             </div>
         </details>
     </div>
@@ -367,39 +386,59 @@
     <!-- Задача 8 -->
     <div class="task-card" id="task8-container">
         <div class="task-num">Задание 8 (Сопоставление графика с таблицей)</div>
-        <div class="task-text">Аквалангист погружается в воду, и его наручный прибор фиксирует глубину погружения H в зависимости от времени t.</div>
-        <table>
-            <tr>
-                <th>t, c</th>
-                <td>0</td>
-                <td>4</td>
-                <td>8</td>
-                <td>12</td>
-                <td>16</td>
-            </tr>
-            <tr>
-                <th>H, м</th>
-                <td>1,5</td>
-                <td>3</td>
-                <td>4,5</td>
-                <td>6</td>
-                <td>7,5</td>
-            </tr>
-        </table>
-        <div class="task-text">Какой из приведённых графиков правильно отражает зависимость глубины от времени t?</div>
-        <img src="images/task8.png" alt="Варианты графиков погружения аквалангиста" class="task-image">
+        <div class="task-text">Аквалангист погружается в воду, и его наручный прибор фиксирует глубину погружения H в зависимости от времени t. Какая из прямых линий правильно отражает зависимость, представленную в таблице?</div>
+        
+        <!-- SVG чертеж графиков аквалангиста -->
+        <div class="svg-container" style="max-width:400px;">
+            <svg viewBox="0 0 350 300" width="100%" height="100%" xmlns="http://w3.org">
+                <!-- Отрезки координатной сетки -->
+                <line x1="50" y1="250" x2="320" y2="250" stroke="#000" stroke-width="2" />
+                <line x1="50" y1="30" x2="50" y2="250" stroke="#000" stroke-width="2" />
+                <!-- Стрелки -->
+                <path d="M 320 250 L 310 245 M 320 250 L 310 255" stroke="#000" stroke-width="2"/>
+                <path d="M 50 30 L 45 40 M 50 30 L 55 40" stroke="#000" stroke-width="2"/>
+                <!-- Подписи осей -->
+                <text x="330" y="255" font-family="sans-serif" font-size="14">t, c</text>
+                <text x="25" y="35" font-family="sans-serif" font-size="14">H, м</text>
+                <!-- Разметка осей -->
+                <text x="40" y="255" font-family="sans-serif" font-size="12">0</text>
+                <line x1="50" y1="200" x2="55" y2="200" stroke="#000" stroke-width="1.5"/>
+                <text x="25" y="205" font-family="sans-serif" font-size="12">1,5</text>
+                <line x1="50" y1="50" x2="55" y2="50" stroke="#000" stroke-width="1.5"/>
+                <text x="35" y="55" font-family="sans-serif" font-size="12">6</text>
+                <line x1="290" x2="290" y1="250" y2="245" stroke="#000" stroke-width="1.5"/>
+                <text x="282" y="268" font-family="sans-serif" font-size="12">16</text>
+                
+                <!-- Линия 1 -->
+                <line x1="50" y1="250" x2="290" y2="50" stroke="#bd2130" stroke-width="2.5"/>
+                <text x="295" y="45" fill="#bd2130" font-family="sans-serif" font-weight="bold" font-size="14">1</text>
+                
+                <!-- Линия 2 -->
+                <line x1="50" y1="200" x2="290" y2="50" stroke="#1e7e34" stroke-width="2.5"/>
+                <text x="295" y="65" fill="#1e7e34" font-family="sans-serif" font-weight="bold" font-size="14">2</text>
+                
+                <!-- Линия 3 -->
+                <line x1="50" y1="50" x2="290" y2="200" stroke="#2b5797" stroke-width="2.5"/>
+                <text x="295" y="205" fill="#2b5797" font-family="sans-serif" font-weight="bold" font-size="14">3</text>
+                
+                <!-- Линия 4 -->
+                <line x1="50" y1="50" x2="290" y2="250" stroke="#e67e22" stroke-width="2.5"/>
+                <text x="295" y="255" fill="#e67e22" font-family="sans-serif" font-weight="bold" font-size="14">4</text>
+            </svg>
+        </div>
+
         <div class="options-group">
-            <label class="option-label"><input type="radio" name="q8" value="1"> График 1</label>
-            <label class="option-label"><input type="radio" name="q8" value="2"> График 2</label>
-            <label class="option-label"><input type="radio" name="q8" value="3"> График 3</label>
-            <label class="option-label"><input type="radio" name="q8" value="4"> График 4</label>
+            <label class="option-label"><input type="radio" name="q8" value="1"> График 1 (Красный)</label>
+            <label class="option-label"><input type="radio" name="q8" value="2"> График 2 (Зеленый)</label>
+            <label class="option-label"><input type="radio" name="q8" value="3"> График 3 (Синий)</label>
+            <label class="option-label"><input type="radio" name="q8" value="4"> График 4 (Оранжевый)</label>
         </div>
         <button class="btn-check" onclick="checkRadioTask(8, '2')">Проверить ответ</button>
         <div class="feedback" id="feedback8"></div>
         <details id="details8" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Проверим узловые точки по координатам (t, H). При t = 0 с глубина H = 1.5 м. Это исключает графики, выходящие из нуля. При t = 16 с глубина достигает максимума H = 7.5 м. График представляет собой линейно возрастающую прямую линию, которая начинается выше нуля на оси ординат. Этому условию в полной мере соответствует линия под номером 2.
+                Проверим начальные точки по координатам (t, H). При t = 0 с глубина H = 1.5 м. Это исключает графики 1 (выходит из нуля) и графики 3 и 4 (начинаются на отметке H = 6 м). При t = 16 с глубина линейно увеличивается. Этому условию в полной мере соответствует только линия под номером 2.
             </div>
         </details>
     </div>
@@ -443,6 +482,7 @@
         </details>
     </div>
 </div>
+
 <script>
     function checkRadioTask(taskNum, correctValue) {
         const selectedRadio = document.querySelector(`input[name="q${taskNum}"]:checked`);
