@@ -1,0 +1,466 @@
+<div class="container">
+    <h1>ОГЭ по физике. Тема 1: Механическое движение (Задачи 11–22)</h1>
+
+    <!-- Задание 11 -->
+    <div class="task-card" id="task11-container">
+        <div class="task-num">Задание 11 (Краткий ответ)</div>
+        <div class="task-text">Используя график зависимости скорости движения тела от времени, определите скорость тела в конце 5-й секунды, считая, что характер движения тела не изменяется.</div>
+        
+        <div class="svg-container" style="max-width:360px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 320 220" width="100%" height="100%" xmlns="http://w3.org">
+                <defs>
+                    <pattern id="grid11" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dfe6e9" stroke-width="0.8"/>
+                    </pattern>
+                </defs>
+                <rect x="40" y="20" width="260" height="160" fill="url(#grid11)" />
+                <line x1="40" y1="180" x2="310" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="180" stroke="#000" stroke-width="2"/>
+                <path d="M 310 180 L 300 175 M 310 180 L 300 185" stroke="#000" stroke-width="2"/>
+                <path d="M 40 20 L 35 30 M 40 20 L 45 30" stroke="#000" stroke-width="2"/>
+                <text x="300" y="198" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="10" y="35" font-family="serif" font-style="italic" font-size="14">v, м/с</text>
+                <text x="28" y="195" font-family="sans-serif" font-size="12">0</text>
+                
+                <line x1="40" y1="140" x2="45" y2="140" stroke="#000" stroke-width="1.5"/>
+                <text x="25" y="145" font-family="sans-serif" font-size="12" font-weight="bold">2</text>
+                <line x1="140" y1="180" x2="140" y2="185" stroke="#000" stroke-width="1.5"/>
+                <text x="135" y="195" font-family="sans-serif" font-size="12">2</text>
+                <line x1="240" y1="180" x2="240" y2="185" stroke="#000" stroke-width="1.5"/>
+                <text x="235" y="195" font-family="sans-serif" font-size="12">4</text>
+                <line x1="290" y1="180" x2="290" y2="185" stroke="#000" stroke-width="1.5"/>
+                <text x="285" y="195" font-family="sans-serif" font-size="12">6</text>
+                
+                <line x1="40" y1="140" x2="250" y2="55" stroke="#2b5797" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <div class="input-group">
+            <label>Ответ: </label>
+            <input type="number" class="text-input" id="input11" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(11, '4.5')">Проверить ответ</button>
+        <div class="feedback" id="feedback11"></div>
+        <details id="details11" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Движение является равноускоренным, так как график скорости — прямая линия. <br>
+                1) Начальная скорость: $v_0 = 2$ м/с.<br>
+                2) Найдём ускорение по точке на графике: при $t = 4$ с скорость равна $5$ м/с (на 3 клетки выше начальной отметки 2). Ускорение: $a = \frac{v - v_0}{t} = \frac{5 - 2}{4} = 0.75$ м/с².<br>
+                3) Скорость в конце 5-й секунды ($t = 5$ с): $v = v_0 + at = 2 + 0.75 \times 5 = 2 + 3.75 = 4.5$ м/с.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 12 -->
+    <div class="task-card" id="task12-container">
+        <div class="task-num">Задание 12 (Выбор двух верных утверждений)</div>
+        <div class="task-text">На рисунке представлен график зависимости координаты тела, движущегося вдоль оси x, от времени. Сравните скорости тела в разные моменты времени и выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 180" width="100%" height="100%" xmlns="http://w3.org">
+                <line x1="40" y1="150" x2="240" y2="150" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="150" stroke="#000" stroke-width="2"/>
+                <path d="M 240 150 L 230 145 M 240 150 L 230 155" stroke="#000" stroke-width="2"/>
+                <path d="M 40 20 L 35 30 M 40 20 L 45 30" stroke="#000" stroke-width="2"/>
+                <text x="230" y="165" font-family="serif" font-style="italic" font-size="14">t</text>
+                <text x="20" y="35" font-family="serif" font-style="italic" font-size="14">x</text>
+                <text x="28" y="162" font-family="sans-serif" font-size="12">0</text>
+                
+                <path d="M 40 150 L 160 50 L 230 50" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round"/>
+                
+                <line x1="80" y1="150" x2="80" y2="117" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="75" y="165" font-family="serif" font-style="italic" font-size="12">t₁</text>
+                
+                <line x1="120" y1="150" x2="120" y2="83" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="115" y="165" font-family="serif" font-style="italic" font-size="12">t₂</text>
+                
+                <line x1="180" y1="150" x2="180" y2="50" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="175" y="165" font-family="serif" font-style="italic" font-size="12">t₃</text>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q12" value="1"> 1) В моменты времени t₁ и t₂ скорость тела одинакова.</label>
+            <label class="option-label"><input type="checkbox" name="q12" value="2"> 2) В момент времени t₁ скорость тела больше, чем в момент времени t₂.</label>
+            <label class="option-label"><input type="checkbox" name="q12" value="3"> 3) В момент времени t₃ скорость тела больше, чем в момент времени t₂.</label>
+            <label class="option-label"><input type="checkbox" name="q12" value="4"> 4) В момент времени t₂ скорость тела равна нулю.</label>
+            <label class="option-label"><input type="checkbox" name="q12" value="5"> 5) В момент времени t₃ скорость тела равна нулю.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(12, ['1', '5'])">Проверить ответ</button>
+        <div class="feedback" id="feedback12"></div>
+        <details id="details12" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Скорость тела на графике зависимости координаты от времени определяется наклоном линии.<br>
+                - На промежутке от 0 до $t_3$ график представляет собой прямую линию с постоянным наклоном. Значит, скорости в моменты $t_1$ и $t_2$ одинаковы <strong>(Утверждение 1 верно)</strong>.<br>
+                - После точки излома график становится горизонтальным. Координата тела не меняется, что означает состояние покоя. В момент времени $t_3$ скорость тела равна нулю <strong>(Утверждение 5 верно)</strong>.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 13 -->
+    <div class="task-card" id="task13-container">
+        <div class="task-num">Задание 13 (Краткий ответ)</div>
+        <div class="task-text">На рисунке представлен график движения пловца из одного конца дорожки бассейна в другой конец и обратно. Начало дорожки находится в точке х = 0, а конец — в точке х = 50 м. Чему равна максимальная скорость пловца на всём пути движения туда и обратно?</div>
+        
+        <div class="svg-container" style="max-width:360px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 320 220" width="100%" height="100%" xmlns="http://w3.org">
+                <defs>
+                    <pattern id="grid13" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#dfe6e9" stroke-width="0.8"/>
+                    </pattern>
+                </defs>
+                <rect x="40" y="20" width="240" height="160" fill="url(#grid13)" />
+                <line x1="40" y1="180" x2="300" y2="180" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="180" stroke="#000" stroke-width="2"/>
+                <text x="290" y="198" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="10" y="35" font-family="serif" font-style="italic" font-size="14">x, м</text>
+                
+                <text x="28" y="195" font-family="sans-serif" font-size="12">0</text>
+                <text x="20" y="125" font-family="sans-serif" font-size="12">20</text>
+                <text x="20" y="85" font-family="sans-serif" font-size="12">40</text>
+                <text x="20" y="45" font-family="sans-serif" font-size="12">60</text>
+                
+                <text x="73" y="195" font-family="sans-serif" font-size="12">20</text>
+                <text x="113" y="195" font-family="sans-serif" font-size="12">40</text>
+                <text x="153" y="195" font-family="sans-serif" font-size="12">60</text>
+                <text x="193" y="195" font-family="sans-serif" font-size="12">80</text>
+                <text x="230" y="195" font-family="sans-serif" font-size="12">100</text>
+                
+                <path d="M 40 180 L 120 60 L 240 180" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="input-group">
+            <label>Ответ: </label>
+            <input type="number" class="text-input" id="input13" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(13, '1.25')">Проверить ответ</button>
+        <div class="feedback" id="feedback13"></div>
+        <details id="details13" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Движение состоит из двух участков: пловец плывет туда и обратно.<br>
+                1) Скорость туда (от 0 до 40 с): пловец преодолевает расстояние 50 метров за 40 секунд. $v_1 = \frac{50\text{ м}}{40\text{ с}} = 1.25$ м/с.<br>
+                2) Скорость обратно (от 40 до 100 с): пловец возвращается обратно на 50 метров за время $\Delta t = 100 - 40 = 60$ с. $v_2 = \frac{50\text{ м}}{60\text{ с}} \approx 0.83$ м/с.<br>
+                Максимальная скорость на всем пути равна $1.25$ м/с.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 14 -->
+    <div class="task-card" id="task14-container">
+        <div class="task-num">Задание 14 (Краткий ответ)</div>
+        <div class="task-text">Муха равномерно переместилась по отрезку длиной 80 мм за 2 с. Чему равна скорость мухи в единицах СИ (м/с)?</div>
+        <div class="input-group">
+            <label>Ответ: </label>
+            <input type="number" class="text-input" id="input14" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(14, '0.04')">Проверить ответ</button>
+        <div class="feedback" id="feedback14"></div>
+        <details id="details14" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Переведем расстояние в метры: $S = 80\text{ мм} = 0.08\text{ м}$. Время движения: $t = 2\text{ с}$. Вычислим скорость: $v = \frac{S}{t} = \frac{0.08\text{ м}}{2\text{ с}} = 0.04\text{ м/с}$.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 15 -->
+    <div class="task-card" id="task15-container">
+        <div class="task-num">Задание 15 (Краткий ответ)</div>
+        <div class="task-text">Путь AB по прямому шоссе равен 10 км. Первую половину пути велосипедист движется равномерно со скоростью 10 км/ч, вторую половину — равномерно со скоростью 2 м/с. Чему равно полное время в пути?</div>
+        <div class="input-group">
+            <label>Ответ (в секундах): </label>
+            <input type="number" class="text-input" id="input15" placeholder="с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(15, '4300')">Проверить ответ</button>
+        <div class="feedback" id="feedback15"></div>
+        <details id="details15" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Разделим путь на две равные половины: $S_1 = S_2 = 5\text{ км} = 5000\text{ м}$.<br>
+                1) Время на первой половине пути: скорость $v_1 = 10\text{ км/ч}$. Время $t_1 = \frac{5\text{ км}}{10\text{ км/ч}} = 0.5\text{ ч} = 1800\text{ с}$.<br>
+                2) Время на второй половине пути: скорость $v_2 = 2\text{ м/с}$. Время $t_2 = \frac{5000\text{ м}}{2\text{ м/с}} = 2500\text{ с}$.<br>
+                3) Полное время движения в секундах: $t = t_1 + t_2 = 1800 + 2500 = 4300\text{ с}$.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 16 -->
+    <div class="task-card" id="task16-container">
+        <div class="task-num">Задание 16 (Установление соответствия)</div>
+        <div class="task-text">Установите соответствие между графическим и словесным описанием движения тела при его прямолинейном движении.</div>
+        
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 15px 0; justify-content: center;">
+            <div style="border: 1px solid #ccc; padding: 5px; background: #fff; border-radius: 4px;">
+                <div style="font-weight: bold; text-align: center;">А)</div>
+                <svg viewBox="0 0 150 110" width="140" height="100">
+                    <line x1="20" y1="90" x2="140" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="10" x2="20" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="90" x2="130" y2="20" stroke="#2b5797" stroke-width="2"/>
+                    <text x="130" y="102" font-size="10">t, c</text><text x="5" y="15" font-size="10">s, м</text>
+                </svg>
+            </div>
+            <div style="border: 1px solid #ccc; padding: 5px; background: #fff; border-radius: 4px;">
+                <div style="font-weight: bold; text-align: center;">Б)</div>
+                <svg viewBox="0 0 150 110" width="140" height="100">
+                    <line x1="20" y1="90" x2="140" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="10" x2="20" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="90" x2="130" y2="90" stroke="#2b5797" stroke-width="3"/>
+                    <text x="130" y="102" font-size="10">t, c</text><text x="5" y="15" font-size="10">v, м/с</text>
+                </svg>
+            </div>
+            <div style="border: 1px solid #ccc; padding: 5px; background: #fff; border-radius: 4px;">
+                <div style="font-weight: bold; text-align: center;">В)</div>
+                <svg viewBox="0 0 150 110" width="140" height="100">
+                    <line x1="20" y1="90" x2="140" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="10" x2="20" y2="90" stroke="#000" stroke-width="1.5"/>
+                    <line x1="20" y1="40" x2="130" y2="40" stroke="#2b5797" stroke-width="2"/>
+                    <text x="130" y="102" font-size="10">t, c</text><text x="5" y="15" font-size="10">v, м/с</text>
+                </svg>
+            </div>
+        </div>
+
+        <div class="task-text">Варианты словесного описания:<br>1) тело покоилось; 2) тело двигалось равномерно; 3) тело двигалось неравномерно</div>
+        <div class="input-group">
+            <label>Ответ (три цифры подряд для А, Б, В без пробелов): </label>
+            <input type="text" class="text-input" id="input16" placeholder="АБВ">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(16, '212')">Проверить ответ</button>
+        <div class="feedback" id="feedback16"></div>
+        <details id="details16" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                <strong>А) График s(t) — наклонная прямая:</strong> Путь растет пропорционально времени, движение равномерное (2).<br>
+                <strong>Б) Скорость v(t) = 0:</strong> Тело покоилось (1).<br>
+                <strong>В) График скорости v(t) — горизонтальная линия выше нуля:</strong> Скорость постоянна, движение равномерное (2). Итоговый ответ: 212.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 17 -->
+    <div class="task-card" id="task17-container">
+        <div class="task-num">Задание 17 (Установление соответствия по диаграммам)</div>
+        <div class="task-text">Полчаса человек двигался со скоростью 4 км/ч, а затем полчаса со скоростью 1 км/ч. Поставьте в соответствие отображаемое соотношение путей и диаграммы, показывающие это соотношение.</div>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0; justify-content: center;">
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; text-align:center; border-radius: 4px;">
+                <div>1</div>
+                <svg viewBox="0 0 80 120" width="70" height="110">
+                    <rect x="15" y="10" width="20" height="100" fill="#95a5a6" stroke="#333"/>
+                    <rect x="45" y="85" width="20" height="25" fill="#34495e" stroke="#333"/>
+                </svg>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; text-align:center; border-radius: 4px;">
+                <div>2</div>
+                <svg viewBox="0 0 80 120" width="70" height="110">
+                    <rect x="15" y="85" width="20" height="25" fill="#95a5a6" stroke="#333"/>
+                    <rect x="45" y="10" width="20" height="100" fill="#34495e" stroke="#333"/>
+                </svg>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; text-align:center; border-radius: 4px;">
+                <div>3</div>
+                <svg viewBox="0 0 80 120" width="70" height="110">
+                    <rect x="15" y="10" width="20" height="100" fill="#95a5a6" stroke="#333"/>
+                    <rect x="45" y="10" width="20" height="100" fill="#34495e" stroke="#333"/>
+                </svg>
+            </div>
+            <div style="border:1px solid #ccc; padding:5px; background:#fff; text-align:center; border-radius: 4px;">
+                <div>4</div>
+                <svg viewBox="0 0 80 120" width="70" height="110">
+                    <rect x="15" y="85" width="20" height="25" fill="#95a5a6" stroke="#333"/>
+                    <rect x="45" y="35" width="20" height="75" fill="#34495e" stroke="#333"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="task-text">
+            <strong>А)</strong> соотношение пути, пройденного за первые полчаса, и пути, пройденного за вторые полчаса<br>
+            <strong>Б)</strong> соотношение пути, пройденного за вторые полчаса, и пути, пройденного за час
+        </div>
+        <div class="input-group">
+            <label>Ответ (две цифры для А и Б без пробелов): </label>
+            <input type="text" class="text-input" id="input17" placeholder="АБ">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(17, '14')">Проверить ответ</button>
+        <div class="feedback" id="feedback17"></div>
+        <details id="details17" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Посчитаем пути на каждом интервале времени ($\Delta t = 0.5$ ч):<br>
+                - Путь за первые полчаса: $S_1 = 4 \times 0.5 = 2\text{ км}$.<br>
+                - Путь за вторые полчаса: $S_2 = 1 \times 0.5 = 0.5\text{ км}$.<br>
+                - Полный путь: $S_{полн} = 2 + 0.5 = 2.5\text{ км}$.<br><br>
+                <strong>А) $S_1$ к $S_2$:</strong> Левый столбец в 4 раза больше правого ($2 / 0.5 = 4$). Соответствует <strong>диаграмме 1</strong>.<br>
+                <strong>Б) $S_2$ к $S_{полн}$:</strong> Левый столбец относится к правому как $0.5 / 2.5 = 1 / 5$. Соответствует <strong>диаграмме 4</strong>. Итоговый ответ: 14.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 18 -->
+    <div class="task-card" id="task18-container">
+        <div class="task-num">Задание 18 (Краткий ответ)</div>
+        <div class="task-text">Плот движется по реке со скоростью течения 3 км/ч, человек движется перпендикулярно скорости течения со скоростью 4 км/ч относительно плота. Чему равен модуль скорости, с которой человек движется относительно берега?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" class="text-input" id="input18" placeholder="км/ч">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(18, '5')">Проверить ответ</button>
+        <div class="feedback" id="feedback18"></div>
+        <details id="details18" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Векторы скоростей человека относительно плота и самого плота направлены перпендикулярно. По закону сложения скоростей модуль результирующего вектора относительно берега находим по теореме Пифагора:<br>
+                $$v = \sqrt{4^2 + 3^2} = \sqrt{16 + 9} = \sqrt{25} = 5 \text{ км/ч}.$$
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 19 -->
+    <div class="task-card" id="task19-container">
+        <div class="task-num">Задание 19 (Краткий ответ)</div>
+        <div class="task-text">Моторная лодка движется по реке относительно берега со скоростью 6 м/с, если плывёт по течению, и со скоростью 3 м/с, если движется против течения. С какой скоростью лодка будет двигаться в стоячей воде озера?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" class="text-input" id="input19" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(19, '4.5')">Проверить ответ</button>
+        <div class="feedback" id="feedback19"></div>
+        <details id="details19" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Составим уравнения движения:<br>
+                1) $v_{лодки} + v_{течения} = 6$<br>
+                2) $v_{лодки} - v_{течения} = 3$<br>
+                Сложим два уравнения: $2 \cdot v_{лодки} = 9 \implies v_{лодки} = 4.5 \text{ м/с}$.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 20 -->
+    <div class="task-card" id="task20-container">
+        <div class="task-num">Задание 20 (Выбор двух верных утверждений)</div>
+        <div class="task-text">На рисунке показан график зависимости координаты тела, движущегося прямолинейно, от времени. Ось Ох совпадает с прямой, вдоль которой происходит движение. Выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 200" width="100%" height="100%" xmlns="http://w3.org">
+                <line x1="40" y1="160" x2="240" y2="160" stroke="#000" stroke-width="2"/>
+                <line x1="40" y1="20" x2="40" y2="160" stroke="#000" stroke-width="2"/>
+                <path d="M 240 160 L 230 155 M 240 160 L 230 165" stroke="#000" stroke-width="2"/>
+                <path d="M 40 20 L 35 30 M 40 20 L 45 30" stroke="#000" stroke-width="2"/>
+                <text x="235" y="175" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="15" y="35" font-family="serif" font-style="italic" font-size="14">x, м</text>
+                <text x="25" y="172" font-family="sans-serif" font-size="12">0</text>
+                
+                <line x1="35" y1="100" x2="40" y2="100" stroke="#000" stroke-width="1.5"/>
+                <text x="18" y="105" font-family="sans-serif" font-size="12">10</text>
+                <line x1="35" y1="40" x2="40" y2="40" stroke="#000" stroke-width="1.5"/>
+                <text x="18" y="45" font-family="sans-serif" font-size="12">20</text>
+                
+                <line x1="100" y1="160" x2="100" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="96" y="180" font-family="sans-serif" font-size="12">1</text>
+                <line x1="160" y1="160" x2="160" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="156" y="180" font-family="sans-serif" font-size="12">2</text>
+                <line x1="220" y1="160" x2="220" y2="165" stroke="#000" stroke-width="1.5"/>
+                <text x="216" y="180" font-family="sans-serif" font-size="12">3</text>
+                
+                <path d="M 40 40 L 100 160 L 160 100 L 220 100" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q20" value="1"> 1) Тело в течение третьей секунды двигалось в направлении оси Ox.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="2"> 2) Тело 1 с двигалось в направлении оси Ox, затем 1 с против оси.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="3"> 3) Третью секунду наблюдения (интервал 2-3 с) тело покоилось.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="4"> 4) Скорости тел в промежутках времени 0–1 с и 1–2 с равны по модулю.</label>
+            <label class="option-label"><input type="checkbox" name="q20" value="5"> 5) Путь, пройденный телом за 3 с наблюдения, равен 30 м.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(20, ['3', '5'])">Проверить ответ</button>
+        <div class="feedback" id="feedback20"></div>
+        <details id="details20" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                - От 2 до 3 с координата тела постоянна ($x = 10\text{ м}$), тело покоится <strong>(Утверждение 3 верно)</strong>.<br>
+                - Расчет пути за 3 секунды: от 0 до 1 с тело прошло 20 м (из 20 в 0), от 1 до 2 с прошло еще 10 м (из 0 в 10). Итоговый путь: $20 + 10 = 30\text{ м}$ <strong>(Утверждение 5 верно)</strong>.
+            </div>
+        </details>
+    </div>
+    <!-- Задание 21 -->
+    <div class="task-card" id="task21-container">
+        <div class="task-num">Задание 21 (Выбор двух верных утверждений)</div>
+        <div class="task-text">График зависимости координаты тела на оси Ox от времени показан на рисунке. Тело всё время находится на оси Ox. Выберите два верных утверждения.</div>
+        
+        <div class="svg-container" style="max-width:320px; background:#fff; padding:10px; margin: 20px auto; border: 1px solid #ccc; border-radius: 4px;">
+            <svg viewBox="0 0 260 180" width="100%" height="100%" xmlns="http://w3.org">
+                <line x1="20" y1="100" x2="240" y2="100" stroke="#000" stroke-width="2"/>
+                <line x1="50" y1="20" x2="50" y2="160" stroke="#000" stroke-width="2"/>
+                <path d="M 240 100 L 230 95 M 240 100 L 230 105" stroke="#000" stroke-width="2"/>
+                <path d="M 50 20 L 45 30 M 50 20 L 55 30" stroke="#000" stroke-width="2"/>
+                <text x="230" y="115" font-family="serif" font-style="italic" font-size="14">t, c</text>
+                <text x="25" y="30" font-family="serif" font-style="italic" font-size="14">x, м</text>
+                
+                <path d="M 50 40 L 110 140 L 220 70" fill="none" stroke="#2b5797" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                
+                <circle cx="90" cy="100" r="4" fill="#bd2130"/>
+                <text x="85" y="90" font-family="serif" font-style="italic" font-size="12">t₁</text>
+                
+                <line x1="110" y1="100" x2="110" y2="140" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>
+                <text x="115" y="90" font-family="serif" font-style="italic" font-size="12">t₂</text>
+                
+                <circle cx="170" cy="100" r="4" fill="#bd2130"/>
+                <text x="165" y="90" font-family="serif" font-style="italic" font-size="12">t₃</text>
+            </svg>
+        </div>
+
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q21" value="1"> 1) В момент времени t₃ скорость тела максимальна по модулю.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="2"> 2) В моменты времени t₁ и t₃ скорость тела равна нулю.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="3"> 3) В момент времени t₂ тело изменило направление движения.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="4"> 4) В моменты времени t₁ и t₃ тело проходит через начало координат.</label>
+            <label class="option-label"><input type="checkbox" name="q21" value="5"> 5) В промежутке времени 0–t₃ тело движется в направлении, противоположном Ox.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(21, ['3', '4'])">Проверить ответ</button>
+        <div class="feedback" id="feedback21"></div>
+        <details id="details21" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                - До точки $t_2$ координата падает, а после растет. Точка излома графика $t_2$ — это момент разворота <strong>(Утверждение 3 верно)</strong>.<br>
+                - В моменты $t_1$ и $t_3$ координата $x = 0$, тело пересекает ось времени, что означает прохождение через начало координат <strong>(Утверждение 4 верно)</strong>.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задание 22 -->
+    <div class="task-card" id="task22-container">
+        <div class="task-num">Задание 22 (Краткий ответ)</div>
+        <div class="task-text">В таблице показаны длины отрезков пути $\Delta s$, пройденных катером за первую, вторую, третью, четвертую и пятую секунды движения. Какой путь прошло тело на отрезке времени, когда оно двигалось равномерно?</div>
+        <table>
+            <tr>
+                <th>t, c</th>
+                <td>1-я</td>
+                <td>2-я</td>
+                <td>3-я</td>
+                <td>4-я</td>
+                <td>5-я</td>
+            </tr>
+            <tr>
+                <th>$\Delta s$, м</th>
+                <td>5</td>
+                <td>10</td>
+                <td>20</td>
+                <td>20</td>
+                <td>20</td>
+            </tr>
+        </table>
+        <div class="input-group">
+            <label>Ответ (в метрах): </label>
+            <input type="number" class="text-input" id="input22" placeholder="м">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(22, '60')">Проверить ответ</button>
+        <div class="feedback" id="feedback22"></div>
+        <details id="details22" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Равномерное движение означает, что тело проходит одинаковый путь за каждую секунду времени. Из таблицы видно, что на 3-й, 4-й и 5-й секундах катер проезжал ровно по 20 метров. Интервал длился 3 секунды. Суммарный путь: $20 + 20 + 20 = 60\text{ м}$.
+            </div>
+        </details>
+    </div>
+</div>
