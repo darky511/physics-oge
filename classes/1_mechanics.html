@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Интерактивный решебник ОГЭ: Механика. Часть 1</title>
+    <style>
+        :root {
+            --primary-color: #2b5797;
+            --success-color: #1e7e34;
+            --error-color: #bd2130;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+        .task-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-color);
+        }
+        .task-num {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .task-text {
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        .task-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 15px auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        .options-group, .input-group {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .option-label {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .option-label:hover {
+            background-color: #e9ecef;
+        }
+        .option-label input {
+            margin-right: 10px;
+        }
+        .text-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-check {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-check:hover {
+            background-color: #1e447b;
+        }
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .feedback.correct {
+            display: block;
+            background-color: #d4edda;
+            color: var(--success-color);
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.wrong {
+            display: block;
+            background-color: #f8d7da;
+            color: var(--error-color);
+            border: 1px solid #f5c6cb;
+        }
+        details {
+            margin-top: 15px;
+            background-color: #eef1f6;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        details summary {
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--primary-color);
+            outline: none;
+        }
+        .explanation-content {
+            margin-top: 10px;
+            padding-left: 5px;
+            border-left: 3px solid #b0c4de;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ОГЭ по физике. Тема 1: Механическое движение (Задачи 1–10)</h1>
+    <!-- Задача 1 -->
+    <div class="task-card" id="task1-container">
+        <div class="task-num">Задание 1 (Выбор одного ответа)</div>
+        <div class="task-text">В спортивном зале человек находится на движущейся дорожке тренажёра. Двигатель тренажёра работает, расстояние от головы человека до пола и стен зала не меняется. Можно утверждать, что голова человека:</div>
+        <div class="options-group">
+            <label class="option-label"><input type="radio" name="q1" value="1"> 1) движется относительно дорожки и относительно пола в зале</label>
+            <label class="option-label"><input type="radio" name="q1" value="2"> 2) движется относительно дорожки и не движется относительно пола</label>
+            <label class="option-label"><input type="radio" name="q1" value="3"> 3) не движется относительно дорожки и относительно пола</label>
+            <label class="option-label"><input type="radio" name="q1" value="4"> 4) не движется относительно дорожки, но движется относительно пола</label>
+        </div>
+        <button class="btn-check" onclick="checkRadioTask(1, '2')">Проверить ответ</button>
+        <div class="feedback" id="feedback1"></div>
+        <details id="details1" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Поскольку положение головы человека относительно пола и стен зала с течением времени остается неизменным, в системе отсчета, связанной с залом (полом), человек покоится. Однако само полотно беговой дорожки смещается под человеком под действием двигателя, значит, его положение относительно полотна непрерывно меняется — относительно дорожки человек движется. Следовательно, верным является утверждение 2.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 2 -->
+    <div class="task-card" id="task2-container">
+        <div class="task-num">Задание 2 (Выбор одного ответа)</div>
+        <div class="task-text">Движутся три тела: улитка по стеблю растения (1), моторная лодка по поверхности воды (2) и реактивный самолёт в небе (3). Движение тела можно характеризовать траекторией:</div>
+        <div class="options-group">
+            <label class="option-label"><input type="radio" name="q2" value="1"> 1) только в случае 1</label>
+            <label class="option-label"><input type="radio" name="q2" value="2"> 2) только в случае 2</label>
+            <label class="option-label"><input type="radio" name="q2" value="3"> 3) только в случае 3</label>
+            <label class="option-label"><input type="radio" name="q2" value="4"> 4) во всех трёх случаях</label>
+        </div>
+        <button class="btn-check" onclick="checkRadioTask(2, '4')">Проверить ответ</button>
+        <div class="feedback" id="feedback2"></div>
+        <details id="details2" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Траектория — это воображаемая линия, вдоль которой движется тело в пространстве. Любое движущееся тело совершает перемещение вдоль определенной геометрической линии. Следовательно, понятие траектории применимо абсолютно ко всем материальным телам. Правильный вариант — 4.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 3 -->
+    <div class="task-card" id="task3-container">
+        <div class="task-num">Задание 3 (Установление соответствия)</div>
+        <div class="task-text">Авиамоделист проводит испытание модели самолёта на привязи постоянной длины, вращаясь вокруг своей оси и не меняя высоту модели относительно земли. Поставьте в соответствие тело отсчёта и форму траектории модели.</div>
+        <table>
+            <tr>
+                <th>ТЕЛО ОТСЧЁТА</th>
+                <th>ФОРМА ТРАЕКТОРИИ МОДЕЛИ</th>
+            </tr>
+            <tr>
+                <td>А) камень, лежащий недалеко от авиамоделиста</td>
+                <td>1) прямая</td>
+            </tr>
+            <tr>
+                <td>Б) кисть авиамоделиста</td>
+                <td>2) окружность</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>3) точка</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>4) парабола</td>
+            </tr>
+        </table>
+        <div class="input-group">
+            <label>Ответ (две цифры подряд без пробелов, например, 12): </label>
+            <input type="text" class="text-input" id="input3" placeholder="АБ">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(3, '22')">Проверить ответ</button>
+        <div class="feedback" id="feedback3"></div>
+        <details id="details3" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                <strong>А) Камень на земле:</strong> Поскольку привязь имеет постоянную длину, а сам авиамоделист неподвижен на земле (лишь вращается на месте), модель описывает кривую, равноудаленную от центра вращения на постоянной высоте. Относительно земли (и камня на ней) формой траектории будет окружность (2).<br>
+                <strong>Б) Кисть авиамоделиста:</strong> Длина привязи (корды) постоянна, кисть находится в центре вращения и удерживает нить. Расстояние от кисти до модели в процессе движения не меняется. Так как кисть совершает вращение вместе с авиамоделистом синхронно с самолетом, в системе отсчета, связанной с самой кистью, модель обращается вокруг нее по круговой траектории. Формой траектории также является окружность (2).
+            </div>
+        </details>
+    </div>
+    <!-- Задача 4 -->
+    <div class="task-card" id="task4-container">
+        <div class="task-num">Задание 4 (Выбор одного ответа)</div>
+        <div class="task-text">Выберите верное утверждение. Путь является:</div>
+        <div class="options-group">
+            <label class="option-label"><input type="radio" name="q4" value="1"> 1) скалярной величиной, а перемещение векторной</label>
+            <label class="option-label"><input type="radio" name="q4" value="2"> 2) векторной величиной, а перемещение скалярной</label>
+            <label class="option-label"><input type="radio" name="q4" value="3"> 3) скалярной величиной, так же как перемещение</label>
+            <label class="option-label"><input type="radio" name="q4" value="4"> 4) векторной величиной, так же как перемещение</label>
+        </div>
+        <button class="btn-check" onclick="checkRadioTask(4, '1')">Проверить ответ</button>
+        <div class="feedback" id="feedback4"></div>
+        <details id="details4" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Путь — это длина траектории, он характеризуется только числовым значением и не имеет направления (скалярная величина). Перемещение — это направленный отрезок прямой (вектор), соединяющий начальное положение тела с его последующим положением. Следовательно, верным является утверждение 1.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 5 -->
+    <div class="task-card" id="task5-container">
+        <div class="task-num">Задание 5 (Выбор двух верных утверждений)</div>
+        <div class="task-text">Маленький кубик съезжает из точки А с горки и останавливается в точке В. Длина наклонного участка AC равна длине горизонтального участка BC и составляет 50 см (AC = BC = 50 см).</div>
+        <img src="images/task5.png" alt="График скольжения кубика по горке" class="task-image">
+        <div class="task-text">Выберите два верных утверждения из пяти предложенных:</div>
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q5" value="1"> 1) Путь, пройденный кубиком, равен 100 см.</label>
+            <label class="option-label"><input type="checkbox" name="q5" value="2"> 2) Модуль перемещения кубика равен 100 см.</label>
+            <label class="option-label"><input type="checkbox" name="q5" value="3"> 3) Путь, пройденный кубиком, равен 89 см.</label>
+            <label class="option-label"><input type="checkbox" name="q5" value="4"> 4) Модуль перемещения кубика равен 89 см.</label>
+            <label class="option-label"><input type="checkbox" name="q5" value="5"> 5) Модуль перемещения кубика не может быть вычислен по этим данным.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(5, ['1', '4'])">Проверить ответ</button>
+        <div class="feedback" id="feedback5"></div>
+        <details id="details5" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                <strong>1. Расчет пути:</strong> Путь равен сумме длин участков траектории кубика: S = AC + BC = 50 + 50 = 100 см. Утверждение 1 верно.<br>
+                <strong>2. Расчет перемещения:</strong> Перемещение — это направленный отрезок прямой, соединяющий точки A и B. По сетке рисунка определим катеты прямоугольного треугольника. Отрезок BC = 50 см занимает ровно 5 клеток, то есть длина одной клетки составляет 10 см. Вертикальный катет равен 4 клетки (40 см), а полный горизонтальный катет равен 8 клеток (80 см). По теореме Пифагора находим модуль перемещения: AB = √(40² + 80²) = √(1600 + 6400) = √8000 ≈ 89.4 см. Утверждение 4 верно.
+            </div>
+        </details>
+    </div>
+    <!-- Задача 6 -->
+    <div class="task-card" id="task6-container">
+        <div class="task-num">Задание 6 (Заполнение таблицы)</div>
+        <div class="task-text">Мотоциклист движется по прямой равномерно и проезжает 100 м за 50 с. В таблицу занесены значения пути, пройденного им с начала регистрации. Какие числовые значения нужно внести в соответствующие пустые ячейки?</div>
+        <table>
+            <tr>
+                <th>S, м</th>
+                <td>0</td>
+                <td>20</td>
+                <td>40</td>
+                <td>80</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <th>t, c</th>
+                <td>0</td>
+                <td><strong>?</strong></td>
+                <td><strong>?</strong></td>
+                <td><strong>?</strong></td>
+                <td>50</td>
+            </tr>
+        </table>
+        <div class="input-group">
+            <label>Впишите три пропущенных числа подряд без пробелов: </label>
+            <input type="text" class="text-input" id="input6" placeholder="например, 102040">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(6, '102040')">Проверить ответ</button>
+        <div class="feedback" id="feedback6"></div>
+        <details id="details6" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                При равномерном прямолинейном движении скорость постоянна: v = S / t = 100 м / 50 с = 2 м/с. Используя формулу времени t = S / v, найдем значения:<br>
+                - Для S = 20 м: t = 20 / 2 = 10 с.<br>
+                - Для S = 40 м: t = 40 / 2 = 20 с.<br>
+                - Для S = 80 м: t = 80 / 2 = 40 с.<br>
+                Искомая последовательность чисел: 102040.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 7 -->
+    <div class="task-card" id="task7-container">
+        <div class="task-num">Задание 7 (Выбор двух верных утверждений)</div>
+        <div class="task-text">Наблюдатель у палатки с помощью прибора фиксирует расстояние до всадников, которые скачут в степи с постоянной скоростью. Результаты измерений представлены в таблице.</div>
+        <table>
+            <tr>
+                <th>t, c</th>
+                <td>0</td>
+                <td>4</td>
+                <td>8</td>
+                <td>12</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <th>l_I, м</th>
+                <td>410</td>
+                <td>430</td>
+                <td>390</td>
+                <td>370</td>
+                <td>350</td>
+            </tr>
+            <tr>
+                <th>l_II, м</th>
+                <td>170</td>
+                <td>210</td>
+                <td>270</td>
+                <td>310</td>
+                <td>350</td>
+            </tr>
+        </table>
+        <div class="task-text">Выберите два верных утверждения и запишите их номера:</div>
+        <div class="options-group">
+            <label class="option-label"><input type="checkbox" name="q7" value="1"> 1) Оба всадника удаляются от палатки.</label>
+            <label class="option-label"><input type="checkbox" name="q7" value="2"> 2) Расстояние между всадниками постоянно сокращается.</label>
+            <label class="option-label"><input type="checkbox" name="q7" value="3"> 3) Первый всадник приближается к палатке, второй удаляется от неё.</label>
+            <label class="option-label"><input type="checkbox" name="q7" value="4"> 4) На шестнадцатой секунде всадники встретились.</label>
+            <label class="option-label"><input type="checkbox" name="q7" value="5"> 5) На шестнадцатой секунде всадники одинаково удалены от наблюдателя.</label>
+        </div>
+        <button class="btn-check" onclick="checkCheckboxTask(7, ['3', '5'])">Проверить ответ</button>
+        <div class="feedback" id="feedback7"></div>
+        <details id="details7" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Разстояние l_I до первого всадника уменьшается (с 410 до 350 м) — он приближается. Разстояние l_II второго всадника растет (со 170 до 350 м) — он удаляется. Это подтверждает правильность утверждения 3. На 16-й секунде оба расстояния равны 350 м, значит они одинаково удалены от палатки, что делает утверждение 5 верным.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 8 -->
+    <div class="task-card" id="task8-container">
+        <div class="task-num">Задание 8 (Сопоставление графика с таблицей)</div>
+        <div class="task-text">Аквалангист погружается в воду, и его наручный прибор фиксирует глубину погружения H в зависимости от времени t.</div>
+        <table>
+            <tr>
+                <th>t, c</th>
+                <td>0</td>
+                <td>4</td>
+                <td>8</td>
+                <td>12</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <th>H, м</th>
+                <td>1,5</td>
+                <td>3</td>
+                <td>4,5</td>
+                <td>6</td>
+                <td>7,5</td>
+            </tr>
+        </table>
+        <div class="task-text">Какой из приведённых графиков правильно отражает зависимость глубины от времени t?</div>
+        <img src="images/task8.png" alt="Варианты графиков погружения аквалангиста" class="task-image">
+        <div class="options-group">
+            <label class="option-label"><input type="radio" name="q8" value="1"> График 1</label>
+            <label class="option-label"><input type="radio" name="q8" value="2"> График 2</label>
+            <label class="option-label"><input type="radio" name="q8" value="3"> График 3</label>
+            <label class="option-label"><input type="radio" name="q8" value="4"> График 4</label>
+        </div>
+        <button class="btn-check" onclick="checkRadioTask(8, '2')">Проверить ответ</button>
+        <div class="feedback" id="feedback8"></div>
+        <details id="details8" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Проверим узловые точки по координатам (t, H). При t = 0 с глубина H = 1.5 м. Это исключает графики, выходящие из нуля. При t = 16 с глубина достигает максимума H = 7.5 м. График представляет собой линейно возрастающую прямую линию, которая начинается выше нуля на оси ординат. Этому условию в полной мере соответствует линия под номером 2.
+            </div>
+        </details>
+    </div>
+    <!-- Задача 9 -->
+    <div class="task-card" id="task9-container">
+        <div class="task-num">Задание 9 (Краткий ответ)</div>
+        <div class="task-text">Скорость равномерного движения равна 108 км/ч. Чему равна эта величина в единицах СИ?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" class="text-input" id="input9" placeholder="м/с">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(9, '30')">Проверить ответ</button>
+        <div class="feedback" id="feedback9"></div>
+        <details id="details9" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                В СИ основной единицей скорости является метр в секунду (м/с). Для перевода км/ч в м/с необходимо разделить значение на коэффициент 3.6:<br>
+                108 км/ч = 108 / 3.6 = 30 м/с.
+            </div>
+        </details>
+    </div>
+
+    <!-- Задача 10 -->
+    <div class="task-card" id="task10-container">
+        <div class="task-num">Задание 10 (Краткий ответ)</div>
+        <div class="task-text">Велосипедист, двигаясь равномерно и прямолинейно, проехал 2400 м за 20 мин. Чему равна скорость велосипедиста в км/ч?</div>
+        <div class="input-group">
+            <label>Ответ (только число): </label>
+            <input type="number" class="text-input" id="input10" placeholder="км/ч">
+        </div>
+        <button class="btn-check" onclick="checkTextTask(10, '7.2')">Проверить ответ</button>
+        <div class="feedback" id="feedback10"></div>
+        <details id="details10" style="display:none;">
+            <summary>💡 Разбор и объяснение</summary>
+            <div class="explanation-content">
+                Переведем компоненты пути и времени в километры и часы:<br>
+                1) Путь: S = 2400 м = 2.4 км.<br>
+                2) Время: t = 20 мин = 20/60 ч = 1/3 ч.<br>
+                3) Скорость: v = S / t = 2.4 / (1/3) = 2.4 * 3 = 7.2 км/ч.
+            </div>
+        </details>
+    </div>
+</div>
+<script>
+    function checkRadioTask(taskNum, correctValue) {
+        const selectedRadio = document.querySelector(`input[name="q${taskNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${taskNum}`);
+        const details = document.getElementById(`details${taskNum}`);
+        if (!selectedRadio) {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Пожалуйста, выберите вариант ответа!";
+            return;
+        }
+        if (selectedRadio.value === correctValue) {
+            feedback.className = "feedback correct";
+            feedback.innerText = "Великолепно! Это правильный ответ.";
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Ответ неверный. Попробуйте проанализировать задачу еще раз.";
+        }
+        details.style.display = "block";
+    }
+
+    function checkTextTask(taskNum, correctValue) {
+        const userInput = document.getElementById(`input${taskNum}`).value.trim().toLowerCase().replace(',', '.');
+        const feedback = document.getElementById(`feedback${taskNum}`);
+        const details = document.getElementById(`details${taskNum}`);
+        if (userInput === "") {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Пожалуйста, введите ответ в поле!";
+            return;
+        }
+        if (userInput === correctValue.toLowerCase()) {
+            feedback.className = "feedback correct";
+            feedback.innerText = "Верно! Задание выполнено правильно.";
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Несовпадение с эталоном. Изучите правильный алгоритм решения ниже.";
+        }
+        details.style.display = "block";
+    }
+
+    function checkCheckboxTask(taskNum, correctArray) {
+        const checkedBoxes = document.querySelectorAll(`input[name="q${taskNum}"]:checked`);
+        const feedback = document.getElementById(`feedback${taskNum}`);
+        const details = document.getElementById(`details${taskNum}`);
+        if (checkedBoxes.length === 0) {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Выберите утверждения!";
+            return;
+        }
+        let userAnswers = [];
+        checkedBoxes.forEach(box => { userAnswers.push(box.value); });
+        userAnswers.sort();
+        correctArray.sort();
+        const isCorrect = userAnswers.length === correctArray.length && 
+                          userAnswers.every((val, index) => val === correctArray[index]);
+        if (isCorrect) {
+            feedback.className = "feedback correct";
+            feedback.innerText = "Абсолютно верно! Оба утверждения выбраны правильно.";
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerText = "Ошибка в выборе утверждений. Ознакомьтесь с разбором каждого пункта ниже.";
+        }
+        details.style.display = "block";
+    }
+</script>
+</body>
+</html>
