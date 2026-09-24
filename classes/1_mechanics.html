@@ -393,14 +393,14 @@
             <svg viewBox="0 0 440 240" width="100%" height="100%" xmlns="http://w3.org">
                 <!-- ВЕРТИКАЛЬНЫЕ ЛИНИИ СЕТКИ (12 штук, шаг 25px) -->
                 <line x1="75" y1="20" x2="75" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
-                <line x1="100" y1="20" x2="100" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 2-я клетка -->
+                <line x1="100" y1="20" x2="100" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 2-я клетка (Линия 1 проходит тут) -->
                 <line x1="125" y1="20" x2="125" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
-                <line x1="150" y1="20" x2="150" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 4-я клетка -->
-                <line x1="175" y1="20" x2="175" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 5-я клетка (10с) -->
-                <line x1="200" y1="20" x2="200" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
-                <line x1="225" y1="20" x2="225" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
-                <line x1="250" y1="20" x2="250" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 8-я клетка -->
-                <line x1="275" y1="20" x2="275" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 9-я клетка -->
+                <line x1="150" y1="20" x2="150" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 4-я клетка (Конец Линии 4) -->
+                <line x1="175" y1="20" x2="175" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 5-я клетка (Отметка 10с) -->
+                <line x1="200" y1="20" x2="200" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 6-я клетка -->
+                <line x1="225" y1="20" x2="225" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" /> <!-- 7-я клетка (Сюда приходят 2 и 3) -->
+                <line x1="250" y1="20" x2="250" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
+                <line x1="275" y1="20" x2="275" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
                 <line x1="300" y1="20" x2="300" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
                 <line x1="325" y1="20" x2="325" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
                 <line x1="350" y1="20" x2="350" y2="200" stroke="#b2bec3" stroke-width="0.8" stroke-dasharray="2,2" />
@@ -439,17 +439,17 @@
                 <text x="167" y="222" font-family="sans-serif" font-size="14" font-weight="bold">10</text>
 
                 <!-- ОТРЕСОВКА ГРАФИКОВ -->
-                <!-- Линия 1: Выходит из (0,0) и строго пересекает узел (2 клетки по x; 1 по y) -> пиксели (100, 180) -->
-                <line x1="50" y1="200" x2="275" y2="110" stroke="#000000" stroke-width="1.5" />
-                <text x="280" y="115" font-family="sans-serif" font-size="14" font-weight="bold">1</text>
+                <!-- Линия 1: Прямая из (0,0) через узел (2 клетки по x; 1 по y) -> пиксели (100, 180) -->
+                <line x1="50" y1="200" x2="300" y2="100" stroke="#000000" stroke-width="1.5" />
+                <text x="305" y="105" font-family="sans-serif" font-size="14" font-weight="bold">1</text>
 
-                <!-- Линия 2: Абсолютно прямая ЖИРНАЯ линия из (0;6) в точку 8.5 клеток по x (262.5px) -->
-                <line x1="50" y1="80" x2="262.5" y2="200" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                <text x="268" y="195" font-family="sans-serif" font-size="14" font-weight="bold">2</text>
+                <!-- Линия 2: Абсолютно прямая ЖИРНАЯ линия из (0;6) в 7-ю клетку (225px) -->
+                <line x1="50" y1="80" x2="225" y2="200" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
+                <text x="230" y="195" font-family="sans-serif" font-size="14" font-weight="bold">2</text>
 
-                <!-- КРИВАЯ ЛИНИЯ 3: Дуга Безье из (0;6) в ту же точку 8.5 клеток (262.5px), провисая под линией 2 -->
-                <path d="M 50 80 Q 140 185 262.5" fill="none" stroke="#000000" stroke-width="1.5" />
-                <text x="225" y="170" font-family="sans-serif" font-size="14" font-weight="bold">3</text>
+                <!-- КРИВАЯ ЛИНИЯ 3: Квадратичная дуга Безье. Исправлен синтаксис Q, теперь она имеет выраженный вогнутый изгиб -->
+                <path d="M 50 80 Q 110 180 225 200" fill="none" stroke="#000000" stroke-width="1.5" />
+                <text x="170" y="160" font-family="sans-serif" font-size="14" font-weight="bold">3</text>
 
                 <!-- Линия 4: Прямая из (0;6) в (4 клетки; 0) -> пиксели (150, 200) -->
                 <line x1="50" y1="80" x2="150" y2="200" stroke="#000000" stroke-width="2" stroke-linecap="round" />
