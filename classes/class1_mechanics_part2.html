@@ -408,24 +408,29 @@
         <div class="task-num">Задание 17 (Установление соответствия по диаграммам)</div>
         <div class="task-text">Полчаса человек двигался со скоростью 4 км/ч, а затем полчаса со скоростью 1 км/ч. Поставьте в соответствие отображаемое соотношение путей и диаграммы, показывающие это соотношение.</div>
         
+        <!-- Четыре точные диаграммы со штриховкой по клеткам ФИПИ -->
         <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0; justify-content: center;">
             <!-- Диаграмма 1 -->
             <div style="border:1px solid #ccc; padding:10px; background:#fff; text-align:center; border-radius: 4px;">
                 <div style="font-weight:bold; margin-bottom:5px;">1)</div>
                 <svg viewBox="0 0 60 120" width="50" height="100">
                     <defs>
+                        <!-- Наклонная штриховка (первый интервал) -->
                         <pattern id="lines" width="10" height="10" patternUnits="userSpaceOnUse">
                             <line x1="0" y1="10" x2="10" y2="0" stroke="#333" stroke-width="1.2" />
                         </pattern>
+                        <!-- Клетчатая штриховка (второй интервал) -->
                         <pattern id="cross" width="6" height="6" patternUnits="userSpaceOnUse">
                             <path d="M 6 0 L 0 0 0 6" fill="none" stroke="#333" stroke-width="0.8"/>
                         </pattern>
                     </defs>
+                    <!-- Внутренняя сетка (4 клетки в высоту, шаг 20px) -->
                     <rect x="10" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
                     <rect x="35" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="40" x2="50" y2="40" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="60" x2="50" y2="60" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="80" x2="50" y2="80" stroke="#aaa" stroke-dasharray="2,2"/>
+                    <!-- Блоки: Левый = 4 клетки (80px), Правый = 1 клетка (20px) -->
                     <rect x="10" y="20" width="15" height="80" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
                     <rect x="35" y="80" width="15" height="20" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
                 </svg>
@@ -440,6 +445,7 @@
                     <line x1="10" y1="40" x2="50" y2="40" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="60" x2="50" y2="60" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="80" x2="50" y2="80" stroke="#aaa" stroke-dasharray="2,2"/>
+                    <!-- Блоки: Левый = 1 клетка (20px), Правый = 4 клетки (80px) -->
                     <rect x="10" y="80" width="15" height="20" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
                     <rect x="35" y="20" width="15" height="80" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
                 </svg>
@@ -448,30 +454,30 @@
             <!-- Диаграмма 3 -->
             <div style="border:1px solid #ccc; padding:10px; background:#fff; text-align:center; border-radius: 4px;">
                 <div style="font-weight:bold; margin-bottom:5px;">3)</div>
-                <svg viewBox="0 0 60 140" width="50" height="116">
-                    <rect x="10" y="20" width="15" height="100" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <rect x="35" y="20" width="15" height="100" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
+                <svg viewBox="0 0 60 120" width="50" height="100">
+                    <rect x="10" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
+                    <rect x="35" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="40" x2="50" y2="40" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="60" x2="50" y2="60" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="80" x2="50" y2="80" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <line x1="10" y1="100" x2="50" y2="100" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <rect x="10" y="40" width="15" height="80" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
-                    <rect x="35" y="20" width="15" height="100" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
+                    <!-- Блоки: Левый = 3 полные клетки + 15px (3 и 3/4 клетки), Правый = 4 полные клетки (80px) -->
+                    <rect x="10" y="25" width="15" height="75" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
+                    <rect x="35" y="20" width="15" height="80" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
                 </svg>
             </div>
 
             <!-- Диаграмма 4 -->
             <div style="border:1px solid #ccc; padding:10px; background:#fff; text-align:center; border-radius: 4px;">
                 <div style="font-weight:bold; margin-bottom:5px;">4)</div>
-                <svg viewBox="0 0 60 140" width="50" height="116">
-                    <rect x="10" y="20" width="15" height="100" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <rect x="35" y="20" width="15" height="100" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
+                <svg viewBox="0 0 60 120" width="50" height="100">
+                    <rect x="10" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
+                    <rect x="35" y="20" width="15" height="80" fill="none" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="40" x2="50" y2="40" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="60" x2="50" y2="60" stroke="#aaa" stroke-dasharray="2,2"/>
                     <line x1="10" y1="80" x2="50" y2="80" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <line x1="10" y1="100" x2="50" y2="100" stroke="#aaa" stroke-dasharray="2,2"/>
-                    <rect x="10" y="100" width="15" height="20" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
-                    <rect x="35" y="20" width="15" height="100" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
+                    <!-- Блоки: Левый = только нижняя клетка на 3/4 (15px), Правый = 4 полные клетки (80px) -->
+                    <rect x="10" y="85" width="15" height="15" fill="url(#lines)" stroke="#000" stroke-width="1.5"/>
+                    <rect x="35" y="20" width="15" height="80" fill="url(#cross)" stroke="#000" stroke-width="1.5"/>
                 </svg>
             </div>
         </div>
@@ -489,12 +495,12 @@
         <details id="details17" style="display:none;">
             <summary>💡 Разбор и объяснение</summary>
             <div class="explanation-content">
-                Расчет путей (интервалы по 0.5 часа):<br>
+                Расчет путей (время интервалов по 0.5 часа):<br>
                 - За первые полчаса: S1 = 4 * 0.5 = 2 км (4 клетки сетки, если 1 клетка = 0.5 км).<br>
                 - За вторые полчаса: S2 = 1 * 0.5 = 0.5 км (1 клетка сетки).<br>
                 - Полный путь за час: Sполн = 2 + 0.5 = 2.5 км (5 клеток сетки).<br><br>
-                <strong>А) Соотношение S1 к S2:</strong> Левый столбец (4 клетки) в 4 раза больше правого (1 клетка) — диаграмма 1.<br>
-                <strong>Б) Соотношение S2 к Sполн:</strong> Левый столбец (1 клетка) относится к полному правому (5 клеток) как 1 к 5 — диаграмма 4. Итоговый ответ: 14.
+                <strong>А) Соотношение S1 к S2:</strong> Левый столбец (4 клетки) должен быть в 4 раза больше правого (1 клетка). Это в точности соответствует диаграмме 1.<br>
+                <strong>Б) Соотношение S2 к Sполн:</strong> Левый столбец (0.5 км) должен соотноситься с полным правым (2.5 км) как 1 к 5. На четырехклеточной сетке это будет 3/4 клетки к 3 и 3/4 клеткам (соотношение высот 15px к 75px равно 1 к 5). Это соответствует диаграмме 4. Итоговый ответ: 14.
             </div>
         </details>
     </div>
