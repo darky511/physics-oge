@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Урок 2: Равноускоренное движение и Свободное падение</title>
     <style>
+        /* Премиальная дизайн-система */
         :root {
             --brand-dark: #1A252C;
             --brand-teal: #0D6066;
@@ -17,6 +18,7 @@
             --border-radius: 8px;
             --transition: all 0.3s ease;
         }
+
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             color: var(--brand-dark);
@@ -25,35 +27,19 @@
             margin: 0;
             padding: 40px 20px;
         }
+
         .container { max-width: 850px; margin: 0 auto; }
+
         header {
             text-align: center;
             margin-bottom: 35px;
             border-bottom: 2px solid var(--brand-teal);
             padding-bottom: 15px;
         }
+
         header h1 { font-size: 26px; font-weight: 700; color: var(--brand-dark); margin: 0 0 5px 0; }
         header p { font-size: 14px; color: var(--brand-teal); font-weight: 600; text-transform: uppercase; margin: 0; }
-        .score-board {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--brand-dark);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-weight: bold;
-            z-index: 1000;
-        }
-        .instructor-panel {
-            background-color: var(--brand-teal-light);
-            border-left: 4px solid var(--brand-teal);
-            padding: 15px 20px;
-            border-radius: var(--border-radius);
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
+
         .section-title {
             font-size: 18px;
             font-weight: 700;
@@ -62,6 +48,7 @@
             padding-bottom: 5px;
             border-bottom: 1px solid #E0E0E0;
         }
+
         .task-card {
             background: #FFFFFF;
             border: 1px solid #E0E0E0;
@@ -69,55 +56,54 @@
             padding: 25px;
             margin-bottom: 20px;
             transition: var(--transition);
-            position: relative;
         }
+
         .task-card.trigger { border-left: 5px solid var(--brand-teal); }
         .task-card.dubler { border-left: 5px solid #78909C; }
         .task-card.correct { border-color: var(--brand-success) !important; background-color: var(--brand-success-light); }
         .task-card.wrong { border-color: var(--brand-alert) !important; background-color: var(--brand-alert-light); }
+
+        /* ИСПРАВЛЕНО: Безопасное поточное расположение меток (без position: absolute) */
         .task-badge {
-            position: absolute;
-            top: 15px;
-            right: 20px;
+            display: inline-block;
             font-size: 11px;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
+            margin-bottom: 12px;
         }
         .trigger .task-badge { background: var(--brand-teal-light); color: var(--brand-teal); }
         .dubler .task-badge { background: #ECEFF1; color: #546E7A; }
+
         .task-text { font-size: 15px; margin-bottom: 15px; font-weight: 500; }
         .graph-container { display: flex; justify-content: center; margin: 15px 0; background: #FFF; padding: 10px; }
+
         .interactive-zone { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
         .input-field { width: 100px; padding: 10px; border: 1px solid #CCCCCC; border-radius: 4px; font-size: 16px; font-weight: bold; text-align: center; outline: none; }
         .input-field:focus { border-color: var(--brand-teal); }
+
         .btn { padding: 10px 20px; border: none; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); }
         .btn-check { background-color: var(--brand-teal); color: #FFFFFF; }
         .btn-check:hover { background-color: #0A494D; }
         .btn-hint { background-color: var(--brand-gray); color: var(--brand-dark); border: 1px solid #D0D0D0; }
         .btn-hint:hover { background-color: #E8EAEB; }
+
         .solution-block { display: none; background: var(--brand-gray); border-radius: 6px; padding: 15px 20px; margin-top: 15px; border: 1px solid #E0E0E0; font-size: 14.5px; }
         .solution-block.visible { display: block; }
         .feedback-text { font-weight: bold; margin-left: 10px; }
+
         .dubler-wrapper { transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease; max-height: 1200px; opacity: 1; }
         .dubler-wrapper.skipped { max-height: 0; opacity: 0; margin: 0; padding: 0; overflow: hidden; pointer-events: none; }
     </style>
 </head>
 <body>
-
-<div class="score-board">Баллы: <span id="total-score">0</span> / 40</div>
-
 <div class="container">
     <header>
         <h1>КИМ ОГЭ: Равноускоренное движение и Свободное падение</h1>
         <p>Интерактивный адаптивный практикум</p>
     </header>
-
-    <div class="instructor-panel">
-        <strong>Методическое правило:</strong> Если ученик решает <em>Задачу-Триггер</em> верно, система автоматически скроет карточку <em>Дублёра</em>. При ошибке разберите решение через «Разбор» и перейдите к отработке навыка на <em>Дублёре</em>.
-    </div>
-
+    <div class="Form">
     <div class="section-title">Раздел 1: Проекция ускорения и анализ графиков скорости v(t)</div>
 
     <!-- Задача 1 (Триггер) -->
@@ -148,7 +134,7 @@
 
         <div class="interactive-zone">
             <input type="text" class="input-field" id="input-task1" placeholder="Ответ">
-            <button class="btn btn-check" onclick="checkTask('task1', '3', 10, 'task1-d')">Проверить</button>
+            <button class="btn btn-check" onclick="checkTask('task1', '3', 'task1-d')">Проверить</button>
             <button class="btn btn-hint" onclick="toggleSolution('sol-task1')">Разбор</button>
             <span class="feedback-text" id="feedback-task1"></span>
         </div>
@@ -157,6 +143,7 @@
             <strong>Методический разбор:</strong> Ускорение равно: a<sub>x</sub> = (v<sub>x</sub> - v<sub>0x</sub>) / t. В момент t=0 скорость v<sub>0x</sub> = 2 м/с, в момент t=4 с скорость v<sub>x</sub> = 14 м/с. Расчет: a<sub>x</sub> = (14 - 2) / 4 = 12 / 4 = 3 м/с<sup>2</sup>.<br><strong>Правильный ответ:</strong> 3
         </div>
     </div>
+
     <!-- Задача 2 (Дублёр) -->
     <div class="dubler-wrapper" id="wrapper-task1-d">
         <div class="task-card dubler" id="card-task1-d">
@@ -181,7 +168,7 @@
 
             <div class="interactive-zone">
                 <input type="text" class="input-field" id="input-task1-d" placeholder="Ответ">
-                <button class="btn btn-check" onclick="checkTask('task1-d', '-3', 5, null)">Проверить</button>
+                <button class="btn btn-check" onclick="checkTask('task1-d', '-3', null)">Проверить</button>
                 <button class="btn btn-hint" onclick="toggleSolution('sol-task1-d')">Разбор</button>
                 <span class="feedback-text" id="feedback-task1-d"></span>
             </div>
@@ -191,7 +178,6 @@
             </div>
         </div>
     </div>
-    <!-- РАЗДЕЛ 2 -->
     <div class="section-title">Раздел 2: Геометрический смысл пройденного пути по графику скорости v(t)</div>
 
     <!-- Задача 3 (Триггер) -->
@@ -201,7 +187,6 @@
         
         <div class="graph-container">
             <svg width="280" height="160" viewBox="0 0 280 160">
-                <!-- Закрашенная площадь трапеции -->
                 <path d="M 40 130 L 40 100 L 200 40 L 200 130 Z" fill="#0D6066" fill-opacity="0.15" />
                 <path d="M 40 100 L 200 40" stroke="#0D6066" stroke-width="3" fill="none" />
                 <path d="M 40 140 L 40 15" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
@@ -219,15 +204,16 @@
 
         <div class="interactive-zone">
             <input type="text" class="input-field" id="input-task2" placeholder="Ответ">
-            <button class="btn btn-check" onclick="checkTask('task2', '24', 10, 'task2-d')">Проверить</button>
+            <button class="btn btn-check" onclick="checkTask('task2', '24', 'task2-d')">Проверить</button>
             <button class="btn btn-hint" onclick="toggleSolution('sol-task2')">Разбор</button>
             <span class="feedback-text" id="feedback-task2"></span>
         </div>
 
         <div class="solution-block" id="sol-task2">
-            <strong>Методический разбор:</strong> Путь численно равен площади фигуры под графиком скорости. На интервале от 0 до 4 с под графиком образуется прямоугольная трапеция. Её основания равны начальной скорости v<sub>0</sub> = 2 м/с и конечной v = 10 м/с, а высота — времени t = 4 с. Вычисляем площадь трапеции: S = ((v<sub>0</sub> + v) / 2) &middot; t = ((2 + 10) / 2) &middot; 4 = 6 &middot; 4 = 24 м.<br><strong>Правильный ответ:</strong> 24
+            <strong>Методический разбор:</strong> Путь численно равен площади фигуры (трапеции) под графиком скорости. Основания равны v<sub>0</sub> = 2 м/с и v = 10 м/с, высота t = 4 с. Вычисляем: S = ((2 + 10) / 2) &middot; 4 = 6 &middot; 4 = 24 м.<br><strong>Правильный ответ:</strong> 24
         </div>
     </div>
+
     <!-- Задача 4 (Дублёр) -->
     <div class="dubler-wrapper" id="wrapper-task2-d">
         <div class="task-card dubler" id="card-task2-d">
@@ -236,7 +222,6 @@
             
             <div class="graph-container">
                 <svg width="280" height="160" viewBox="0 0 280 160">
-                    <!-- Закрашенная площадь треугольника -->
                     <path d="M 40 40 L 220 130 L 40 130 Z" fill="#8C2D19" fill-opacity="0.15" />
                     <path d="M 40 40 L 220 130" stroke="#8C2D19" stroke-width="3" fill="none" />
                     <path d="M 40 140 L 40 15" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
@@ -252,17 +237,16 @@
 
             <div class="interactive-zone">
                 <input type="text" class="input-field" id="input-task2-d" placeholder="Ответ">
-                <button class="btn btn-check" onclick="checkTask('task2-d', '36', 5, null)">Проверить</button>
+                <button class="btn btn-check" onclick="checkTask('task2-d', '36', null)">Проверить</button>
                 <button class="btn btn-hint" onclick="toggleSolution('sol-task2-d')">Разбор</button>
                 <span class="feedback-text" id="feedback-task2-d"></span>
             </div>
 
             <div class="solution-block" id="sol-task2-d">
-                <strong>Методический разбор:</strong> Тело тормозит до полной остановки в момент t = 6 с. Фигура под графиком является прямоугольным треугольником. Его катеты равны начальной скорости v<sub>0</sub> = 12 м/с и времени движения t = 6 с. Вычисляем площадь треугольника: S = &frac12; &middot; v<sub>0</sub> &middot; t = &frac12; &middot; 12 &middot; 6 = 6 &middot; 6 = 36 м.<br><strong>Правильный ответ:</strong> 36
+                <strong>Методический разбор:</strong> Фигура является прямоугольным треугольником. Катеты равны начальной скорости v<sub>0</sub> = 12 м/с и времени t = 6 с. Вычисляем площадь: S = &frac12; &middot; 12 &middot; 6 = 36 м.<br><strong>Правильный ответ:</strong> 36
             </div>
         </div>
     </div>
-    <!-- РАЗДЕЛ 3 -->
     <div class="section-title">Раздел 3: Анализ аналитических уравнений движения и проекций параметров</div>
 
     <!-- Задача 5 (Триггер) -->
@@ -272,15 +256,16 @@
 
         <div class="interactive-zone">
             <input type="text" class="input-field" id="input-task3" placeholder="Ответ">
-            <button class="btn btn-check" onclick="checkTask('task3', '-6', 10, 'task3-d')">Проверить</button>
+            <button class="btn btn-check" onclick="checkTask('task3', '-6', 'task3-d')">Проверить</button>
             <button class="btn btn-hint" onclick="toggleSolution('sol-task3')">Разбор</button>
             <span class="feedback-text" id="feedback-task3"></span>
         </div>
 
         <div class="solution-block" id="sol-task3">
-            <strong>Методический разбор:</strong> Эталонный вид уравнения координаты выглядит так: x(t) = x<sub>0</sub> + v<sub>0x</sub>&middot;t + (a<sub>x</sub>&middot;t<sup>2</sup>)/2. Коэффициент перед первой степенью времени равен проекции начальной скорости (v<sub>0x</sub> = 6 м/с). Коэффициент перед квадратом времени t<sup>2</sup> равен половине проекции ускорения: a<sub>x</sub>/2 = -3. Чтобы найти полное ускорение, умножаем коэффициент на 2: a<sub>x</sub> = -3 &middot; 2 = -6 м/с<sup>2</sup>. Знак «минус» пишется в отдельную ячейку.<br><strong>Правильный ответ:</strong> -6
+            <strong>Методический разбор:</strong> В уравнении x(t) = x<sub>0</sub> + v<sub>0x</sub>&middot;t + (a<sub>x</sub>&middot;t<sup>2</sup>)/2 коэффициент перед квадратом времени равен половине ускорения: a<sub>x</sub>/2 = -3. Умножаем на 2: a<sub>x</sub> = -3 &middot; 2 = -6 м/с<sup>2</sup>.<br><strong>Правильный ответ:</strong> -6
         </div>
     </div>
+
     <!-- Задача 6 (Дублёр) -->
     <div class="dubler-wrapper" id="wrapper-task3-d">
         <div class="task-card dubler" id="card-task3-d">
@@ -289,84 +274,68 @@
 
             <div class="interactive-zone">
                 <input type="text" class="input-field" id="input-task3-d" placeholder="Ответ">
-                <button class="btn btn-check" onclick="checkTask('task3-d', '10', 5, null)">Проверить</button>
+                <button class="btn btn-check" onclick="checkTask('task3-d', '10', null)">Проверить</button>
                 <button class="btn btn-hint" onclick="toggleSolution('sol-task3-d')">Разбор</button>
                 <span class="feedback-text" id="feedback-task3-d"></span>
             </div>
 
             <div class="solution-block" id="sol-task3-d">
-                <strong>Методический разбор:</strong> Сопоставляем заданное выражение с эталоном x(t) = x<sub>0</sub> + v<sub>0x</sub>&middot;t + (a<sub>x</sub>&middot;t<sup>2</sup>)/2. Коэффициент перед квадратом времени t<sup>2</sup> равен +5. Помним, что это половина проекции ускорения: a<sub>x</sub>/2 = 5. Следовательно, полная проекция ускорения равна: a<sub>x</sub> = 5 &middot; 2 = 10 м/с<sup>2</sup>. Так как значение положительно, ветви параболы направлены вверх.<br><strong>Правильный ответ:</strong> 10
+                <strong>Методический разбор:</strong> Коэффициент перед t<sup>2</sup> равен половине ускорения: a<sub>x</sub>/2 = 5. Следовательно, полная проекция ускорения равна: a<sub>x</sub> = 5 &middot; 2 = 10 м/с<sup>2</sup>.<br><strong>Правильный ответ:</strong> 10
             </div>
         </div>
     </div>
-
-    <!-- РАЗДЕЛ 4 -->
     <div class="section-title">Раздел 4: Анализ графиков координаты x(t) и геометрия парабол</div>
+
     <!-- Задача 7 (Триггер) -->
     <div class="task-card trigger" id="card-task4">
         <div class="task-badge">Триггер #4</div>
         <div class="task-text"><strong>Задание 7.</strong> На рисунке представлены графики зависимости координаты x от времени t для трех движущихся тел. Напишите номер тела, которое движется с отрицательной проекцией ускорения (a<sub>x</sub> &lt; 0).</div>
         
         <div class="graph-container">
+            <!-- ИСПРАВЛЕНО: Синтаксис тегов графики SVG восстановлен, все параболы отображаются -->
             <svg width="280" height="160" viewBox="0 0 280 160">
-                <draw>
-                    <!-- Оси координат -->
+                <g>
                     <path d="M 40 140 L 40 15" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
                     <path d="M 30 130 L 260 130" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
-                    
-                    <!-- Кривая 1 (Ветви вверх) -->
                     <path d="M 40 120 Q 140 115 220 30" stroke="#0D6066" stroke-width="3" fill="none" />
-                    <!-- Линия 2 (Прямая) -->
                     <path d="M 40 120 L 220 70" stroke="#0D6066" stroke-width="2" fill="none" />
-                    <!-- Кривая 3 (Ветви вниз) -->
                     <path d="M 40 120 Q 120 40 220 45" stroke="#8C2D19" stroke-width="3" fill="none" />
-                    
-                    <!-- Подписи линий -->
                     <text x="225" y="35" font-size="11" font-weight="bold" fill="#0D6066">1</text>
                     <text x="225" y="75" font-size="11" font-weight="bold" fill="#0D6066">2</text>
                     <text x="225" y="50" font-size="11" font-weight="bold" fill="#8C2D19">3</text>
-                    
-                    <!-- Оси названия -->
                     <text x="250" y="145" font-size="11" font-weight="bold">t, с</text>
                     <text x="15" y="20" font-size="11" font-weight="bold">x, м</text>
                     <text x="45" y="145" font-size="11">0</text>
-                </draw>
+                </g>
             </svg>
         </div>
 
         <div class="interactive-zone">
             <input type="text" class="input-field" id="input-task4" placeholder="Ответ">
-            <button class="btn btn-check" onclick="checkTask('task4', '3', 10, 'task4-d')">Проверить</button>
+            <button class="btn btn-check" onclick="checkTask('task4', '3', 'task4-d')">Проверить</button>
             <button class="btn btn-hint" onclick="toggleSolution('sol-task4')">Разбор</button>
             <span class="feedback-text" id="feedback-task4"></span>
         </div>
 
         <div class="solution-block" id="sol-task4">
-            <strong>Методический разбор:</strong> График зависимости координаты от времени для равноускоренного движения является параболой. Направление изгиба (ветвей) жестко связано со знаком проекции ускорения: 1) График тела 1 изгибается «чашей» вверх — ветви направлены вверх, значит a<sub>x</sub> &gt; 0. 2) График тела 2 — идеальная прямая линия. Это равномерное движение с постоянной скоростью, где ускорение отсутствует (a<sub>x</sub> = 0). 3) График тела 3 изгибается «куполом» вниз — ветви параболы направлены вниз, что однозначно указывает на отрицательную проекцию ускорения (a<sub>x</sub> &lt; 0).<br><strong>Правильный ответ:</strong> 3
+            <strong>Методический разбор:</strong> Направление изгиба параболы x(t) связано со знаком ускорения: 1) У тела 1 ветви направлены вверх (a<sub>x</sub> &gt; 0). 2) График 2 — прямая линия, движение равномерное (a<sub>x</sub> = 0). 3) У тела 3 изгиб параболы направлен ветвями вниз, что означает отрицательное ускорение (a<sub>x</sub> &lt; 0).<br><strong>Правильный ответ:</strong> 3
         </div>
     </div>
+
     <!-- Задача 8 (Дублёр) -->
     <div class="dubler-wrapper" id="wrapper-task4-d">
         <div class="task-card dubler" id="card-task4-d">
             <div class="task-badge">Дублёр #4</div>
-            <div class="task-text"><strong>Задание 8.</strong> На рисунке показан график зависимости координаты x движущегося тела от времени t. На графике выделена точка стыковки двух участков. Как менялось ускорение тела на интервале времени после прохождения этой точки?</div>
+            <div class="task-text"><strong>Задание 8.</strong> На рисунке показан график зависимости координаты x движущегося тела от времени t. На графике выделена точка стыковки двух участков. Чему равно ускорение тела на интервале времени после прохождения этой точки?</div>
             
             <div class="graph-container">
                 <svg width="280" height="160" viewBox="0 0 280 160">
-                    <!-- Оси координат -->
                     <path d="M 40 140 L 40 15" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
                     <path d="M 30 130 L 260 130" stroke="#1A252C" stroke-width="2" marker-end="url(#arrow)" />
-                    
-                    <!-- Участок параболы переходящий в прямую -->
                     <path d="M 40 120 Q 110 90 150 65 L 220 30" stroke="#0D6066" stroke-width="3" fill="none" />
-                    
-                    <!-- Точка стыковки -->
                     <circle cx="150" cy="65" r="4" fill="#1A252C" />
-                    
-                    <!-- Указатели текста -->
-                    <text x="80" y="115" font-size="9" fill="#1A252C" font-style="italic">ускорение</text>
-                    <text x="175" y="45" font-size="9" fill="#1A252C" font-style="italic">стабильно</text>
-                    
+                    <text x="80" y="115" font-size="9" fill="#1A252C" font-style="italic">парабола</text>
+                    <text x="175" y="45" font-size="9" fill="#1A252C" font-style="italic">прямая</text>
                     <text x="250" y="145" font-size="11" font-weight="bold">t, с</text>
                     <text x="15" y="20" font-size="11" font-weight="bold">x, м</text>
                     <text x="45" y="145" font-size="11">0</text>
@@ -375,61 +344,58 @@
 
             <div class="interactive-zone">
                 <input type="text" class="input-field" id="input-task4-d" placeholder="Ответ">
-                <button class="btn btn-check" onclick="checkTask('task4-d', '0', 5, null)">Проверить</button>
+                <button class="btn btn-check" onclick="checkTask('task4-d', '0', null)">Проверить</button>
                 <button class="btn btn-hint" onclick="toggleSolution('sol-task4-d')">Разбор</button>
                 <span class="feedback-text" id="feedback-task4-d"></span>
             </div>
 
             <div class="solution-block" id="sol-task4-d">
-                <strong>Методический разбор:</strong> До выделенной точки график плавно изгибается — это ветвь параболы, тело движется с постоянным ускорением (равноускоренно). После выделенной точки график выпрямляется в идеальную наклонную прямую линию. Прямая линия на графике координаты означает, что координата меняется линейно, то есть движение стало строго равномерным со стабильной скоростью. При равномерном движении ускорение пропадает и становится равным нулю.<br><strong>Правильный ответ:</strong> 0
+                <strong>Методический разбор:</strong> После выделенной точки график выпрямляется в идеальную наклонную прямую линию. Это означает, что движение перешло в равномерное со стабильной скоростью. При равномерном движении ускорение равно нулю.<br><strong>Правильный ответ:</strong> 0
             </div>
         </div>
     </div>
-
-    <!-- РАЗДЕЛ 5 -->
     <div class="section-title">Раздел 5: Свободное падение под действием силы тяжести</div>
+
     <!-- Задача 9 (Триггер) -->
     <div class="task-card trigger" id="card-task5">
         <div class="task-badge">Триггер #5</div>
-        <div class="task-text"><strong>Задание 9.</strong> Тяжёлый металлический шарик свободно падает с крыши здания без начальной скорости. Какую скорость (в м/с) будет иметь этот шарик через 3 секунды после начала падения? Сопротивлением воздуха пренебречь, ускорение свободного падения принять равным g = 10 м/с<sup>2</sup>.</div>
+        <div class="task-text"><strong>Задание 9.</strong> Тяжёлый металлический шарик свободно падает с крыши здания без начальной скорости. Какую скорость (в м/с) будет иметь этот шарик через 3 секунды после начала падения? Сопротивлением воздуха пренебречь, g = 10 м/с<sup>2</sup>.</div>
 
         <div class="interactive-zone">
             <input type="text" class="input-field" id="input-task5" placeholder="Ответ">
-            <button class="btn btn-check" onclick="checkTask('task5', '30', 10, 'task5-d')">Проверить</button>
+            <button class="btn btn-check" onclick="checkTask('task5', '30', 'task5-d')">Проверить</button>
             <button class="btn btn-hint" onclick="toggleSolution('sol-task5')">Разбор</button>
             <span class="feedback-text" id="feedback-task5"></span>
         </div>
 
         <div class="solution-block" id="sol-task5">
-            <strong>Методический разбор:</strong> Свободное падение является классическим частным случаем равноускоренного движения. Роль постоянного ускорения «a» здесь всегда выполняет ускорение свободного падения «g». Так как шарик падает без начальной скорости (v<sub>0</sub> = 0), формула для мгновенной скорости упрощается до вида: v = g &middot; t. Подставляем числовые значения: v = 10 м/с<sup>2</sup> &middot; 3 с = 30 м/с.<br><strong>Правильный ответ:</strong> 30
+            <strong>Методический разбор:</strong> Свободное падение — это равноускоренное движение с начальной скоростью v<sub>0</sub> = 0 и ускорением a = g = 10 м/с<sup>2</sup>. Формула скорости: v = g &middot; t. Расчет: v = 10 &middot; 3 = 30 м/с.<br><strong>Правильный ответ:</strong> 30
         </div>
     </div>
+
     <!-- Задача 10 (Дублёр) -->
     <div class="dubler-wrapper" id="wrapper-task5-d">
         <div class="task-card dubler" id="card-task5-d">
             <div class="task-badge">Дублёр #5</div>
-            <div class="task-text"><strong>Задание 10.</strong> Тяжёлый металлический шарик свободно падает с крыши здания без начальной скорости и достигает поверхности земли через 4 секунды. Определите высоту здания (в метрах). Сопротивлением воздуха пренебречь, ускорение свободного падения принять равным g = 10 м/с<sup>2</sup>.</div>
+            <div class="task-text"><strong>Задание 10.</strong> Тяжёлый металлический шарик свободно падает с крыши здания без начальной скорости и достигает земли через 4 секунды. Определите высоту здания (в метрах). Сопротивлением воздуха пренебречь, g = 10 м/с<sup>2</sup>.</div>
 
             <div class="interactive-zone">
                 <input type="text" class="input-field" id="input-task5-d" placeholder="Ответ">
-                <button class="btn btn-check" onclick="checkTask('task5-d', '80', 5, null)">Проверить</button>
+                <button class="btn btn-check" onclick="checkTask('task5-d', '80', null)">Проверить</button>
                 <button class="btn btn-hint" onclick="toggleSolution('sol-task5-d')">Разбор</button>
                 <span class="feedback-text" id="feedback-task5-d"></span>
             </div>
 
             <div class="solution-block" id="sol-task5-d">
-                <strong>Методический разбор:</strong> При свободном падении без начальной скорости (v<sub>0</sub> = 0) пройденный телом путь (высота здания H) рассчитывается по формуле перемещения: H = (g &middot; t<sup>2</sup>) / 2. Подставим время полета шарика: H = (10 &middot; 4<sup>2</sup>) / 2 = (10 &middot; 16) / 2 = 160 / 2 = 80 метров.<br><strong>Правильный ответ:</strong> 80
+                <strong>Методический разбор:</strong> Высота свободного падения без начальной скорости рассчитывается по формуле: H = (g &middot; t<sup>2</sup>) / 2. Подставим значения: H = (10 &middot; 4<sup>2</sup>) / 2 = (10 &middot; 16) / 2 = 80 метров.<br><strong>Правильный ответ:</strong> 80
             </div>
         </div>
     </div>
-    </Form>
+    </div> <!-- Конец .Form -->
 </div> <!-- Конец .container -->
 
 <script>
-    // Живой счетчик баллов за урок
-    let totalScore = 0;
-
-    // Функция скрытия/показа разборов (спойлеров)
+    // Показ и скрытие блоков методического разбора (спойлеры)
     function toggleSolution(id) {
         const block = document.getElementById(id);
         if (block) {
@@ -437,32 +403,25 @@
         }
     }
 
-    // JS-движок управления адаптивной логикой урока
-    function checkTask(taskId, correctAnswer, points, dublerId) {
+    // ИСПРАВЛЕНО: Из логики JS полностью удален подсчет и вывод баллов
+    function checkTask(taskId, correctAnswer, dublerId) {
         const inputField = document.getElementById('input-' + taskId);
         const card = document.getElementById('card-' + taskId);
         const feedback = document.getElementById('feedback-' + taskId);
         
         if (!inputField || !card || !feedback) return;
 
-        // Нормализация ввода (убираем пробелы, меняем запятые на точки)
+        // Нормализация пользовательского ввода
         const userAnswer = inputField.value.trim().replace(',', '.');
 
         if (userAnswer === correctAnswer) {
-            // Сценарий Успеха
+            // Маркер Успеха
             card.classList.remove('wrong');
             card.classList.add('correct');
-            feedback.textContent = '● Верно! (+' + points + ' баллов)';
+            feedback.textContent = '● Верно!';
             feedback.style.color = 'var(--brand-success)';
-            
-            // Начисление баллов (только если задача не была решена ранее)
-            if (!card.dataset.solved) {
-                totalScore += points;
-                document.getElementById('total-score').textContent = totalScore;
-                card.dataset.solved = "true";
-            }
 
-            // Адаптивное ветвление: если это триггер — плавно скрываем дублёр
+            // Адаптивное ветвление: если триггер взят сходу — прячем дублёр
             if (dublerId) {
                 const wrapper = document.getElementById('wrapper-' + dublerId);
                 if (wrapper) {
@@ -470,19 +429,18 @@
                 }
             }
         } else {
-            // Сценарий Ошибки
+            // Маркер Ошибки
             card.classList.remove('correct');
             card.classList.add('wrong');
             feedback.textContent = '○ Неверно, попробуй ещё раз';
             feedback.style.color = 'var(--brand-alert)';
             
-            // Автоматически открываем разбор, чтобы помочь ученику разобраться
+            // Автоматическое открытие подсказки для разбора с преподавателем
             const solId = 'sol-' + taskId;
             const block = document.getElementById(solId);
             if (block) block.classList.add('visible');
         }
     }
 </script>
-
 </body>
 </html>
