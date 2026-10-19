@@ -421,8 +421,13 @@
                     стороны они встречаются каждые <strong>4 с</strong>. 
                     Вычислите скорость в м/с (округлив π ≈ 3.14 до сотых).
                 </p>
+                <!-- Переключатель режимов движения -->
+                <div class="sim-controls" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px;">
+                    <button class="btn btn-accent" id="btnModeL" onclick="setPointsMode('left')">В одну сторону</button>
+                    <button class="btn" id="btnModeR" onclick="setPointsMode('right')">Навстречу</button>
+                </div>
                 <div class="sim-controls">
-                    <button class="btn" onclick="toggleSimulation('points')">Старт / Пауза</button>
+                    <button class="btn" style="flex: 1;" onclick="toggleSimulation('points')">Старт / Пауза</button>
                     <button class="btn" onclick="resetSimulation('points')">Сброс</button>
                 </div>
                 <div class="answer-zone" style="margin-top: auto;">
@@ -560,7 +565,7 @@ let currentSlide = 1;
 const totalSlides = 17;
 let totalTasksCount = 16; // ИСПРАВЛЕНО: Всего 16 задач, а не 11
 let solvedTasks = {}; // ИСПРАВЛЕНО: Перевели в объект-карту, чтобы не привязываться к индексам массива
-let simStates = { car: { active: false, ang: 0 }, accel: { active: false, ang1: 0, ang2: 0 }, belt: { active: false, ang1: 0, ang2: 0 }, points: { active: false, ang1: 0, ang2: 0 } };
+let simStates = { car: { active: false, ang: 0 }, accel: { active: false, ang1: 0, ang2: 0 }, belt: { active: false, ang1: 0, ang2: 0 }, points: { active: false, ang1: 0, ang2: 0, mode: 'left' } };
 let activeAnimations = { car: null, accel: null, belt: null, points: null };
 
 window.onload = function() {
@@ -873,73 +878,90 @@ function loopBelt() {
     activeAnimations.belt = requestAnimationFrame(loopBelt);
 }
 
+function setPointsMode(mode) {
+    // Меняем активный режим движения
+    simStates.points.mode = mode;
+    
+    // Подсветка активной кнопки переключателя
+    const btnL = document.getElementById('btnModeL');
+    const btnR = document.getElementById('btnModeR');
+    if (btnL && btnR) {
+        if (mode === 'left') {
+            btnL.classList.add('btn-accent');
+            btnR.classList.remove('btn-accent');
+        } else {
+            btnR.classList.add('btn-accent');
+            btnL.classList.remove('btn-accent');
+        }
+    }
+    
+    // Перерисовываем холст в статике с новыми условиями
+    initPointsSimulation();
+}
+
 function initPointsSimulation() {
     const canvas = document.getElementById('canvasPointsQ14');
     if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Вычисляем два центра для разделения экрана пополам по горизонтали
+    // Теперь окружность располагается строго по центру холста и стала крупнее
+    const cx = canvas.width / 2;
     const cy = canvas.height / 2;
-    const r = 40; // Оптимальный радиус, чтобы обе окружности влезли в окно
+    const r = 55; 
     
-    const cxLeft = canvas.width * 0.28;  // Центр левой симуляции
-    const cxRight = canvas.width * 0.72; // Центр правой симуляции
-    
-    // --- 1. ЛЕВАЯ СИМУЛЯЦИЯ: ДВИЖЕНИЕ В ОДНУ СТОРОНУ ---
+    // Общая круговая траектория движения
     ctx.strokeStyle = '#1e293b';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.arc(cxLeft, cy, r, 0, Math.PI * 2);
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
     ctx.stroke();
     
-    // Подпись для левого круга
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '10px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText("В одну сторону (догон)", cxLeft, cy - r - 15);
-    
-    // Точка 1 (Быстрая, голубая) и Точка 2 (Медленная, оранжевая) - обе по часовой стрелке
-    const x1_L = cxLeft + r * Math.cos(simStates.points.ang1);
-    const y1_L = cy + r * Math.sin(simStates.points.ang1);
-    ctx.fillStyle = '#38bdf8';
-    ctx.beginPath(); ctx.arc(x1_L, y1_L, 6, 0, Math.PI * 2); ctx.fill();
-    drawArrow(ctx, x1_L, y1_L, x1_L - 25 * Math.sin(simStates.points.ang1), y1_L + 25 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
-    
-    const x2_L = cxLeft + r * Math.cos(simStates.points.ang2);
-    const y2_L = cy + r * Math.sin(simStates.points.ang2);
-    ctx.fillStyle = '#fb923c';
-    ctx.beginPath(); ctx.arc(x2_L, y2_L, 6, 0, Math.PI * 2); ctx.fill();
-    drawArrow(ctx, x2_L, y2_L, x2_L - 15 * Math.sin(simStates.points.ang2), y2_L + 15 * Math.cos(simStates.points.ang2), '#fb923c', 'v₂');
-    
-    
-    // --- 2. ПРАВАЯ СИМУЛЯЦИЯ: В ПРОТИВОПОЛОЖНЫЕ СТОРОНЫ ---
-    ctx.strokeStyle = '#1e293b';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.arc(cxRight, cy, r, 0, Math.PI * 2);
-    ctx.stroke();
-    
-    // Подпись для правого круга
-    ctx.fillStyle = '#94a3b8';
-    ctx.fillText("Навстречу (встреча)", cxRight, cy - r - 15);
-    
-    // Точка 1 (Голубая) летит по часовой стрелке, Точка 2 (Оранжевая) летит НАВСТРЕЧУ (против часовой)
-    const x1_R = cxRight + r * Math.cos(simStates.points.ang1);
-    const y1_R = cy + r * Math.sin(simStates.points.ang1);
-    ctx.fillStyle = '#38bdf8';
-    ctx.beginPath(); ctx.arc(x1_R, y1_R, 6, 0, Math.PI * 2); ctx.fill();
-    drawArrow(ctx, x1_R, y1_R, x1_R - 25 * Math.sin(simStates.points.ang1), y1_R + 25 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
-    
-    // Для движения навстречу инвертируем угол второй точки (минус ang2) и направление вектора скорости
-    const invAng2 = -simStates.points.ang2;
-    const x2_R = cxRight + r * Math.cos(invAng2);
-    const y2_R = cy + r * Math.sin(invAng2);
-    ctx.fillStyle = '#fb923c';
-    ctx.beginPath(); ctx.arc(x2_R, y2_R, 6, 0, Math.PI * 2); ctx.fill();
-    // Вектор скорости направлен в противоположную сторону вращения (против часовой касательной)
-    drawArrow(ctx, x2_R, y2_R, x2_R + 15 * Math.sin(invAng2), y2_R - 15 * Math.cos(invAng2), '#fb923c', 'v₂');
+    if (simStates.points.mode === 'left') {
+        // --- РЕЖИМ 1: ДВИЖЕНИЕ В ОДНУ СТОРОНУ (ВДОГОНКУ) ---
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText("Режим: Движение в одну сторону (догон каждые 20 с)", cx, cy - r - 20);
+        
+        // Точка 1 (Быстрая, голубая) летит по часовой стрелке
+        const x1 = cx + r * Math.cos(simStates.points.ang1);
+        const y1 = cy + r * Math.sin(simStates.points.ang1);
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath(); ctx.arc(x1, y1, 7, 0, Math.PI * 2); ctx.fill();
+        drawArrow(ctx, x1, y1, x1 - 35 * Math.sin(simStates.points.ang1), y1 + 35 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+        
+        // Точка 2 (Медленная, оранжевая) летит тоже по часовой стрелке
+        const x2 = cx + r * Math.cos(simStates.points.ang2);
+        const y2 = cy + r * Math.sin(simStates.points.ang2);
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath(); ctx.arc(x2, y2, 7, 0, Math.PI * 2); ctx.fill();
+        drawArrow(ctx, x2, y2, x2 - 22 * Math.sin(simStates.points.ang2), y2 + 22 * Math.cos(simStates.points.ang2), '#fb923c', 'v₂');
+        
+    } else {
+        // --- РЕЖИМ 2: ДВИЖЕНИЕ В РАЗНЫЕ СТОРОНЫ (НАВСТРЕЧУ) ---
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText("Режим: Движение навстречу (встреча каждые 4 с)", cx, cy - r - 20);
+        
+        // Точка 1 (Быстрая, голубая) летит по часовой стрелке
+        const x1 = cx + r * Math.cos(simStates.points.ang1);
+        const y1 = cy + r * Math.sin(simStates.points.ang1);
+        ctx.fillStyle = '#38bdf8';
+        ctx.beginPath(); ctx.arc(x1, y1, 7, 0, Math.PI * 2); ctx.fill();
+        drawArrow(ctx, x1, y1, x1 - 35 * Math.sin(simStates.points.ang1), y1 + 35 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+        
+        // Точка 2 (Медленная, оранжевая) летит НАВСТРЕЧУ (против часовой стрелки)
+        const invAng2 = -simStates.points.ang2;
+        const x2 = cx + r * Math.cos(invAng2);
+        const y2 = cy + r * Math.sin(invAng2);
+        ctx.fillStyle = '#fb923c';
+        ctx.beginPath(); ctx.arc(x2, y2, 7, 0, Math.PI * 2); ctx.fill();
+        drawArrow(ctx, x2, y2, x2 + 22 * Math.sin(invAng2), y2 - 22 * Math.cos(invAng2), '#fb923c', 'v₂');
+    }
 }
+
 
 function loopPoints() {
     if (!simStates.points.active) return;
