@@ -782,7 +782,8 @@ function submitMultiSelector() {
     if (answersState.quiz1.submitted) return;
     const fields = ['q1_v', 'q1_f', 'q1_a'];
     const correctMap = { 'q1_v': 'вправо', 'q1_f': 'влево', 'q1_a': 'влево' };
-    let localScore = 0;
+    
+    let allCorrect = true;
     
     fields.forEach(f => {
         const el = document.getElementById(f); 
@@ -790,19 +791,23 @@ function submitMultiSelector() {
             el.disabled = true;
             if (el.value.trim() === correctMap[f]) { 
                 el.classList.add('correct-highlight'); 
-                localScore += 1; 
             } else { 
-                el.classList.add('wrong-highlight'); 
+                el.classList.add('wrong-highlight');
+                allCorrect = false; // Если хотя бы один вектор неверен
             }
         }
     });
     
-    // Перезаписываем итоговый стейт перед отправкой, чтобы гарантировать успех
+    // Фиксируем стейт
     answersState.quiz1.v = (document.getElementById('q1_v').value.trim() === 'вправо');
     answersState.quiz1.f = (document.getElementById('q1_f').value.trim() === 'влево');
     answersState.quiz1.a = (document.getElementById('q1_a').value.trim() === 'влево');
     
-    score += localScore; 
+    // Задание №1 дает ровно 1 балл, если ВСЕ три вектора сопоставлены верно
+    if (allCorrect) {
+        score += 1;
+    }
+    
     answersState.quiz1.submitted = true; 
     updateSliderUI();
 }
@@ -825,18 +830,25 @@ function highlightTrueAnswer(cards, qIdx) {
 
 function buildFinalReport() {
     const container = document.getElementById('analyticsMap');
-    const q1_res = (answersState.quiz1.v && answersState.quiz1.f && answersState.quiz1.a) ? 'Успешно' : 'Есть ошибки';
-    const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка'; const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка'; const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
-    let verdict = ''; const pct = (score / 8) * 100;
-    if (pct >= 85) verdict = '<span class="text-green">Превосходно!</span>';
-    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо.</span>';
+    const q1_res = (answersState.quiz1.v && answersState.quiz1.f && answersState.quiz1.a) ? 'Успешно' : 'Ошибка';
+    const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка'; 
+    const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка'; 
+    const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
+    
+    let verdict = ''; 
+    // Теперь максимальный балл равен 4
+    const pct = (score / 4) * 100;
+    
+    if (pct >= 85) verdict = '<span class="text-green">Превосходно! Максимум КИМ ОГЭ.</span>';
+    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо. Повторите законы Ньютона.</span>';
     else verdict = '<span class="text-red">Требуется работа над векторами.</span>';
+    
     container.innerHTML = `
-        <div class="analytics-item"><span>Задание №1:</span> <strong>${q1_res}</strong></div>
-        <div class="analytics-item"><span>Задание №2:</span> <strong>${q2_res}</strong></div>
-        <div class="analytics-item"><span>Задание №3:</span> <strong>${q3_res}</strong></div>
-        <div class="analytics-item"><span>Задание №4:</span> <strong>${q4_res}</strong></div>
-        <div style="margin-top:15px; font-weight:600;">Итоговый балл: ${score} из 8 (${pct.toFixed(0)}%).<br><br>Вердикт: ${verdict}</div>`;
+        <div class="analytics-item"><span>Задание №1 (Векторы при торможении):</span> <strong>${q1_res}</strong></div>
+        <div class="analytics-item"><span>Задание №2 (Модуль равнодействующей):</span> <strong>${q2_res}</strong></div>
+        <div class="analytics-item"><span>Задание №3 (Ловушка жесткости k):</span> <strong>${q3_res}</strong></div>
+        <div class="analytics-item"><span>Задание №4 (Взаимодействие масс):</span> <strong>${q4_res}</strong></div>
+        <div style="margin-top:15px; font-weight:600;">Итоговый балл: ${score} из 4 (${pct.toFixed(0)}%).<br><br>Вердикт: ${verdict}</div>`;
 }
 </script>
 </body>
