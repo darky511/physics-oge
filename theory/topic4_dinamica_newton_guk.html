@@ -59,20 +59,24 @@
             <div class="content-side">
                 <span class="slide-type">Теория</span>
                 <h2>Закон инерции (I закон Ньютона)</h2>
-                <p class="formula-main">Если F<sub>равн</sub> = 0 ⇒ v = const</p>
+                <p class="formula-main">Если F<sub>равн</sub> = 0 ⇒ v = const или v = 0</p>
                 <p class="text-concentrate">
-                    Существуют <strong>ИСО</strong>, в которых тело сохраняет 
-                    состояние покоя или равномерного движения, 
-                    если внешние силы скомпенсированы.
+                    Если внешние силы скомпенсированы, тело либо сохраняет 
+                    состояние <strong>покоя (v = 0)</strong>, либо движется 
+                    равномерно прямолинейно <strong>(v = const)</strong>.
                 </p>
-                <div class="control-row">
+                <div class="control-row" style="gap: 5px; flex-wrap: wrap;">
+                    <button class="btn btn-accent" 
+                            onclick="triggerInertia('rest')">
+                        Покой (v = 0)
+                    </button>
                     <button class="btn btn-accent" 
                             onclick="triggerInertia('compensate')">
-                        Баланс (v = const)
+                        Движение (v = const)
                     </button>
                     <button class="btn id-danger" 
                             onclick="triggerInertia('break')">
-                        Нарушить баланс
+                        Нарушить баланс (Резкое F<sub>тян</sub>)
                     </button>
                 </div>
             </div>
@@ -88,11 +92,12 @@
             <div class="content-side">
                 <span class="slide-type">Теория</span>
                 <h2>Ускорение (II закон Ньютона)</h2>
-                <p class="formula-main">a = F / m ⇒ F = m · a</p>
+                <p class="formula-main">a = F<sub>равн</sub> / m ⇒ F<sub>равн</sub> = m · a</p>
                 <p class="text-concentrate">
-                    Вектор ускорения <span class="text-green">a</span> всегда 
-                    строго сонаправлен с вектором силы 
-                    <span class="text-red">F<sub>равн</sub></span>.
+                    Второй закон связывает массу именно с 
+                    <strong>равнодействующей силой</strong> (показана ярким 
+                    <span class="text-red">красным</span> цветом). 
+                    Второстепенные силы показаны <span class="text-blue">голубым</span>.
                 </p>
                 <div class="control-row">
                     <label style="font-size:12px; color:#38bdf8;">
@@ -105,7 +110,7 @@
                 <div class="control-row" style="margin-top: 10px;">
                     <button class="btn btn-accent" 
                             onclick="launchSecondLaw()">
-                        Толкнуть тело
+                        Толкнуть тело (Замедленно)
                     </button>
                 </div>
             </div>
@@ -114,7 +119,6 @@
             </div>
         </div>
     </div>
-
     <!-- СЛАЙД 4: Третий закон Ньютона -->
     <div class="slide" id="slide4">
         <div class="slide-grid">
@@ -123,14 +127,13 @@
                 <h2>Взаимодействие (III закон)</h2>
                 <p class="formula-main">F<sub>1→2</sub> = - F<sub>2→1</sub></p>
                 <p class="text-concentrate">
-                    Силы возникают парами, имеют одинаковую природу, 
-                    равны по модулю и направлены противоположно. 
-                    Приложены к <strong>разным телам</strong>!
+                    Силы действия и противодействия всегда равны по модулю 
+                    и противоположны по направлению, независимо от массы тел.
                 </p>
                 <div class="control-row">
                     <button class="btn btn-accent" 
                             onclick="startCollision()">
-                        Столкнуть шары
+                        Столкнуть крупные шары
                     </button>
                 </div>
             </div>
@@ -139,6 +142,7 @@
             </div>
         </div>
     </div>
+
     <!-- СЛАЙД 5: Закон Гука -->
     <div class="slide" id="slide5">
         <div class="slide-grid">
@@ -147,9 +151,8 @@
                 <h2>Закон Гука и деформация</h2>
                 <p class="formula-main">F<sub>упр</sub> = k · |x|</p>
                 <p class="text-concentrate">
-                    Сила упругости направлена против деформации. 
-                    Жесткость пружины <strong>k</strong> зависит от её геометрии 
-                    и материала, но не от силы растяжения!
+                    При растяжении сила упругости направлена строго к центру пружины, 
+                    противодействуя деформации \(x\).
                 </p>
                 <div class="control-row">
                     <label style="font-size:12px; color:#38bdf8;">
@@ -173,7 +176,7 @@
                 <span class="slide-type">Диагностика (База)</span>
                 <h2>Направления при торможении</h2>
                 <p class="text-concentrate">
-                    Брусок скользит вправо и тормозит. 
+                    Брусок скользит вправо и экстренно тормозит. 
                     Сопоставьте направления стрелок.
                 </p>
                 <div class="multivector-grid">
@@ -220,33 +223,26 @@
             </div>
         </div>
     </div>
-    <!-- СЛАЙД 7: Задача №2 -->
+    <!-- СЛАЙД 7: Задача №2 (С интерактивным чертежом) -->
     <div class="slide" id="slide7">
-        <div class="slide-inner">
-            <span class="slide-type">Диагностика (Расчеты)</span>
-            <h2>Задача №2: Расчёт равнодействующей силы</h2>
-            <p class="text-concentrate" style="margin-bottom: 20px;">
-                К телу приложены силы вдоль одной горизонтальной прямой: 
-                F<sub>1</sub> = 12 Н (вправо), F<sub>2</sub> = 5 Н (влево), 
-                F<sub>3</sub> = 3 Н (влево). Чему равен модуль равнодействующей?
-            </p>
-            <div class="cards-container">
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 1, false)">
-                    4 Н, направлена влево
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 1, true)">
-                    4 Н, направлена вправо
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 1, false)">
-                    20 Н, направлена вправо
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 1, false)">
-                    10 Н, направлена влево
-                </button>
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Диагностика (Расчеты)</span>
+                <h2>Задача №2: Расчёт равнодействующей сил</h2>
+                <p class="text-concentrate" style="font-size:13px; margin-bottom:12px;">
+                    К телу приложены три силы: F<sub>1</sub> = 12 Н (вправо), 
+                    F<sub>2</sub> = 5 Н (влево), F<sub>3</sub> = 3 Н (влево). 
+                    Чему равен модуль равнодействующей силы и куда она направлена?
+                </p>
+                <div class="cards-container" style="grid-template-columns: 1fr; gap: 6px;">
+                    <button class="card-btn" style="padding:12px;" onclick="checkCardAnswer(this, 1, false)">4 Н, направлена влево</button>
+                    <button class="card-btn" style="padding:12px;" onclick="checkCardAnswer(this, 1, true)">4 Н, направлена вправо</button>
+                    <button class="card-btn" style="padding:12px;" onclick="checkCardAnswer(this, 1, false)">20 Н, направлена вправо</button>
+                    <button class="card-btn" style="padding:12px;" onclick="checkCardAnswer(this, 1, false)">10 Н, направлена влево</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasQuiz2Forces"></canvas>
             </div>
         </div>
     </div>
@@ -262,22 +258,10 @@
                 Как изменилась жесткость пружины во второй части опыта?
             </p>
             <div class="cards-container">
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 2, false)">
-                    Увеличилась в 2 раза
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 2, false)">
-                    Уменьшилась в 2 раза
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 2, true)">
-                    Абсолютно не изменилась
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 2, false)">
-                    Стала равна нулю
-                </button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 2, false)">Увеличилась в 2 раза</button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 2, false)">Уменьшилась в 2 раза</button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 2, true)">Абсолютно не изменилась</button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 2, false)">Стала равна нулю</button>
             </div>
         </div>
     </div>
@@ -293,22 +277,10 @@
                 сила легкового авто равна F<sub>2</sub>. Что верно?
             </p>
             <div class="cards-container">
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 3, false)">
-                    F<sub>1</sub> = 5 · F<sub>2</sub>
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 3, true)">
-                    F<sub>1</sub> = F<sub>2</sub>
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 3, false)">
-                    F<sub>1</sub> = 0.2 · F<sub>2</sub>
-                </button>
-                <button class="card-btn" 
-                        onclick="checkCardAnswer(this, 3, false)">
-                    F<sub>1</sub> + F<sub>2</sub> = 0
-                </button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 3, false)">F<sub>1</sub> = 5 · F<sub>2</sub></button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 3, true)">F<sub>1</sub> = F<sub>2</sub></button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 3, false)">F<sub>1</sub> = 0.2 · F<sub>2</sub></button>
+                <button class="card-btn" onclick="checkCardAnswer(this, 3, false)">F<sub>1</sub> + F<sub>2</sub> = 0</button>
             </div>
         </div>
     </div>
@@ -407,6 +379,8 @@ body {
     padding: 4px 10px;
     border-radius: 6px;
 }
+</style>
+<style>
 .controls-footer {
     padding: 12px 24px;
     background-color: #0f172a;
@@ -425,37 +399,12 @@ body {
     border-radius: 8px;
     cursor: pointer;
 }
-.nav-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
-</style>
-<style>
-.slide {
-    display: none;
-    flex-grow: 1;
-    padding: 24px;
-    overflow: hidden;
-}
-.slide.active {
-    display: flex;
-    flex-direction: column;
-}
-.slide-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    height: 100%;
-}
-.slide-inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.content-side {
-    display: flex;
-    flex-direction: column;
-}
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.slide { display: none; flex-grow: 1; padding: 24px; overflow: hidden; }
+.slide.active { display: flex; flex-direction: column; }
+.slide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; height: 100%; }
+.slide-inner { display: flex; flex-direction: column; height: 100%; }
+.content-side { display: flex; flex-direction: column; }
 .visual-side {
     background-color: #05070f;
     border: 1px solid #1e293b;
@@ -465,113 +414,37 @@ body {
     height: 100%;
     min-height: 250px;
 }
-.visual-side canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.slide-type {
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #fb923c;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #f8fafc;
-    margin-bottom: 8px;
-}
+.visual-side canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.slide-type { font-size: 10px; text-transform: uppercase; color: #fb923c; font-weight: 700; margin-bottom: 4px; }
+h2 { font-size: 20px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
 .formula-main {
-    font-family: monospace;
-    font-size: 18px;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.05);
-    padding: 8px;
-    border-left: 3px solid #38bdf8;
-    margin-bottom: 12px;
+    font-family: monospace; font-size: 16px; color: #38bdf8;
+    background: rgba(56, 189, 248, 0.05); padding: 8px;
+    border-left: 3px solid #38bdf8; margin-bottom: 12px;
 }
-</style>
-<style>
-.text-concentrate {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #94a3b8;
-    margin-bottom: 16px;
-}
-.control-row {
-    display: flex;
-    gap: 8px;
-}
+.text-concentrate { font-size: 13px; line-height: 1.5; color: #94a3b8; margin-bottom: 16px; }
+.control-row { display: flex; gap: 6px; }
 .btn {
-    background-color: #0f172a;
-    border: 1px solid #334155;
-    color: #e2e8f0;
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 6px;
-    cursor: pointer;
+    background-color: #0f172a; border: 1px solid #334155; color: #e2e8f0;
+    padding: 6px 10px; font-size: 11px; border-radius: 6px; cursor: pointer;
 }
 .btn-accent { border-color: #38bdf8; color: #38bdf8; }
 .id-danger { border-color: #ef4444; color: #ef4444; }
-.cards-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
+.cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .card-btn {
-    background-color: #0f172a;
-    border: 1px solid #1e293b;
-    color: #cbd5e1;
-    padding: 20px;
-    font-size: 14px;
-    border-radius: 10px;
-    cursor: pointer;
+    background-color: #0f172a; border: 1px solid #1e293b; color: #cbd5e1;
+    padding: 16px; font-size: 13px; border-radius: 10px; cursor: pointer; text-align: left;
 }
-.multivector-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-}
+.multivector-grid { display: grid; grid-template-columns: 1fr; gap: 6px; }
 .oga-select {
-    background-color: #05070f;
-    border: 1px solid #334155;
-    color: #f8fafc;
-    padding: 6px;
-    border-radius: 6px;
-    width: 100%;
+    background-color: #05070f; border: 1px solid #334155; color: #f8fafc;
+    padding: 6px; border-radius: 6px; width: 100%; outline: none;
 }
-.correct-highlight { 
-    background-color: rgba(34, 197, 94, 0.15) !important; 
-    border-color: #22c55e !important; 
-    color: #4ade80 !important; 
-}
-.wrong-highlight { 
-    background-color: rgba(239, 68, 68, 0.15) !important; 
-    border-color: #ef4444 !important; 
-    color: #f43f5e !important; 
-}
-.analytics-card { 
-    background-color: #05070f; 
-    border: 1px solid #1e293b; 
-    border-radius: 10px; 
-    padding: 15px; 
-    height: 160px; 
-    overflow-y: auto; 
-    font-size: 13px; 
-}
-.analytics-item { 
-    display: flex; 
-    justify-content: space-between; 
-    padding: 6px 0; 
-    border-bottom: 1px solid #1e293b; 
-}
-.text-green { color: #22c55e; } 
-.text-blue { color: #38bdf8; } 
-.text-red { color: #ef4444; }
+.correct-highlight { background-color: rgba(34, 197, 94, 0.15) !important; border-color: #22c55e !important; color: #4ade80 !important; }
+.wrong-highlight { background-color: rgba(239, 68, 68, 0.15) !important; border-color: #ef4444 !important; color: #f43f5e !important; }
+.analytics-card { background-color: #05070f; border: 1px solid #1e293b; border-radius: 10px; padding: 15px; height: 160px; overflow-y: auto; font-size: 13px; }
+.analytics-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1e293b; }
+.text-green { color: #22c55e; } .text-blue { color: #38bdf8; } .text-red { color: #ef4444; }
 </style>
 <script>
 let currentSlide = 1;
@@ -581,24 +454,19 @@ let answersState = {
     quiz1: { v: false, f: false, a: false, submitted: false }, 
     quiz2: null, quiz3: null, quiz4: null 
 };
-let activeAnimationIds = { 
-    forces: null, inertia: null, 
-    secondLaw: null, thirdLaw: null 
-};
+let activeAnimationIds = { forces: null, inertia: null, secondLaw: null, thirdLaw: null };
 
 window.onload = function() {
     updateSliderUI();
-    setTimeout(lazyLoadCanvasTrigger, 100); 
+    setTimeout(lazyLoadCanvasTrigger, 120); 
     window.addEventListener('resize', lazyLoadCanvasTrigger);
 };
 
 function changeSlide(direction) {
     cancelAllAnimations();
-    document.getElementById(`slide${currentSlide}`)
-            .classList.remove('active');
+    document.getElementById(`slide${currentSlide}`).classList.remove('active');
     currentSlide += direction;
-    document.getElementById(`slide${currentSlide}`)
-            .classList.add('active');
+    document.getElementById(`slide${currentSlide}`).classList.add('active');
     updateSliderUI();
     setTimeout(lazyLoadCanvasTrigger, 50); 
 }
@@ -619,8 +487,7 @@ function cancelAllAnimations() {
         }
     }
 }
-</script>
-<script>
+
 function forceSetupCanvas(canvas) {
     if (!canvas) return false;
     const parent = canvas.parentElement;
@@ -638,101 +505,115 @@ function lazyLoadCanvasTrigger() {
     if (currentSlide === 4) initThirdLawCanvas();
     if (currentSlide === 5) drawHooke();
     if (currentSlide === 6) drawQuiz1Static();
+    if (currentSlide === 7) drawQuiz2ForcesStatic();
 }
 
-function drawArrow(ctx, fromX, fromY, toX, toY, color) {
-    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "", txtColor = "#f8fafc") {
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3.5;
     ctx.beginPath(); ctx.moveTo(fromX, fromY); ctx.lineTo(toX, toY); ctx.stroke();
     const angle = Math.atan2(toY - fromY, toX - fromX);
     ctx.beginPath(); ctx.moveTo(toX, toY);
-    ctx.lineTo(toX - 12 * Math.cos(angle - Math.PI / 6), 
-               toY - 12 * Math.sin(angle - Math.PI / 6));
-    ctx.lineTo(toX - 12 * Math.cos(angle + Math.PI / 6), 
-               toY - 12 * Math.sin(angle + Math.PI / 6));
+    ctx.lineTo(toX - 14 * Math.cos(angle - Math.PI / 6), toY - 14 * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(toX - 14 * Math.cos(angle + Math.PI / 6), toY - 14 * Math.sin(angle + Math.PI / 6));
     ctx.closePath(); ctx.fill();
+    if (txt) {
+        ctx.fillStyle = txtColor; ctx.font = "bold 14px sans-serif";
+        ctx.fillText(txt, toX + 8 * Math.cos(angle) - 4, toY + 12 * Math.sin(angle) + 4);
+    }
 }
-
+</script>
+<script>
 let forceMode = 'one-side';
 function setForceMode(mode) {
     forceMode = mode;
     const hint = document.getElementById('forceFormulaHint');
-    if (mode === 'one-side') 
-        hint.innerHTML = 'F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub>';
-    if (mode === 'opposite') 
-        hint.innerHTML = 'F<sub>равн</sub> = F<sub>1</sub> - F<sub>2</sub>';
-    if (mode === 'angle') 
-        hint.innerHTML = 'F<sub>равн</sub> = √(F<sub>1</sub><sup>2</sup> + F<sub>2</sub><sup>2</sup>)';
+    if (mode === 'one-side') hint.innerHTML = 'F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub>';
+    if (mode === 'opposite') hint.innerHTML = 'F<sub>равн</sub> = F<sub>1</sub> - F<sub>2</sub>';
+    if (mode === 'angle') hint.innerHTML = 'F<sub>равн</sub> = √(F<sub>1</sub><sup>2</sup> + F<sub>2</sub><sup>2</sup>)';
     initForceCanvas();
 }
 
 function initForceCanvas() {
     const canvas = document.getElementById('canvasForces');
     if (!forceSetupCanvas(canvas)) return;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const cx = canvas.width / 2, cy = canvas.height / 2;
-    const bw = 80, bh = 40;
+    const cx = canvas.width / 2, cy = canvas.height * 0.55;
+    const bw = 100, bh = 50;
     ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
-    ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
+    ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
 
-    ctx.font = '13px sans-serif';
     if (forceMode === 'one-side') {
-        drawArrow(ctx, cx, cy, cx + 40, cy, '#ef4444'); 
-        drawArrow(ctx, cx + 40, cy, cx + 90, cy, '#fb923c');
-        drawArrow(ctx, cx, cy + 35, cx + 90, cy + 35, '#38bdf8');
+        drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444', 'F₁'); 
+        drawArrow(ctx, cx + 70, cy, cx + 150, cy, '#fb923c', 'F₂');
+        drawArrow(ctx, cx, cy - 45, cx + 150, cy - 45, '#38bdf8', 'Fравн', '#38bdf8');
     } else if (forceMode === 'opposite') {
-        drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444'); 
-        drawArrow(ctx, cx, cy, cx - 40, cy, '#fb923c');
-        drawArrow(ctx, cx, cy + 35, cx + 30, cy + 35, '#38bdf8');
+        drawArrow(ctx, cx, cy, cx + 110, cy, '#ef4444', 'F₁'); 
+        drawArrow(ctx, cx, cy, cx - 70, cy, '#fb923c', 'F₂');
+        drawArrow(ctx, cx, cy - 45, cx + 40, cy - 45, '#38bdf8', 'Fравн', '#38bdf8');
     } else if (forceMode === 'angle') {
-        drawArrow(ctx, cx, cy, cx + 50, cy, '#ef4444'); 
-        drawArrow(ctx, cx, cy, cx, cy - 50, '#fb923c');
-        drawArrow(ctx, cx, cy, cx + 50, cy - 50, '#38bdf8');
+        drawArrow(ctx, cx, cy, cx + 90, cy, '#ef4444', 'F₁'); 
+        drawArrow(ctx, cx, cy, cx, cy - 90, '#fb923c', 'F₂');
+        ctx.strokeStyle = '#334155'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+        ctx.beginPath(); ctx.moveTo(cx + 90, cy); ctx.lineTo(cx + 90, cy - 90); ctx.lineTo(cx, cy - 90); ctx.stroke(); ctx.setLineDash([]);
+        drawArrow(ctx, cx, cy, cx + 90, cy - 90, '#38bdf8', 'Fравн', '#38bdf8');
     }
 }
 </script>
 <script>
-let inertiaState = { x: 50, vx: 1.5, mode: 'compensate' };
+let inertiaState = { x: 50, vx: 1.5, mode: 'rest' };
 function initInertiaCanvas() {
     const canvas = document.getElementById('canvasInertia');
     if (!forceSetupCanvas(canvas)) return;
-    inertiaState.x = canvas.width / 4; 
-    inertiaState.vx = 1.5; 
-    inertiaState.mode = 'compensate';
+    inertiaState.x = canvas.width / 2 - 45; 
+    inertiaState.vx = (inertiaState.mode === 'compensate') ? 1.5 : ((inertiaState.mode === 'break') ? 3 : 0);
     loopInertia();
 }
-function triggerInertia(mode) { inertiaState.mode = mode; }
+
+function triggerInertia(mode) {
+    inertiaState.mode = mode;
+    const canvas = document.getElementById('canvasInertia');
+    if (!canvas) return;
+    if (mode === 'rest') { inertiaState.vx = 0; inertiaState.x = canvas.width / 2 - 45; }
+    else if (mode === 'compensate') { inertiaState.vx = 1.5; }
+    else if (mode === 'break') { inertiaState.vx = 3.5; }
+}
+
 function loopInertia() {
     const canvas = document.getElementById('canvasInertia');
     if (!canvas || currentSlide !== 2) return;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     inertiaState.x += inertiaState.vx;
-    if (inertiaState.x > canvas.width - 70 || inertiaState.x < 10) 
+    if (inertiaState.mode !== 'rest' && (inertiaState.x > canvas.width - 100 || inertiaState.x < 10)) {
         inertiaState.vx *= -1;
-
-    const cy = canvas.height / 2;
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(inertiaState.x, cy - 20, 60, 40);
-    ctx.strokeStyle = '#334155'; ctx.strokeRect(inertiaState.x, cy - 20, 60, 40);
-    const midX = inertiaState.x + 30;
-
-    ctx.font = '13px sans-serif';
-    if (inertiaState.mode === 'compensate') {
-        drawArrow(ctx, midX, cy, midX + 45, cy, '#ef4444'); 
-        drawArrow(ctx, midX, cy, midX - 45, cy, '#38bdf8');
-        ctx.fillStyle = '#4ade80'; ctx.fillText('v = const', 15, 25);
-    } else {
-        drawArrow(ctx, midX, cy, midX + 15, cy, '#ef4444'); 
-        drawArrow(ctx, midX, cy, midX - 55, cy, '#ef4444');
-        inertiaState.vx -= 0.01; if (inertiaState.vx < 0) inertiaState.vx = 0;
-        ctx.fillStyle = '#f43f5e'; ctx.fillText('Торможение', 15, 25);
     }
-    drawArrow(ctx, midX, cy - 30, midX + (inertiaState.vx * 20), cy - 30, '#22c55e');
+
+    const cy = canvas.height / 2, bw = 90, bh = 50;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(inertiaState.x, cy - bh/2, bw, bh);
+    ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.strokeRect(inertiaState.x, cy - bh/2, bw, bh);
+    const mx = inertiaState.x + bw / 2;
+
+    if (inertiaState.mode === 'rest') {
+        drawArrow(ctx, mx, cy, mx + 70, cy, '#ef4444', 'Fтян'); 
+        drawArrow(ctx, mx, cy, mx - 70, cy, '#38bdf8', 'Fтр');
+        ctx.fillStyle = '#4ade80'; ctx.font = '13px sans-serif'; ctx.fillText('ПОКОЙ: Fравн = 0 ⇒ v = 0', 15, 25);
+    } else if (inertiaState.mode === 'compensate') {
+        drawArrow(ctx, mx, cy, mx + 70, cy, '#ef4444', 'Fтян'); 
+        drawArrow(ctx, mx, cy, mx - 70, cy, '#38bdf8', 'Fтр');
+        drawArrow(ctx, mx, cy - 40, mx + (inertiaState.vx * 30), cy - 40, '#22c55e', 'v');
+        ctx.fillStyle = '#4ade80'; ctx.font = '13px sans-serif'; ctx.fillText('ДВИЖЕНИЕ: Fравн = 0 ⇒ v = const', 15, 25);
+    } else if (inertiaState.mode === 'break') {
+        drawArrow(ctx, mx, cy, mx + 110, cy, '#ef4444', 'Fтян'); 
+        drawArrow(ctx, mx, cy, mx - 50, cy, '#38bdf8', 'Fтр');
+        inertiaState.vx -= 0.012; if (inertiaState.vx < 0) inertiaState.vx = 0;
+        drawArrow(ctx, mx, cy - 40, mx + (inertiaState.vx * 20), cy - 40, '#22c55e', 'v');
+        ctx.fillStyle = '#f43f5e'; ctx.font = '13px sans-serif'; ctx.fillText('ДИСПРОПОРЦИЯ: Fтян > Fтр ⇒ Торможение до остановки', 15, 25);
+    }
     activeAnimationIds.inertia = requestAnimationFrame(loopInertia);
 }
-
+</script>
+<script>
 let secondLawState = { x: 30, a: 0, v: 0, m: 2, active: false };
 function initSecondLawCanvas() {
     const canvas = document.getElementById('canvasSecondLaw');
@@ -744,72 +625,76 @@ function updateMass() {
     secondLawState.m = parseFloat(document.getElementById('massSlider').value);
     if (!secondLawState.active) renderSecondLawStatic();
 }
+
 function renderSecondLawStatic() {
-    const canvas = document.getElementById('canvasSecondLaw');
-    if (!canvas) return; const ctx = canvas.getContext('2d'); 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cy = canvas.height * 0.6, size = 25 + (secondLawState.m * 6);
+    const canvas = document.getElementById('canvasSecondLaw'); if (!canvas) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.6, size = 35 + (secondLawState.m * 6);
     ctx.fillStyle = '#0f172a'; ctx.fillRect(secondLawState.x, cy - size, size, size);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(secondLawState.x, cy - size, size, size);
-    drawArrow(ctx, secondLawState.x + size/2, cy - size/2, 
-              secondLawState.x + size/2 + 50, cy - size/2, '#ef4444');
+    const mx = secondLawState.x + size/2, my = cy - size/2;
+    drawArrow(ctx, mx, my, mx + 90, my, '#38bdf8', 'Fтян');
+    drawArrow(ctx, mx, my, mx - 40, my, '#38bdf8', 'Fтр');
+    drawArrow(ctx, mx, cy - size - 45, mx + 50, cy - size - 45, '#ef4444', 'Fравн', '#ef4444');
 }
-function launchSecondLaw() { 
-    secondLawState.x = 30; secondLawState.v = 0; 
-    secondLawState.a = 0.25 / secondLawState.m; 
-    secondLawState.active = true; loopSecondLaw(); 
+
+function launchSecondLaw() {
+    secondLawState.x = 30; secondLawState.v = 0;
+    secondLawState.a = 0.08 / secondLawState.m; // Снижено в 3 раза для плавного наблюдения
+    secondLawState.active = true; loopSecondLaw();
 }
+
 function loopSecondLaw() {
     const canvas = document.getElementById('canvasSecondLaw');
     if (!canvas || !secondLawState.active || currentSlide !== 3) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     secondLawState.v += secondLawState.a; secondLawState.x += secondLawState.v;
     if (secondLawState.x > canvas.width) { secondLawState.x = 30; secondLawState.v = 0; }
-    const cy = canvas.height * 0.6, size = 25 + (secondLawState.m * 6);
+    
+    const cy = canvas.height * 0.6, size = 35 + (secondLawState.m * 6);
     ctx.fillStyle = '#0f172a'; ctx.fillRect(secondLawState.x, cy - size, size, size);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(secondLawState.x, cy - size, size, size);
     const mx = secondLawState.x + size / 2, my = cy - size / 2;
-    drawArrow(ctx, mx, my, mx + 50, my, '#ef4444');
-    drawArrow(ctx, mx, cy - size - 12, mx + (secondLawState.a * 300), cy - size - 12, '#22c55e');
+    
+    drawArrow(ctx, mx, my, mx + 90, my, '#38bdf8', 'Fтян');
+    drawArrow(ctx, mx, my, mx - 40, my, '#38bdf8', 'Fтр');
+    drawArrow(ctx, mx, cy - size - 45, mx + 50, cy - size - 45, '#ef4444', 'Fравн', '#ef4444');
+    drawArrow(ctx, mx, cy - size - 15, mx + (secondLawState.a * 900), cy - size - 15, '#22c55e', 'a');
+    
+    ctx.fillStyle = '#22c55e'; ctx.font = '13px sans-serif';
+    ctx.fillText(`Ускорение a = ${(0.08/secondLawState.m * 30).toFixed(1)} м/с²`, 15, 25);
     activeAnimationIds.secondLaw = requestAnimationFrame(loopSecondLaw);
 }
 </script>
 <script>
-let collisionState = { x1: 40, x2: 240, v1: 0, v2: 0, colliding: false, timer: 0 };
+let collisionState = { x1: 50, x2: 240, v1: 0, v2: 0, colliding: false, timer: 0 };
 function initThirdLawCanvas() {
-    const canvas = document.getElementById('canvasThirdLaw'); 
-    if (!forceSetupCanvas(canvas)) return;
-    collisionState = { 
-        x1: 40, x2: canvas.width - 40, 
-        v1: 0, v2: 0, colliding: false, timer: 0 
-    };
+    const canvas = document.getElementById('canvasThirdLaw'); if (!forceSetupCanvas(canvas)) return;
+    collisionState = { x1: 50, x2: canvas.width - 50, v1: 0, v2: 0, colliding: false, timer: 0 };
     loopThirdLaw();
 }
 function startCollision() { 
     const canvas = document.getElementById('canvasThirdLaw'); 
-    collisionState.x1 = 40; collisionState.x2 = canvas.width - 40; 
-    collisionState.v1 = 1.5; collisionState.v2 = -1.5; 
-    collisionState.colliding = false; collisionState.timer = 0; 
+    collisionState.x1 = 50; collisionState.x2 = canvas.width - 50; 
+    collisionState.v1 = 1.2; collisionState.v2 = -1.2; collisionState.colliding = false; collisionState.timer = 0; 
 }
 function loopThirdLaw() {
-    const canvas = document.getElementById('canvasThirdLaw'); 
-    if (!canvas || currentSlide !== 4) return;
+    const canvas = document.getElementById('canvasThirdLaw'); if (!canvas || currentSlide !== 4) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionState.x1 += collisionState.v1; collisionState.x2 += collisionState.v2;
-    if (!collisionState.colliding && Math.abs(collisionState.x2 - collisionState.x1) <= 30) { 
-        collisionState.colliding = true; collisionState.v1 = 0; 
-        collisionState.v2 = 0; collisionState.timer = 25; 
+    const cy = canvas.height / 2, r = 30; // Увеличенный диаметр шаров
+
+    if (!collisionState.colliding && Math.abs(collisionState.x2 - collisionState.x1) <= r*2) { 
+        collisionState.colliding = true; collisionState.v1 = 0; collisionState.v2 = 0; collisionState.timer = 40; 
     }
-    const cy = canvas.height / 2;
-    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#38bdf8'; 
-    ctx.beginPath(); ctx.arc(collisionState.x1, cy, 15, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = '#fb923c'; 
-    ctx.beginPath(); ctx.arc(collisionState.x2, cy, 15, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(collisionState.x1, cy, r, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = '#fb923c'; ctx.beginPath(); ctx.arc(collisionState.x2, cy, r, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+
     if (collisionState.colliding && collisionState.timer > 0) { 
-        drawArrow(ctx, collisionState.x1, cy, collisionState.x1 - 50, cy, '#ef4444'); 
-        drawArrow(ctx, collisionState.x2, cy, collisionState.x2 + 50, cy, '#ef4444'); 
-        collisionState.timer--; 
-        if (collisionState.timer === 0) { collisionState.v1 = -1; collisionState.v2 = 1; } 
+        drawArrow(ctx, collisionState.x1 + r, cy, collisionState.x1 - 60, cy, '#ef4444', 'F₂→₁'); 
+        drawArrow(ctx, collisionState.x2 - r, cy, collisionState.x2 + 60, cy, '#ef4444', 'F₁→₂'); 
+        collisionState.timer--; if (collisionState.timer === 0) { collisionState.v1 = -1; collisionState.v2 = 1; } 
     }
     activeAnimationIds.thirdLaw = requestAnimationFrame(loopThirdLaw);
 }
@@ -818,31 +703,45 @@ function drawHooke() {
     const canvas = document.getElementById('canvasHooke'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const ext = parseInt(document.getElementById('hookeSlider').value);
-    const startX = 30, cy = canvas.height / 2, endX = (canvas.width / 2.8) + ext;
-    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(startX, cy);
+    const startX = 35, cy = canvas.height / 2, endX = (canvas.width / 2.5) + ext;
+    
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(startX, cy);
     const turns = 12; const step = (endX - startX) / turns;
     for (let i = 0; i < turns; i++) { 
-        const cx = startX + i * step; 
-        ctx.lineTo(cx + step/4, cy - 15); 
-        ctx.lineTo(cx + 3*step/4, cy + 15); 
-        ctx.lineTo(cx + step, cy); 
+        const cx = startX + i * step; ctx.lineTo(cx + step/4, cy - 25); ctx.lineTo(cx + 3*step/4, cy + 25); ctx.lineTo(cx + step, cy); 
     }
     ctx.stroke();
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(endX, cy - 15, 30, 30); 
-    ctx.strokeStyle = '#334155'; ctx.strokeRect(endX, cy - 15, 30, 30);
-    if (ext > 10) { drawArrow(ctx, endX, cy, endX - ext * 0.8, cy, '#ef4444'); }
+    
+    const sz = 50; // Увеличенный груз
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(endX, cy - sz/2, sz, sz);
+    ctx.strokeStyle = '#334155'; ctx.strokeRect(endX, cy - sz/2, sz, sz);
+    if (ext > 5) { 
+        drawArrow(ctx, endX, cy, endX - ext * 0.9 - 30, cy, '#ef4444', 'Fупр'); 
+        ctx.fillStyle = '#38bdf8'; ctx.font = '13px sans-serif'; ctx.fillText(`Удлинение x = ${ext} мм`, startX, cy + 55);
+    }
 }
 </script>
 <script>
 function drawQuiz1Static() {
     const canvas = document.getElementById('canvasQuiz1'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2, cy = canvas.height / 2, bw = 70, bh = 30;
+    const cx = canvas.width / 2, cy = canvas.height / 2, bw = 100, bh = 50;
     ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
-    drawArrow(ctx, cx, cy, cx - 50, cy, '#38bdf8'); 
-    drawArrow(ctx, cx, cy, cx + 50, cy, '#ef4444'); 
-    drawArrow(ctx, cx, cy, cx, cy - 45, '#fb923c');
+    drawArrow(ctx, cx, cy, cx - 110, cy, '#38bdf8', '1 (Fтр)'); 
+    drawArrow(ctx, cx, cy, cx + 110, cy, '#ef4444', '2 (v)'); 
+    drawArrow(ctx, cx, cy, cx - 70, cy - 40, '#fb923c', '3 (a)');
+}
+
+function drawQuiz2ForcesStatic() {
+    const canvas = document.getElementById('canvasQuiz2Forces'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2, bw = 90, bh = 45;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
+    ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
+    drawArrow(ctx, cx, cy, cx + 120, cy, '#ef4444', 'F₁ = 12 H'); 
+    drawArrow(ctx, cx, cy, cx - 50, cy, '#38bdf8', 'F₂ = 5 H'); 
+    drawArrow(ctx, cx - 50, cy, cx - 80, cy, '#fb923c', 'F₃ = 3 H');
 }
 
 function checkSelectAnswer(selectId, correctAnswer) {
@@ -857,11 +756,8 @@ function submitMultiSelector() {
     let localScore = 0;
     fields.forEach(f => {
         const el = document.getElementById(f); el.disabled = true;
-        if (el.value === correctMap[f]) { 
-            el.classList.add('correct-highlight'); localScore += 1; 
-        } else { 
-            el.classList.add('wrong-highlight'); 
-        }
+        if (el.value === correctMap[f]) { el.classList.add('correct-highlight'); localScore += 1; }
+        else { el.classList.add('wrong-highlight'); }
     });
     score += localScore; answersState.quiz1.submitted = true; updateSliderUI();
 }
@@ -869,36 +765,27 @@ function submitMultiSelector() {
 function checkCardAnswer(btnElement, questionIndex, isCorrect) {
     const parent = btnElement.parentElement; const siblingCards = parent.querySelectorAll('.card-btn');
     siblingCards.forEach(card => card.disabled = true);
-    if (isCorrect) { 
-        btnElement.classList.add('correct-highlight'); score += 1; setQuizState(questionIndex, true); 
-    } else { 
-        btnElement.classList.add('wrong-highlight'); setQuizState(questionIndex, false); 
-        highlightTrueAnswer(siblingCards, questionIndex); 
-    }
+    if (isCorrect) { btnElement.classList.add('correct-highlight'); score += 1; setQuizState(questionIndex, true); }
+    else { btnElement.classList.add('wrong-highlight'); setQuizState(questionIndex, false); highlightTrueAnswer(siblingCards, questionIndex); }
     updateSliderUI();
 }
 
 function setQuizState(idx, val) {
-    if (idx === 1) answersState.quiz2 = val; 
-    if (idx === 2) answersState.quiz3 = val; 
-    if (idx === 3) answersState.quiz4 = val;
+    if (idx === 1) answersState.quiz2 = val; if (idx === 2) answersState.quiz3 = val; if (idx === 3) answersState.quiz4 = val;
 }
 
 function highlightTrueAnswer(cards, qIdx) {
-    let trueIndexes = { 1: 1, 2: 2, 3: 1 }; 
-    cards[trueIndexes[qIdx]].classList.add('correct-highlight');
+    let trueIndexes = { 1: 1, 2: 2, 3: 1 }; cards[trueIndexes[qIdx]].classList.add('correct-highlight');
 }
 
 function buildFinalReport() {
     const container = document.getElementById('analyticsMap');
     const q1_res = (answersState.quiz1.v && answersState.quiz1.f && answersState.quiz1.a) ? 'Успешно' : 'Есть ошибки';
-    const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка'; 
-    const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка'; 
-    const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
+    const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка'; const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка'; const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
     let verdict = ''; const pct = (score / 8) * 100;
-    if (pct >= 85) verdict = '<span class="text-green">Превосходно! Максимум за КИМ ОГЭ.</span>';
+    if (pct >= 85) verdict = '<span class="text-green">Превосходно! Максимум КИМ ОГЭ.</span>';
     else if (pct >= 50) verdict = '<span class="text-blue">Хорошо. Повторите III закон Ньютона.</span>';
-    else verdict = '<span class="text-red">Требуется глубокая работа над теорией векторов.</span>';
+    else verdict = '<span class="text-red">Требуется работа над векторами.</span>';
     container.innerHTML = `
         <div class="analytics-item"><span>Задание №1:</span> <strong>${q1_res}</strong></div>
         <div class="analytics-item"><span>Задание №2:</span> <strong>${q2_res}</strong></div>
