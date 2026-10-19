@@ -838,8 +838,8 @@ function buildFinalReport() {
     // Теперь максимальный балл равен 4
     const pct = (score / 4) * 100;
     
-    if (pct >= 85) verdict = '<span class="text-green">Превосходно! Максимум КИМ ОГЭ.</span>';
-    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо. Повторите законы Ньютона.</span>';
+    if (pct >= 85) verdict = '<span class="text-green">Превосходно!</span>';
+    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо.</span>';
     else verdict = '<span class="text-red">Требуется работа над векторами.</span>';
     
     container.innerHTML = `
