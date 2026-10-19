@@ -879,47 +879,81 @@ function initPointsSimulation() {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    const cx = canvas.width / 2;
+    // Вычисляем два центра для разделения экрана пополам по горизонтали
     const cy = canvas.height / 2;
-    const r = 55;
+    const r = 40; // Оптимальный радиус, чтобы обе окружности влезли в окно
     
-    // Общая круговая траектория
+    const cxLeft = canvas.width * 0.28;  // Центр левой симуляции
+    const cxRight = canvas.width * 0.72; // Центр правой симуляции
+    
+    // --- 1. ЛЕВАЯ СИМУЛЯЦИЯ: ДВИЖЕНИЕ В ОДНУ СТОРОНУ ---
     ctx.strokeStyle = '#1e293b';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.arc(cxLeft, cy, r, 0, Math.PI * 2);
     ctx.stroke();
     
-    // Точка 1: Быстрая (Неоновый голубой)
-    const x1 = cx + r * Math.cos(simStates.points.ang1);
-    const y1 = cy + r * Math.sin(simStates.points.ang1);
-    ctx.fillStyle = '#38bdf8';
-    ctx.beginPath();
-    ctx.arc(x1, y1, 7, 0, Math.PI * 2);
-    ctx.fill();
-    drawArrow(ctx, x1, y1, x1 - 35 * Math.sin(simStates.points.ang1), y1 + 35 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+    // Подпись для левого круга
+    ctx.fillStyle = '#94a3b8';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("В одну сторону (догон)", cxLeft, cy - r - 15);
     
-    // Точка 2: Медленная (Мягкий оранжевый)
-    const x2 = cx + r * Math.cos(simStates.points.ang2);
-    const y2 = cy + r * Math.sin(simStates.points.ang2);
+    // Точка 1 (Быстрая, голубая) и Точка 2 (Медленная, оранжевая) - обе по часовой стрелке
+    const x1_L = cxLeft + r * Math.cos(simStates.points.ang1);
+    const y1_L = cy + r * Math.sin(simStates.points.ang1);
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath(); ctx.arc(x1_L, y1_L, 6, 0, Math.PI * 2); ctx.fill();
+    drawArrow(ctx, x1_L, y1_L, x1_L - 25 * Math.sin(simStates.points.ang1), y1_L + 25 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+    
+    const x2_L = cxLeft + r * Math.cos(simStates.points.ang2);
+    const y2_L = cy + r * Math.sin(simStates.points.ang2);
     ctx.fillStyle = '#fb923c';
+    ctx.beginPath(); ctx.arc(x2_L, y2_L, 6, 0, Math.PI * 2); ctx.fill();
+    drawArrow(ctx, x2_L, y2_L, x2_L - 15 * Math.sin(simStates.points.ang2), y2_L + 15 * Math.cos(simStates.points.ang2), '#fb923c', 'v₂');
+    
+    
+    // --- 2. ПРАВАЯ СИМУЛЯЦИЯ: В ПРОТИВОПОЛОЖНЫЕ СТОРОНЫ ---
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.arc(x2, y2, 7, 0, Math.PI * 2);
-    ctx.fill();
-    drawArrow(ctx, x2, y2, x2 - 25 * Math.sin(simStates.points.ang2), y2 + 25 * Math.cos(simStates.points.ang2), '#fb923c', 'v₂');
+    ctx.arc(cxRight, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Подпись для правого круга
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillText("Навстречу (встреча)", cxRight, cy - r - 15);
+    
+    // Точка 1 (Голубая) летит по часовой стрелке, Точка 2 (Оранжевая) летит НАВСТРЕЧУ (против часовой)
+    const x1_R = cxRight + r * Math.cos(simStates.points.ang1);
+    const y1_R = cy + r * Math.sin(simStates.points.ang1);
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath(); ctx.arc(x1_R, y1_R, 6, 0, Math.PI * 2); ctx.fill();
+    drawArrow(ctx, x1_R, y1_R, x1_R - 25 * Math.sin(simStates.points.ang1), y1_R + 25 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+    
+    // Для движения навстречу инвертируем угол второй точки (минус ang2) и направление вектора скорости
+    const invAng2 = -simStates.points.ang2;
+    const x2_R = cxRight + r * Math.cos(invAng2);
+    const y2_R = cy + r * Math.sin(invAng2);
+    ctx.fillStyle = '#fb923c';
+    ctx.beginPath(); ctx.arc(x2_R, y2_R, 6, 0, Math.PI * 2); ctx.fill();
+    // Вектор скорости направлен в противоположную сторону вращения (против часовой касательной)
+    drawArrow(ctx, x2_R, y2_R, x2_R + 15 * Math.sin(invAng2), y2_R - 15 * Math.cos(invAng2), '#fb923c', 'v₂');
 }
 
 function loopPoints() {
     if (!simStates.points.active) return;
     
-    // Физическое соотношение скоростей из решения системы уравнений задачи:
-    // v1 - v2 = S/20 и v1 + v2 = S/4 => скор. относятся как 1.5 к 1
-    simStates.points.ang1 += 0.024; // Скорость быстрой точки
-    simStates.points.ang2 += 0.016; // Скорость медленной точки
+    // Физически точные коэффициенты скоростей, исходя из условий ОГЭ задачи:
+    // Скорость сближения вдогонку в 5 раз меньше скорости сближения навстречу (20с / 4с = 5)
+    // Из системы уравнений: v1 = 0.024 рад/кадр, v2 = 0.016 рад/кадр
+    simStates.points.ang1 += 0.024; 
+    simStates.points.ang2 += 0.016; 
     
     initPointsSimulation();
     activeAnimations.points = requestAnimationFrame(loopPoints);
 }
+
 
 </script>
 <script>
