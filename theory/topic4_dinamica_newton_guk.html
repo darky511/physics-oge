@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" 
           content="width=device-width, initial-scale=1.0">
-    <title>Законы Ньютона — ОГЭ</title>
+    <title>Законы Ньютона. Закон Гука</title>
 </head>
 <body>
 
@@ -289,9 +289,9 @@
     <div class="slide" id="slide10">
         <div class="slide-inner">
             <span class="slide-type">Аналитика сессии</span>
-            <h2>Диагностическая карта ОГЭ по динамике</h2>
+            <h2>Диагностическая карта</h2>
             <div class="analytics-card" id="analyticsMap">
-                Нажмите кнопку для расчёта результатов и генерации вердикта.
+                Нажмите кнопку для расчёта результатов.
             </div>
             <div style="margin-top: 25px; text-align: center;">
                 <button class="btn btn-accent" style="padding: 12px 40px;" 
@@ -546,7 +546,7 @@ function initForceCanvas() {
     ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
 
     if (forceMode === 'one-side') {
-        drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444', 'F₁'); 
+        drawArrow(ctx, cx, cy + 15, cx + 70, cy + 15, '#ef4444', 'F₁'); 
         drawArrow(ctx, cx + 70, cy, cx + 150, cy, '#fb923c', 'F₂');
         drawArrow(ctx, cx, cy - 45, cx + 150, cy - 45, '#38bdf8', 'Fравн', '#38bdf8');
     } else if (forceMode === 'opposite') {
