@@ -520,7 +520,7 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "", txtColor = "#f8
         ctx.fillStyle = txtColor; ctx.font = "bold 14px sans-serif";
         const offsetX = 22 * Math.cos(angle);
         const offsetY = 22 * Math.sin(angle) + 15;
-        ctx.fillText(txt, toX + offsetX - 15, toY + offsetY);
+        ctx.fillText(txt, toX + offsetX - 30, toY + offsetY);
     }
 }
 </script>
