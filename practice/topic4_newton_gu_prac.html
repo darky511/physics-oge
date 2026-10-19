@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ Физика — Лаборатория: Законы Динамики Ньютона</title>
+    <!-- Стили CSS будут подключены в Части 5 -->
+</head>
+<body>
+
+<div class="app-container">
+    <header class="app-header">
+        <div class="topic-badge">Блок 4. Динамика и Упругость</div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+        </div>
+        <div class="score-badge" id="scoreDisplay">Успех: 0 / 14</div>
+    </header>
+
+    <!-- ЗАДАНИЕ 1.1: Алиса в Зазеркалье -->
+    <div class="slide active" id="slide1">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.1 (I закон Ньютона)</span>
+            <h2>Чем объясняется резкий вылет рыцаря вперед при остановке коня?</h2>
+            <p class="text-concentrate" style="margin-bottom: 20px;">
+                В сказке «Алиса в Зазеркалье» сказано: «Стоило коню остановиться, как рыцарь тут же летел вперёд». 
+                Какое физическое явление лежит в основе этого наблюдения?
+            </p>
+            
+            <!-- Кнопки-карточки вместо длинных списков согласно брифу -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 1, true)">1) Явлением инерции</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 1, false)">2) Силами сопротивления</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 1, false)">3) Выталкивающей силой</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 1, false)">4) Всемирным тяготением</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.2: Закон Гука расчет -->
+    <div class="slide" id="slide2">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.2 (Закон Гука)</span>
+                <h2>Определите силу упругости пружины при деформации</h2>
+                <p class="text-concentrate">
+                    Жёсткость пружины динамометра равна <strong>7500 Н/м</strong>. 
+                    Чему равна возникающая сила упругости при её растяжении на <strong>4 см</strong>? 
+                    Ответ выразите в Ньютонах.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q2" class="oga-input" placeholder="Ответ в Н...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q2', '300', 2)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasHookeQ2"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.3: Случаи движения по инерции -->
+    <div class="slide" id="slide3">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.3 (Примеры инерции)</span>
+            <h2>В каком из приведённых случаев речь идёт о движении по инерции?</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+                <button class="btn btn-card" style="text-align: left; padding: 10px;" onclick="checkCardAnswer(this, 3, false)">
+                    1) Мяч, брошенный вертикально вверх, возвращается обратно.
+                </button>
+                <button class="btn btn-card" style="text-align: left; padding: 10px;" onclick="checkCardAnswer(this, 3, false)">
+                    2) Шарик, скатывающийся с наклонной плоскости, движется с ускорением.
+                </button>
+                <button class="btn btn-card" style="text-align: left; padding: 10px;" onclick="checkCardAnswer(this, 3, true)">
+                    3) Споткнувшись о внезапное препятствие, человек падает вперёд.
+                </button>
+                <button class="btn btn-card" style="text-align: left; padding: 10px;" onclick="checkCardAnswer(this, 3, false)">
+                    4) Растянутая пружина динамометра возвращает свою исходную форму.
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.4: Направление равнодействующей (Баллистика) -->
+    <div class="slide" id="slide4">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.4 (Равнодействующая сила)</span>
+                <h2>Куда направлена равнодействующая сил в точке А?</h2>
+                <p class="text-concentrate">
+                    Мяч брошен под углом к горизонту. Сопротивление воздуха пренебрежимо мало. 
+                    Определите, какому из векторов (1–4) сонаправлена равнодействующая сила, действующая на мяч в верхней точке траектории А.
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('ballistics')">Старт / Пауза</button>
+                    <button class="btn" onclick="resetSimulation('ballistics')">Сброс</button>
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q4" class="oga-input" placeholder="Номер вектора...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q4', '4', 4)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasBallisticsQ4"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.5: Встряхивание собаки -->
+    <div class="slide" id="slide5">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.5 (Качественная задача)</span>
+                <h2>На каком явлении основано освобождение шерсти от капель воды?</h2>
+                <p class="text-concentrate">
+                    Промокшая под дождём собака начинает резко встряхиваться. 
+                    Капли воды и частицы грязи при этом стремительно разлетаются в стороны. 
+                    Выберите ведущее физическое явление.
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('dog')">Встряхнуть шерсть</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 15px;">
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">1) Реактивное движение</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 5, true)">2) Явление инерции</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">3) Действие силы тяжести</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasDogQ5"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.6: Мячик на столике в поезде -->
+    <div class="slide" id="slide6">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.6 (Неинерциальные СО)</span>
+                <h2>Куда покатится мяч при резком ускорении поезда вперед?</h2>
+                <p class="text-concentrate">
+                    На горизонтальном гладком столике в купе поезда лежит мяч. 
+                    При внезапном экстренном ускорении поезда вперёд мячик начинает катиться относительно стола. 
+                    Выберите верное физическое объяснение ситуации.
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('train')">Ускорение поезда</button>
+                    <button class="btn" onclick="resetSimulation('train')">Сброс</button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+                    <button class="btn btn-card" style="text-align:left; font-size:11px;" onclick="checkCardAnswer(this, 6, false)">1) Нагревание за счет трения об атмосферу</button>
+                    <button class="btn btn-card" style="text-align:left; font-size:11px;" onclick="checkCardAnswer(this, 6, true)">2) Мяч по инерции сохраняет покой относительно Земли</button>
+                    <button class="btn btn-card" style="text-align:left; font-size:11px;" onclick="checkCardAnswer(this, 6, false)">3) Во время падения груз теряет упругие свойства</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasTrainQ6"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.7: Расчет по второму закону Ньютона -->
+    <div class="slide" id="slide7">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.7 (II закон Ньютона)</span>
+            <h2>Вычислите модуль приобретаемого телом ускорения</h2>
+            <p class="text-concentrate" style="margin-bottom: 25px;">
+                Исследуемое тело обладает строго заданной массой <strong>500 г</strong>. 
+                На него начинает непрерывно действовать постоянная несбалансированная сила <strong>0,2 Н</strong>. 
+                Какое по модулю ускорение приобретёт данное тело в инерциальной системе отсчёта? 
+                Ответ выразите в м/с².
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q7" class="oga-input" placeholder="м/с²...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q7', '0.4', 7)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.8: Растяжение пружины под грузом -->
+    <div class="slide" id="slide8">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.8 (Баланс сил)</span>
+                <h2>Чему равно продольное растяжение вертикальной пружины?</h2>
+                <p class="text-concentrate">
+                    Груз массой <strong>100 г</strong> подвесили на упругую вертикальную пружину жёсткостью <strong>40 Н/м</strong>. 
+                    Чему равно её растяжение в состоянии установившегося равновесия? 
+                    Ответ выразите в <strong>сантиметрах</strong> (дробь через точку).
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q8" class="oga-input" placeholder="см...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q8', '2.5', 8)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasSpringQ8"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.9: Равнодействующая по сетке -->
+    <div class="slide" id="slide9">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.9 (Векторная сетка)</span>
+                <h2>Чему равен модуль равнодействующей трех приложенных сил?</h2>
+                <p class="text-concentrate">
+                    На тело действуют три силы. Их модули: 
+                    F₁ = <strong>4 Н</strong>, F₂ = <strong>6 Н</strong>, F₃ = <strong>12 Н</strong>. 
+                    Ориентация векторов строго задана на координатной сетке. 
+                    Вычислите модуль их результирующей равнодействующей силы в Ньютонах.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q9" class="oga-input" placeholder="Н...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q9', '10', 9)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasGridQ9"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.10: Параметры шкалы динамометра -->
+    <div class="slide" id="slide10">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.10 (Шкала прибора)</span>
+                <h2>Определите цену деления и предел измерения прибора</h2>
+                <p class="text-concentrate">
+                    Внимательно изучите шкалу представленного пружинного динамометра. 
+                    Определите по ней цену деления (Ц.Д.) и максимальный предел измерения прибора.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 15px;">
+                    <button class="btn btn-card" style="text-align: left;" onclick="checkCardAnswer(this, 10, false)">1) Ц.Д. = 0,5 Н; предел = 4 Н</button>
+                    <button class="btn btn-card" style="text-align: left;" onclick="checkCardAnswer(this, 10, true)">2) Ц.Д. = 0,1 Н; предел = 4 Н</button>
+                    <button class="btn btn-card" style="text-align: left;" onclick="checkCardAnswer(this, 10, false)">3) Ц.Д. = 1 Н; предел = 4 Н</button>
+                    <button class="btn btn-card" style="text-align: left;" onclick="checkCardAnswer(this, 10, false)">4) Ц.Д. = 4 Н; предел = 1 Н</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasScaleQ10"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.11: Повтор качественной задачи на инерцию -->
+    <div class="slide" id="slide11">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.11 (Физические явления)</span>
+            <h2>Какое явление объясняет отставание мяча от ускоряющегося поезда?</h2>
+            <p class="text-concentrate" style="margin-bottom: 20px;">
+                На горизонтальном гладком столике в купе движущегося поезда лежит мячик. При ускорении поезда мячик начинает катиться против направления движения поезда относительно купе. Какое физическое явление объясняет движение мячика?
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 11, true)">1) Инерция</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 11, false)">2) Трение скольжения</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 11, false)">3) Закон сохранения энергии</button>
+                <button class="btn btn-card" onclick="checkCardAnswer(this, 11, false)">4) Всемирное тяготение</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.12: Равнодействующая по графику скорости -->
+    <div class="slide" id="slide12">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.12 (Динамика по графику)</span>
+                <h2>Чему равен модуль равнодействующей сил в первые 2 секунды?</h2>
+                <p class="text-concentrate">
+                    На рисунке приведён график зависимости модуля скорости прямолинейно движущегося тела массой <strong>1 кг</strong> от времени t относительно Земли. 
+                    Определите модуль равнодействующей всех сил, действующих на тело на интервале от 0 до 2 с.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q12" class="oga-input" placeholder="Н...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q12', '5', 12)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasGraphQ12"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.13: Направление равнодействующей по сетке -->
+    <div class="slide" id="slide13">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.13 (Направление векторов)</span>
+                <h2>С каким из векторов совпадает направление равнодействующей?</h2>
+                <p class="text-concentrate">
+                    На материальную точку действуют три силы: F₁ = 2 Н, F₂ = 3 Н и F₃ = 6 Н. 
+                    Направления действия сил показаны на рисунке. С направлением какого из векторов (1, 2, 3 или 4) совпадает итоговая равнодействующая?
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q13" class="oga-input" placeholder="Номер вектора...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q13', '4', 13)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasVectorQ13"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.1: Высокий уровень — Вертикальный подъем -->
+    <div class="slide" id="slide14">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №3.1 (Высокий уровень)</span>
+            <h2>Чему равен модуль силы натяжения троса при ускоренном подъеме?</h2>
+            <p class="text-concentrate" style="margin-bottom: 25px;">
+                Груз массой <strong>5 кг</strong>, подвешенный на лёгком тросе, поднимают вертикально вверх с ускорением, равным по модулю <strong>1 м/с²</strong> и направленным вверх. Приняв ускорение свободного падения g = 10 м/с², рассчитайте силу натяжения троса в Ньютонах.
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q14" class="oga-input" placeholder="Н...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q14', '55', 14)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.2: Высокий уровень — Обрыв нити при рывке -->
+    <div class="slide" id="slide15">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №3.2 (Качественная задача)</span>
+                <h2>Какая нить оборвется при резком рывке за нижнюю нить 2?</h2>
+                <p class="text-concentrate">
+                    Массивный груз подвешен на тонкой нити 1. К грузу снизу прикреплена такая же нить 2. 
+                    Определите, какая из нитей оборвётся первой, если резко и быстро дёрнуть за нижнюю нить. 
+                    Проверьте гипотезу с помощью симуляции (Резкий рывок vs Плавное натяжение).
+                </p>
+                <div class="sim-controls" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button class="btn btn-accent" onclick="triggerThreadBreak('sharp')">Резкий рывок</button>
+                    <button class="btn" onclick="triggerThreadBreak('smooth')">Плавно тянуть</button>
+                </div>
+                <div class="sim-controls">
+                    <button class="btn" style="flex: 1;" onclick="resetSimulation('thread')">Сброс нитей</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px;">
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 15, false)">1) Верхняя №1</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 15, true)">2) Нижняя №2</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasThreadQ15"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.3: Высокий уровень — Ящик в лифте -->
+    <div class="slide" id="slide16">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №3.3 (Комплексная задача)</span>
+            <h2>На какую высоту поднимется лифт из состояния покоя за первые 5 секунд?</h2>
+            <p class="text-concentrate" style="margin-bottom: 25px;">
+                На полу равноускоренно движущегося вверх лифта стоит ящик массой <strong>50 кг</strong>. 
+                Определите высоту подъёма лифта за первые <strong>5 с</strong> движения, если сила давления (вес) ящика на пол лифта составляет <strong>600 Н</strong>. 
+                Ответ выразите в метрах.
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q16" class="oga-input" placeholder="м...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q16', '25', 16)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ИТОГОВЫЙ СЛАЙД АНАЛИТИКИ -->
+    <div class="slide" id="slide17">
+        <div class="slide-inner">
+            <span class="slide-type">Итоги практикума</span>
+            <h2>Диагностическая карта по Блоку №4</h2>
+            <div class="analytics-card" id="analyticsMap">
+                Решите задачи практикума и нажмите кнопку ниже для автоматической компиляции отчета.
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn btn-accent" style="padding:12px 35px; font-weight:700;" onclick="buildReport()">Сформировать вердикт</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="controls-footer">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Назад</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Вперед →</button>
+    </footer>
+</div>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+body {
+    background-color: #04060a; color: #f8fafc;
+    font-family: system-ui, -apple-system, sans-serif;
+    height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
+}
+.app-container {
+    width: 95vw; max-width: 960px; height: 85vh; max-height: 520px;
+    background-color: #090d16; border: 1px solid #1e293b; border-radius: 16px;
+    display: flex; flex-direction: column; justify-content: space-between; position: relative;
+}
+.app-header {
+    padding: 12px 20px; background-color: #0f172a; border-bottom: 1px solid #1e293b;
+    border-top-left-radius: 15px; border-top-right-radius: 15px;
+    display: flex; align-items: center; justify-content: space-between; gap: 15px;
+}
+.topic-badge {
+    font-size: 11px; text-transform: uppercase; font-weight: 700; color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1); padding: 4px 10px; border-radius: 6px;
+}
+.progress-bar-container { flex-grow: 1; height: 6px; background-color: #1e293b; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, #22c55e); transition: width 0.3s ease; }
+.score-badge { font-size: 12px; font-weight: 600; color: #4ade80; background: rgba(34, 197, 94, 0.1); padding: 4px 10px; border-radius: 6px; }
+.controls-footer { padding: 12px 20px; background-color: #0f172a; border-top: 1px solid #1e293b; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; display: flex; justify-content: space-between; }
+.nav-btn { background-color: #1e293b; color: #f8fafc; border: none; padding: 8px 18px; font-size: 13px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.slide { display: none; flex-grow: 1; padding: 24px; overflow: hidden; }
+.slide.active { display: flex; flex-direction: column; }
+.slide-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; height: 100%; }
+.slide-inner { display: flex; flex-direction: column; height: 100%; }
+.content-side { display: flex; flex-direction: column; height: 100%; }
+.visual-side { background-color: #05070f; border: 1px solid #1e293b; border-radius: 12px; position: relative; overflow: hidden; height: 100%; }
+.visual-side canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.slide-type { font-size: 10px; text-transform: uppercase; color: #fb923c; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.5px; }
+h2 { font-size: 19px; font-weight: 700; color: #f8fafc; margin-bottom: 10px; line-height: 1.35; }
+.text-concentrate { font-size: 13.5px; line-height: 1.5; color: #94a3b8; }
+.sim-controls { display: flex; gap: 6px; margin-top: 10px; }
+
+.btn { background-color: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 6px 12px; font-size: 11.5px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.btn-accent { border-color: #38bdf8; color: #38bdf8; }
+.btn-accent:hover { background: rgba(56, 189, 248, 0.08); }
+.btn-card { background: #05070f; border: 1px solid #1e293b; border-radius: 8px; color: #cbd5e1; text-align: left; padding: 12px; font-size: 13px; font-weight: 500; }
+.btn-card:hover { border-color: #334155; background: #090d16; }
+
+.answer-zone { background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 8px; border: 1px dashed #334155; margin-top: auto; }
+.input-row { display: flex; gap: 8px; }
+.oga-input { background-color: #05070f; border: 1px solid #334155; color: #f8fafc; padding: 7px 14px; font-size: 13px; border-radius: 6px; outline: none; flex-grow: 1; }
+.oga-input:focus { border-color: #38bdf8; }
+
+.correct-highlight { background-color: rgba(34, 197, 94, 0.1) !important; border-color: #22c55e !important; color: #4ade80 !important; }
+.wrong-highlight { background-color: rgba(239, 68, 68, 0.1) !important; border-color: #ef4444 !important; color: #f43f5e !important; }
+.analytics-card { background-color: #05070f; border: 1px solid #1e293b; border-radius: 10px; padding: 14px; height: 210px; overflow-y: auto; font-size: 12px; }
+</style>
+<script>
+// Глобальное состояние
+let currentSlide = 1;
+const totalSlides = 17;
+const totalTasksCount = 14; 
+let solvedTasks = {}; // Карта состояния ответов ученика
+
+// Состояния анимаций
+let simStates = {
+    ballistics: { active: false, t: 0, x: 0, y: 0 },
+    dog: { active: false, phase: 0, count: 0 },
+    train: { active: false, xCar: 0, vCar: 0, aCar: 0.15, xBall: 0, vBall: 0 },
+    thread: { active: false, mode: null, progress: 0, broken1: false, broken2: false }
+};
+let activeAnimations = { ballistics: null, dog: null, train: null, thread: null };
+
+window.onload = function() {
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 100);
+    window.addEventListener('resize', triggerCanvasBySlide);
+};
+
+function changeSlide(direction) {
+    stopAllSimulations();
+    document.getElementById(`slide${currentSlide}`).classList.remove('active');
+    currentSlide += direction;
+    document.getElementById(`slide${currentSlide}`).classList.add('active');
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 50);
+}
+
+function updateSliderUI() {
+    document.getElementById('prevBtn').disabled = (currentSlide === 1);
+    document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+    document.getElementById('progressBar').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
+    
+    let score = 0;
+    for (let key in solvedTasks) {
+        if (solvedTasks[key] && solvedTasks[key].success === true) score++;
+    }
+    document.getElementById('scoreDisplay').innerText = `Успех: ${score} / ${totalTasksCount}`;
+}
+
+function stopAllSimulations() {
+    for (let k in activeAnimations) { 
+        if (activeAnimations[k]) { cancelAnimationFrame(activeAnimations[k]); activeAnimations[k] = null; } 
+    }
+    for (let k in simStates) { simStates[k].active = false; }
+}
+
+function forceSetupCanvas(canvas) {
+    if (!canvas) return false;
+    const parent = canvas.parentElement;
+    const rect = parent.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return false;
+    canvas.width = rect.width; canvas.height = rect.height;
+    return true;
+}
+
+function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(fromX, fromY); ctx.lineTo(toX, toY); ctx.stroke();
+    const angle = Math.atan2(toY - fromY, toX - fromX);
+    ctx.beginPath(); ctx.moveTo(toX, toY);
+    ctx.lineTo(toX - 12 * Math.cos(angle - Math.PI / 6), toY - 12 * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(toX - 12 * Math.cos(angle + Math.PI / 6), toY - 12 * Math.sin(angle + Math.PI / 6));
+    ctx.closePath(); ctx.fill();
+    if (txt) {
+        ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(txt, toX, toY + 12);
+    }
+}
+
+// ПРОВЕРКА ОТВЕТОВ: Текстовые поля
+function checkTextAnswer(inputId, correctAnswer, taskNum) {
+    if (solvedTasks[taskNum]) return;
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const userAns = input.value.trim().replace(',', '.');
+    if (userAns === "") return;
+
+    input.disabled = true;
+    const btn = input.nextElementSibling;
+    if (btn) btn.disabled = true;
+
+    const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer) || userAns === correctAnswer);
+    if (isCorrect) {
+        input.classList.add('correct-highlight');
+    } else {
+        input.classList.add('wrong-highlight');
+    }
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
+    updateSliderUI();
+}
+
+// ПРОВЕРКА ОТВЕТОВ: Кнопки-карточки
+function checkCardAnswer(btn, taskNum, isCorrect) {
+    if (solvedTasks[taskNum]) return;
+    const container = btn.parentElement;
+    const cards = container.querySelectorAll('.btn-card');
+    cards.forEach(c => c.disabled = true);
+
+    if (isCorrect) {
+        btn.classList.add('correct-highlight');
+    } else {
+        btn.classList.add('wrong-highlight');
+        cards.forEach(c => {
+            if (c !== btn && c.innerText.includes("1)")) c.classList.add('correct-highlight');
+            if (taskNum === 3 && c.innerText.includes("3)")) c.classList.add('correct-highlight');
+            if (taskNum === 10 && c.innerText.includes("2)")) c.classList.add('correct-highlight');
+        });
+    }
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
+    updateSliderUI();
+}
+</script>
+
+<script>
+// ДИСПЕТЧЕР ХОЛСТОВ
+function triggerCanvasBySlide() {
+    if (currentSlide === 2) drawHookeQ2();
+    if (currentSlide === 4) initBallisticsSimulation();
+    if (currentSlide === 5) initDogSimulation();
+    if (currentSlide === 6) initTrainSimulation();
+    if (currentSlide === 8) drawSpringQ8();
+    if (currentSlide === 9) drawGridQ9();
+    if (currentSlide === 10) drawScaleQ10();
+    if (currentSlide === 12) drawGraphQ12();
+    if (currentSlide === 13) drawVectorQ13();
+    if (currentSlide === 15) initThreadSimulation();
+}
+
+// Задание 1.2: Закон Гука в статике
+function drawHookeQ2() {
+    const canvas = document.getElementById('canvasHookeQ2'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2;
+    ctx.fillStyle = '#1e293b'; ctx.fillRect(cx - 30, 20, 60, 10); // Потолок
+    // Пружина
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath();
+    ctx.moveTo(cx, 30); for(let y = 30; y <= 130; y += 8) { ctx.lineTo(cx + (y%16===0?15:-15), y); }
+    ctx.lineTo(cx, 138); ctx.stroke();
+    // Груз
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155';
+    ctx.fillRect(cx - 20, 138, 40, 30); ctx.strokeRect(cx - 20, 138, 40, 30);
+    // Векторы сил
+    drawArrow(ctx, cx, 138, cx, 80, '#38bdf8', 'Fупр');
+    drawArrow(ctx, cx, 153, cx, 220, '#ef4444', 'Fтяж');
+}
+
+// Задание 1.4: Баллистика и Равнодействующая
+function toggleSimulation(key) {
+    simStates[key].active = !simStates[key].active;
+    if (simStates[key].active) {
+        if (key === 'ballistics') loopBallistics();
+        if (key === 'dog') loopDog();
+        if (key === 'train') loopTrain();
+    }
+}
+function resetSimulation(key) {
+    stopAllSimulations();
+    if (key === 'ballistics') { simStates.ballistics.t = 0; initBallisticsSimulation(); }
+    if (key === 'train') { simStates.train.xCar = 0; simStates.train.vCar = 0; simStates.train.xBall = 0; simStates.train.vBall = 0; initTrainSimulation(); }
+    if (key === 'thread') { simStates.thread.progress = 0; simStates.thread.broken1 = false; simStates.thread.broken2 = false; initThreadSimulation(); }
+}
+function initBallisticsSimulation() {
+    const canvas = document.getElementById('canvasBallisticsQ4'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.75;
+    
+    // Траектория
+    ctx.strokeStyle = '#334155'; ctx.setLineDash(Array(4, 4)); ctx.beginPath();
+    ctx.moveTo(30, cy); ctx.quadraticCurveTo(canvas.width/2, cy - 140, canvas.width - 30, cy); ctx.stroke(); ctx.setLineDash(Array());
+    
+    // Точка А (Пик)
+    const ax = canvas.width / 2, ay = cy - 70;
+    ctx.fillStyle = '#f8fafc'; ctx.beginPath(); ctx.arc(ax, ay, 4, 0, Math.PI*2); ctx.fill();
+    ctx.fillText("А", ax - 12, ay - 12);
+    
+    // Векторы выбора (1-4)
+    drawArrow(ctx, ax, ay, ax, ay - 40, '#fb923c', '1');
+    drawArrow(ctx, ax, ay, ax + 30, ay - 30, '#fb923c', '2');
+    drawArrow(ctx, ax, ay, ax + 40, ay, '#fb923c', '3');
+    drawArrow(ctx, ax, ay, ax, ay + 45, '#ef4444', '4 (Fравн)');
+}
+function loopBallistics() {
+    if (!simStates.ballistics.active) return;
+    simStates.ballistics.t += 0.01; if (simStates.ballistics.t > 1) simStates.ballistics.t = 0;
+    initBallisticsSimulation();
+    const ctx = document.getElementById('canvasBallisticsQ4').getContext('2d');
+    const cy = canvasBallisticsQ4.height * 0.75;
+    // Летящий мяч
+    const t = simStates.ballistics.t;
+    const mx = 30 + (canvasBallisticsQ4.width - 60) * t;
+    const my = cy - 4 * 70 * t * (1 - t);
+    ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(mx, my, 8, 0, Math.PI*2); ctx.fill();
+    activeAnimations.ballistics = requestAnimationFrame(loopBallistics);
+}
+
+// Задание 1.5: Встряхивание шерсти собаки
+function initDogSimulation() {
+    const canvas = document.getElementById('canvasDogQ5'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    // Корпус собаки (схематичный овал с фазовым сдвигом гармонических колебаний)
+    let dx = simStates.dog.active ? Math.sin(simStates.dog.phase) * 15 : 0;
+    ctx.fillStyle = '#1e293b'; ctx.beginPath(); ctx.ellipse(cx + dx, cy, 45, 30, 0, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.stroke();
+    // Голова
+    ctx.beginPath(); ctx.arc(cx - 50 + dx, cy - 10, 15, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    // Капли воды по инерции слетают
+    if (simStates.dog.active) {
+        ctx.fillStyle = '#38bdf8';
+        for(let i = 0; i < 6; i++) {
+            let kx = cx + dx + Math.cos(i) * 50 + (simStates.dog.phase * 5) % 40;
+            ctx.beginPath(); ctx.arc(kx, cy - 20 + Math.sin(i)*20, 3, 0, Math.PI*2); ctx.fill();
+        }
+    }
+}
+function loopDog() {
+    if (!simStates.dog.active) return;
+    simStates.dog.phase += 0.25;
+    initDogSimulation(); activeAnimations.dog = requestAnimationFrame(loopDog);
+}
+
+// Задание 1.6: Поезд и мяч в неинерциальной СО
+function initTrainSimulation() {
+    const canvas = document.getElementById('canvasTrainQ6'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.65;
+    // Отрисовка вагона поезда
+    let tx = simStates.train.xCar;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(15, cy - 60, canvas.width - 30, 80);
+<script>
+// Глобальное состояние системы
+let currentSlide = 1;
+const totalSlides = 17;
+const totalTasksCount = 14; 
+let solvedTasks = {}; // Карта состояния ответов ученика
+
+// Состояния анимаций для каждого холста
+let simStates = {
+    ballistics: { active: false, t: 0, x: 0, y: 0 },
+    dog: { active: false, phase: 0, count: 0 },
+    train: { active: false, xCar: 0, vCar: 0, aCar: 0.15, xBall: 0, vBall: 0 },
+    thread: { active: false, mode: null, progress: 0, broken1: false, broken2: false }
+};
+let activeAnimations = { ballistics: null, dog: null, train: null, thread: null };
+
+window.onload = function() {
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 100);
+    window.addEventListener('resize', triggerCanvasBySlide);
+};
+
+function changeSlide(direction) {
+    stopAllSimulations();
+    document.getElementById(`slide${currentSlide}`).classList.remove('active');
+    currentSlide += direction;
+    document.getElementById(`slide${currentSlide}`).classList.add('active');
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 50);
+}
+
+function updateSliderUI() {
+    document.getElementById('prevBtn').disabled = (currentSlide === 1);
+    document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+    document.getElementById('progressBar').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
+    
+    let score = 0;
+    for (let key in solvedTasks) {
+        if (solvedTasks[key] && solvedTasks[key].success === true) score++;
+    }
+    document.getElementById('scoreDisplay').innerText = `Успех: ${score} / ${totalTasksCount}`;
+}
+
+function stopAllSimulations() {
+    for (let k in activeAnimations) { 
+        if (activeAnimations[k]) { cancelAnimationFrame(activeAnimations[k]); activeAnimations[k] = null; } 
+    }
+    for (let k in simStates) { simStates[k].active = false; }
+}
+
+function forceSetupCanvas(canvas) {
+    if (!canvas) return false;
+    const parent = canvas.parentElement;
+    const rect = parent.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return false;
+    canvas.width = rect.width; canvas.height = rect.height;
+    return true;
+}
+
+function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(fromX, fromY); ctx.lineTo(toX, toY); ctx.stroke();
+    const angle = Math.atan2(toY - fromY, toX - fromX);
+    ctx.beginPath(); ctx.moveTo(toX, toY);
+    ctx.lineTo(toX - 12 * Math.cos(angle - Math.PI / 6), toY - 12 * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(toX - 12 * Math.cos(angle + Math.PI / 6), toY - 12 * Math.sin(angle + Math.PI / 6));
+    ctx.closePath(); ctx.fill();
+    if (txt) {
+        ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(txt, toX, toY + 12);
+    }
+}
+
+// ПРОВЕРКА ОТВЕТОВ: Текстовые поля
+function checkTextAnswer(inputId, correctAnswer, taskNum) {
+    if (solvedTasks[taskNum]) return;
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const userAns = input.value.trim().replace(',', '.');
+    if (userAns === "") return;
+
+    input.disabled = true;
+    const btn = input.nextElementSibling;
+    if (btn) btn.disabled = true;
+
+    const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer) || userAns === correctAnswer);
+    if (isCorrect) {
+        input.classList.add('correct-highlight');
+    } else {
+        input.classList.add('wrong-highlight');
+    }
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
+    updateSliderUI();
+}
+
+// ПРОВЕРКА ОТВЕТОВ: Кнопки-карточки
+function checkCardAnswer(btn, taskNum, isCorrect) {
+    if (solvedTasks[taskNum]) return;
+    const container = btn.parentElement;
+    const cards = container.querySelectorAll('.btn-card');
+    cards.forEach(c => c.disabled = true);
+
+    if (isCorrect) {
+        btn.classList.add('correct-highlight');
+    } else {
+        btn.classList.add('wrong-highlight');
+        cards.forEach(c => {
+            if (c !== btn && c.innerText.includes("1)")) c.classList.add('correct-highlight');
+            if (taskNum === 3 && c.innerText.includes("3)")) c.classList.add('correct-highlight');
+            if (taskNum === 10 && c.innerText.includes("2)")) c.classList.add('correct-highlight');
+        });
+    }
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
+    updateSliderUI();
+}
+</script>
+<script>
+// ДИСПЕТЧЕР ОТОБРАЖЕНИЯ ХОЛСТОВ ПО СЛАЙДАМ
+function triggerCanvasBySlide() {
+    if (currentSlide === 2) drawHookeQ2();
+    if (currentSlide === 4) initBallisticsSimulation();
+    if (currentSlide === 5) initDogSimulation();
+    if (currentSlide === 6) initTrainSimulation();
+    if (currentSlide === 8) drawSpringQ8();
+    if (currentSlide === 9) drawGridQ9();
+    if (currentSlide === 10) drawScaleQ10();
+    if (currentSlide === 12) drawGraphQ12();
+    if (currentSlide === 13) drawVectorQ13();
+    if (currentSlide === 15) initThreadSimulation();
+}
+
+// Задание 1.2: Закон Гука (Подвешенный груз)
+function drawHookeQ2() {
+    const canvas = document.getElementById('canvasHookeQ2'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2;
+    ctx.fillStyle = '#1e293b'; ctx.fillRect(cx - 30, 20, 60, 10); // Потолок
+    // Пружина
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath();
+    ctx.moveTo(cx, 30); for(let y = 30; y <= 130; y += 8) { ctx.lineTo(cx + (y%16===0?15:-15), y); }
+    ctx.lineTo(cx, 138); ctx.stroke();
+    // Груз
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155';
+    ctx.fillRect(cx - 20, 138, 40, 30); ctx.strokeRect(cx - 20, 138, 40, 30);
+    // Векторы сил
+    drawArrow(ctx, cx, 138, cx, 80, '#38bdf8', 'Fупр');
+    drawArrow(ctx, cx, 153, cx, 220, '#ef4444', 'Fтяж');
+}
+
+// Задание 1.8: Пружина в состоянии равновесия
+function drawSpringQ8() {
+    const canvas = document.getElementById('canvasSpringQ8'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2;
+    ctx.fillStyle = '#334155'; ctx.fillRect(cx - 40, 15, 80, 5);
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(cx, 20);
+    for(let y = 20; y <= 150; y += 10) { ctx.lineTo(cx + (y%20===0?18:-18), y); }
+    ctx.lineTo(cx, 155); ctx.stroke();
+    ctx.fillStyle = '#fb923c'; ctx.beginPath(); ctx.arc(cx, 162, 8, 0, Math.PI*2); ctx.fill();
+}
+
+// Задание 1.9: Координатная сетка трех сил
+function drawGridQ9() {
+    const canvas = document.getElementById('canvasGridQ9'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const step = 20, cx = canvas.width/2 - 20, cy = canvas.height/2 + 20;
+    
+    // Сетка
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
+    for(let x=0; x<canvas.width; x+=step) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+    for(let y=0; y<canvas.height; y+=step) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
+    
+    // Векторы (Масштаб: 1 клетка = 2 Ньютона)
+    drawArrow(ctx, cx, cy, cx, cy - 2*step, '#38bdf8', 'F₁'); // 4H вверх
+    drawArrow(ctx, cx, cy, cx + 3*step, cy, '#38bdf8', 'F₂'); // 6H вправо
+    drawArrow(ctx, cx, cy, cx, cy + 6*step, '#fb923c', 'F₃'); // 12H вниз
+}
+
+// Задание 1.10: Шкала Динамометра
+function drawScaleQ10() {
+    const canvas = document.getElementById('canvasScaleQ10'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - 20, 10, 40, canvas.height - 20);
+    ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - 20, 10, 40, canvas.height - 20);
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    for(let i = 0; i <= 40; i++) {
+        let y = 20 + i * 4; if (y > canvas.height - 20) break;
+        if(i % 10 === 0) {
+            ctx.strokeStyle = '#f8fafc'; ctx.beginPath(); ctx.moveTo(cx - 15, y); ctx.lineTo(cx - 2, y); ctx.stroke();
+            ctx.fillText(i/10 + " H", cx + 12, y + 3);
+        } else if(i % 5 === 0) {
+            ctx.strokeStyle = '#94a3b8'; ctx.beginPath(); ctx.moveTo(cx - 10, y); ctx.lineTo(cx - 2, y); ctx.stroke();
+        } else {
+            ctx.strokeStyle = '#1e293b'; ctx.beginPath(); ctx.moveTo(cx - 6, y); ctx.lineTo(cx - 2, y); ctx.stroke();
+        }
+    }
+}
+
+// Задание 1.12: График скорости от времени
+function drawGraphQ12() {
+    const canvas = document.getElementById('canvasGraphQ12'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const ox = 35, oy = canvas.height - 30;
+    
+    // Оси координат
+    drawArrow(ctx, ox, oy, canvas.width - 15, oy, '#94a3b8'); ctx.fillText("t, c", canvas.width - 25, oy + 15);
+    drawArrow(ctx, ox, oy, ox, 15, '#94a3b8'); ctx.fillText("v, м/с", ox - 20, 15);
+    
+    // Линии графика
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy);
+    ctx.lineTo(ox + 60, oy - 100);   // Интервал 0-2с до 10 м/с
+    ctx.lineTo(ox + 110, oy - 100);  // Интервал 2-3с (а = 0)
+    ctx.lineTo(ox + 150, oy);        // Торможение 3-4с
+    ctx.stroke();
+    
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif';
+    ctx.fillText("0", ox - 10, oy + 12); ctx.fillText("2", ox + 60, oy + 12); ctx.fillText("10", ox - 18, oy - 96);
+}
+
+// Задание 1.13: Роза направлений векторов
+function drawVectorQ13() {
+    const canvas = document.getElementById('canvasVectorQ13'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    drawArrow(ctx, cx, cy, cx, cy - 40, '#38bdf8', '1');
+    drawArrow(ctx, cx, cy, cx + 40, cy - 40, '#fb923c', '2');
+    drawArrow(ctx, cx, cy, cx + 50, cy, '#38bdf8', '3');
+    drawArrow(ctx, cx, cy, cx + 40, cy + 50, '#ef4444', '4');
+}
+</script>
+<script>
+// Запуск и переключение анимационных циклов
+function toggleSimulation(key) {
+    simStates[key].active = !simStates[key].active;
+    if (simStates[key].active) {
+        if (key === 'ballistics') loopBallistics();
+        if (key === 'dog') loopDog();
+        if (key === 'train') loopTrain();
+    }
+}
+
+function resetSimulation(key) {
+    stopAllSimulations();
+    if (key === 'ballistics') { simStates.ballistics.t = 0; initBallisticsSimulation(); }
+    if (key === 'train') { simStates.train.xCar = 0; simStates.train.vCar = 0; simStates.train.xBall = 0; simStates.train.vBall = 0; initTrainSimulation(); }
+    if (key === 'thread') { simStates.thread.progress = 0; simStates.thread.broken1 = false; simStates.thread.broken2 = false; initThreadSimulation(); }
+}
+
+// Задание 1.4: Анимация баллистического движения мяча
+function initBallisticsSimulation() {
+    const canvas = document.getElementById('canvasBallisticsQ4'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.75;
+    
+    ctx.strokeStyle = '#334155'; ctx.setLineDash(Array(4, 4)); ctx.beginPath();
+    ctx.moveTo(30, cy); ctx.quadraticCurveTo(canvas.width/2, cy - 140, canvas.width - 30, cy); ctx.stroke(); ctx.setLineDash(Array());
+    
+    const ax = canvas.width / 2, ay = cy - 70;
+    ctx.fillStyle = '#f8fafc'; ctx.beginPath(); ctx.arc(ax, ay, 4, 0, Math.PI*2); ctx.fill();
+    ctx.fillText("А", ax - 12, ay - 12);
+    
+    drawArrow(ctx, ax, ay, ax, ay - 40, '#fb923c', '1');
+    drawArrow(ctx, ax, ay, ax + 30, ay - 30, '#fb923c', '2');
+    drawArrow(ctx, ax, ay, ax + 40, ay, '#fb923c', '3');
+    drawArrow(ctx, ax, ay, ax, ay + 45, '#ef4444', '4 (Fравн)');
+}
+
+function loopBallistics() {
+    if (!simStates.ballistics.active) return;
+    simStates.ballistics.t += 0.01; if (simStates.ballistics.t > 1) simStates.ballistics.t = 0;
+    initBallisticsSimulation();
+    const ctx = document.getElementById('canvasBallisticsQ4').getContext('2d');
+    const cy = canvasBallisticsQ4.height * 0.75;
+    const t = simStates.ballistics.t;
+    const mx = 30 + (canvasBallisticsQ4.width - 60) * t;
+    const my = cy - 4 * 70 * t * (1 - t);
+    ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(mx, my, 8, 0, Math.PI*2); ctx.fill();
+    activeAnimations.ballistics = requestAnimationFrame(loopBallistics);
+}
+
+// Задание 1.5: Анимация колебаний шерсти
+function initDogSimulation() {
+    const canvas = document.getElementById('canvasDogQ5'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    let dx = simStates.dog.active ? Math.sin(simStates.dog.phase) * 15 : 0;
+    
+    ctx.fillStyle = '#1e293b'; ctx.beginPath(); ctx.ellipse(cx + dx, cy, 45, 30, 0, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx - 50 + dx, cy - 10, 15, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    
+    if (simStates.dog.active) {
+        ctx.fillStyle = '#38bdf8';
+        for(let i = 0; i < 6; i++) {
+            let kx = cx + dx + Math.cos(i) * 50 + (simStates.dog.phase * 5) % 40;
+            ctx.beginPath(); ctx.arc(kx, cy - 20 + Math.sin(i)*20, 3, 0, Math.PI*2); ctx.fill();
+        }
+    }
+}
+
+function loopDog() {
+    if (!simStates.dog.active) return;
+    simStates.dog.phase += 0.25;
+    initDogSimulation(); activeAnimations.dog = requestAnimationFrame(loopDog);
+}
+
+// Задание 1.6: Анимация инерционного наката мяча в вагоне
+function initTrainSimulation() {
+    const canvas = document.getElementById('canvasTrainQ6'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.65;
+    
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(15, cy - 60, canvas.width - 30, 80);
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 3; ctx.strokeRect(15, cy - 60, canvas.width - 30, 80);
+    ctx.fillStyle = '#1e293b'; ctx.fillRect(40, cy + 5, 120, 6);
+    
+    let bx = 60 + simStates.train.xBall;
+    ctx.fillStyle = '#fb923c'; ctx.beginPath(); ctx.arc(bx, cy - 2, 7, 0, Math.PI*2); ctx.fill();
+    
+    if (simStates.train.active) {
+        drawArrow(ctx, canvas.width - 90, cy - 40, canvas.width - 40, cy - 40, '#22c55e', 'a поезда');
+        drawArrow(ctx, bx, cy - 2, bx - 30, cy - 2, '#ef4444', 'а отн');
+    }
+}
+
+function loopTrain() {
+    if (!simStates.train.active) return;
+    simStates.train.vCar += simStates.train.aCar;
+    simStates.train.xBall -= simStates.train.vCar * 0.05;
+    if (60 + simStates.train.xBall < 45) { simStates.train.xBall = -15; simStates.train.active = false; }
+    initTrainSimulation(); if (simStates.train.active) activeAnimations.train = requestAnimationFrame(loopTrain);
+}
+
+// Задание 3.2: Инерционный разрыв нитей при рывке
+function triggerThreadBreak(mode) {
+    resetSimulation('thread'); simStates.thread.active = true; simStates.thread.mode = mode; loopThread();
+}
+
+function initThreadSimulation() {
+    const canvas = document.getElementById('canvasThreadQ15'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2;
+    
+    ctx.strokeStyle = simStates.thread.broken1 ? '#ef4444' : '#38bdf8'; ctx.lineWidth = simStates.thread.broken1 ? 1 : 3;
+    ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, 80 - (simStates.thread.broken1 ? simStates.thread.progress : 0)); ctx.stroke();
+    
+    ctx.fillStyle = '#1e293b'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
+    let gy = 80 + (simStates.thread.broken1 ? simStates.thread.progress : 0);
+    ctx.beginPath(); ctx.arc(cx, gy + 20, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#f8fafc'; ctx.font = '10px sans-serif'; ctx.fillText("m", cx - 4, gy + 23);
+    
+    ctx.strokeStyle = simStates.thread.broken2 ? '#ef4444' : '#38bdf8'; ctx.lineWidth = simStates.thread.broken2 ? 1 : 3;
+    let ny = gy + 40;
+    ctx.beginPath(); ctx.moveTo(cx, ny); 
+    ctx.lineTo(cx, ny + 60 + (simStates.thread.broken2 ? simStates.thread.progress*1.5 : 0)); ctx.stroke();
+    
+    ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText("Нить 1", cx + 25, 50); ctx.fillText("Нить 2", cx + 25, ny + 30);
+}
+
+function loopThread() {
+    if (!simStates.thread.active) return;
+    simStates.thread.progress += 2;
+    if (simStates.thread.mode === 'sharp') { simStates.thread.broken2 = true; } 
+    else { simStates.thread.broken1 = true; }
+    initThreadSimulation();
+    if (simStates.thread.progress < 40) activeAnimations.thread = requestAnimationFrame(loopThread);
+    else simStates.thread.active = false;
+}
+
+// Автоматическая компиляция карты готовности
+function buildReport() {
+    const container = document.getElementById('analyticsMap'); if (!container) return;
+    let reportHtml = `<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; margin-bottom:15px;">`;
+    let score = 0;
+    
+    for (let i = 1; i <= totalTasksCount; i++) {
+        const task = solvedTasks[i];
+        let statusClass = "text-blue"; let statusText = "Пропущено";
+        if (task && task.checked) {
+            if (task.success) { statusClass = "correct-highlight"; statusText = "Верно"; score++; }
+            else { statusClass = "wrong-highlight"; statusText = "Ошибка"; }
+        }
+        let label = i <= 13 ? `№1.${i}` : `№3.${i-13}`;
+        reportHtml += `<div class="${statusClass}" style="padding:6px; border-radius:6px; text-align:center; border:1px solid #1e293b; font-size:11px;">
+            ${label}<br><strong>${statusText}</strong>
+        </div>`;
+    }
+    reportHtml += `</div>`;
+    
+    const pct = (score / totalTasksCount) * 100;
+    let verdict = '';
+    if (pct >= 85) verdict = '<span style="color:#4ade80;">Великолепный уровень! Базовые законы динамики и критерии ФИПИ отработаны идеально.</span>';
+    else if (pct >= 50) verdict = '<span style="color:#38bdf8;">Хороший средний результат. Рекомендуется повторить задачи на векторную проекцию сил по сетке.</span>';
+    else verdict = '<span style="color:#f43f5e;">Критический уровень. Требуется глубокий разбор понятия инертности и расчетных алгоритмов II закона Ньютона.</span>';
+    
+    container.innerHTML = reportHtml + `
+        <div style="margin-top:10px; font-size:13px; line-height:1.45; border-top:1px solid #1e293b; padding-top:10px;">
+            Выполнено верно: <strong>${score}</strong> из <strong>${totalTasksCount}</strong> задач (${pct.toFixed(0)}%).<br>
+            <strong>Вердикт методиста:</strong> ${verdict}
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
