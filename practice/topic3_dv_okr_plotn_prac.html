@@ -796,6 +796,131 @@ function loopAccel() {
     simStates.accel.ang2 += 0.01; // Скорость v2 = v1 / 2
     initAccelSimulation(); activeAnimations.accel = requestAnimationFrame(loopAccel);
 }
+
+function initBeltSimulation() {
+    const canvas = document.getElementById('canvasBeltQ13');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    
+    // Радиусы согласно условию (в 3 раза отличаются)
+    const r1 = 45;
+    const r2 = 15;
+    
+    // Центры шкивов разнесены по горизонтали
+    const x1 = cx - 50;
+    const x2 = cx + 60;
+    
+    // Отрисовка соединительного ремня (касательные линии)
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x1, cy - r1); ctx.lineTo(x2, cy - r2);
+    ctx.moveTo(x1, cy + r1); ctx.lineTo(x2, cy + r2);
+    ctx.stroke();
+    
+    // Шкив 1: Большой ведущий
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(x1, cy, r1, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Спица большого шкива для визуализации вращения
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x1, cy);
+    ctx.lineTo(x1 + r1 * Math.cos(simStates.belt.ang1), cy + r1 * Math.sin(simStates.belt.ang1));
+    ctx.stroke();
+    
+    // Шкив 2: Малый ведомый
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(x2, cy, r2, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Спица малого шкива
+    ctx.beginPath();
+    ctx.moveTo(x2, cy);
+    ctx.lineTo(x2 + r2 * Math.cos(simStates.belt.ang2), cy + r2 * Math.sin(simStates.belt.ang2));
+    ctx.stroke();
+    
+    // Точка на ободе большого шкива и вектор скорости (по касательной)
+    const px = x1 + r1 * Math.cos(simStates.belt.ang1);
+    const py = cy + r1 * Math.sin(simStates.belt.ang1);
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fill();
+    
+    // Направление вектора скорости сонаправлено с вращением
+    drawArrow(ctx, px, py, px - 35 * Math.sin(simStates.belt.ang1), py + 35 * Math.cos(simStates.belt.ang1), '#ef4444', 'v');
+}
+
+function loopBelt() {
+    if (!simStates.belt.active) return;
+    // Большой шкив вращается со скоростью со значениями шага
+    simStates.belt.ang1 += 0.01;
+    // Малый шкив вращается ровно в 3 раза БЫСТРЕЕ согласно физике задачи
+    simStates.belt.ang2 += 0.03; 
+    
+    initBeltSimulation();
+    activeAnimations.belt = requestAnimationFrame(loopBelt);
+}
+
+function initPointsSimulation() {
+    const canvas = document.getElementById('canvasPointsQ14');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const r = 55;
+    
+    // Общая круговая траектория
+    ctx.strokeStyle = '#1e293b';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+    
+    // Точка 1: Быстрая (Неоновый голубой)
+    const x1 = cx + r * Math.cos(simStates.points.ang1);
+    const y1 = cy + r * Math.sin(simStates.points.ang1);
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath();
+    ctx.arc(x1, y1, 7, 0, Math.PI * 2);
+    ctx.fill();
+    drawArrow(ctx, x1, y1, x1 - 35 * Math.sin(simStates.points.ang1), y1 + 35 * Math.cos(simStates.points.ang1), '#38bdf8', 'v₁');
+    
+    // Точка 2: Медленная (Мягкий оранжевый)
+    const x2 = cx + r * Math.cos(simStates.points.ang2);
+    const y2 = cy + r * Math.sin(simStates.points.ang2);
+    ctx.fillStyle = '#fb923c';
+    ctx.beginPath();
+    ctx.arc(x2, y2, 7, 0, Math.PI * 2);
+    ctx.fill();
+    drawArrow(ctx, x2, y2, x2 - 25 * Math.sin(simStates.points.ang2), y2 + 25 * Math.cos(simStates.points.ang2), '#fb923c', 'v₂');
+}
+
+function loopPoints() {
+    if (!simStates.points.active) return;
+    
+    // Физическое соотношение скоростей из решения системы уравнений задачи:
+    // v1 - v2 = S/20 и v1 + v2 = S/4 => скор. относятся как 1.5 к 1
+    simStates.points.ang1 += 0.024; // Скорость быстрой точки
+    simStates.points.ang2 += 0.016; // Скорость медленной точки
+    
+    initPointsSimulation();
+    activeAnimations.points = requestAnimationFrame(loopPoints);
+}
+
 </script>
 <script>
 function checkTextAnswer(inputId, correctAnswer, taskNum) {
