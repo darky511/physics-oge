@@ -133,7 +133,7 @@
                 <div class="control-row">
                     <button class="btn btn-accent" 
                             onclick="startCollision()">
-                        Столкнуть крупные шары
+                        Столкнуть шары
                     </button>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 <p class="formula-main">F<sub>упр</sub> = k · |x|</p>
                 <p class="text-concentrate">
                     При растяжении сила упругости направлена строго к центру пружины, 
-                    противодействуя деформации \(x\).
+                    противодействуя деформации.
                 </p>
                 <div class="control-row">
                     <label style="font-size:12px; color:#38bdf8;">
@@ -518,7 +518,9 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "", txtColor = "#f8
     ctx.closePath(); ctx.fill();
     if (txt) {
         ctx.fillStyle = txtColor; ctx.font = "bold 14px sans-serif";
-        ctx.fillText(txt, toX + 8 * Math.cos(angle) - 4, toY + 12 * Math.sin(angle) + 4);
+        const offsetX = 22 * Math.cos(angle);
+        const offsetY = 22 * Math.sin(angle) + 4;
+        ctx.fillText(txt, toX + offsetX - 6, toY + offsetY);
     }
 }
 </script>
@@ -554,7 +556,7 @@ function initForceCanvas() {
     } else if (forceMode === 'angle') {
         drawArrow(ctx, cx, cy, cx + 90, cy, '#ef4444', 'F₁'); 
         drawArrow(ctx, cx, cy, cx, cy - 90, '#fb923c', 'F₂');
-        ctx.strokeStyle = '#334155'; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = '#334155'; ctx.lineWidth = 1; ctx.setLineDash();
         ctx.beginPath(); ctx.moveTo(cx + 90, cy); ctx.lineTo(cx + 90, cy - 90); ctx.lineTo(cx, cy - 90); ctx.stroke(); ctx.setLineDash([]);
         drawArrow(ctx, cx, cy, cx + 90, cy - 90, '#38bdf8', 'Fравн', '#38bdf8');
     }
@@ -608,7 +610,7 @@ function loopInertia() {
         drawArrow(ctx, mx, cy, mx - 50, cy, '#38bdf8', 'Fтр');
         inertiaState.vx -= 0.012; if (inertiaState.vx < 0) inertiaState.vx = 0;
         drawArrow(ctx, mx, cy - 40, mx + (inertiaState.vx * 20), cy - 40, '#22c55e', 'v');
-        ctx.fillStyle = '#f43f5e'; ctx.font = '13px sans-serif'; ctx.fillText('ДИСПРОПОРЦИЯ: Fтян > Fтр ⇒ Торможение до остановки', 15, 25);
+        ctx.fillStyle = '#f43f5e'; ctx.font = '13px sans-serif'; ctx.fillText('ДИСПРОПОРЦИЯ: Fтян > Fтр ⇒ Торможение', 15, 25);
     }
     activeAnimationIds.inertia = requestAnimationFrame(loopInertia);
 }
@@ -640,7 +642,7 @@ function renderSecondLawStatic() {
 
 function launchSecondLaw() {
     secondLawState.x = 30; secondLawState.v = 0;
-    secondLawState.a = 0.08 / secondLawState.m; // Снижено в 3 раза для плавного наблюдения
+    secondLawState.a = 0.08 / secondLawState.m; 
     secondLawState.active = true; loopSecondLaw();
 }
 
@@ -667,7 +669,7 @@ function loopSecondLaw() {
 }
 </script>
 <script>
-let collisionState = { x1: 50, x2: 240, v1: 0, v2: 0, colliding: false, timer: 0 };
+let collisionState = { x1: 40, x2: 240, v1: 0, v2: 0, colliding: false, timer: 0 };
 function initThirdLawCanvas() {
     const canvas = document.getElementById('canvasThirdLaw'); if (!forceSetupCanvas(canvas)) return;
     collisionState = { x1: 50, x2: canvas.width - 50, v1: 0, v2: 0, colliding: false, timer: 0 };
@@ -682,7 +684,7 @@ function loopThirdLaw() {
     const canvas = document.getElementById('canvasThirdLaw'); if (!canvas || currentSlide !== 4) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     collisionState.x1 += collisionState.v1; collisionState.x2 += collisionState.v2;
-    const cy = canvas.height / 2, r = 30; // Увеличенный диаметр шаров
+    const cy = canvas.height / 2, r = 30;
 
     if (!collisionState.colliding && Math.abs(collisionState.x2 - collisionState.x1) <= r*2) { 
         collisionState.colliding = true; collisionState.v1 = 0; collisionState.v2 = 0; collisionState.timer = 40; 
@@ -691,10 +693,13 @@ function loopThirdLaw() {
     ctx.beginPath(); ctx.arc(collisionState.x1, cy, r, 0, Math.PI*2); ctx.fill(); ctx.stroke();
     ctx.strokeStyle = '#fb923c'; ctx.beginPath(); ctx.arc(collisionState.x2, cy, r, 0, Math.PI*2); ctx.fill(); ctx.stroke();
 
-    if (collisionState.colliding && collisionState.timer > 0) { 
-        drawArrow(ctx, collisionState.x1 + r, cy, collisionState.x1 - 60, cy, '#ef4444', 'F₂→₁'); 
-        drawArrow(ctx, collisionState.x2 - r, cy, collisionState.x2 + 60, cy, '#ef4444', 'F₁→₂'); 
-        collisionState.timer--; if (collisionState.timer === 0) { collisionState.v1 = -1; collisionState.v2 = 1; } 
+    if (collisionState.colliding) { 
+        drawArrow(ctx, collisionState.x1, cy, collisionState.x1 - 65, cy, '#ef4444', 'F₂→₁'); 
+        drawArrow(ctx, collisionState.x2, cy, collisionState.x2 + 65, cy, '#ef4444', 'F₁→₂'); 
+        if (collisionState.timer > 0) {
+            collisionState.timer--; 
+            if (collisionState.timer === 0) { collisionState.v1 = -0.8; collisionState.v2 = 0.8; } 
+        }
     }
     activeAnimationIds.thirdLaw = requestAnimationFrame(loopThirdLaw);
 }
@@ -712,7 +717,7 @@ function drawHooke() {
     }
     ctx.stroke();
     
-    const sz = 50; // Увеличенный груз
+    const sz = 50; 
     ctx.fillStyle = '#0f172a'; ctx.fillRect(endX, cy - sz/2, sz, sz);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(endX, cy - sz/2, sz, sz);
     if (ext > 5) { 
