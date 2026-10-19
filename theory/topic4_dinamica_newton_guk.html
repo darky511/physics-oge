@@ -576,37 +576,26 @@ h2 {
 .text-green { color: #22c55e; font-weight: 600; }
 .text-blue { color: #38bdf8; font-weight: 600; }
 </style>
+
 <script>
-// Глобальный стейт приложения
 let currentSlide = 1;
 const totalSlides = 10;
 let score = 0;
 let answersState = {
     quiz1: { v: false, f: false, a: false, submitted: false },
-    quiz2: null,
-    quiz3: null,
-    quiz4: null
+    quiz2: null, quiz3: null, quiz4: null
 };
 
-// Хранилище идентификаторов анимационных циклов
-let activeAnimationIds = {
-    forces: null,
-    inertia: null,
-    secondLaw: null,
-    thirdLaw: null
-};
+let activeAnimationIds = { forces: null, inertia: null, secondLaw: null, thirdLaw: null };
 
-// Функция инициализации при загрузке страницы
 window.onload = function() {
     updateSliderUI();
-    initForceCanvas();
+    lazyLoadCanvasTrigger();
+    window.addEventListener('resize', lazyLoadCanvasTrigger);
 };
 
-// Навигационный плеер слайдера
 function changeSlide(direction) {
-    // Принудительное высвобождение памяти и остановка всех физических потоков
     cancelAllAnimations();
-
     document.getElementById(`slide${currentSlide}`).classList.remove('active');
     currentSlide += direction;
     if (currentSlide < 1) currentSlide = 1;
@@ -614,14 +603,12 @@ function changeSlide(direction) {
     document.getElementById(`slide${currentSlide}`).classList.add('active');
 
     updateSliderUI();
-    lazyLoadCanvasTrigger();
+    setTimeout(lazyLoadCanvasTrigger, 50);
 }
 
 function updateSliderUI() {
     document.getElementById('prevBtn').disabled = (currentSlide === 1);
     document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
-    
-    // Перерасчет прогресс-бара
     const progress = ((currentSlide - 1) / (totalSlides - 1)) * 100;
     document.getElementById('progressBar').style.width = `${progress}%`;
     document.getElementById('scoreDisplay').innerText = `${score} / 8`;
@@ -636,7 +623,17 @@ function cancelAllAnimations() {
     }
 }
 
-// Ленивый запуск холстов при входе на соответствующий слайд
+function resizeCanvasToDisplaySize(canvas) {
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        return true;
+    }
+    return false;
+}
+
 function lazyLoadCanvasTrigger() {
     if (currentSlide === 1) initForceCanvas();
     if (currentSlide === 2) initInertiaCanvas();
@@ -646,7 +643,6 @@ function lazyLoadCanvasTrigger() {
     if (currentSlide === 6) drawQuiz1Static();
 }
 
-// Математический хелпер для рисования завершенных стрелок (Векторов)
 function drawArrow(ctx, fromX, fromY, toX, toY, color, width = 3) {
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
@@ -656,7 +652,6 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, width = 3) {
     ctx.lineTo(toX, toY);
     ctx.stroke();
 
-    // Отрисовка тригонометрического наконечника вектора
     const angle = Math.atan2(toY - fromY, toX - fromX);
     ctx.beginPath();
     ctx.moveTo(toX, toY);
@@ -667,7 +662,6 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, width = 3) {
 }
 </script>
 <script>
-// --- СИМУЛЯЦИЯ 1: СЛОЖЕНИЕ СИЛ ---
 let forceMode = 'one-side';
 function setForceMode(mode) {
     forceMode = mode;
@@ -677,133 +671,141 @@ function setForceMode(mode) {
     if (mode === 'angle') hint.innerHTML = 'F<sub>равн</sub> = √(F<sub>1</sub><sup>2</sup> + F<sub>2</sub><sup>2</sup>)';
     initForceCanvas();
 }
+
 function initForceCanvas() {
     const canvas = document.getElementById('canvasForces');
     if (!canvas) return;
+    resizeCanvasToDisplaySize(canvas);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const bx = 150, by = 130, bw = 90, bh = 50;
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const bw = 90, bh = 50;
+    const bx = cx - bw / 2, by = cy - bh / 2;
+
     ctx.fillStyle = '#0f172a';
     ctx.fillRect(bx, by, bw, bh);
     ctx.strokeStyle = '#334155';
     ctx.strokeRect(bx, by, bw, bh);
 
-    const cx = bx + bw / 2;
-    const cy = by + bh / 2;
+    ctx.font = '14px sans-serif';
 
     if (forceMode === 'one-side') {
-        drawArrow(ctx, cx, cy, cx + 60, cy, '#ef4444');
-        drawArrow(ctx, cx + 60, cy, cx + 110, cy, '#fb923c');
-        drawArrow(ctx, cx, cy + 50, cx + 110, cy + 50, '#38bdf8');
-        ctx.fillStyle = '#f8fafc';
-        ctx.fillText('F1', cx + 30, cy - 8); ctx.fillText('F2', cx + 80, cy - 8);
-        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 45, cy + 45);
+        drawArrow(ctx, cx, cy, cx + 50, cy, '#ef4444');
+        drawArrow(ctx, cx + 50, cy, cx + 100, cy, '#fb923c');
+        drawArrow(ctx, cx, cy + 45, cx + 100, cy + 45, '#38bdf8');
+        ctx.fillStyle = '#f8fafc'; ctx.fillText('F1', cx + 20, cy - 10); ctx.fillText('F2', cx + 70, cy - 10);
+        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 30, cy + 35);
     } else if (forceMode === 'opposite') {
-        drawArrow(ctx, cx, cy, cx + 90, cy, '#ef4444');
+        drawArrow(ctx, cx, cy, cx + 80, cy, '#ef4444');
         drawArrow(ctx, cx, cy, cx - 50, cy, '#fb923c');
-        drawArrow(ctx, cx, cy + 50, cx + 40, cy + 50, '#38bdf8');
-        ctx.fillStyle = '#f8fafc';
-        ctx.fillText('F1', cx + 45, cy - 8); ctx.fillText('F2', cx - 35, cy - 8);
-        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 10, cy + 45);
+        drawArrow(ctx, cx, cy + 45, cx + 30, cy + 45, '#38bdf8');
+        ctx.fillStyle = '#f8fafc'; ctx.fillText('F1', cx + 40, cy - 10); ctx.fillText('F2', cx - 40, cy - 10);
+        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 5, cy + 35);
     } else if (forceMode === 'angle') {
-        drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444');
+        drawArrow(ctx, cx, cy, cx + 60, cy, '#ef4444');
         drawArrow(ctx, cx, cy, cx, cy - 60, '#fb923c');
-        // Пунктир достройки прямоугольника
-        ctx.strokeStyle = '#334155'; ctx.setLineDash([4, 4]);
-        ctx.beginPath(); ctx.moveTo(cx + 70, cy); ctx.lineTo(cx + 70, cy - 60); ctx.lineTo(cx, cy - 60); ctx.stroke(); ctx.setLineDash([]);
-        drawArrow(ctx, cx, cy, cx + 70, cy - 60, '#38bdf8');
-        ctx.fillStyle = '#f8fafc';
-        ctx.fillText('F1', cx + 35, cy + 15); ctx.fillText('F2', cx - 20, cy - 25);
-        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 40, cy - 35);
+        ctx.strokeStyle = '#334155'; ctx.setLineDash();
+        ctx.beginPath(); ctx.moveTo(cx + 60, cy); ctx.lineTo(cx + 60, cy - 60); ctx.lineTo(cx, cy - 60); ctx.stroke(); ctx.setLineDash([]);
+        drawArrow(ctx, cx, cy, cx + 60, cy - 60, '#38bdf8');
+        ctx.fillStyle = '#f8fafc'; ctx.fillText('F1', cx + 25, cy + 15); ctx.fillText('F2', cx - 25, cy - 25);
+        ctx.fillStyle = '#38bdf8'; ctx.fillText('Fравн', cx + 30, cy - 40);
     }
 }
 
-// --- СИМУЛЯЦИЯ 2: ПЕРВЫЙ ЗАКОН НЬЮТОНА ---
-let inertiaState = { x: 50, vx: 2, mode: 'compensate' };
+let inertiaState = { x: -1, vx: 2, mode: 'compensate' };
 function initInertiaCanvas() {
-    inertiaState.x = 50; inertiaState.vx = 2; inertiaState.mode = 'compensate';
+    const canvas = document.getElementById('canvasInertia');
+    if (!canvas) return;
+    resizeCanvasToDisplaySize(canvas);
+    inertiaState.x = canvas.width / 4;
+    inertiaState.vx = 2;
+    inertiaState.mode = 'compensate';
     loopInertia();
 }
+
 function triggerInertia(mode) {
     inertiaState.mode = mode;
 }
+
 function loopInertia() {
     const canvas = document.getElementById('canvasInertia');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Движение по оси X
     inertiaState.x += inertiaState.vx;
     if (inertiaState.x > canvas.width - 70 || inertiaState.x < 10) inertiaState.vx *= -1;
 
-    const cy = 130;
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(inertiaState.x, cy, 60, 40);
-    ctx.strokeStyle = '#334155'; ctx.strokeRect(inertiaState.x, cy, 60, 40);
+    const cy = canvas.height / 2;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(inertiaState.x, cy - 20, 60, 40);
+    ctx.strokeStyle = '#334155'; ctx.strokeRect(inertiaState.x, cy - 20, 60, 40);
 
     const midX = inertiaState.x + 30;
-    const midY = cy + 20;
+    ctx.font = '14px sans-serif';
 
-    // Отрисовка векторов сил в зависимости от компенсации
     if (inertiaState.mode === 'compensate') {
-        drawArrow(ctx, midX, midY, midX + 50, midY, '#ef4444'); // Сила тяги
-        drawArrow(ctx, midX, midY, midX - 50, midY, '#38bdf8'); // Сила трения
+        drawArrow(ctx, midX, cy, midX + 50, cy, '#ef4444');
+        drawArrow(ctx, midX, cy, midX - 50, cy, '#38bdf8');
         ctx.fillStyle = '#4ade80'; ctx.fillText('v = const (Силы равны)', 20, 30);
     } else {
-        drawArrow(ctx, midX, midY, midX + 20, midY, '#ef4444');
-        drawArrow(ctx, midX, midY, midX - 60, midY, '#ef4444'); // Трение преобладает
-        inertiaState.vx -= 0.015; // Торможение
+        drawArrow(ctx, midX, cy, midX + 20, cy, '#ef4444');
+        drawArrow(ctx, midX, cy, midX - 60, cy, '#ef4444');
+        inertiaState.vx -= 0.015;
         if (inertiaState.vx < 0) inertiaState.vx = 0;
         ctx.fillStyle = '#f43f5e'; ctx.fillText('Торможение (Fтр > Fтяги)', 20, 30);
     }
-    // Скорость
-    drawArrow(ctx, inertiaState.x + 30, cy - 15, inertiaState.x + 30 + (inertiaState.vx * 15), cy - 15, '#22c55e', 2);
+    drawArrow(ctx, inertiaState.x + 30, cy - 35, inertiaState.x + 30 + (inertiaState.vx * 15), cy - 35, '#22c55e', 2);
 
     activeAnimationIds.inertia = requestAnimationFrame(loopInertia);
 }
 
-// --- СИМУЛЯЦИЯ 3: ВТОРОЙ ЗАКОН НЬЮТОНА ---
 let secondLawState = { x: 40, a: 0, v: 0, m: 2, active: false };
 function initSecondLawCanvas() {
     secondLawState.x = 40; secondLawState.v = 0; secondLawState.a = 0; secondLawState.active = false;
+    const canvas = document.getElementById('canvasSecondLaw');
+    if (canvas) resizeCanvasToDisplaySize(canvas);
     updateMass();
 }
+
 function updateMass() {
     secondLawState.m = parseFloat(document.getElementById('massSlider').value);
     if (!secondLawState.active) renderSecondLawStatic();
 }
+
 function renderSecondLawStatic() {
     const canvas = document.getElementById('canvasSecondLaw');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    const cy = 150, size = 30 + (secondLawState.m * 8);
+    const cy = canvas.height * 0.65, size = 30 + (secondLawState.m * 8);
     ctx.fillStyle = '#0f172a'; ctx.fillRect(secondLawState.x, cy - size, size, size);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(secondLawState.x, cy - size, size, size);
     
-    // Вектор постоянной толкающей силы
     drawArrow(ctx, secondLawState.x + size/2, cy - size/2, secondLawState.x + size/2 + 60, cy - size/2, '#ef4444');
-    ctx.fillStyle = '#ef4444'; ctx.fillText('F', secondLawState.x + size/2 + 65, cy - size/2 + 4);
+    ctx.fillStyle = '#ef4444'; ctx.font = '14px sans-serif'; ctx.fillText('F', secondLawState.x + size/2 + 65, cy - size/2 + 4);
 }
+
 function launchSecondLaw() {
     secondLawState.x = 40; secondLawState.v = 0;
-    // Постоянная сила F=10H. Ускорение a = F / m
     secondLawState.a = 0.3 / secondLawState.m; 
     secondLawState.active = true;
     loopSecondLaw();
 }
+
 function loopSecondLaw() {
     if (!secondLawState.active) return;
     const canvas = document.getElementById('canvasSecondLaw');
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     secondLawState.v += secondLawState.a;
     secondLawState.x += secondLawState.v;
 
-    const cy = 150, size = 30 + (secondLawState.m * 8);
+    const cy = canvas.height * 0.65, size = 30 + (secondLawState.m * 8);
     if (secondLawState.x > canvas.width) { secondLawState.x = 40; secondLawState.v = 0; }
 
     ctx.fillStyle = '#0f172a'; ctx.fillRect(secondLawState.x, cy - size, size, size);
@@ -812,24 +814,30 @@ function loopSecondLaw() {
     const midX = secondLawState.x + size / 2;
     const midY = cy - size / 2;
 
-    drawArrow(ctx, midX, midY, midX + 60, midY, '#ef4444'); // Сила F
-    drawArrow(ctx, midX, cy - size - 15, midX + (secondLawState.a * 350), cy - size - 15, '#22c55e', 3); // Ускорение а
+    drawArrow(ctx, midX, midY, midX + 60, midY, '#ef4444');
+    drawArrow(ctx, midX, cy - size - 15, midX + (secondLawState.a * 350), cy - size - 15, '#22c55e', 3);
 
-    ctx.fillStyle = '#22c55e'; ctx.fillText(`Ускорение a = ${(0.3/secondLawState.m * 10).toFixed(1)} м/с²`, 20, 30);
+    ctx.fillStyle = '#22c55e'; ctx.font = '14px sans-serif';
+    ctx.fillText(`Ускорение a = ${(0.3/secondLawState.m * 10).toFixed(1)} м/с²`, 20, 30);
     activeAnimationIds.secondLaw = requestAnimationFrame(loopSecondLaw);
 }
 
-// --- СИМУЛЯЦИЯ 4: ТРЕТИЙ ЗАКОН НЬЮТОНА ---
-let collisionState = { x1: 60, x2: 340, v1: 0, v2: 0, colliding: false, timer: 0 };
+let collisionState = { x1: 60, x2: 300, v1: 0, v2: 0, colliding: false, timer: 0 };
 function initThirdLawCanvas() {
-    collisionState = { x1: 60, x2: 340, v1: 0, v2: 0, colliding: false, timer: 0 };
+    const canvas = document.getElementById('canvasThirdLaw');
+    if (!canvas) return;
+    resizeCanvasToDisplaySize(canvas);
+    collisionState = { x1: 60, x2: canvas.width - 60, v1: 0, v2: 0, colliding: false, timer: 0 };
     loopThirdLaw();
 }
+
 function startCollision() {
-    collisionState.x1 = 60; collisionState.x2 = 340;
+    const canvas = document.getElementById('canvasThirdLaw');
+    collisionState.x1 = 60; collisionState.x2 = canvas.width - 60;
     collisionState.v1 = 2; collisionState.v2 = -2;
     collisionState.colliding = false; collisionState.timer = 0;
 }
+
 function loopThirdLaw() {
     const canvas = document.getElementById('canvasThirdLaw');
     if (!canvas) return;
@@ -839,46 +847,43 @@ function loopThirdLaw() {
     collisionState.x1 += collisionState.v1;
     collisionState.x2 += collisionState.v2;
 
-    // Фиксация момента удара
     if (!collisionState.colliding && Math.abs(collisionState.x2 - collisionState.x1) <= 40) {
         collisionState.colliding = true;
         collisionState.v1 = 0; collisionState.v2 = 0;
-        collisionState.timer = 30; // Кадры отображения сил взаимодействия
+        collisionState.timer = 30;
     }
 
-    // Рендеринг взаимодействующих тел
+    const cy = canvas.height / 2;
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#38bdf8';
-    ctx.beginPath(); ctx.arc(collisionState.x1, 150, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(collisionState.x1, cy, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
     ctx.strokeStyle = '#fb923c';
-    ctx.beginPath(); ctx.arc(collisionState.x2, 150, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(collisionState.x2, cy, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
 
+    ctx.font = '13px sans-serif';
     if (collisionState.colliding && collisionState.timer > 0) {
-        // Отрисовка векторов взаимных равных сил
-        drawArrow(ctx, collisionState.x1, 150, collisionState.x1 - 60, 150, '#ef4444', 3);
-        drawArrow(ctx, collisionState.x2, 150, collisionState.x2 + 60, 150, '#ef4444', 3);
+        drawArrow(ctx, collisionState.x1, cy, collisionState.x1 - 60, cy, '#ef4444', 3);
+        drawArrow(ctx, collisionState.x2, cy, collisionState.x2 + 60, cy, '#ef4444', 3);
         ctx.fillStyle = '#f8fafc';
-        ctx.fillText('F2→1', collisionState.x1 - 50, 125);
-        ctx.fillText('F1→2', collisionState.x2 + 20, 125);
+        ctx.fillText('F2→1', collisionState.x1 - 50, cy - 25);
+        ctx.fillText('F1→2', collisionState.x2 + 20, cy - 25);
         collisionState.timer--;
-        if (collisionState.timer === 0) {
-            collisionState.v1 = -1.5; collisionState.v2 = 1.5; // Разлет после удара
-        }
+        if (collisionState.timer === 0) { collisionState.v1 = -1.5; collisionState.v2 = 1.5; }
     }
 
     activeAnimationIds.thirdLaw = requestAnimationFrame(loopThirdLaw);
 }
 
-// --- СИМУЛЯЦИЯ 5: ЗАКОН ГУКА ---
 function drawHooke() {
     const canvas = document.getElementById('canvasHooke');
     if (!canvas) return;
+    resizeCanvasToDisplaySize(canvas);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const ext = parseInt(document.getElementById('hookeSlider').value);
-    const startX = 50, endX = 180 + ext, cy = 150;
+    const startX = 40, cy = canvas.height / 2;
+    const endX = (canvas.width / 2.5) + ext;
 
-    // Отрисовка витков пружины методом синусоиды
     ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 3; ctx.beginPath();
     ctx.moveTo(startX, cy);
     const turns = 15;
@@ -891,135 +896,95 @@ function drawHooke() {
     }
     ctx.stroke();
 
-    // Зацепленный груз
     ctx.fillStyle = '#0f172a'; ctx.fillRect(endX, cy - 20, 40, 40);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(endX, cy - 20, 40, 40);
 
-    // Точка зацепа и вектор силы упругости (строго от контакта влево)
     if (ext > 10) {
-        drawArrow(ctx, endX, cy, endX - ext * 0.8, cy, '#ef4444', 3);
-ctx.fillStyle = '#ef4444'; ctx.fillText('Fупр', endX - 45, cy - 12);
+drawArrow(ctx, endX, cy, endX - ext * 0.8, cy, '#ef4444', 3);
+ctx.fillStyle = '#ef4444'; ctx.font = '13px sans-serif'; ctx.fillText('Fупр', endX - 45, cy - 25);
 }
 }
-
-<script>
-// --- БЛОК ДИАГНОСТИКИ И ТЕСТИРОВАНИЯ ---
-
+    <script>
 function drawQuiz1Static() {
     const canvas = document.getElementById('canvasQuiz1');
     if (!canvas) return;
+    resizeCanvasToDisplaySize(canvas);
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const bx = 160, by = 160, bw = 80, bh = 40;
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(bx, by, bw, bh);
-    ctx.strokeStyle = '#334155'; ctx.strokeRect(bx, by, bw, bh);
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const bw = 80, bh = 40;
 
-    const cx = bx + bw / 2;
-    const cy = by + bh / 2;
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
+    ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
 
-    // Отрисовка диагностических стрелок направлений
-    drawArrow(ctx, cx, cy, cx - 70, cy, '#38bdf8'); // 1 Влево
-    drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444'); // 2 Вправо
-    drawArrow(ctx, cx, cy, cx, cy - 60, '#fb923c'); // 3 Вверх
+    drawArrow(ctx, cx, cy, cx - 70, cy, '#38bdf8');
+    drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444');
+    drawArrow(ctx, cx, cy, cx, cy - 60, '#fb923c');
 
-    ctx.fillStyle = '#f8fafc';
+    ctx.fillStyle = '#f8fafc'; ctx.font = '14px sans-serif';
     ctx.fillText('1', cx - 60, cy - 10);
     ctx.fillText('2', cx + 50, cy - 10);
     ctx.fillText('3', cx + 10, cy - 45);
 }
 
-// Мгновенная валидация изменений выпадающих списков селекторной сетки
 function checkSelectAnswer(selectId, correctAnswer) {
     const el = document.getElementById(selectId);
-    if (el.value === correctAnswer) {
-        answersState.quiz1[selectId.split('_')[1]] = true;
-    } else {
-        answersState.quiz1[selectId.split('_')[1]] = false;
-    }
+    answersState.quiz1[selectId.split('_')] = (el.value === correctAnswer);
 }
 
 function submitMultiSelector() {
     if (answersState.quiz1.submitted) return;
-    
     const fields = ['q1_v', 'q1_f', 'q1_a'];
     const correctMap = { 'q1_v': 'вправо', 'q1_f': 'влево', 'q1_a': 'влево' };
-    
     let localScore = 0;
     fields.forEach(f => {
-        const el = document.getElementById(f);
-        el.disabled = true;
-        if (el.value === correctMap[f]) {
-            el.classList.add('correct-highlight');
-            localScore += 1;
-        } else {
-            el.classList.add('wrong-highlight');
-        }
+        const el = document.getElementById(f); el.disabled = true;
+        if (el.value === correctMap[f]) { el.classList.add('correct-highlight'); localScore += 1; }
+        else { el.classList.add('wrong-highlight'); }
     });
-
-    score += localScore;
-    answersState.quiz1.submitted = true;
-    updateSliderUI();
+    score += localScore; answersState.quiz1.submitted = true; updateSliderUI();
 }
 
-// Обработка кликов по интерактивным карточкам-кнопкам
 function checkCardAnswer(btnElement, questionIndex, isCorrect) {
     const parent = btnElement.parentElement;
     const siblingCards = parent.querySelectorAll('.card-btn');
-    
-    // Блокировка всех вариантов ответа в данном блоке
     siblingCards.forEach(card => card.disabled = true);
-
-    if (isCorrect) {
-        btnElement.classList.add('correct-highlight');
-        score += 1;
-        if (questionIndex === 1) answersState.quiz2 = true;
-        if (questionIndex === 2) answersState.quiz3 = true;
-        if (questionIndex === 3) answersState.quiz4 = true;
-    } else {
-        btnElement.classList.add('wrong-highlight');
-        if (questionIndex === 1) answersState.quiz2 = false;
-        if (questionIndex === 2) answersState.quiz3 = false;
-        if (questionIndex === 3) answersState.quiz4 = false;
-        
-        // Подсветка верного ответа для обеспечения геймифицированного фидбека
-        highlightTrueAnswer(siblingCards, questionIndex);
-    }
+    if (isCorrect) { btnElement.classList.add('correct-highlight'); score += 1; setQuizState(questionIndex, true); }
+    else { btnElement.classList.add('wrong-highlight'); setQuizState(questionIndex, false); highlightTrueAnswer(siblingCards, questionIndex); }
     updateSliderUI();
 }
 
+function setQuizState(idx, val) {
+    if (idx === 1) answersState.quiz2 = val;
+    if (idx === 2) answersState.quiz3 = val;
+    if (idx === 3) answersState.quiz4 = val;
+}
+
 function highlightTrueAnswer(cards, qIdx) {
-    // Внутренний маппинг истинных индексов ответов для подсветки
     let trueIndexes = { 1: 1, 2: 2, 3: 1 }; 
     cards[trueIndexes[qIdx]].classList.add('correct-highlight');
 }
 
-// Сборка финального аналитического отчёта
 function buildFinalReport() {
     const container = document.getElementById('analyticsMap');
-    
     const q1_res = (answersState.quiz1.v && answersState.quiz1.f && answersState.quiz1.a) ? 'Успешно' : 'Есть ошибки';
     const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка';
     const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка';
     const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
-
-    let verdict = '';
-    const pct = (score / 8) * 100;
+    let verdict = ''; const pct = (score / 8) * 100;
     if (pct >= 85) verdict = '<span class="text-green">Великолепный уровень подготовки! КИМ ОГЭ по динамике решён на максимум.</span>';
     else if (pct >= 50) verdict = '<span class="text-blue">Хороший базис. Внимательно повторите ловушку с жёсткостью пружины и III закон Ньютона.</span>';
-    else verdict = '<span class="text-red">Требуется глубокая проработка теории векторов и законов динамики. Равнодействующая требует внимания.</span>';
-
+    else verdict = '<span class="text-red">Требуется глубокая проработка теории векторов и законов динамики.</span>';
     container.innerHTML = `
-        <div class="analytics-item"><span>Задача №1 (Векторы v, a, Fтр при торможении):</span> <strong>${q1_res}</strong></div>
-        <div class="analytics-item"><span>Задача №2 (Модуль равнодействующей сил):</span> <strong>${q2_res}</strong></div>
-        <div class="analytics-item"><span>Задача №3 (Ловушка инвариантности жесткости k):</span> <strong>${q3_res}</strong></div>
+        <div class="analytics-item"><span>Задача №1 (Векторы при торможении):</span> <strong>${q1_res}</strong></div>
+        <div class="analytics-item"><span>Задача №2 (Модуль равнодействующей):</span> <strong>${q2_res}</strong></div>
+        <div class="analytics-item"><span>Задача №3 (Ловушка жесткости k):</span> <strong>${q3_res}</strong></div>
         <div class="analytics-item"><span>Задача №4 (Взаимодействие тел разной массы):</span> <strong>${q4_res}</strong></div>
-        <div style="margin-top:15px; font-weight:600; font-size:14px;">
-            Итоговый балл: ${score} из 8 возможных (${pct.toFixed(0)}%).<br>
-            <p style="margin-top:8px; font-weight:400; font-style:italic;">Вердикт: ${verdict}</p>
-        </div>
-    `;
+        <div style="margin-top:15px; font-weight:600; font-size:14px;">Итоговый балл: ${score} из 8 (${pct.toFixed(0)}%).<br><p style="margin-top:8px; font-weight:400; font-style:italic;">Вердикт: ${verdict}</p></div>`;
 }
 </script>
+
 </body>
 </html>
