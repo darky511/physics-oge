@@ -733,9 +733,9 @@ function drawQuiz1Static() {
     const cx = canvas.width / 2, cy = canvas.height / 2, bw = 100, bh = 50;
     ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
-    drawArrow(ctx, cx, cy, cx - 110, cy, '#38bdf8', '1 (Fтр)'); 
-    drawArrow(ctx, cx, cy, cx + 110, cy, '#ef4444', '2 (v)'); 
-    drawArrow(ctx, cx, cy, cx - 70, cy - 40, '#fb923c', '3 (a)');
+    drawArrow(ctx, cx, cy, cx - 110, cy, '#38bdf8', '1'); 
+    drawArrow(ctx, cx, cy, cx + 110, cy, '#ef4444', '2'); 
+    drawArrow(ctx, cx, cy, cx - 70, cy - 40, '#fb923c', '3');
 }
 
 function drawQuiz2ForcesStatic() {
@@ -744,9 +744,9 @@ function drawQuiz2ForcesStatic() {
     const cx = canvas.width / 2, cy = canvas.height / 2, bw = 90, bh = 45;
     ctx.fillStyle = '#0f172a'; ctx.fillRect(cx - bw/2, cy - bh/2, bw, bh);
     ctx.strokeStyle = '#334155'; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
-    drawArrow(ctx, cx, cy, cx + 120, cy, '#ef4444', 'F₁ = 12 H'); 
-    drawArrow(ctx, cx, cy, cx - 50, cy, '#38bdf8', 'F₂ = 5 H'); 
-    drawArrow(ctx, cx - 50, cy, cx - 80, cy, '#fb923c', 'F₃ = 3 H');
+    drawArrow(ctx, cx, cy, cx + 120, cy, '#ef4444', 'F₁'); 
+    drawArrow(ctx, cx, cy, cx - 50, cy, '#38bdf8', 'F₂'); 
+    drawArrow(ctx, cx - 50, cy, cx - 80, cy, '#fb923c', 'F₃');
 }
 
 function checkSelectAnswer(selectId, correctAnswer) {
@@ -788,8 +788,8 @@ function buildFinalReport() {
     const q1_res = (answersState.quiz1.v && answersState.quiz1.f && answersState.quiz1.a) ? 'Успешно' : 'Есть ошибки';
     const q2_res = answersState.quiz2 ? 'Успешно' : 'Ошибка'; const q3_res = answersState.quiz3 ? 'Успешно' : 'Ошибка'; const q4_res = answersState.quiz4 ? 'Успешно' : 'Ошибка';
     let verdict = ''; const pct = (score / 8) * 100;
-    if (pct >= 85) verdict = '<span class="text-green">Превосходно! Максимум КИМ ОГЭ.</span>';
-    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо. Повторите III закон Ньютона.</span>';
+    if (pct >= 85) verdict = '<span class="text-green">Превосходно!</span>';
+    else if (pct >= 50) verdict = '<span class="text-blue">Хорошо.</span>';
     else verdict = '<span class="text-red">Требуется работа над векторами.</span>';
     container.innerHTML = `
         <div class="analytics-item"><span>Задание №1:</span> <strong>${q1_res}</strong></div>
