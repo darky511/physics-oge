@@ -584,6 +584,25 @@ function updateSliderUI() {
     document.getElementById('progressBar').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
     
     let score = solvedTasks.filter(Boolean).length;
+    let answersState = {
+    t1_1: { submitted: false, correct: false },
+    t1_2: { submitted: false, correct: false },
+    t1_3: { submitted: false, correct: false },
+    t1_4: { submitted: false, correct: false },
+    t1_5: { submitted: false, correct: false },
+    t1_6: { submitted: false, correct: false },
+    t1_7: { submitted: false, correct: false },
+    t1_8: { submitted: false, correct: false },
+    t1_9: { submitted: false, correct: false },
+    t1_10: { submitted: false, correct: false },
+    t1_11: { submitted: false, correct: false },
+    t3_1: { submitted: false, correct: false },
+    t3_2: { submitted: false, correct: false },
+    t3_3: { submitted: false, correct: false },
+    t3_4: { submitted: false, correct: false },
+    t3_5: { submitted: false, correct: false }
+};
+
     document.getElementById('scoreDisplay').innerText = `Успех: ${score} / ${totalTasksCount}`;
 }
 
@@ -791,35 +810,81 @@ function loopAccel() {
 </script>
 <script>
 function checkInputAnswer(btn, taskId, correctAnswer) {
-    if (answersState.tasks[taskId].submitted) return;
+    // Преобразуем точки в нижние подчеркивания для соответствия нашему стейту (например, '1.2' -> 't1_2')
+    const taskKey = 't' + taskId.toString().replace('.', '_');
     
-    const wrapper = btn.closest('.input-answer-container');
+    if (!answersState || !answersState[taskKey]) return;
+    if (answersState[taskKey].submitted) return;
+    
+    const wrapper = btn.closest('.input-answer-container') || btn.parentElement;
     const input = wrapper.querySelector('.oga-input');
     const feedback = wrapper.querySelector('.input-feedback');
-    const userAns = input.value.trim().replace(',', '.');
     
+    if (!input) return;
+    const userAns = input.value.trim().replace(',', '.');
     if (userAns === "") return;
     
     input.disabled = true;
     btn.disabled = true;
-    answersState.tasks[taskId].submitted = true;
+    answersState[taskKey].submitted = true;
     
+    // Математически точное сравнение чисел
     const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer));
-    answersState.tasks[taskId].correct = isCorrect;
+    answersState[taskKey].correct = isCorrect;
     
     if (isCorrect) {
         input.classList.add('correct-highlight');
-        feedback.className = "input-feedback text-green";
-        feedback.innerText = "✓ Верно!";
+        if (feedback) {
+            feedback.className = "input-feedback text-green";
+            feedback.innerText = "✓ Верно!";
+        }
         score += 1;
     } else {
         input.classList.add('wrong-highlight');
-        feedback.className = "input-feedback text-red";
-        feedback.innerText = `✗ Неверно. Правильный ответ: ${correctAnswer}`;
+        if (feedback) {
+            feedback.className = "input-feedback text-red";
+            feedback.innerText = `✗ Неверно. Правильный ответ: ${correctAnswer}`;
+        }
     }
     updateSliderUI();
 }
 
+function submitSelectTask(btn, taskId, correctCombinedValue) {
+    const taskKey = 't' + taskId.toString().replace('.', '_');
+    if (!answersState || !answersState[taskKey] || answersState[taskKey].submitted) return;
+
+    const slide = btn.closest('.slide');
+    const selects = slide.querySelectorAll('.oga-select');
+    const feedback = slide.querySelector('.input-feedback');
+    
+    let userValue = "";
+    selects.forEach(sel => { userValue += sel.value; });
+
+    // Проверяем, что ученик выбрал все выпадающие списки в задаче
+    if (userValue.includes("") || userValue.length < selects.length) return;
+
+    selects.forEach(sel => sel.disabled = true);
+    btn.disabled = true;
+    answersState[taskKey].submitted = true;
+
+    if (userValue === correctCombinedValue.toString()) {
+        answersState[taskKey].correct = true;
+        score += 1;
+        if (feedback) {
+            feedback.className = "input-feedback text-green";
+            feedback.innerText = "✓ Верно!";
+        }
+    } else {
+        answersState[taskKey].correct = false;
+        if (feedback) {
+            feedback.className = "input-feedback text-red";
+            feedback.innerText = `✗ Неверно. Правильный код ответа: ${correctCombinedValue}`;
+        }
+    }
+    updateSliderUI();
+}
+
+    
 function updateMassTask3() {
     task3State.m = parseFloat(document.getElementById('massSliderTask3').value);
     if (!task3State.active) drawTask3Static();
