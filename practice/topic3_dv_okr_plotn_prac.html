@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ОГЭ Физика — Практикум: Окружность и Плотность</title>
+    <!-- CSS Стили будут находиться в Частях 5, 6 и 7 -->
+</head>
+<body>
+
+<div class="app-container">
+    <header class="app-header">
+        <div class="topic-badge">Блок 3. Окружность и Плотность</div>
+        <div class="progress-bar-container">
+            <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+        </div>
+        <div class="score-badge" id="scoreDisplay">Успех: 0 / 11</div>
+    </header>
+
+    <!-- ЗАДАНИЕ 1.1: Соответствие величин -->
+    <div class="slide active" id="slide1">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.1 (Определения физических величин)</span>
+            <h2>Установите соответствие между величинами и их определениями</h2>
+            
+            <div class="task-table-layout">
+                <div class="table-col">
+                    <div class="table-head">ФИЗИЧЕСКИЕ ВЕЛИЧИНЫ</div>
+                    <div class="table-row-item"><strong>А)</strong> Плотность вещества</div>
+                    <div class="table-row-item"><strong>Б)</strong> Жёсткость пружины</div>
+                    <div class="table-row-item"><strong>В)</strong> Сила трения скольжения</div>
+                </div>
+                <div class="table-col">
+                    <div class="table-head">ОПРЕДЕЛЕНИЯ</div>
+                    <div class="table-def-item">1) Коэффициент, связывающий силу сжатия/растяжения пружины с её удлинением.</div>
+                    <div class="table-def-item">2) Сила, возникающая при движении одного тела по поверхности другого (против скорости).</div>
+                    <div class="table-def-item">3) Коэффициент, зависящий исключительно от деформации тела.</div>
+                    <div class="table-def-item">4) Величина, показывающая, какой массой обладает вещество в единице объёма.</div>
+                    <div class="table-def-item">5) Физическая величина, которая зависит от общего объёма тела.</div>
+                </div>
+            </div>
+
+            <div class="answer-zone">
+                <p class="text-concentrate">Введите трёхзначное число ответа (например, 123):</p>
+                <div class="input-row">
+                    <input type="text" id="input_q1" class="oga-input" placeholder="Ответ...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q1', '412', 1)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.2: Плотность по мензурке -->
+    <div class="slide" id="slide2">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.2 (Расчет плотности)</span>
+                <h2>Чему равна средняя плотность погруженного цилиндра?</h2>
+                <p class="text-concentrate">
+                    До погружения уровень воды в мензурке был на отметке <strong>60 мл</strong>, 
+                    а после полного погружения поднялся до <strong>100 мл</strong>. 
+                    Масса цилиндра равна <strong>320 г</strong>. 
+                    Вычислите плотность в кг/м³.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q2" class="oga-input" placeholder="кг/м³...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q2', '8000', 2)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasMenzuraQ2"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.3: Нагревание стального шарика -->
+    <div class="slide" id="slide3">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.3 (Тепловое расширение)</span>
+                <h2>Как изменились масса и плотность стального шарика при нагревании?</h2>
+                <p class="text-concentrate">
+                    В процессе нагревания стальной шарик расширился и перестал пролезать сквозь металлическое кольцо.
+                    <br><br>
+                    <strong>Характер изменения:</strong> 1) увеличилась, 2) уменьшилась, 3) не изменилась.
+                </p>
+                
+                <div class="multivector-grid" style="margin-top: 10px;">
+                    <div class="select-wrapper">
+                        <label>Масса шарика</label>
+                        <select id="select_q3_m" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличилась</option>
+                            <option value="2">2) Уменьшилась</option>
+                            <option value="3">3) Не изменилась</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <label>Плотность шарика</label>
+                        <select id="select_q3_p" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличилась</option>
+                            <option value="2">2) Уменьшилась</option>
+                            <option value="3">3) Не изменилась</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="answer-zone" style="margin-top: 15px;">
+                    <button class="btn btn-accent" style="width:100%;" onclick="checkSelectDouble('select_q3_m', 'select_q3_p', '3', '2', 3)">Зафиксировать выбор</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasRingQ3"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.4: Линейная скорость авто -->
+    <div class="slide" id="slide4">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.4 (Кинематика окружности)</span>
+                <h2>Чему равен модуль линейной скорости автомобиля?</h2>
+                <p class="text-concentrate">
+                    Автомобиль движется равномерно по окружности радиусом <strong>40 м</strong> 
+                    с центростремительным ускорением <strong>2,5 м/с²</strong>. 
+                    Определите его линейную скорость в м/с.
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('car')">Старт / Пауза</button>
+                    <button class="btn" onclick="resetSimulation('car')">Сброс</button>
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q4" class="oga-input" placeholder="м/с...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q4', '10', 4)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasCarQ4"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.5: Свинцовый шарик на свече -->
+    <div class="slide" id="slide5">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.5 (Параметры вещества)</span>
+                <h2>Как меняются объём и плотность шарика при нагревании?</h2>
+                <p class="text-concentrate">
+                    Свинцовый шарик нагревают в пламени свечи. 
+                    Определите характер изменения для объёма и плотности вещества.
+                    <br><br>
+                    <strong>Варианты:</strong> 1) увеличивается, 2) уменьшается, 3) не изменяется.
+                </p>
+                <div class="multivector-grid">
+                    <div class="select-wrapper">
+                        <label>Объём шарика</label>
+                        <select id="select_q5_v" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличивается</option>
+                            <option value="2">2) Уменьшается</option>
+                            <option value="3">3) Не изменяется</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <label>Плотность шарика</label>
+                        <select id="select_q5_p" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличивается</option>
+                            <option value="2">2) Уменьшается</option>
+                            <option value="3">3) Не изменяется</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="answer-zone" style="margin-top: 15px;">
+                    <button class="btn btn-accent" style="width:100%;" onclick="checkSelectDouble('select_q5_v', 'select_q5_p', '1', '2', 5)">Зафиксировать выбор</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasCandleQ5"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 1.6: Сравнение плотностей четырех мензурок -->
+    <div class="slide" id="slide6">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.6 (Анализ графиков и шкал)</span>
+                <h2>В какой из мензурок находится жидкость с наибольшей плотностью?</h2>
+                <p class="text-concentrate">
+                    На рисунке представлены четыре мензурки с разными жидкостями <strong>равной массы</strong>. 
+                    Определите номер мензурки (1–4), в которой находится жидкость с наибольшей плотностью.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q6" class="oga-input" placeholder="Номер...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q6', '1', 6)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasFourMenzQ6"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.7: Термометр на солнце -->
+    <div class="slide" id="slide7">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.7 (Тепловые явления)</span>
+                <h2>Как изменяются объём и масса спирта в термометре?</h2>
+                <p class="text-concentrate">
+                    Спиртовой термометр выносят из тени на солнечную сторону. 
+                    Определите характер изменения величин.
+                    <br><br>
+                    <strong>Варианты:</strong> 1) увеличивается, 2) уменьшается, 3) не изменяется.
+                </p>
+                <div class="multivector-grid">
+                    <div class="select-wrapper">
+                        <label>Объём спирта</label>
+                        <select id="select_q7_v" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличивается</option>
+                            <option value="2">2) Уменьшается</option>
+                            <option value="3">3) Не изменяется</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <label>Масса спирта</label>
+                        <select id="select_q7_m" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличивается</option>
+                            <option value="2">2) Уменьшается</option>
+                            <option value="3">3) Не изменяется</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="answer-zone" style="margin-top: 15px;">
+                    <button class="btn btn-accent" style="width:100%;" onclick="checkSelectDouble('select_q7_v', 'select_q7_m', '1', '3', 7)">Зафиксировать выбор</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasTermQ7"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.8: Расчет массы медного цилиндра -->
+    <div class="slide" id="slide8">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.8 (Экспериментальные задачи)</span>
+                <h2>Чему равна масса медного цилиндра, погружённого в воду?</h2>
+                <p class="text-concentrate">
+                    Объём сплошного медного цилиндра измерили с помощью мензурки (см. чертёж). 
+                    Используя справочное значение плотности меди <strong>8,9 г/см³</strong>, 
+                    найдите массу цилиндра в граммах.
+                </p>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q8" class="oga-input" placeholder="грамм...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q8', '356', 8)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasCopperQ8"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.9: Сравнение масс одинаковых ведер -->
+    <div class="slide" id="slide9">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №1.9 (Плотности металлов)</span>
+            <h2>Какую массу будет иметь стальное ведро точно такого же объёма?</h2>
+            <p class="text-concentrate" style="margin-bottom: 25px;">
+                Масса алюминиевого ведра равна <strong>1350 г</strong>. Какую массу будет иметь точно такое же 
+                ведро из стали? Плотность алюминия принять равной <strong>2,7 г/см³</strong>, 
+                стали — <strong>7,8 г/см³</strong>. Ответ запишите в граммах.
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q9" class="oga-input" placeholder="г...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q9', '3900', 9)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.10: Нагревание колбы с жидкостью -->
+    <div class="slide" id="slide10">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.10 (Молекулярная структура)</span>
+                <h2>Как изменились плотность жидкости и скорость молекул?</h2>
+                <p class="text-concentrate">
+                    При нагревании колбы зафиксировано повышение уровня жидкости в тонкой трубке. 
+                    Определите характер изменений величин.
+                    <br><br>
+                    <strong>Варианты:</strong> 1) увеличилась, 2) уменьшилась, 3) не изменилась.
+                </p>
+                <div class="multivector-grid">
+                    <div class="select-wrapper">
+                        <label>Плотность жидкости</label>
+                        <select id="select_q10_p" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличилась</option>
+                            <option value="2">2) Уменьшилась</option>
+                            <option value="3">3) Не изменилась</option>
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <label>Скорость движения молекул</label>
+                        <select id="select_q10_v" class="oga-select">
+                            <option value="">Выбрать...</option>
+                            <option value="1">1) Увеличилась</option>
+                            <option value="2">2) Уменьшилась</option>
+                            <option value="3">3) Не изменилась</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="answer-zone" style="margin-top: 15px;">
+                    <button class="btn btn-accent" style="width:100%;" onclick="checkSelectDouble('select_q10_p', 'select_q10_v', '2', '1', 10)">Зафиксировать выбор</button>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasFlaskQ10"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1.11: Изменение параметров окружности -->
+    <div class="slide" id="slide11">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №1.11 (Пропорциональные изменения)</span>
+                <h2>Во сколько раз уменьшилось центростремительное ускорение тела?</h2>
+                <p class="text-concentrate">
+                    Радиус движения тела по окружности уменьшили в <strong>2 раза</strong>, 
+                    его линейную скорость тоже уменьшили в <strong>2 раза</strong>. 
+                    Вычислите кратность уменьшения центростремительного ускорения.
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('accel')">Старт / Пауза</button>
+                    <button class="btn" onclick="resetSimulation('accel')">Сброс</button>
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q11" class="oga-input" placeholder="Кратность...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q11', '2', 11)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasAccelQ11"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- ЗАДАНИЕ 3.1: Сплав двух металлов -->
+    <div class="slide" id="slide12">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №3.1 (Высокий уровень — Сплавы)</span>
+            <h2>Определите массу первого металла в полученном сплошном сплаве</h2>
+            <p class="text-concentrate" style="margin-bottom: 20px;">
+                Из двух металлов с плотностями \(\rho_1 = 3000\) кг/м³ и \(\rho_2 = 8000\) кг/м³ изготовили сплав 
+                массой <strong>4 кг</strong>. Плотность сплава равна <strong>5000 кг/м³</strong>. 
+                Найдите массу первого металла, если суммарный объём сплава равен сумме объёмов его составных частей. 
+                Ответ запишите в килограммах (дробь через точку).
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q12" class="oga-input" placeholder="кг...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q12', '1.44', 12)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.2: Ременная передача -->
+    <div class="slide" id="slide13">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №3.2 (Высокий уровень — Передачи)</span>
+                <h2>Сколько оборотов в секунду совершает точка на ободе второго шкива?</h2>
+                <p class="text-concentrate">
+                    Два шкива соединены ремнём без проскальзывания. Радиус первого шкива в <strong>3 раза больше</strong> 
+                    радиуса второго. Первый шкив делает <strong>120 оборотов за одну минуту</strong>. 
+                    Найдите частоту вращения второго шкива (об/с).
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('belt')">Старт / Пауза</button>
+                    <button class="btn" onclick="resetSimulation('belt')">Сброс</button>
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q13" class="oga-input" placeholder="об/с...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q13', '6', 13)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasBeltQ13"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.3: Встречные точки на окружности -->
+    <div class="slide" id="slide14">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №3.3 (Высокий уровень — Относительное движение)</span>
+                <h2>Определите линейную скорость более быстрой материальной точки</h2>
+                <p class="text-concentrate">
+                    Две точки вращаются по окружности радиусом <strong>2 м</strong>. При движении в одну сторону 
+                    одна догоняет другую каждые <strong>20 с</strong>. При движении в противоположные 
+                    стороны они встречаются каждые <strong>4 с</strong>. 
+                    Вычислите скорость в м/с (округлив \(\pi \approx 3.14\) до сотых).
+                </p>
+                <div class="sim-controls">
+                    <button class="btn" onclick="toggleSimulation('points')">Старт / Пауза</button>
+                    <button class="btn" onclick="resetSimulation('points')">Сброс</button>
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q14" class="oga-input" placeholder="м/с...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q14', '1.88', 14)">Проверить</button>
+                    </div>
+                </div>
+            </div>
+            <div class="visual-side">
+                <canvas id="canvasPointsQ14"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.4: Толщина стенок шара -->
+    <div class="slide" id="slide15">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №3.4 (Высокий уровень — Геометрия)</span>
+            <h2>Определите толщину стенок полого латунного шара</h2>
+            <p class="text-concentrate" style="margin-bottom: 20px;">
+                Полый латунный шар имеет массу <strong>850 г</strong>. При полном погружении в воду он вытесняет 
+                <strong>200 см³</strong> жидкости. Определите толщину стенок шара в сантиметрах, если его внешний 
+                радиус равен <strong>5 см</strong>. Плотность латуни — <strong>8500 кг/м³</strong>. 
+                Результат округлите до сотых.
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q15" class="oga-input" placeholder="см...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q15', '2.12', 15)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3.5: Ускорение на экваторе планеты -->
+    <div class="slide" id="slide16">
+        <div class="slide-inner">
+            <span class="slide-type">Задание №3.5 (Высокий уровень — Космология)</span>
+            <h2>Чему равно центростремительное ускорение точек на экваторе планеты?</h2>
+            <p class="text-concentrate" style="margin-bottom: 20px;">
+                Период обращения сферической планеты вокруг собственной оси равен <strong>6 часам</strong>. 
+                Геометрический радиус планеты составляет \(4 \cdot 10^6\) м. 
+                Вычислите центростремительное ускорение на линии экватора в м/с² (округлив до сотых).
+            </p>
+            <div class="answer-zone">
+                <div class="input-row">
+                    <input type="text" id="input_q16" class="oga-input" placeholder="м/с²...">
+                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q16', '0.34', 16)">Проверить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ИТОГОВЫЙ СЛАЙД АНАЛИТИКИ -->
+    <div class="slide" id="slide17">
+        <div class="slide-inner">
+            <span class="slide-type">Итоги урока</span>
+            <h2>Диагностическая карта по Блоку №3</h2>
+            <div class="analytics-card" id="analyticsMap">
+                Решите задачи и нажмите кнопку ниже для компиляции карты готовности ученика.
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn btn-accent" style="padding:12px 35px;" onclick="buildReport()">Сформировать вердикт</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="controls-footer">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Назад</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Вперед →</button>
+    </footer>
+</div>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+body {
+    background-color: #04060a; color: #f8fafc;
+    font-family: system-ui, -apple-system, sans-serif;
+    height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
+}
+.app-container {
+    width: 95vw; max-width: 960px; height: 85vh; max-height: 520px;
+    background-color: #090d16; border: 1px solid #1e293b; border-radius: 16px;
+    display: flex; flex-direction: column; justify-content: space-between; position: relative;
+}
+.app-header {
+    padding: 12px 20px; background-color: #0f172a; border-bottom: 1px solid #1e293b;
+    border-top-left-radius: 15px; border-top-right-radius: 15px;
+    display: flex; align-items: center; justify-content: space-between; gap: 15px;
+}
+.topic-badge {
+    font-size: 11px; text-transform: uppercase; font-weight: 700; color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1); padding: 4px 10px; border-radius: 6px;
+}
+.progress-bar-container { flex-grow: 1; height: 6px; background-color: #1e293b; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, #22c55e); transition: width 0.3s ease; }
+.score-badge { font-size: 12px; font-weight: 600; color: #4ade80; background: rgba(34, 197, 94, 0.1); padding: 4px 10px; border-radius: 6px; }
+.controls-footer { padding: 12px 20px; background-color: #0f172a; border-top: 1px solid #1e293b; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; display: flex; justify-content: space-between; }
+.nav-btn { background-color: #1e293b; color: #f8fafc; border: none; padding: 8px 18px; font-size: 13px; border-radius: 8px; cursor: pointer; }
+.nav-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+</style>
+<style>
+.slide { display: none; flex-grow: 1; padding: 20px; overflow: hidden; }
+.slide.active { display: flex; flex-direction: column; }
+.slide-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; height: 100%; }
+.slide-inner { display: flex; flex-direction: column; height: 100%; }
+.content-side { display: flex; flex-direction: column; height: 100%; }
+.visual-side { background-color: #05070f; border: 1px solid #1e293b; border-radius: 12px; position: relative; overflow: hidden; height: 100%; }
+.visual-side canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.slide-type { font-size: 10px; text-transform: uppercase; color: #fb923c; font-weight: 700; margin-bottom: 2px; }
+h2 { font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; line-height: 1.3; }
+.formula-main { font-family: monospace; font-size: 15px; color: #38bdf8; background: rgba(56, 189, 248, 0.04); padding: 6px; border-left: 3px solid #38bdf8; margin-bottom: 8px; }
+.text-concentrate { font-size: 13px; line-height: 1.45; color: #94a3b8; }
+.control-row, .sim-controls { display: flex; gap: 6px; margin-top: 8px; }
+.btn { background-color: #0f172a; border: 1px solid #334155; color: #e2e8f0; padding: 5px 10px; font-size: 11px; border-radius: 5px; cursor: pointer; }
+.btn-accent { border-color: #38bdf8; color: #38bdf8; }
+.btn-accent:hover { background: rgba(56, 189, 248, 0.08); }
+.answer-zone { background: rgba(15, 23, 42, 0.4); padding: 10px; border-radius: 8px; border: 1px dashed #334155; margin-top: auto; }
+.input-row { display: flex; gap: 8px; margin-top: 6px; }
+.oga-input { background-color: #05070f; border: 1px solid #334155; color: #f8fafc; padding: 6px 12px; font-size: 13px; border-radius: 6px; outline: none; flex-grow: 1; }
+.multivector-grid { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
+.select-wrapper { display: flex; flex-direction: column; gap: 3px; }
+.select-wrapper label { font-size: 11px; color: #94a3b8; }
+.oga-select { background-color: #05070f; border: 1px solid #334155; color: #f8fafc; padding: 6px; font-size: 12px; border-radius: 6px; outline: none; }
+.task-table-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px; margin-bottom: 10px; }
+.table-col { display: flex; flex-direction: column; background: #05070f; border: 1px solid #1e293b; border-radius: 8px; overflow: hidden; }
+.table-head { background: #1e293b; padding: 6px 10px; font-size: 11px; font-weight: 700; color: #38bdf8; }
+.table-row-item, .table-def-item { padding: 6px 10px; font-size: 12px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+.correct-highlight { background-color: rgba(34, 197, 94, 0.15) !important; border-color: #22c55e !important; color: #4ade80 !important; }
+.wrong-highlight { background-color: rgba(239, 68, 68, 0.15) !important; border-color: #ef4444 !important; color: #f43f5e !important; }
+.analytics-card { background-color: #05070f; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; height: 190px; overflow-y: auto; font-size: 12px; }
+</style>
+<script>
+let currentSlide = 1;
+const totalSlides = 17;
+let totalTasksCount = 11;
+let solvedTasks = new Array(totalTasksCount + 1).fill(false);
+let simStates = { car: { active: false, ang: 0 }, accel: { active: false, ang1: 0, ang2: 0 }, belt: { active: false, ang1: 0, ang2: 0 }, points: { active: false, ang1: 0, ang2: 0 } };
+let activeAnimations = { car: null, accel: null, belt: null, points: null };
+
+window.onload = function() {
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 100);
+    window.addEventListener('resize', triggerCanvasBySlide);
+};
+
+function changeSlide(direction) {
+    stopAllSimulations();
+    document.getElementById(`slide${currentSlide}`).classList.remove('active');
+    currentSlide += direction;
+    document.getElementById(`slide${currentSlide}`).classList.add('active');
+    updateSliderUI();
+    setTimeout(triggerCanvasBySlide, 50);
+}
+
+function updateSliderUI() {
+    document.getElementById('prevBtn').disabled = (currentSlide === 1);
+    document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+    document.getElementById('progressBar').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
+    
+    let score = solvedTasks.filter(Boolean).length;
+    document.getElementById('scoreDisplay').innerText = `Успех: ${score} / ${totalTasksCount}`;
+}
+
+function forceSetupCanvas(canvas) {
+    if (!canvas) return false;
+    const parent = canvas.parentElement;
+    const rect = parent.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return false;
+    canvas.width = rect.width; canvas.height = rect.height;
+    return true;
+}
+
+function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(fromX, fromY); ctx.lineTo(toX, toY); ctx.stroke();
+    const angle = Math.atan2(toY - fromY, toX - fromX);
+    ctx.beginPath(); ctx.moveTo(toX, toY);
+    ctx.lineTo(toX - 12 * Math.cos(angle - Math.PI / 6), toY - 12 * Math.sin(angle - Math.PI / 6));
+    ctx.lineTo(toX - 12 * Math.cos(angle + Math.PI / 6), toY - 12 * Math.sin(angle + Math.PI / 6));
+    ctx.closePath(); ctx.fill();
+    if (txt) {
+        ctx.fillStyle = "#f8fafc"; ctx.font = "bold 13px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(txt, toX, toY + 14);
+    }
+}
+</script>
+<script>
+function triggerCanvasBySlide() {
+    if (currentSlide === 2) drawMenzuraQ2();
+    if (currentSlide === 3) drawRingQ3();
+    if (currentSlide === 4) initCarSimulation();
+    if (currentSlide === 5) drawCandleQ5();
+    if (currentSlide === 6) drawFourMenzQ6();
+    if (currentSlide === 7) drawTermQ7();
+    if (currentSlide === 8) drawCopperQ8();
+    if (currentSlide === 10) drawFlaskQ10();
+    if (currentSlide === 11) initAccelSimulation();
+    if (currentSlide === 13) initBeltSimulation();
+    if (currentSlide === 14) initPointsSimulation();
+}
+
+function drawMenzuraQ2() {
+    const canvas = document.getElementById('canvasMenzuraQ2');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    
+    // Рисуем две мензурки: до и после
+    for (let i = 0; i < 2; i++) {
+        const x = cx + (i === 0 ? -60 : 60);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(x - 25, cy - 70, 50, 130);
+        ctx.strokeStyle = '#334155'; ctx.strokeRect(x - 25, cy - 70, 50, 130);
+        // Вода
+        ctx.fillStyle = '#38bdf8'; 
+        const h = i === 0 ? 50 : 80;
+        ctx.fillRect(x - 24, cy + 60 - h, 48, h);
+        if (i === 1) {
+            ctx.fillStyle = '#ef4444'; ctx.fillRect(x - 12, cy + 35, 24, 25);
+        }
+        ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif';
+        ctx.fillText(i === 0 ? "60 мл" : "100 мл", x - 18, cy - 80);
+    }
+}
+
+function drawRingQ3() {
+    const canvas = document.getElementById('canvasRingQ3');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    // Кольцо
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 6;
+    ctx.beginPath(); ctx.arc(cx, cy, 40, 0, Math.PI*2); ctx.stroke();
+    // Шарик крупнее кольца
+    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(cx, cy - 10, 43, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fb923c'; ctx.font = '12px sans-serif'; ctx.fillText("Не проходит", cx - 35, cy + 70);
+}
+
+function drawCandleQ5() {
+    const canvas = document.getElementById('canvasCandleQ5');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    // Шарик
+    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(cx, cy - 30, 35, 0, Math.PI*2); ctx.fill();
+    // Пламя свечи
+    ctx.fillStyle = '#fb923c'; ctx.beginPath(); ctx.moveTo(cx, cy + 10);
+    ctx.quadraticCurveTo(cx - 15, cy + 40, cx, cy + 60); ctx.quadraticCurveTo(cx + 15, cy + 40, cx, cy + 10); ctx.fill();
+}
+</script>
+<script>
+function drawFourMenzQ6() {
+    const canvas = document.getElementById('canvasFourMenzQ6'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const step = canvas.width / 5, cy = canvas.height / 2;
+    const heights =; const labels = ["60 мл", "320 мл", "260 мл", "65 мл"];
+
+    for (let i = 0; i < 4; i++) {
+        const x = step * (i + 1);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(x - 20, cy - 50, 40, 110);
+        ctx.strokeStyle = '#334155'; ctx.strokeRect(x - 20, cy - 50, 40, 110);
+        ctx.fillStyle = '#38bdf8'; ctx.fillRect(x - 19, cy + 60 - heights[i], 38, heights[i]);
+        ctx.fillStyle = '#f8fafc'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(labels[i], x, cy - 60); ctx.fillText(`№${i+1}`, x, cy + 80);
+    }
+}
+
+function drawTermQ7() {
+    const canvas = document.getElementById('canvasTermQ7'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    ctx.fillStyle = '#1e293b'; ctx.fillRect(cx - 15, cy - 80, 30, 160);
+    ctx.fillStyle = '#ef4444'; ctx.fillRect(cx - 4, cy - 20, 8, 100);
+    ctx.beginPath(); ctx.arc(cx, cy + 70, 12, 0, Math.PI*2); ctx.fill();
+}
+
+function drawCopperQ8() {
+    const canvas = document.getElementById('canvasCopperQ8'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+
+    for (let i = 0; i < 2; i++) {
+        const x = cx + (i === 0 ? -65 : 65);
+        ctx.fillStyle = '#0f172a'; ctx.fillRect(x - 25, cy - 70, 50, 130);
+        ctx.strokeStyle = '#334155'; ctx.strokeRect(x - 25, cy - 70, 50, 130);
+        ctx.fillStyle = '#38bdf8'; const h = i === 0 ? 50 : 75; ctx.fillRect(x - 24, cy + 60 - h, 48, h);
+        if (i === 1) { ctx.fillStyle = '#fb923c'; ctx.fillRect(x - 10, cy + 15, 20, 35); }
+        ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(i === 0 ? "80 мл" : "120 мл", x, cy - 80);
+    }
+}
+
+function drawFlaskQ10() {
+    const canvas = document.getElementById('canvasFlaskQ10'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    ctx.fillStyle = '#38bdf8'; ctx.beginPath(); ctx.arc(cx, cy + 20, 40, 0, Math.PI*2); ctx.fill();
+    ctx.fillRect(cx - 10, cy - 40, 20, 40); ctx.fillRect(cx - 3, cy - 90, 6, 50);
+    ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, cy + 20, 42, 0, Math.PI*2); ctx.stroke();
+}
+</script>
+<script>
+function stopAllSimulations() {
+    for (let k in activeAnimations) { if (activeAnimations[k]) { cancelAnimationFrame(activeAnimations[k]); activeAnimations[k] = null; } }
+    for (let k in simStates) { simStates[k].active = false; }
+}
+
+function toggleSimulation(key) {
+    simStates[key].active = !simStates[key].active;
+    if (simStates[key].active) {
+        if (key === 'car') loopCar();
+        if (key === 'accel') loopAccel();
+        if (key === 'belt') loopBelt();
+        if (key === 'points') loopPoints();
+    }
+}
+
+function resetSimulation(key) {
+    stopAllSimulations();
+    if (key === 'car') { simStates.car.ang = 0; initCarSimulation(); }
+    if (key === 'accel') { simStates.accel.ang1 = 0; simStates.accel.ang2 = 0; initAccelSimulation(); }
+    if (key === 'belt') { simStates.belt.ang1 = 0; simStates.belt.ang2 = 0; initBeltSimulation(); }
+    if (key === 'points') { simStates.points.ang1 = 0; simStates.points.ang2 = 0; initPointsSimulation(); }
+}
+
+function initCarSimulation() {
+    const canvas = document.getElementById('canvasCarQ4'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2, r = 65;
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+    const px = cx + r * Math.cos(simStates.car.ang), py = cy + r * Math.sin(simStates.car.ang);
+    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(px, py, 10, 0, Math.PI*2); ctx.fill();
+    drawArrow(ctx, px, py, px - 50 * Math.sin(simStates.car.ang), py + 50 * Math.cos(simStates.car.ang), '#22c55e', 'v');
+    drawArrow(ctx, px, py, px - 45 * Math.cos(simStates.car.ang), py - 45 * Math.sin(simStates.car.ang), '#ef4444', 'an');
+}
+function loopCar() {
+    if (!simStates.car.active) return; simStates.car.ang += 0.02; initCarSimulation();
+    activeAnimations.car = requestAnimationFrame(loopCar);
+}
+
+function initAccelSimulation() {
+    const canvas = document.getElementById('canvasAccelQ11'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2, cy = canvas.height / 2;
+    
+    // Внутренний малый радиус (R/2) и Внешний стандартный радиус
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(cx, cy, 35, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, 70, 0, Math.PI*2); ctx.stroke();
+    
+    const x1 = cx + 70 * Math.cos(simStates.accel.ang1), y1 = cy + 70 * Math.sin(simStates.accel.ang1);
+    ctx.fillStyle = '#38bdf8'; ctx.beginPath(); ctx.arc(x1, y1, 8, 0, Math.PI*2); ctx.fill();
+    drawArrow(ctx, x1, y1, x1 - 40 * Math.cos(simStates.accel.ang1), y1 - 40 * Math.sin(simStates.accel.ang1), '#ef4444', 'a₁');
+
+    const x2 = cx + 35 * Math.cos(simStates.accel.ang2), y2 = cy + 35 * Math.sin(simStates.accel.ang2);
+    ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(x2, y2, 8, 0, Math.PI*2); ctx.fill();
+    drawArrow(ctx, x2, y2, x2 - 20 * Math.cos(simStates.accel.ang2), y2 - 20 * Math.sin(simStates.accel.ang2), '#fb923c', 'a₂');
+}
+function loopAccel() {
+    if (!simStates.accel.active) return;
+    simStates.accel.ang1 += 0.02; // Скорость v1
+    simStates.accel.ang2 += 0.01; // Скорость v2 = v1 / 2
+    initAccelSimulation(); activeAnimations.accel = requestAnimationFrame(loopAccel);
+}
+</script>
+<script>
+function checkInputAnswer(btn, taskId, correctAnswer) {
+    if (answersState.tasks[taskId].submitted) return;
+    
+    const wrapper = btn.closest('.input-answer-container');
+    const input = wrapper.querySelector('.oga-input');
+    const feedback = wrapper.querySelector('.input-feedback');
+    const userAns = input.value.trim().replace(',', '.');
+    
+    if (userAns === "") return;
+    
+    input.disabled = true;
+    btn.disabled = true;
+    answersState.tasks[taskId].submitted = true;
+    
+    const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer));
+    answersState.tasks[taskId].correct = isCorrect;
+    
+    if (isCorrect) {
+        input.classList.add('correct-highlight');
+        feedback.className = "input-feedback text-green";
+        feedback.innerText = "✓ Верно!";
+        score += 1;
+    } else {
+        input.classList.add('wrong-highlight');
+        feedback.className = "input-feedback text-red";
+        feedback.innerText = `✗ Неверно. Правильный ответ: ${correctAnswer}`;
+    }
+    updateSliderUI();
+}
+
+function updateMassTask3() {
+    task3State.m = parseFloat(document.getElementById('massSliderTask3').value);
+    if (!task3State.active) drawTask3Static();
+}
+
+function drawTask3Static() {
+    const canvas = document.getElementById('canvasTask3');
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    const cx = canvas.width / 2, cy = canvas.height * 0.65;
+    const size = 30 + (task3State.m * 6);
+    
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(cx - size/2, cy - size, size, size);
+    ctx.strokeStyle = '#334155';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(cx - size/2, cy - size, size, size);
+    
+    drawArrow(ctx, cx, cy - size/2, cx + 80, cy - size/2, '#38bdf8', 'F=4Н');
+    drawArrow(ctx, cx, cy - size/2, cx - 40, cy - size/2, '#38bdf8', 'Fтр=2Н');
+    drawArrow(ctx, cx, cy - size - 45, cx + 40, cy - size - 45, '#ef4444', 'Fравн', '#ef4444');
+}
+
+function launchTask3() {
+    task3State.x = 40;
+    task3State.v = 0;
+    task3State.a = (4 - 2) / task3State.m * 0.05; 
+    task3State.active = true;
+    loopTask3();
+}
+
+function stopTask3() {
+    task3State.active = false;
+    cancelAnimationFrame(activeAnimationIds.task3);
+    activeAnimationIds.task3 = null;
+}
+
+function resetTask3() {
+    stopTask3();
+    initTask3Canvas();
+}
+
+function loopTask3() {
+    if (!task3State.active || currentSlide !== 3) return;
+    const canvas = document.getElementById('canvasTask3');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    task3State.v += task3State.a;
+    task3State.x += task3State.v;
+    
+    if (task3State.x > canvas.width) {
+        task3State.x = 40;
+        task3State.v = 0;
+    }
+    
+    const cy = canvas.height * 0.65, size = 30 + (task3State.m * 6);
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(task3State.x, cy - size, size, size);
+    ctx.strokeStyle = '#334155';
+    ctx.strokeRect(task3State.x, cy - size, size, size);
+    
+    const mx = task3State.x + size/2, my = cy - size/2;
+    drawArrow(ctx, mx, my, mx + 80, my, '#38bdf8', 'F');
+    drawArrow(ctx, mx, my, mx - 40, my, '#38bdf8', 'Fтр');
+    drawArrow(ctx, mx, cy - size - 45, mx + 40, cy - size - 45, '#ef4444', 'Fравн', '#ef4444');
+    drawArrow(ctx, mx, cy - size - 15, mx + (task3State.a * 400), cy - size - 15, '#22c55e', 'a');
+    
+    activeAnimationIds.task3 = requestAnimationFrame(loopTask3);
+}
+</script>
+<script>
+function buildFinalReport() {
+    const container = document.getElementById('analyticsMap');
+    let reportHtml = "";
+    
+    for (let i = 1; i <= 6; i++) {
+        const t = answersState.tasks[`t${i}`];
+        const status = t.submitted 
+            ? (t.correct ? '<span class="text-green">Успешно</span>' : '<span class="text-red">Ошибка</span>')
+            : '<span class="text-blue">Не пропущено</span>';
+        reportHtml += `<div class="analytics-item"><span>Задача №${i}:</span> <strong>${status}</strong></div>`;
+    }
+    
+    const pct = (score / 6) * 100;
+    let verdict = '';
+    if (pct >= 85) verdict = '<span class="text-green">Великолепный уровень! Практика ОГЭ отработана идеально.</span>';
+    else if (pct >= 50) verdict = '<span class="text-blue">Хороший результат. Рекомендуется повторить задачи на закон Гука и графики.</span>';
+    else verdict = '<span class="text-red">Необходимо глубоко проработать разбор формул и алгоритм поиска равнодействующей.</span>';
+    
+    container.innerHTML = reportHtml + `
+        <div style="margin-top:15px; font-weight:600;">
+            Итоговый результат урока: ${score} из 6 баллов (${pct.toFixed(0)}%).<br><br>
+            Вердикт методиста: ${verdict}
+        </div>
+    `;
+}
+</script>
+</body>
+</html>
