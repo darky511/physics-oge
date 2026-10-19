@@ -558,8 +558,8 @@ h2 { font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; line
 <script>
 let currentSlide = 1;
 const totalSlides = 17;
-let totalTasksCount = 11;
-let solvedTasks = new Array(totalTasksCount + 1).fill(false);
+let totalTasksCount = 16; // ИСПРАВЛЕНО: Всего 16 задач, а не 11
+let solvedTasks = {}; // ИСПРАВЛЕНО: Перевели в объект-карту, чтобы не привязываться к индексам массива
 let simStates = { car: { active: false, ang: 0 }, accel: { active: false, ang1: 0, ang2: 0 }, belt: { active: false, ang1: 0, ang2: 0 }, points: { active: false, ang1: 0, ang2: 0 } };
 let activeAnimations = { car: null, accel: null, belt: null, points: null };
 
@@ -583,25 +583,13 @@ function updateSliderUI() {
     document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
     document.getElementById('progressBar').style.width = `${((currentSlide - 1) / (totalSlides - 1)) * 100}%`;
     
-    let score = solvedTasks.filter(Boolean).length;
-    let answersState = {
-    t1_1: { submitted: false, correct: false },
-    t1_2: { submitted: false, correct: false },
-    t1_3: { submitted: false, correct: false },
-    t1_4: { submitted: false, correct: false },
-    t1_5: { submitted: false, correct: false },
-    t1_6: { submitted: false, correct: false },
-    t1_7: { submitted: false, correct: false },
-    t1_8: { submitted: false, correct: false },
-    t1_9: { submitted: false, correct: false },
-    t1_10: { submitted: false, correct: false },
-    t1_11: { submitted: false, correct: false },
-    t3_1: { submitted: false, correct: false },
-    t3_2: { submitted: false, correct: false },
-    t3_3: { submitted: false, correct: false },
-    t3_4: { submitted: false, correct: false },
-    t3_5: { submitted: false, correct: false }
-};
+    // Считаем только успешно решенные задачи
+    let score = 0;
+    for (let key in solvedTasks) {
+        if (solvedTasks[key] && solvedTasks[key].success === true) {
+            score++;
+        }
+    }
 
     document.getElementById('scoreDisplay').innerText = `Успех: ${score} / ${totalTasksCount}`;
 }
@@ -698,7 +686,8 @@ function drawFourMenzQ6() {
     const canvas = document.getElementById('canvasFourMenzQ6'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const step = canvas.width / 5, cy = canvas.height / 2;
-    const heights =; const labels = ["60 мл", "320 мл", "260 мл", "65 мл"];
+    const heights = Array(20, 100, 80, 22);
+    const labels = ["60 мл", "320 мл", "260 мл", "65 мл"];
 
     for (let i = 0; i < 4; i++) {
         const x = step * (i + 1);
@@ -809,81 +798,73 @@ function loopAccel() {
 }
 </script>
 <script>
-function checkInputAnswer(btn, taskId, correctAnswer) {
-    // Преобразуем точки в нижние подчеркивания для соответствия нашему стейту (например, '1.2' -> 't1_2')
-    const taskKey = 't' + taskId.toString().replace('.', '_');
-    
-    if (!answersState || !answersState[taskKey]) return;
-    if (answersState[taskKey].submitted) return;
-    
-    const wrapper = btn.closest('.input-answer-container') || btn.parentElement;
-    const input = wrapper.querySelector('.oga-input');
-    const feedback = wrapper.querySelector('.input-feedback');
-    
+function checkTextAnswer(inputId, correctAnswer, taskNum) {
+    // Защита от повторного клика
+    if (solvedTasks[taskNum]) return;
+
+    const input = document.getElementById(inputId);
     if (!input) return;
+
     const userAns = input.value.trim().replace(',', '.');
     if (userAns === "") return;
-    
+
     input.disabled = true;
-    btn.disabled = true;
-    answersState[taskKey].submitted = true;
     
-    // Математически точное сравнение чисел
-    const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer));
-    answersState[taskKey].correct = isCorrect;
+    // Поиск кнопки в той же строке для её блокировки
+    const btn = input.nextElementSibling;
+    if (btn) btn.disabled = true;
+
+    // Сравнение строк или чисел с плавающей точкой
+    const isCorrect = (parseFloat(userAns) === parseFloat(correctAnswer) || userAns === correctAnswer);
     
     if (isCorrect) {
         input.classList.add('correct-highlight');
-        if (feedback) {
-            feedback.className = "input-feedback text-green";
-            feedback.innerText = "✓ Верно!";
-        }
-        score += 1;
+        solvedTasks[taskNum] = true;
     } else {
         input.classList.add('wrong-highlight');
-        if (feedback) {
-            feedback.className = "input-feedback text-red";
-            feedback.innerText = `✗ Неверно. Правильный ответ: ${correctAnswer}`;
-        }
+        solvedTasks[taskNum] = false;
     }
+
+    // Принудительно ставим флаг, что задача проверена, чтобы зафиксировать её в аналитике
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
+
     updateSliderUI();
 }
 
-function submitSelectTask(btn, taskId, correctCombinedValue) {
-    const taskKey = 't' + taskId.toString().replace('.', '_');
-    if (!answersState || !answersState[taskKey] || answersState[taskKey].submitted) return;
+function checkSelectDouble(selectId1, selectId2, correctVal1, correctVal2, taskNum) {
+    if (solvedTasks[taskNum]) return;
 
-    const slide = btn.closest('.slide');
-    const selects = slide.querySelectorAll('.oga-select');
-    const feedback = slide.querySelector('.input-feedback');
-    
-    let userValue = "";
-    selects.forEach(sel => { userValue += sel.value; });
+    const sel1 = document.getElementById(selectId1);
+    const sel2 = document.getElementById(selectId2);
+    if (!sel1 || !sel2) return;
 
-    // Проверяем, что ученик выбрал все выпадающие списки в задаче
-    if (userValue.includes("") || userValue.length < selects.length) return;
+    if (sel1.value === "" || sel2.value === "") return; // Игнорируем, если не выбрано
 
-    selects.forEach(sel => sel.disabled = true);
-    btn.disabled = true;
-    answersState[taskKey].submitted = true;
+    sel1.disabled = true;
+    sel2.disabled = true;
 
-    if (userValue === correctCombinedValue.toString()) {
-        answersState[taskKey].correct = true;
-        score += 1;
-        if (feedback) {
-            feedback.className = "input-feedback text-green";
-            feedback.innerText = "✓ Верно!";
-        }
+    // Поиск кнопки фиксации в этой зоне
+    const btn = sel1.closest('.slide').querySelector('.btn-accent');
+    if (btn) btn.disabled = true;
+
+    const isCorrect = (sel1.value === correctVal1 && sel2.value === correctVal2);
+
+    if (isCorrect) {
+        sel1.classList.add('correct-highlight');
+        sel2.classList.add('correct-highlight');
+        solvedTasks[taskNum] = true;
     } else {
-        answersState[taskKey].correct = false;
-        if (feedback) {
-            feedback.className = "input-feedback text-red";
-            feedback.innerText = `✗ Неверно. Правильный код ответа: ${correctCombinedValue}`;
-        }
+        sel1.classList.add('wrong-highlight');
+        sel2.classList.add('wrong-highlight');
+        // Подсвечиваем верные ответы для ученика в соответствии с ОГЭ-логикой
+        document.querySelector(`#${selectId1} option[value="${correctVal1}"]`).text += " ✓";
+        document.querySelector(`#${selectId2} option[value="${correctVal2}"]`).text += " ✓";
+        solvedTasks[taskNum] = false;
     }
+
+    solvedTasks[taskNum] = { checked: true, success: isCorrect };
     updateSliderUI();
 }
-
     
 function updateMassTask3() {
     task3State.m = parseFloat(document.getElementById('massSliderTask3').value);
@@ -960,31 +941,50 @@ function loopTask3() {
 }
 </script>
 <script>
-function buildFinalReport() {
+function buildReport() {
     const container = document.getElementById('analyticsMap');
-    let reportHtml = "";
+    if (!container) return;
+
+    let reportHtml = `<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; margin-bottom:15px;">`;
+    let score = 0;
     
-    for (let i = 1; i <= 6; i++) {
-        const t = answersState.tasks[`t${i}`];
-        const status = t.submitted 
-            ? (t.correct ? '<span class="text-green">Успешно</span>' : '<span class="text-red">Ошибка</span>')
-            : '<span class="text-blue">Не пропущено</span>';
-        reportHtml += `<div class="analytics-item"><span>Задача №${i}:</span> <strong>${status}</strong></div>`;
+    for (let i = 1; i <= totalTasksCount; i++) {
+        const task = solvedTasks[i];
+        let statusClass = "text-blue";
+        let statusText = "Пропущено";
+        
+        if (task && task.checked) {
+            if (task.success) {
+                statusClass = "correct-highlight";
+                statusText = "Верно";
+                score++;
+            } else {
+                statusClass = "wrong-highlight";
+                statusText = "Ошибка";
+            }
+        }
+        
+        // Красивые мини-карточки в стиле космического интерфейса
+        reportHtml += `<div class="${statusClass}" style="padding:6px; border-radius:6px; text-align:center; border:1px solid #1e293b; font-size:11px;">
+            №${i < 12 ? '1.' + (i === 12 ? 12 : i) : '3.' + (i - 11)}<br><strong>${statusText}</strong>
+        </div>`;
     }
+    reportHtml += `</div>`;
     
-    const pct = (score / 6) * 100;
+    const pct = (score / totalTasksCount) * 100;
     let verdict = '';
-    if (pct >= 85) verdict = '<span class="text-green">Великолепный уровень! Практика ОГЭ отработана идеально.</span>';
-    else if (pct >= 50) verdict = '<span class="text-blue">Хороший результат. Рекомендуется повторить задачи на закон Гука и графики.</span>';
-    else verdict = '<span class="text-red">Необходимо глубоко проработать разбор формул и алгоритм поиска равнодействующей.</span>';
+    if (pct >= 85) verdict = '<span style="color:#4ade80;">Великолепный уровень! Практика ОГЭ/ЕГЭ отработана идеально.</span>';
+    else if (pct >= 50) verdict = '<span style="color:#38bdf8;">Хороший результат. Рекомендуется точечно повторить гидростатику и кинематику окружности.</span>';
+    else verdict = '<span style="color:#f43f5e;">Необходимо глубоко проработать разбор формул плотности и векторов ускорения.</span>';
     
     container.innerHTML = reportHtml + `
-        <div style="margin-top:15px; font-weight:600;">
-            Итоговый результат урока: ${score} из 6 баллов (${pct.toFixed(0)}%).<br><br>
-            Вердикт методиста: ${verdict}
+        <div style="margin-top:10px; font-size:13px; line-height:1.4; border-top:1px solid #1e293b; padding-top:10px;">
+            Выполнено верно: <strong>${score}</strong> из <strong>${totalTasksCount}</strong> задач (${pct.toFixed(0)}%).<br>
+            <strong>Вердикт методиста:</strong> ${verdict}
         </div>
     `;
 }
+
 </script>
 </body>
 </html>
