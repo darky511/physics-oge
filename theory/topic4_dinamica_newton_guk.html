@@ -771,7 +771,11 @@ function drawQuiz2ForcesStatic() {
 
 function checkSelectAnswer(selectId, correctAnswer) {
     const el = document.getElementById(selectId);
-    answersState.quiz1[selectId.split('_')] = (el.value === correctAnswer);
+    // Берем точную букву после нижнего подчеркивания: 'v', 'f' или 'a'
+    const key = selectId.split('_')[1]; 
+    if (el) {
+        answersState.quiz1[key] = (el.value.trim() === correctAnswer);
+    }
 }
 
 function submitMultiSelector() {
@@ -779,12 +783,28 @@ function submitMultiSelector() {
     const fields = ['q1_v', 'q1_f', 'q1_a'];
     const correctMap = { 'q1_v': 'вправо', 'q1_f': 'влево', 'q1_a': 'влево' };
     let localScore = 0;
+    
     fields.forEach(f => {
-        const el = document.getElementById(f); el.disabled = true;
-        if (el.value === correctMap[f]) { el.classList.add('correct-highlight'); localScore += 1; }
-        else { el.classList.add('wrong-highlight'); }
+        const el = document.getElementById(f); 
+        if (el) {
+            el.disabled = true;
+            if (el.value.trim() === correctMap[f]) { 
+                el.classList.add('correct-highlight'); 
+                localScore += 1; 
+            } else { 
+                el.classList.add('wrong-highlight'); 
+            }
+        }
     });
-    score += localScore; answersState.quiz1.submitted = true; updateSliderUI();
+    
+    // Перезаписываем итоговый стейт перед отправкой, чтобы гарантировать успех
+    answersState.quiz1.v = (document.getElementById('q1_v').value.trim() === 'вправо');
+    answersState.quiz1.f = (document.getElementById('q1_f').value.trim() === 'влево');
+    answersState.quiz1.a = (document.getElementById('q1_a').value.trim() === 'влево');
+    
+    score += localScore; 
+    answersState.quiz1.submitted = true; 
+    updateSliderUI();
 }
 
 function checkCardAnswer(btnElement, questionIndex, isCorrect) {
