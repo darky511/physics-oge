@@ -519,7 +519,7 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "", txtColor = "#f8
     if (txt) {
         ctx.fillStyle = txtColor; ctx.font = "bold 14px sans-serif";
         const offsetX = 22 * Math.cos(angle);
-        const offsetY = 22 * Math.sin(angle) + 4;
+        const offsetY = 22 * Math.sin(angle) + 15;
         ctx.fillText(txt, toX + offsetX - 6, toY + offsetY);
     }
 }
@@ -546,7 +546,7 @@ function initForceCanvas() {
     ctx.strokeStyle = '#334155'; ctx.lineWidth = 2; ctx.strokeRect(cx - bw/2, cy - bh/2, bw, bh);
 
     if (forceMode === 'one-side') {
-        drawArrow(ctx, cx, cy + 15, cx + 70, cy + 15, '#ef4444', 'F₁'); 
+        drawArrow(ctx, cx, cy, cx + 70, cy, '#ef4444', 'F₁'); 
         drawArrow(ctx, cx + 70, cy, cx + 150, cy, '#fb923c', 'F₂');
         drawArrow(ctx, cx, cy - 45, cx + 150, cy - 45, '#38bdf8', 'Fравн', '#38bdf8');
     } else if (forceMode === 'opposite') {
