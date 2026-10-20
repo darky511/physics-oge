@@ -76,64 +76,82 @@
             <div class="visual-side"><canvas id="canvasStep3"></canvas></div>
         </div>
     </div>
-    <!-- СЛАЙД 4: Проекции на простые оси -->
+    <!-- ОБНОВЛЕННЫЙ СЛАЙД 4: Фундаментальный векторный закон -->
     <div class="slide" id="slide4">
         <div class="slide-grid">
             <div class="content-side">
-                <span class="slide-type">Этап 4. Переход к проекциям</span>
-                <h2>Шаг 3. Спроецируйте сонаправленные и перпендикулярные силы</h2>
+                <span class="slide-type">Этап 4. Геометрическая сумма</span>
+                <h2>Шаг 3. Запишите закон в векторном виде</h2>
+                <p class="text-concentrate" style="font-size: 12.5px;">
+                    Перед тем как переходить к проекциям и осям, Второй закон Ньютона обязан быть записан строго в векторном виде. 
+                    <strong style="color: #38bdf8;">Главное правило:</strong> Равнодействующая сила — это просто сумма всех векторов сил, приложенных к телу. И эта сумма всегда равна произведению массы на вектор ускорения.
+                </p>
+                <div class="methodology-card" style="padding: 10px; margin-top: 15px; font-family: monospace; font-size: 13px; text-align: center; border-color: #38bdf8;">
+                    <span style="color: #cbd5e1;">F</span> + <span style="color: #38bdf8;">N</span> + <span style="color: #fb923c;">mg</span> + <span style="color: #ef4444;">Fтр</span> = <span style="color: #22c55e;">m · a</span>
+                </div>
+                <p class="text-concentrate" style="font-size: 12px; margin-top: 15px; color: #94a3b8;">
+                    Посмотрите на холст справа: стрелки сил последовательно складываются друг с другом, образуя результирующее направление движения.
+                </p>
+            </div>
+            <div class="visual-side"><canvas id="canvasStep4New"></canvas></div>
+        </div>
+    </div>
+
+    <!-- ОБНОВЛЕННЫЙ СЛАЙД 5: Проекции (С осями и ускорением) -->
+    <div class="slide" id="slide5">
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Этап 5. Переход к проекциям</span>
+                <h2>Шаг 4. Спроецируйте сонаправленные и перпендикулярные силы</h2>
                 <p class="text-concentrate" style="font-size: 12px; line-height: 1.4;">
-                    Правило проекций на пальцах:<br>
-                    • Сила сонаправлена с осью: Проекция равна +F.<br>
-                    • Сила направлена против оси: Проекция равна -F.<br>
-                    • Сила перпендикулярна оси: Проекция равна 0.
+                    Переносим векторы на оси, сохраняя включенными систему координат и вектор ускорения:<br>
+                    • Сила сонаправлена с осью \(\rightarrow\) Проекция равна \(+F\).<br>
+                    • Сила направлена против оси \(\rightarrow\) Проекция равна \(-F\).<br>
+                    • Сила перпендикулярна оси \(\rightarrow\) Проекция равна \(0\).
                 </p>
                 <div class="methodology-card" style="padding: 8px; margin-top: 8px; font-family: monospace; font-size: 12px;">
                     На ось Ox: F - Fтр = m · a<br>
-                    На ось Oy: N - mg = 0  (значит N = mg)
+                    На ось Oy: N - mg = 0
                 </div>
-                <p class="text-concentrate" style="font-size: 11.5px; margin-top: 8px; color: #fb923c;">
-                    Кликните на кнопки ниже, чтобы подсветить проекцию конкретной силы на выбранную ось на холсте:
-                </p>
-                <div class="sim-controls" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                <div class="sim-controls" style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: auto;">
                     <button class="btn" onclick="highlightProjectionStep4('F', 'X')">Проекция F на Ox (+)</button>
                     <button class="btn" onclick="highlightProjectionStep4('Ftr', 'X')">Проекция Fтр на Ox (-)</button>
                     <button class="btn" onclick="highlightProjectionStep4('N', 'Y')">Проекция N на Oy (+)</button>
                     <button class="btn" onclick="highlightProjectionStep4('mg', 'Y')">Проекция mg на Oy (-)</button>
                 </div>
             </div>
-            <div class="visual-side"><canvas id="canvasStep4"></canvas></div>
+            <div class="visual-side"><canvas id="canvasStep5New"></canvas></div>
         </div>
     </div>
-    <!-- СЛАЙД 5: Силы под углом и системы уравнений -->
-    <div class="slide" id="slide5">
+
+    <!-- ОБНОВЛЕННЫЙ СЛАЙД 6: Силы под углом (Полная сквозная отрисовка системы) -->
+    <div class="slide" id="slide6">
         <div class="slide-grid">
             <div class="content-side">
-                <span class="slide-type">Этап 5. Разбор тригонометрии</span>
-                <h2>Шаг 4. Сила под углом α в сочетании с другими силами</h2>
-                <p class="text-concentrate" style="font-size: 12px; line-height: 1.4; margin-bottom: 6px;">
-                    Если силу F приложили под углом α к горизонту, она раскладывается на две составляющие и меняет уравнения на обеих осях сразу:
+                <span class="slide-type">Этап 6. Разбор тригонометрии</span>
+                <h2>Шаг 5. Сила под углом \(\alpha\) в полной системе сил и осей</h2>
+                <p class="text-concentrate" style="font-size: 12px; line-height: 1.4; margin-bottom: 5px;">
+                    Наклонная тяга меняет уравнения на обеих осях сразу. Вся система сил и осей координат остается перед глазами:
                 </p>
-                <div class="methodology-card" style="padding: 8px; font-size: 11.5px; line-height: 1.45; margin-bottom: 6px; font-family: monospace;">
+                <div class="methodology-card" style="padding: 6px; font-size: 11px; line-height: 1.4; font-family: monospace;">
                     <strong style="color: #fb923c;">Ось Ox (горизонтальная):</strong><br>
-                    Вместо чистой силы F ящик тянет вперед только её прилежащий катет. С учетом силы трения:<br>
-                    F · cosα - Fтр = m · a<br><br>
+                    Вперед тянет только прилежащий катет силы тяги: F · cos\(\alpha\) - Fтр = m · a<br><br>
                     <strong style="color: #38bdf8;">Ось Oy (вертикальная):</strong><br>
-                    Вертикальный катет F · sinα тянет ящик вверх, разгружая пол. Уравнение баланса примет вид:<br>
-                    N + F · sinα - mg = 0
+                    Вертикальный катет тянет вверх, помогая опоре: N + F · sin\(\alpha\) - mg = 0
                 </div>
                 <div class="sim-controls" style="margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                    <button class="btn btn-accent" onclick="toggleTrigComponent('cos')">Показать катет F · cosα</button>
-                    <button class="btn btn-accent" onclick="toggleTrigComponent('sin')">Показать катет F · sinα</button>
+                    <button class="btn btn-accent" onclick="toggleTrigComponent('cos')">Катет F · cos\(\alpha\)</button>
+                    <button class="btn btn-accent" onclick="toggleTrigComponent('sin')">Катет F · sin\(\alpha\)</button>
                 </div>
             </div>
-            <div class="visual-side"><canvas id="canvasStep5"></canvas></div>
+            <div class="visual-side"><canvas id="canvasStep6New"></canvas></div>
         </div>
     </div>
+
     <!-- СЛАЙД 6: Блиц-тест -->
-    <div class="slide" id="slide6">
+    <div class="slide" id="slide7">
         <div class="slide-inner">
-            <span class="slide-type">Этап 6. Закрепление навыка</span>
+            <span class="slide-type">Этап 7. Закрепление навыка</span>
             <h2>Интерактивный блиц-тест на знание проекций сил</h2>
             <p class="text-concentrate" style="margin-bottom: 20px;">
                 Посмотрите на итоговое уравнение сил на вертикальной оси: N + F · sinα - mg = 0.<br>
@@ -200,7 +218,7 @@ h2 { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 10px; lin
 <script>
 // Глобальный конфигуратор интерактивной презентации
 let currentSlide = 1;
-const totalSlides = 6;
+const totalSlides = 7;
 
 // Состояние отображения векторных слоев на холстах
 let forceLayers = {
@@ -244,9 +262,11 @@ function forceSetupCanvas(canvas) {
 function renderActiveCanvas() {
     if (currentSlide === 2) drawStep2();
     if (currentSlide === 3) drawStep3();
-    if (currentSlide === 4) drawStep4();
-    if (currentSlide === 5) drawStep5();
+    if (currentSlide === 4) drawStep4New(); // Векторный закон
+    if (currentSlide === 5) drawStep5New(); // Проекции с осями и ускорением
+    if (currentSlide === 6) drawStep6New(); // Силы под углом в полной системе
 }
+
 
 // Универсальный отрисовщик векторов с настраиваемыми наконечниками и стилями
 function drawVector(ctx, fromX, fromY, toX, toY, color, width, label = "") {
@@ -433,4 +453,103 @@ function checkQuizMethodology(btn, isCorrect) {
         cards.forEach(c => { if (c.innerText.includes("2)")) c.classList.add('correct-highlight'); });
     }
 }
+
+function drawAxesAndAcceleration(ctx, canvas, cx, cy) {
+    // Включение оси OX (Зеленая)
+    ctx.strokeStyle = 'rgba(34, 197, 94, 0.35)'; ctx.lineWidth = 1.5; ctx.setLineDash(Array(6, 4));
+    ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(canvas.width - 20, cy); ctx.stroke();
+    // Включение оси OY (Голубая)
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)'; ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, canvas.height - 20); ctx.stroke();
+    ctx.setLineDash(Array()); // Сброс
+    
+    // Подписи осей
+    drawVector(ctx, canvas.width - 35, cy, canvas.width - 15, cy, '#22c55e', 1.5, 'X');
+    drawVector(ctx, cx, 30, cx, 10, '#38bdf8', 1.5, 'Y');
+    
+    // Стабильный вынесенный вектор ускорения
+    drawVector(ctx, cx + 90, cy - 55, cx + 140, cy - 55, '#4ade80', 2.5, 'a');
+}
+
+// Отрисовка этапа 4: Геометрический закон Ньютона
+function drawStep4New() {
+    const canvas = document.getElementById('canvasStep4New'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2 - 20, cy = canvas.height / 2 + 10;
+    
+    drawEnvironment(ctx, canvas, cx, cy);
+    drawAxesAndAcceleration(ctx, canvas, cx, cy);
+    
+    // Отображаем все базовые векторы сил в их точках приложения
+    drawVector(ctx, cx, cy + 25, cx, cy - 45, '#38bdf8', 2.5, 'N');
+    drawVector(ctx, cx, cy, cx, cy + 70, '#fb923c', 2.5, 'mg');
+    drawVector(ctx, cx + 30, cy, cx + 110, cy, '#cbd5e1', 2.5, 'F');
+    drawVector(ctx, cx - 10, cy + 25, cx - 90, cy + 25, '#ef4444', 2.5, 'Fтр');
+}
+
+// Отрисовка этапа 5: Проекции простых сил (с сохраненными осями и ускорением)
+function drawStep5New() {
+    const canvas = document.getElementById('canvasStep5New'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2 - 20, cy = canvas.height / 2 + 10;
+    
+    drawEnvironment(ctx, canvas, cx, cy);
+    drawAxesAndAcceleration(ctx, canvas, cx, cy);
+    
+    const h = forceLayers.Step4.highlighted;
+    
+    // Отрисовка сил с динамическим утолщением активной проекции
+    drawVector(ctx, cx, cy + 25, cx, cy - 45, (h==='N'?'#4ade80':'#38bdf8'), (h==='N'?4:2), 'N');
+    drawVector(ctx, cx, cy, cx, cy + 70, (h==='mg'?'#f43f5e':'#fb923c'), (h==='mg'?4:2), 'mg');
+    drawVector(ctx, cx + 30, cy, cx + 110, cy, (h==='F'?'#4ade80':'#cbd5e1'), (h==='F'?4:2), 'F');
+    drawVector(ctx, cx - 10, cy + 25, cx - 90, cy + 25, (h==='Ftr'?'#f43f5e':'#ef4444'), (h==='Ftr'?4:2), 'Fтр');
+    
+    // Вспомогательный пунктир проецирования
+    if (h) {
+        ctx.strokeStyle = '#a855f7'; ctx.lineWidth = 1.5; ctx.setLineDash(Array(3, 3));
+        if (h === 'F') { ctx.beginPath(); ctx.moveTo(cx + 110, cy); ctx.lineTo(cx + 110, cy + 12); ctx.stroke(); }
+        if (h === 'Ftr') { ctx.beginPath(); ctx.moveTo(cx - 90, cy + 25); ctx.lineTo(cx - 90, cy); ctx.stroke(); }
+        ctx.setLineDash(Array());
+    }
+}
+
+// Отрисовка этапа 6: Разложение наклонной силы в полной системе сил и координат
+function drawStep6New() {
+    const canvas = document.getElementById('canvasStep6New'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2 - 40, cy = canvas.height / 2 + 25;
+    
+    drawEnvironment(ctx, canvas, cx, cy);
+    drawAxesAndAcceleration(ctx, canvas, cx, cy);
+    
+    // Отрисовка остальных сил для полноты физической картины
+    drawVector(ctx, cx, cy + 25, cx, cy - 45, '#38bdf8', 2, 'N');
+    drawVector(ctx, cx, cy, cx, cy + 65, '#fb923c', 2, 'mg');
+    drawVector(ctx, cx - 10, cy + 25, cx - 85, cy + 25, '#ef4444', 2, 'Fтр');
+    
+    // Наклонная сила тяги F
+    const startX = cx + 30, startY = cy;
+    const fx = startX + 85, fy = startY - 50;
+    const alpha = Math.atan2(fy - startY, fx - startX);
+    
+    // Дуга угла
+    ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(startX, startY, 20, 0, alpha, true); ctx.stroke();
+    ctx.fillStyle = '#fb923c'; ctx.font = '10px sans-serif'; ctx.fillText("α", startX + 25, startY - 6);
+    
+    drawVector(ctx, startX, startY, fx, fy, '#cbd5e1', 3, 'F');
+    
+    // Проекция Cos косинуса поверх оси Ox
+    if (forceLayers.Step5.cos) {
+        ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(startX, startY); ctx.lineTo(fx, startY); ctx.stroke();
+        ctx.fillStyle = '#fb923c'; ctx.font = 'bold 11px monospace'; ctx.fillText("F · cosα", startX + 30, startY + 14);
+    }
+    
+    // Проекция Sin синуса параллельно оси Oy
+    if (forceLayers.Step5.sin) {
+        ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(fx, startY); ctx.lineTo(fx, fy); ctx.stroke();
+        ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px monospace'; ctx.fillText("F · sinα", fx + 12, (startY + fy)/2);
+    }
+}
+
 </script>
