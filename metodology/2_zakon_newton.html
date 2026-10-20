@@ -16,7 +16,7 @@
         <div class="score-badge" id="scoreDisplay">Шаг: 1 / 6</div>
     </header>
 
-    <!-- СЛАЙД 1: Фундаментальный чек-лист ФИПИ -->
+    <!-- СЛАЙД 1: Алгоритм динамики -->
     <div class="slide active" id="slide1">
         <div class="slide-inner">
             <span class="slide-type">Этап 1. Теоретический базис</span>
@@ -26,10 +26,10 @@
             </p>
             <div class="methodology-card">
                 <ol style="padding-left: 20px; line-height: 1.6; color: #e2e8f0; font-size: 13px;">
-                    <li><strong style="color: #38bdf8;">Рисунок и Центр масс:</strong> Изображаем тело и прикладываем все силы строго к одной точке.</li>
-                    <li><strong style="color: #22c55e;">Вектор ускорения:</strong> Определяем, куда направлено суммарное движение \(\vec{a}\).</li>
-                    <li><strong style="color: #fb923c;">Выбор СО:</strong> Направляем ось Ох строго вдоль ускорения — это сократит проекции в ноль.</li>
-                    <li><strong style="color: #ef4444;">Проецирование:</strong> Раскладываем силы под углом через синусы и косинусы.</li>
+                    <li><strong style="color: #38bdf8;">Рисунок и точки приложения:</strong> Изображаем тело и расставляем векторы сил строго по их физическому смыслу (тяжесть — к центру масс, трение и реакцию опоры — к поверхности контакта).</li>
+                    <li><strong style="color: #22c55e;">Вектор ускорения:</strong> Определяем, куда направлено результирующее ускорение тела а.</li>
+                    <li><strong style="color: #fb923c;">Выбор СО:</strong> Направляем ось Ох вдоль ускорения — это сильно упростит вычисления.</li>
+                    <li><strong style="color: #ef4444;">Проецирование:</strong> Переносим силы на оси, раскладывая наклонные векторы через синусы и косинусы.</li>
                 </ol>
             </div>
             <p class="text-concentrate" style="margin-top: 15px; font-size: 12.5px; color: #94a3b8;">
@@ -44,15 +44,15 @@
                 <span class="slide-type">Этап 2. Силы и Ускорение</span>
                 <h2>Шаг 1. Укажите действующие силы и вектор ускорения</h2>
                 <p class="text-concentrate" style="font-size: 12.5px;">
-                    Тело массой \(m\) тянут вправо по шероховатой горизонтальной поверхности с ускорением \(\vec{a}\). 
-                    Активируйте чекбоксы ниже, чтобы приложить силы к центру масс тела:
+                    Тело массой m тянут вправо по шероховатой горизонтальной поверхности с ускорением а. 
+                    Активируйте чекбоксы ниже, чтобы правильно приложить векторы к телу:
                 </p>
                 <div class="control-box-group" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
-                    <label class="checkbox-container"><input type="checkbox" id="checkForces_N" onchange="toggleForceLayer('N')"> Сила реакции опоры \(\vec{N}\) (вертикально вверх)</label>
-                    <label class="checkbox-container"><input type="checkbox" id="checkForces_mg" onchange="toggleForceLayer('mg')"> Сила тяжести \(m\vec{g}\) (вертикально вниз)</label>
-                    <label class="checkbox-container"><input type="checkbox" id="checkForces_F" onchange="toggleForceLayer('F')"> Сила тяги \(\vec{F}\) (горизонтально вправо)</label>
-                    <label class="checkbox-container"><input type="checkbox" id="checkForces_Ftr" onchange="toggleForceLayer('Ftr')"> Сила трения \(\vec{F}_{\text{тр}}\) (против движения влево)</label>
-                    <label class="checkbox-container" style="color: #22c55e; border-color: #22c55e;"><input type="checkbox" id="checkForces_a" onchange="toggleForceLayer('a')"> Вектор ускорения \(\vec{a}\) (вдоль движения)</label>
+                    <label class="checkbox-container"><input type="checkbox" id="checkForces_N" onchange="toggleForceLayer('N')"> Сила реакции опоры N (от поверхности вверх)</label>
+                    <label class="checkbox-container"><input type="checkbox" id="checkForces_mg" onchange="toggleForceLayer('mg')"> Сила тяжести mg (от центра масс вниз)</label>
+                    <label class="checkbox-container"><input type="checkbox" id="checkForces_F" onchange="toggleForceLayer('F')"> Сила тяги F (в точку крепления вправо)</label>
+                    <label class="checkbox-container"><input type="checkbox" id="checkForces_Ftr" onchange="toggleForceLayer('Ftr')"> Сила трения Fтр (вдоль поверхности влево)</label>
+                    <label class="checkbox-container" style="color: #4ade80; border-color: rgba(34, 197, 94, 0.4);"><input type="checkbox" id="checkForces_a" onchange="toggleForceLayer('a')"> Вектор ускорения а (вынесен отдельно вправо)</label>
                 </div>
             </div>
             <div class="visual-side"><canvas id="canvasStep2"></canvas></div>
@@ -63,14 +63,14 @@
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Этап 3. Выбор осей</span>
-                <h2>Шаг 2. Свяжите тело с системой координат (СО)</h2>
+                <h2>Шаг 2. Свяжите тело с системой координат</h2>
                 <p class="text-concentrate" style="font-size: 12.5px;">
                     Чтобы перейти от стрелок к числам, введем оси координат. 
-                    <strong style="color: #22c55e;">Главный секрет:</strong> Направляйте ось \(Ox\) строго по направлению вектора ускорения \(\vec{a}\). Тогда перпендикулярная ось \(Oy\) покажет нулевое ускорение, так как по вертикали тело не взлетает.
+                    <strong style="color: #22c55e;">Главный секрет:</strong> Направляйте ось Ox строго по направлению вектора ускорения а. Тогда перпендикулярная ось Oy покажет нулевое ускорение, так как по вертикали тело не перемещается.
                 </p>
                 <div class="sim-controls" style="margin-top: 15px; display: grid; grid-template-columns: 1fr; gap: 8px;">
                     <button class="btn btn-accent" onclick="activateAxesStep3('showX')">Включить ось Ox (вдоль ускорения)</button>
-                    <button class="btn btn-accent" onclick="activateAxesStep3('showY')">Включить ось Oy (вдоль реакции опоры)</button>
+                    <button class="btn btn-accent" onclick="activateAxesStep3('showY')">Включить ось Oy (вертикально вверх)</button>
                 </div>
             </div>
             <div class="visual-side"><canvas id="canvasStep3"></canvas></div>
@@ -84,13 +84,13 @@
                 <h2>Шаг 3. Спроецируйте сонаправленные и перпендикулярные силы</h2>
                 <p class="text-concentrate" style="font-size: 12px; line-height: 1.4;">
                     Правило проекций на пальцах:<br>
-                    • Сила сонаправлена с осью \(\rightarrow\) Проекция равна \(+F\).<br>
-                    • Сила направлена против оси \(\rightarrow\) Проекция равна \(-F\).<br>
-                    • Сила перпендикулярна оси \(\rightarrow\) Проекция равна \(0\).
+                    • Сила сонаправлена с осью: Проекция равна +F.<br>
+                    • Сила направлена против оси: Проекция равна -F.<br>
+                    • Сила перпендикулярна оси: Проекция равна 0.
                 </p>
                 <div class="methodology-card" style="padding: 8px; margin-top: 8px; font-family: monospace; font-size: 12px;">
-                    На ось Ox: F - Fтр = ma<br>
-                    На ось Oy: N - mg = 0
+                    На ось Ox: F - Fтр = m · a<br>
+                    На ось Oy: N - mg = 0  (значит N = mg)
                 </div>
                 <p class="text-concentrate" style="font-size: 11.5px; margin-top: 8px; color: #fb923c;">
                     Кликните на кнопки ниже, чтобы подсветить проекцию конкретной силы на выбранную ось на холсте:
@@ -105,40 +105,43 @@
             <div class="visual-side"><canvas id="canvasStep4"></canvas></div>
         </div>
     </div>
-    <!-- СЛАЙД 5: Силы под углом (Самый тонкий момент) -->
+    <!-- СЛАЙД 5: Силы под углом и системы уравнений -->
     <div class="slide" id="slide5">
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Этап 5. Разбор тригонометрии</span>
-                <h2>Шаг 4. Самый сложный этап — сила под углом \(\alpha\)</h2>
-                <p class="text-concentrate" style="font-size: 12px; line-height: 1.4;">
-                    Когда силу тяги \(\vec{F}\) прикладывают под углом \(\alpha\) к горизонту, она тянет тело одновременно и вправо, и вверх. Её вектор образует гипотенузу прямоугольного треугольника.
+                <h2>Шаг 4. Сила под углом α в сочетании с другими силами</h2>
+                <p class="text-concentrate" style="font-size: 12px; line-height: 1.4; margin-bottom: 6px;">
+                    Если силу F приложили под углом α к горизонту, она раскладывается на две составляющие и меняет уравнения на обеих осях сразу:
                 </p>
-                <div class="methodology-card" style="padding: 6px; font-size: 11.5px; line-height: 1.45;">
-                    <strong style="color: #fb923c;">Прилежащий катет (ось Ox):</strong> Лежит рядом с углом. Проекция \(F_x = F \cdot \cos\alpha\).<br>
-                    <strong style="color: #38bdf8;">Противолежащий катет (ось Oy):</strong> Лежит напротив угла. Проекция \(F_y = F \cdot \sin\alpha\).
+                <div class="methodology-card" style="padding: 8px; font-size: 11.5px; line-height: 1.45; margin-bottom: 6px; font-family: monospace;">
+                    <strong style="color: #fb923c;">Ось Ox (горизонтальная):</strong><br>
+                    Вместо чистой силы F ящик тянет вперед только её прилежащий катет. С учетом силы трения:<br>
+                    F · cosα - Fтр = m · a<br><br>
+                    <strong style="color: #38bdf8;">Ось Oy (вертикальная):</strong><br>
+                    Вертикальный катет F · sinα тянет ящик вверх, разгружая пол. Уравнение баланса примет вид:<br>
+                    N + F · sinα - mg = 0
                 </div>
                 <div class="sim-controls" style="margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                    <button class="btn btn-accent" onclick="toggleTrigComponent('cos')">Показать катет F·cosα</button>
-                    <button class="btn btn-accent" onclick="toggleTrigComponent('sin')">Показать катет F·sinα</button>
+                    <button class="btn btn-accent" onclick="toggleTrigComponent('cos')">Показать катет F · cosα</button>
+                    <button class="btn btn-accent" onclick="toggleTrigComponent('sin')">Показать катет F · sinα</button>
                 </div>
             </div>
             <div class="visual-side"><canvas id="canvasStep5"></canvas></div>
         </div>
     </div>
-
-    <!-- СЛАЙД 6: Интерактивный интерактивный КВИЗ для закрепления -->
+    <!-- СЛАЙД 6: Блиц-тест -->
     <div class="slide" id="slide6">
         <div class="slide-inner">
             <span class="slide-type">Этап 6. Закрепление навыка</span>
             <h2>Интерактивный блиц-тест на знание проекций сил</h2>
             <p class="text-concentrate" style="margin-bottom: 20px;">
-                Посмотрите на финальное векторное уравнение силы тяги под углом: \(F \cdot \cos\alpha - F_{\text{тр}} = m \cdot a\).<br>
-                Каким станет выражение для силы нормальной реакции опоры \(N\) на вертикальную ось \(Oy\), если уравнение в векторах выглядит как \(N + F \cdot \sin\alpha - m \cdot g = 0\)?
+                Посмотрите на итоговое уравнение сил на вертикальной оси: N + F · sinα - mg = 0.<br>
+                Каким станет выражение для силы нормальной реакции опоры N, если мы выразим ее математически?
             </p>
             <div style="display: flex; flex-direction: column; gap: 8px;">
                 <button class="btn btn-card" onclick="checkQuizMethodology(this, false)">1) N = mg + F · sinα</button>
-                <button class="btn btn-card" onclick="checkQuizMethodology(this, true)">2) N = mg - F · sinα (сила под углом помогает опоре удерживать ящик)</button>
+                <button class="btn btn-card" onclick="checkQuizMethodology(this, true)">2) N = mg - F · sinα (сила под углом разгружает опору, помогая удерживать ящик)</button>
                 <button class="btn btn-card" onclick="checkQuizMethodology(this, false)">3) N = mg / cosα</button>
             </div>
             <div id="quizFeedback" class="text-concentrate" style="margin-top: 15px; font-weight: 600; min-height: 20px;"></div>
@@ -182,7 +185,7 @@ body {
 .visual-side { background-color: #05070f; border: 1px solid #1e293b; border-radius: 12px; position: relative; overflow: hidden; height: 100%; }
 .visual-side canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .slide-type { font-size: 10px; text-transform: uppercase; color: #fb923c; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.5px; }
-h2 { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 10px; line-height: 1.4; }
+h2 { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 10px; line-height: 1.4; }
 .text-concentrate { font-size: 13px; line-height: 1.45; color: #94a3b8; }
 .methodology-card { background: rgba(15, 23, 42, 0.6); border: 1px solid #1e293b; border-radius: 8px; padding: 12px; }
 .sim-controls { display: flex; gap: 6px; margin-top: 6px; }
@@ -191,8 +194,6 @@ h2 { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 10px; lin
 .btn-accent:hover { background: rgba(56, 189, 248, 0.08); }
 .btn-card { background: #05070f; border: 1px solid #1e293b; border-radius: 8px; color: #cbd5e1; text-align: left; padding: 10px; font-size: 12px; width: 100%; }
 .btn-card:hover { border-color: #334155; background: #090d16; }
-.correct-highlight { background-color: rgba(34, 197, 94, 0.1) !important; border-color: #22c55e !important; color: #4ade80 !important; }
-.wrong-highlight { background-color: rgba(239, 68, 68, 0.1) !important; border-color: #ef4444 !important; color: #f43f5e !important; }
 .checkbox-container { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; background: #05070f; border: 1px solid #1e293b; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
 .checkbox-container input { cursor: pointer; }
 </style>
@@ -270,7 +271,7 @@ function drawVector(ctx, fromX, fromY, toX, toY, color, width, label = "") {
     }
 }
 
-// Отрисовка базовой геометрии окружения (ящик на плоскости)
+// Отрисовка базовой геометрии окружения (ИСПРАВЛЕНО: точки приложения сил разнесены по физике)
 function drawEnvironment(ctx, canvas, cx, cy) {
     // Горизонтальная опора (поверхность Земли)
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4;
@@ -280,7 +281,7 @@ function drawEnvironment(ctx, canvas, cx, cy) {
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.lineWidth = 2;
     ctx.fillRect(cx - 30, cy - 25, 60, 50); ctx.strokeRect(cx - 30, cy - 25, 60, 50);
     
-    // Центральная точка (центр масс системы)
+    // Центральная точка (центр масс системы для силы тяжести)
     ctx.fillStyle = '#64748b'; ctx.beginPath(); ctx.arc(cx, cy, 4, 0, Math.PI * 2); ctx.fill();
 }
 </script>
@@ -293,20 +294,20 @@ function toggleForceLayer(key) {
 function drawStep2() {
     const canvas = document.getElementById('canvasStep2'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2, cy = canvas.height / 2 + 10;
+    const cx = canvas.width / 2 - 20, cy = canvas.height / 2 + 10;
     
     drawEnvironment(ctx, canvas, cx, cy);
     const layers = forceLayers.Step2;
     
-    // Поэтапная отрисовка векторов при активации чекбоксов учеником
-    if (layers.N)   drawVector(ctx, cx, cy, cx, cy - 70, '#38bdf8', 3, 'N');
-    if (layers.mg)  drawVector(ctx, cx, cy, cx, cy + 70, '#fb923c', 3, 'mg');
-    if (layers.F)   drawVector(ctx, cx, cy, cx + 80, cy, '#cbd5e1', 3, 'F');
-    if (layers.Ftr) drawVector(ctx, cx, cy, cx - 80, cy, '#ef4444', 3, 'Fтр');
+    // Физически точное приложение сил согласно законам механики
+    if (layers.N)   drawVector(ctx, cx, cy + 25, cx, cy - 45, '#38bdf8', 3, 'N');      // От точки контакта с опорой вверх
+    if (layers.mg)  drawVector(ctx, cx, cy, cx, cy + 70, '#fb923c', 3, 'mg');         // Строго из центра масс вниз
+    if (layers.F)   drawVector(ctx, cx + 30, cy, cx + 110, cy, '#cbd5e1', 3, 'F');     // От правой грани/точки крепления вправо
+    if (layers.Ftr) drawVector(ctx, cx - 10, cy + 25, cx - 90, cy + 25, '#ef4444', 3, 'Fтр'); // Вдоль нижней грани контакта влево
     
-    // Вывод вектора ускорения над телом
+    // ИСПРАВЛЕНО: Вектор ускорения вынесен значительно дальше вправо и вверх, исключая пересечения с N
     if (layers.a) {
-        drawVector(ctx, cx - 20, cy - 45, cx + 30, cy - 45, '#22c55e', 2.5, 'a');
+        drawVector(ctx, cx + 90, cy - 55, cx + 140, cy - 55, '#22c55e', 2.5, 'a');
     }
 }
 </script>
@@ -319,25 +320,25 @@ function activateAxesStep3(key) {
 function drawStep3() {
     const canvas = document.getElementById('canvasStep3'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2, cy = canvas.height / 2 + 10;
+    const cx = canvas.width / 2 - 20, cy = canvas.height / 2 + 10;
     
     drawEnvironment(ctx, canvas, cx, cy);
     
-    // Силы отображаются по умолчанию для контекста
-    drawVector(ctx, cx, cy, cx, cy - 65, '#38bdf8', 2, 'N');
+    // Силы отображаются с физически точным распределением точек приложения
+    drawVector(ctx, cx, cy + 25, cx, cy - 45, '#38bdf8', 2, 'N');
     drawVector(ctx, cx, cy, cx, cy + 65, '#fb923c', 2, 'mg');
-    drawVector(ctx, cx, cy, cx + 75, cy, '#cbd5e1', 2, 'F');
-    drawVector(ctx, cx, cy, cx - 75, cy, '#ef4444', 2, 'Fтр');
-    drawVector(ctx, cx - 20, cy - 45, cx + 30, cy - 45, '#22c55e', 2.5, 'a');
+    drawVector(ctx, cx + 30, cy, cx + 105, cy, '#cbd5e1', 2, 'F');
+    drawVector(ctx, cx - 10, cy + 25, cx - 85, cy + 25, '#ef4444', 2, 'Fтр');
+    drawVector(ctx, cx + 90, cy - 55, cx + 140, cy - 55, '#22c55e', 2.5, 'a');
     
-    // Включение оси OX (зеленая, сонаправлена с ускорением)
+    // Включение оси OX (вдоль ускорения)
     if (forceLayers.Step3.showX) {
         ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)'; ctx.lineWidth = 1.5; ctx.setLineDash(Array(6, 4));
         ctx.beginPath(); ctx.moveTo(20, cy); ctx.lineTo(canvas.width - 20, cy); ctx.stroke(); ctx.setLineDash(Array());
         drawVector(ctx, canvas.width - 35, cy, canvas.width - 15, cy, '#22c55e', 2, 'X');
     }
     
-    // Включение оси OY (голубая, перпендикулярна опоре)
+    // Включение оси OY (вертикальный баланс)
     if (forceLayers.Step3.showY) {
         ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)'; ctx.lineWidth = 1.5; ctx.setLineDash(Array(6, 4));
         ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, canvas.height - 20); ctx.stroke(); ctx.setLineDash(Array());
@@ -355,28 +356,25 @@ function highlightProjectionStep4(forceKey, axis) {
 function drawStep4() {
     const canvas = document.getElementById('canvasStep4'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2, cy = canvas.height / 2 + 10;
+    const cx = canvas.width / 2 - 20, cy = canvas.height / 2 + 10;
     
     drawEnvironment(ctx, canvas, cx, cy);
     
-    // Рендеринг системных осей
     ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(15, cy); ctx.lineTo(canvas.width - 15, cy); ctx.moveTo(cx, 15); ctx.lineTo(cx, canvas.height - 15); ctx.stroke();
     
     const h = forceLayers.Step4.highlighted;
     
-    // Динамическая подсветка выбранного вектора неоновым цветом при анализе знака проекции
-    drawVector(ctx, cx, cy, cx, cy - 65, (h==='N'?'#22c55e':'#38bdf8'), (h==='N'?4:2), 'N');
+    drawVector(ctx, cx, cy + 25, cx, cy - 45, (h==='N'?'#22c55e':'#38bdf8'), (h==='N'?4:2), 'N');
     drawVector(ctx, cx, cy, cx, cy + 65, (h==='mg'?'#ef4444':'#fb923c'), (h==='mg'?4:2), 'mg');
-    drawVector(ctx, cx, cy, cx + 75, cy, (h==='F'?'#22c55e':'#cbd5e1'), (h==='F'?4:2), 'F');
-    drawVector(ctx, cx, cy, cx - 75, cy, (h==='Ftr'?'#ef4444':'#ef4444'), (h==='Ftr'?4:2), 'Fтр');
+    drawVector(ctx, cx + 30, cy, cx + 105, cy, (h==='F'?'#22c55e':'#cbd5e1'), (h==='F'?4:2), 'F');
+    drawVector(ctx, cx - 10, cy + 25, cx - 85, cy + 25, (h==='Ftr'?'#ef4444':'#ef4444'), (h==='Ftr'?4:2), 'Fтр');
     
-    // Визуальное проецирование точки вектора на ось в виде неоновой линии-тени
     if (h) {
         ctx.strokeStyle = '#a855f7'; ctx.lineWidth = 2; ctx.setLineDash(Array(3, 3));
-        if (h === 'F') { ctx.beginPath(); ctx.moveTo(cx + 75, cy); ctx.lineTo(cx + 75, cy + 12); ctx.stroke(); }
-        if (h === 'Ftr') { ctx.beginPath(); ctx.moveTo(cx - 75, cy); ctx.lineTo(cx - 75, cy + 12); ctx.stroke(); }
-        if (h === 'N') { ctx.beginPath(); ctx.moveTo(cx, cy - 65); ctx.lineTo(cx - 12, cy - 65); ctx.stroke(); }
+        if (h === 'F') { ctx.beginPath(); ctx.moveTo(cx + 105, cy); ctx.lineTo(cx + 105, cy + 12); ctx.stroke(); }
+        if (h === 'Ftr') { ctx.beginPath(); ctx.moveTo(cx - 85, cy + 25); ctx.lineTo(cx - 85, cy); ctx.stroke(); }
+        if (h === 'N') { ctx.beginPath(); ctx.moveTo(cx, cy - 45); ctx.lineTo(cx - 12, cy - 45); ctx.stroke(); }
         if (h === 'mg') { ctx.beginPath(); ctx.moveTo(cx, cy + 65); ctx.lineTo(cx - 12, cy + 65); ctx.stroke(); }
         ctx.setLineDash(Array());
     }
@@ -391,58 +389,48 @@ function toggleTrigComponent(key) {
 function drawStep5() {
     const canvas = document.getElementById('canvasStep5'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2 - 30, cy = canvas.height / 2 + 25;
+    const cx = canvas.width / 2 - 40, cy = canvas.height / 2 + 25;
     
     drawEnvironment(ctx, canvas, cx, cy);
     
-    const fx = cx + 90, fy = cy - 55; // Конечная координата силы под углом
-    const alpha = Math.atan2(fy - cy, fx - cx);
+    // Тяга прикладывается к центру или правому углу, для наглядности треугольника строим от центра грани
+    const startX = cx + 30, startY = cy;
+    const fx = startX + 85, fy = startY - 50; 
+    const alpha = Math.atan2(fy - startY, fx - startX);
     
-    // Направляющие пунктиры катетов
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1; ctx.setLineDash(Array(4, 4));
-    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(fx, cy); ctx.lineTo(fx, fy); ctx.stroke(); ctx.setLineDash(Array());
+    ctx.beginPath(); ctx.moveTo(startX, startY); ctx.lineTo(fx, startY); ctx.lineTo(fx, fy); ctx.stroke(); ctx.setLineDash(Array());
     
-    // Дуга угла альфа
-    ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 1.5; ctx.beginPath();
-    ctx.arc(cx, cy, 25, 0, alpha, true); ctx.stroke();
-    ctx.fillStyle = '#fb923c'; ctx.font = '11px sans-serif'; ctx.fillText("α", cx + 32, cy - 10);
+    ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(startX, startY, 22, 0, alpha, true); ctx.stroke();
+    ctx.fillStyle = '#fb923c'; ctx.font = '11px sans-serif'; ctx.fillText("α", startX + 28, startY - 8);
     
-    // Вектор гипотенузы (Сила F под углом)
-    drawVector(ctx, cx, cy, fx, fy, '#cbd5e1', 3, 'F');
+    drawVector(ctx, startX, startY, fx, fy, '#cbd5e1', 3, 'F');
     
-    // Отрисовка прилежащего катета (Проекция на Ox -> косинус)
     if (forceLayers.Step5.cos) {
         ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 4;
-        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(fx, cy); ctx.stroke();
-        ctx.fillStyle = '#fb923c'; ctx.font = 'bold 11px monospace'; ctx.fillText("Fx = F·cosα", cx + 45, cy + 14);
+        ctx.beginPath(); ctx.moveTo(startX, startY); ctx.lineTo(fx, startY); ctx.stroke();
+        ctx.fillStyle = '#fb923c'; ctx.font = 'bold 11px monospace'; ctx.fillText("F · cosα", startX + 35, startY + 14);
     }
     
-    // Отрисовка противолежащего катета (Проекция на Oy -> синус)
     if (forceLayers.Step5.sin) {
         ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 4;
-        ctx.beginPath(); ctx.moveTo(fx, cy); ctx.lineTo(fx, fy); ctx.stroke();
-        ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px monospace'; ctx.fillText("Fy = F·sinα", fx + 12, (cy + fy)/2);
+        ctx.beginPath(); ctx.moveTo(fx, startY); ctx.lineTo(fx, fy); ctx.stroke();
+        ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 11px monospace'; ctx.fillText("F · sinα", fx + 12, (startY + fy)/2);
     }
 }
-</script>
-<script>
+
 function checkQuizMethodology(btn, isCorrect) {
-    const slide = document.getElementById('slide6');
-    const cards = slide.querySelectorAll('.btn-card');
+    const cards = document.getElementById('slide6').querySelectorAll('.btn-card');
     cards.forEach(c => c.disabled = true);
-    
     const feedback = document.getElementById('quizFeedback');
+    
     if (isCorrect) {
         btn.classList.add('correct-highlight');
-        feedback.innerHTML = '<span style="color:#4ade80;">✓ Абсолютно верно!</span> Проекция вертикального синуса \(F \cdot \sin\alpha\) направлена вверх, помогая силе \(N\) компенсировать вес. Поэтому опора нагружается меньше: \(N = mg - F \cdot \sin\alpha\).';
+        feedback.innerHTML = '<span style="color:#4ade80;">✓ Абсолютно верно!</span> Проекция вертикального синуса F · sinα направлена вверх, помогая силе N компенсировать вес. Поэтому опора нагружается меньше: N = mg - F · sinα.';
     } else {
         btn.classList.add('wrong-highlight');
-        feedback.innerHTML = '<span style="color:#f43f5e;">✕ Ошибка.</span> При переносе слагаемых через знак равенства знаки меняются. Верный ответ №2: сила тяги разгружает плоскость опоры.';
-        cards.forEach(c => {
-            if (c.innerText.includes("2)")) c.classList.add('correct-highlight');
-        });
+        feedback.innerHTML = '<span style="color:#f43f5e;">✕ Ошибка.</span> При переносе членов выражения знаки меняются. Верный ответ №2: наклонная сила тяги частично приподнимает ящик, разгружая пол.';
+        cards.forEach(c => { if (c.innerText.includes("2)")) c.classList.add('correct-highlight'); });
     }
 }
 </script>
-</body>
-</html>
