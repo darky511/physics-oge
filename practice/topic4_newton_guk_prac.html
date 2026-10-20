@@ -100,7 +100,7 @@
     <div class="slide" id="slide6">
         <div class="slide-inner">
             <span class="slide-type">Задание №1.6</span>
-            <h2>Какая situation объясняется явлением инерции?</h2>
+            <h2>Какая ситуация объясняется явлением инерции?</h2>
             <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 15px;">
                 <button class="btn btn-card" onclick="checkCardAnswer(this, 6, false)">1) При прохождении через земную атмосферу метеорное тело нагревается.</button>
                 <button class="btn btn-card" onclick="checkCardAnswer(this, 6, false)">2) Если груз, подвешенный на пружинном динамометре, отпустить вместе с динамометром, то можно заметить, что груз во время падения не растягивает пружину.</button>
@@ -164,8 +164,8 @@
                 <span class="slide-type">Задание №1.10</span>
                 <h2>Чему равны цена деления и предел измерения динамометра (см. рисунок)?</h2>
                 <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 15px;">
-                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">1) 0,5 Н, 4 Н</button>
-                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, true)">2) 0,1 Н, 4 Н</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, true)">1) 0,5 Н, 4 Н</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">2) 0,1 Н, 4 Н</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">3) 1 Н, 4 Н</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">4) 4 Н, 1 Н</button>
                 </div>
@@ -192,7 +192,7 @@
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Задание №1.12</span>
-                <h2>На рисунке приведён график зависимости модуля скорости υ прямолинейно движущегося тела массой 1 кг от времени t (относительно Земли). Чему равен модуль равнодействующей всех сил, действующих на тело в первые две секунды?</h2>
+                <h2>На рисунке приведён график зависимости модуля скорости...</h2>
                 <div class="answer-zone" style="margin-top: auto;">
                     <div class="input-row">
                         <input type="text" id="input_q12" class="oga-input" placeholder="Ответ...">
@@ -204,12 +204,13 @@
         </div>
     </div>
 
+
     <!-- ЗАДАНИЕ №1.13 -->
     <div class="slide" id="slide13">
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Задание №1.13</span>
-                <h2>На материальную точку действуют три силы, модули которых F₁ = 2 Н, F₂ = 3 Н и F₃ = 6 Н. Направления действия сил показаны на рисунке. С направлением какого из векторов (1, 2, 3 или 4) совпадает направление равнодействующей этих трёх сил?</h2>
+                <h2>На материальную точку действуют три силы...</h2>
                 <div class="answer-zone" style="margin-top: auto;">
                     <div class="input-row">
                         <input type="text" id="input_q13" class="oga-input" placeholder="Ответ...">
@@ -220,18 +221,15 @@
             <div class="visual-side"><canvas id="canvasVectorQ13"></canvas></div>
         </div>
     </div>
+
     <!-- ЗАДАНИЕ №2.1 -->
     <div class="slide" id="slide14">
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Задание №2.1</span>
-                <h2>Тело движется по прямой дороге. На рисунке представлен график зависимости координаты x тела от времени t. Используя рисунок, выберите из предложенного перечня два верных утверждения.</h2>
+                <h2>Тело движется по прямой дороге. На рисунке представлен график...</h2>
                 <p class="text-concentrate" style="font-size:11px; line-height:1.35; margin-bottom: 5px;">
-                    1) В промежутке времени от 0 до 5 с равнодействующая сил, действующих на тело, равна нулю.<br>
-                    2) В промежутке времени от 5 до 15 с скорость тела равна нулю.<br>
-                    3) За время движения тело проделало путь 200 м.<br>
-                    4) В промежутке времени от 20 до 35 с тело двигалось равноускоренно.<br>
-                    5) За первые 20 с тело прошло путь в 75 м.
+                    1) В промежутке времени от 0 до 5 с равнодействующая сил...
                 </p>
                 <div class="input-row" style="margin-top: auto;">
                     <input type="text" id="input_q14" class="oga-input" placeholder="Две цифры...">
@@ -242,19 +240,27 @@
         </div>
     </div>
 
-    <!-- ЗАДАНИЕ №2.2 (ИСПРАВЛЕНО: Интегрированы все 5 исходных вариантов утверждений) -->
+
+    <!-- ЗАДАНИЕ №2.2 -->
     <div class="slide" id="slide15">
-        <div class="slide-inner">
-            <span class="slide-type">Задание №2.2</span>
-            <h2>Учитель взял две одинаковые тележки, к первой из которых прикрепил лёгкую упругую стальную пластинку, согнул её и связал ниткой. Вторую тележку с грузом приставил плотно ко второму концу пластинки. После пережигания нити пружина выпрямилась, и тележки разъехались. Из предложенного перечня выберите два верных утверждения.</h2>
-            <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
-                <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 1)">1) Тележки взаимодействуют друг с другом силами, направленными в противоположные стороны.</button>
-                <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 2)">2) Ускорения, приобретаемые тележками, зависят от массы тележек.</button>
-                <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 3)">3) На вторую тележку действует большая сила упругости.</button>
-                <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 4)">4) На первую тележку действует большая сила трения.</button>
-                <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 5)">5) Ускорения, приобретённые тележками при распрямлении пластинки, сонаправлены.</button>
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №2.2</span>
+                <h2>Учитель взял две одинаковые тележки, к первой из которых прикрепил лёгкую упругую стальную пластинку, согнул её и связал ниткой. Вторую тележку с грузом приставил плотно ко второму концу пластинки. После пережигания нити пружина выпрямилась, и тележки разъехались. Из предложенного перечня выберите два верных утверждения.</h2>
+                <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
+                    <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 1)">1) Тележки взаимодействуют друг с другом силами, направленными в противоположные стороны.</button>
+                    <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 2)">2) Ускорения, приобретаемые тележками, зависят от массы тележек.</button>
+                    <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 3)">3) На вторую тележку действует большая сила упругости.</button>
+                    <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 4)">4) На первую тележку действует большая сила трения.</button>
+                    <button class="btn btn-card" style="font-size:11.5px; padding:6px;" onclick="checkCardAnswer2(this, 15, 5)">5) Ускорения, приобрётенные тележками при распрямлении пластинки, сонаправлены.</button>
+                </div>
+                <div style="text-align:right; margin-top:auto;">
+                    <button id="submit_q15" class="btn btn-accent" style="width:100%;" onclick="submitMultiTask(15, Array(1,2))" disabled>Подтвердить выбор (0 / 2)</button>
+                </div>
             </div>
-            <div style="text-align:right; margin-top:8px;"><button id="submit_q15" class="btn btn-accent" onclick="submitMultiTask(15, Array(1,2))" disabled>Подтвердить выбор (0 / 2)</button></div>
+            <div class="visual-side">
+                <canvas id="canvasTrucksQ15"></canvas>
+            </div>
         </div>
     </div>
 
@@ -283,19 +289,24 @@
             </div>
         </div>
     </div>
+
     <!-- ЗАДАНИЕ №3.1 -->
     <div class="slide" id="slide17">
-        <div class="slide-inner">
-            <span class="slide-type">Задание №3.1</span>
-            <h2>Груз массой 5 кг, подвешенный на лёгком тросе, поднимают вертикально вверх с ускорением, равным по модулю 1 м/с² и направленным вверх. Чему равен модуль силы натяжения троса?</h2>
-            <div class="answer-zone" style="margin-top: 30px;">
-                <div class="input-row">
-                    <input type="text" id="input_q17" class="oga-input" placeholder="Ответ...">
-                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q17', '55', 17)">Проверить</button>
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №3.1</span>
+                <h2>Груз массой 5 кг, подвешенный на лёгком тросе, поднимают вертикально вверх...</h2>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q17" class="oga-input" placeholder="Ответ...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q17', '55', 17)">Проверить</button>
+                    </div>
                 </div>
             </div>
+            <div class="visual-side"><canvas id="canvasLiftQ17"></canvas></div>
         </div>
     </div>
+
 
     <!-- ЗАДАНИЕ №3.2 -->
     <div class="slide" id="slide18">
@@ -319,17 +330,21 @@
 
     <!-- ЗАДАНИЕ №3.3 -->
     <div class="slide" id="slide19">
-        <div class="slide-inner">
-            <span class="slide-type">Задание №3.3</span>
-            <h2>На полу равноускоренно движущегося вверх лифта стоит ящик массой 50 кг. На какую высоту из состояния покоя поднимется лифт за первые 5 с движения, если сила давления (вес) ящика на пол лифта составляет 600 Н?</h2>
-            <div class="answer-zone" style="margin-top: 30px;">
-                <div class="input-row">
-                    <input type="text" id="input_q19" class="oga-input" placeholder="Ответ...">
-                    <button class="btn btn-accent" onclick="checkTextAnswer('input_q19', '25', 19)">Проверить</button>
+        <div class="slide-grid">
+            <div class="content-side">
+                <span class="slide-type">Задание №3.3</span>
+                <h2>На полу равноускоренно движущегося вверх лифта стоит ящик...</h2>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q19" class="oga-input" placeholder="Ответ...">
+                        <button class="btn btn-accent" onclick="checkTextAnswer('input_q19', '25', 19)">Проверить</button>
+                    </div>
                 </div>
             </div>
+            <div class="visual-side"><canvas id="canvasElevatorBoxQ19"></canvas></div>
         </div>
     </div>
+
 
     <!-- ИТОГОВЫЙ СЛАЙД АНАЛИТИКИ -->
     <div class="slide" id="slide20">
@@ -567,7 +582,13 @@ function triggerCanvasBySlide() {
     if (currentSlide === 12) drawGraphXQ14();
     if (currentSlide === 13) drawGraphQ12();
     if (currentSlide === 14) drawVectorQ13();
+    if (currentSlide === 15) drawTrucksQ15();
     if (currentSlide === 18) initThreadSimulation();
+    if (currentSlide === 12) drawGraphQ12(); // График скорости к 1.12
+    if (currentSlide === 13) drawVectorQ13(); // Векторы сил к 1.13
+    if (currentSlide === 16) drawScaleQ10();  // Шкала к 1.10 (вместо старого индекса)
+    if (currentSlide === 17) drawLiftQ17();   // Ускоренный подъем к 3.1
+    if (currentSlide === 19) drawElevatorBoxQ19(); // Ящик в лифте к 3.3
 }
 
 function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
@@ -705,6 +726,57 @@ function drawGraphXQ14() {
     ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy);
     ctx.lineTo(ox + sw, oy - sh); ctx.lineTo(ox + 3*sw, oy - sh); ctx.lineTo(ox + 4*sw, oy); ctx.lineTo(ox + 7*sw, oy - 4*sh); ctx.stroke();
 }
+
+function drawTrucksQ15() {
+    const canvas = document.getElementById('canvasTrucksQ15'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height * 0.65;
+
+    // Рельсы/Опора
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(10, cy + 20); ctx.lineTo(canvas.width - 10, cy + 20); ctx.stroke();
+
+    // Тележка 1 (Слева)
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(40, cy - 20, 60, 30); ctx.strokeRect(40, cy - 20, 60, 30);
+    ctx.fillStyle = '#475569'; ctx.beginPath(); ctx.arc(55, cy + 15, 6, 0, Math.PI*2); ctx.arc(85, cy + 15, 6, 0, Math.PI*2); ctx.fill();
+
+    // Тележка 2 с грузом (Справа)
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(canvas.width - 100, cy - 20, 60, 30); ctx.strokeRect(canvas.width - 100, cy - 20, 60, 30);
+    ctx.fillStyle = '#475569'; ctx.beginPath(); ctx.arc(canvas.width - 85, cy + 15, 6, 0, Math.PI*2); ctx.arc(canvas.width - 55, cy + 15, 6, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fb923c'; ctx.fillRect(canvas.width - 90, cy - 35, 40, 15); // Дополнительный груз сверху
+
+    // Изогнутая стальная пластина (упругий элемент) посередине
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath();
+    ctx.moveTo(100, cy - 5);
+    ctx.quadraticCurveTo(canvas.width / 2, cy - 60, canvas.width - 100, cy - 5);
+    ctx.stroke();
+
+    // Перевязывающая нить (горизонтальная линия)
+    ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(100, cy - 5); ctx.lineTo(canvas.width - 100, cy - 5); ctx.stroke();
+}
+
+function drawLiftQ17() {
+    const canvas = document.getElementById('canvasLiftQ17'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2, cy = canvas.height / 2;
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(cx - 20, cy - 20, 40, 40); ctx.strokeRect(cx - 20, cy - 20, 40, 40);
+    ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, cy - 20); ctx.stroke(); // Трос
+    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'T');
+    drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
+    drawArrow(ctx, cx + 35, cy, cx + 35, cy - 40, '#22c55e', 'a'); // Вектор ускорения вверх
+}
+
+function drawElevatorBoxQ19() {
+    const canvas = document.getElementById('canvasElevatorBoxQ19'); if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); const cx = canvas.width / 2, cy = canvas.height / 2;
+    // Опора (пол лифта)
+    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(cx - 60, cy + 25); ctx.lineTo(cx + 60, cy + 25); ctx.stroke();
+    // Ящик
+    ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(cx - 25, cy - 25, 50, 50); ctx.strokeRect(cx - 25, cy - 25, 50, 50);
+    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'N');
+    drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
+    drawArrow(ctx, cx + 40, cy, cx + 40, cy - 40, '#22c55e', 'a'); // Ускорение лифта
+}
+
+    
 </script>
 <script>
 function toggleSimulation(key) {
@@ -794,8 +866,19 @@ function initThreadSimulation() {
     ctx.fillStyle = '#1e293b'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
     let gy = 80 + (simStates.thread.broken1 ? simStates.thread.progress : 0);
     ctx.beginPath(); ctx.arc(cx, gy + 20, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
-    ctx.strokeStyle = simStates.thread.broken2 ? '#ef4444' : '#38bdf8';
-    ctx.beginPath(); ctx.moveTo(cx, gy + 40); ctx.lineTo(cx, gy + 100 + (simStates.thread.broken2 ? simStates.thread.progress*1.5 : 0)); ctx.stroke();
+    let ny = gy + 40;
+    if (simStates.thread.broken2) {
+        // ЯВНЫЙ РАЗРЫВ: верхний кончик остается у груза, нижний улетает вниз вместе с рукой
+        ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(cx, ny); ctx.lineTo(cx, ny + 10); ctx.stroke(); // Обрывок сверху
+        
+        ctx.strokeStyle = '#ef4444'; ctx.beginPath(); 
+        let gap = simStates.thread.progress * 2; // Динамически увеличивающийся зазор разрыва
+        ctx.moveTo(cx, ny + 25 + gap); 
+        ctx.lineTo(cx, ny + 75 + gap); ctx.stroke(); // Обрывок снизу, уходящий вниз
+    } else {
+        // Целая нить до рывка или при плавном натяжении
+        ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(cx, ny); ctx.lineTo(cx, ny + 60); ctx.stroke();
+    }
 }
 
 function loopThread() {
