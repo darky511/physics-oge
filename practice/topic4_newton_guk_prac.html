@@ -829,24 +829,84 @@ function drawGraphQ12() {
 
 // Задание 1.13 (ИСПРАВЛЕНО: Двойной чертеж, привязка к canvasVectorQ13)
 function drawVectorQ13() {
-    const canvas = document.getElementById('canvasVectorQ13'); if (!canvas) return; if (!forceSetupCanvas(canvas)) return;
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cy = canvas.height / 2, step = 14, cxLeft = canvas.width * 0.28, cxRight = canvas.width * 0.72;
+    const canvas = document.getElementById('canvasVectorQ13'); 
+    if (!canvas) return;
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
-    for(let x = cxLeft - 4*step; x <= cxLeft + 4*step; x += step) { ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 4*step); ctx.stroke(); }
-    for(let y = cy - 4*step; y <= cy + 4*step; y += step) { ctx.beginPath(); ctx.moveTo(cxLeft - 4*step, y); ctx.lineTo(cxLeft + 4*step, y); ctx.stroke(); }
-    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy - step, '#38bdf8', 'F₁'); 
-    drawArrow(ctx, cxLeft, cy + step, cxLeft + 3*step, cy + step, '#38bdf8', 'F₂'); 
-    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy + 7*step, '#fb923c', 'F₃');
+    // Автоматический расчет шага сетки исходя из ширины окна, чтобы все влезло
+    const step = Math.min(18, canvas.width / 22); 
+    const startY = (canvas.height - 9 * step) / 2; // Центрирование сеток по вертикали
+    
+    // Вычисляем начальные координаты X для левой и правой панели
+    const leftGridX = oxL = canvas.width * 0.08;
+    const rightGridX = oxR = canvas.width * 0.62;
 
-    for(let x = cxRight - 2*step; x <= cxRight + 4*step; x += step) { ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 5*step); ctx.stroke(); }
-    for(let y = cy - 4*step; y <= cy + 5*step; y += step) { ctx.beginPath(); ctx.moveTo(cxRight - 2*step, y); ctx.lineTo(cxRight + 4*step, y); ctx.stroke(); }
-    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy - 4*step, '#38bdf8', '1');
-    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy - 2*step, '#fb923c', '2');
-    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy + 2*step, '#38bdf8', '3');
-    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy + 4*step, '#ef4444', '4');
+    // --- ЛЕВАЯ ПАНЕЛЬ: Координатная сетка 10х9 клеток ---
+    ctx.strokeStyle = '#334155'; 
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 10; i++) {
+        ctx.beginPath(); ctx.moveTo(leftGridX + i * step, startY); ctx.lineTo(leftGridX + i * step, startY + 9 * step); ctx.stroke();
+    }
+    for (let j = 0; j <= 9; j++) {
+        ctx.beginPath(); ctx.moveTo(leftGridX, startY + j * step); ctx.lineTo(leftGridX + 10 * step, startY + j * step); ctx.stroke();
+    }
+    
+    // Точка приложения сил находится на 5-й вертикальной линии и 3-й линии сверху (6-й снизу)
+    const bodyX = leftGridX + 5 * step;
+    const bodyY = startY + 3 * step;
+    
+    // Отрисовка векторов сил строго по размерам КИМ (Масштаб: 1 клетка = 1 Н)
+    drawArrow(ctx, bodyX, bodyY, bodyX, bodyY - 2 * step, '#38bdf8'); // F1: 2 клетки вверх
+    drawArrow(ctx, bodyX, bodyY, bodyX + 3 * step, bodyY, '#38bdf8'); // F2: 3 клетки вправо
+    drawArrow(ctx, bodyX, bodyY, bodyX, bodyY + 6 * step, '#38bdf8'); // F3: 6 клеток вниз
+    
+    // Текстовые подписи векторов сил в формате Юникод со стрелочками
+    ctx.fillStyle = '#cbd5e1'; 
+    ctx.font = 'italic 12px sans-serif';
+    ctx.fillText("F₁", bodyX - 16, bodyY - 1.2 * step);
+    ctx.fillText("F₂", bodyX + 2.2 * step, bodyY - 8);
+    ctx.fillText("F₃", bodyX + 8, bodyY + 4.5 * step);
+    
+    // Центральная жирная точка тела
+    ctx.fillStyle = '#cbd5e1'; 
+    ctx.beginPath(); ctx.arc(bodyX, bodyY, 4.5, 0, Math.PI * 2); ctx.fill();
+
+
+    // --- ПРАВАЯ ПАНЕЛЬ: Координатная сетка 6х9 клеток ---
+    ctx.strokeStyle = '#334155'; 
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i <= 6; i++) {
+        ctx.beginPath(); ctx.moveTo(rightGridX + i * step, startY); ctx.lineTo(rightGridX + i * step, startY + 9 * step); ctx.stroke();
+    }
+    for (let j = 0; j <= 9; j++) {
+        ctx.beginPath(); ctx.moveTo(rightGridX, startY + j * step); ctx.lineTo(rightGridX + 6 * step, startY + j * step); ctx.stroke();
+    }
+    
+    // Начальная точка на 1-й вертикальной линии и 5-й линии сверху
+    const startVectorX = rightGridX + 1 * step;
+    const startVectorY = startY + 4 * step;
+    
+    // Отрисовка четырех векторов направлений (все идут на 3 клетки вправо)
+    drawArrow(ctx, startVectorX, startVectorY, startVectorX + 3 * step, startVectorY - 4 * step, '#cbd5e1'); // 1: 4 клетки вверх
+    drawArrow(ctx, startVectorX, startVectorY, startVectorX + 3 * step, startVectorY - 2 * step, '#cbd5e1'); // 2: 2 клетки вверх
+    drawArrow(ctx, startVectorX, startVectorY, startVectorX + 3 * step, startVectorY + 2 * step, '#cbd5e1'); // 3: 2 клетки вниз
+    drawArrow(ctx, startVectorX, startVectorY, startVectorX + 3 * step, startVectorY + 4 * step, '#cbd5e1'); // 4: 4 клетки вниз
+    
+    // Номера векторов справа от наконечников
+    ctx.fillStyle = '#38bdf8'; 
+    ctx.font = '12px sans-serif';
+    ctx.fillText("1", startVectorX + 3.4 * step, startVectorY - 4 * step + 4);
+    ctx.fillText("2", startVectorX + 3.4 * step, startVectorY - 2 * step + 4);
+    ctx.fillText("3", startVectorX + 3.4 * step, startVectorY + 2 * step + 4);
+    ctx.fillText("4", startVectorX + 3.4 * step, startVectorY + 4 * step + 4);
+    
+    // Начальная жирная точка для векторов направлений
+    ctx.fillStyle = '#cbd5e1'; 
+    ctx.beginPath(); ctx.arc(startVectorX, startVectorY, 4, 0, Math.PI * 2); ctx.fill();
 }
+
 
 // Задание 2.1 (ИСПРАВЛЕНО: Привязка к canvasGraphXQ14)
 function drawGraphXQ14() {
