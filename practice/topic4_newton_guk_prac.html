@@ -739,16 +739,93 @@ function drawScaleQ10() {
 <script>
 // Задание 1.12 (ИСПРАВЛЕНО: Привязка к id canvasGraphQ12)
 function drawGraphQ12() {
-    const canvas = document.getElementById('canvasGraphQ12'); if (!forceSetupCanvas(canvas)) return;
-    const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const ox = 40, oy = canvas.height - 35;
-    drawArrow(ctx, ox, oy, canvas.width - 15, oy, '#94a3b8'); ctx.fillStyle = '#94a3b8'; ctx.fillText("t, с", canvas.width - 35, oy + 18);
-    drawArrow(ctx, ox, oy, ox, 15, '#94a3b8'); ctx.fillText("υ, м/с", ox - 24, 15);
-    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy);
-    ctx.lineTo(ox + 50, oy - 90); ctx.lineTo(ox + 100, oy - 90); ctx.lineTo(ox + 140, oy); ctx.stroke();
-    ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif';
-    ctx.fillText("0", ox - 12, oy + 12); ctx.fillText("2", ox + 50, oy + 15); ctx.fillText("10", ox - 20, oy - 86);
+    const canvas = document.getElementById('canvasGraphQ12'); 
+    if (!forceSetupCanvas(canvas)) return;
+    const ctx = canvas.getContext('2d'); 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Отступы и масштаб для идеальной посадки графика в окно
+    const ox = 45; 
+    const oy = canvas.height - 35;
+    const scaleX = (canvas.width - ox - 30) / 5.5; // Шаг по оси t (на 5.5 делений)
+    const scaleY = (oy - 25) / 11;                // Шаг по оси v (на 11 делений)
+    
+    // 1. Отрисовка координатных осей t и v
+    drawArrow(ctx, ox, oy, canvas.width - 15, oy, '#94a3b8'); 
+    ctx.fillStyle = '#94a3b8'; 
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("t, с", canvas.width - 25, oy + 18);
+    
+    drawArrow(ctx, ox, oy, ox, 15, '#94a3b8'); 
+    ctx.textAlign = 'right';
+    ctx.fillText("υ, м/с", ox - 10, 18);
+    ctx.fillText("O", ox - 6, oy + 14);
+
+    // 2. Оцифровка засечек осей (1, 2, 3, 4, 5 с и 10 м/с)
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 1;
+    ctx.textAlign = 'center';
+    
+    for (let t = 1; i = t, t <= 5; t++) {
+        let x = ox + t * scaleX;
+        ctx.beginPath(); ctx.moveTo(x, oy - 4); ctx.lineTo(x, oy + 4); ctx.stroke();
+        ctx.fillText(t, x, oy + 16);
+    }
+    
+    let y10 = oy - 10 * scaleY;
+    ctx.beginPath(); ctx.moveTo(ox - 4, y10); ctx.lineTo(ox + 4, y10); ctx.stroke();
+    ctx.textAlign = 'right';
+    ctx.fillText("10", ox - 8, y10 + 4);
+
+    // 3. Пунктирные линии проекций к осям КИМ
+    ctx.strokeStyle = '#475569';
+    ctx.lineWidth = 1;
+    ctx.setLineDash(Array(4, 4));
+    
+    // Проекция от 10 м/с до точки A
+    ctx.beginPath(); ctx.moveTo(ox, y10); ctx.lineTo(ox + 2 * scaleX, y10); ctx.stroke();
+    // Вертикальная проекция от точки A к 2 с
+    ctx.beginPath(); ctx.moveTo(ox + 2 * scaleX, y10); ctx.lineTo(ox + 2 * scaleX, oy); ctx.stroke();
+    // Вертикальная проекция от точки B к 3 с
+    ctx.beginPath(); ctx.moveTo(ox + 3 * scaleX, y10); ctx.lineTo(ox + 3 * scaleX, oy); ctx.stroke();
+    
+    ctx.setLineDash(Array()); // Сброс пунктира
+
+    // 4. Построение жирного графика движения (O -> A -> B -> C -> D)
+    ctx.strokeStyle = '#cbd5e1'; 
+    ctx.lineWidth = 3.5; 
+    ctx.beginPath(); 
+    ctx.moveTo(ox, oy);                         // Точка O (0, 0)
+    ctx.lineTo(ox + 2 * scaleX, y10);           // Точка A (2, 10)
+    ctx.lineTo(ox + 3 * scaleX, y10);           // Точка B (3, 10)
+    ctx.lineTo(ox + 4 * scaleX, oy);            // Точка C (4, 0)
+    ctx.lineTo(ox + 5 * scaleX, oy);            // Точка D (5, 0)
+    ctx.stroke();
+
+    // 5. Отрисовка узловых точек и буквенных подписей
+    ctx.fillStyle = '#090d16'; 
+    ctx.strokeStyle = '#cbd5e1'; 
+    ctx.lineWidth = 2;
+    
+    let points = Array(
+        { x: ox, y: oy, lbl: "" },
+        { x: ox + 2 * scaleX, y: y10, lbl: "A", dx: -10, dy: -8 },
+        { x: ox + 3 * scaleX, y: y10, lbl: "B", dx: 10, dy: -8 },
+        { x: ox + 4 * scaleX, y: oy, lbl: "C", dx: 10, dy: -10 },
+        { x: ox + 5 * scaleX, y: oy, lbl: "D", dx: 10, dy: -10 }
+    );
+    
+    points.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+        if (p.lbl) {
+            ctx.fillStyle = '#cbd5e1';
+            ctx.font = 'italic 12px sans-serif';
+            ctx.fillText(p.lbl, p.x + p.dx, p.y + p.dy);
+        }
+    });
 }
+
 
 // Задание 1.13 (ИСПРАВЛЕНО: Двойной чертеж, привязка к canvasVectorQ13)
 function drawVectorQ13() {
