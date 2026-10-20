@@ -402,7 +402,20 @@ h2 { font-size: 15px; font-weight: 600; color: #f8fafc; margin-bottom: 10px; lin
 .btn-card.selected { border-color: #38bdf8; background: rgba(56, 189, 248, 0.05); color: #38bdf8; }
 .answer-zone { background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 8px; border: 1px dashed #334155; margin-top: auto; }
 .input-row { display: flex; gap: 8px; }
-.oga-input:disabled { background-color: #05070f; border: 1px solid #334155; color: #f8fafc; padding: 7px 14px; font-size: 13px; border-radius: 6px; outline: none; flex-grow: 1; }
+.oga-input { 
+    background: #05070f !important; 
+    border: 1px solid #334155; 
+    color: #f8fafc; 
+    padding: 7px 14px; 
+    font-size: 13px; 
+    border-radius: 6px; 
+    outline: none; 
+    flex-grow: 1; 
+}
+.oga-input:focus, .oga-input:disabled { 
+    background: #05070f !important; 
+    color: #f8fafc !important; 
+}
 .correct-highlight { 
     background-color: rgba(34, 197, 94, 0.15) !important; 
     border-color: #22c55e !important; 
