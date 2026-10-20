@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <!-- ЗАДАНИЕ №1.2 (ИСПРАВЛЕНО: Рендеринг реальной зигзаг-пружины и векторов сил из центра масс) -->
+    <!-- ЗАДАНИЕ №1.2 -->
     <div class="slide" id="slide2">
         <div class="slide-grid">
             <div class="content-side">
@@ -46,7 +46,6 @@
             <div class="visual-side"><canvas id="canvasHookeQ2"></canvas></div>
         </div>
     </div>
-
     <!-- ЗАДАНИЕ №1.3 -->
     <div class="slide" id="slide3">
         <div class="slide-inner">
@@ -60,7 +59,8 @@
             </div>
         </div>
     </div>
-    <!-- ЗАДАНИЕ №1.4 (ИСПРАВЛЕНО: Добавлен вектор начальной скорости v0, все 4 вектора для выбора, скрыт маркер Fравн с холста) -->
+
+    <!-- ЗАДАНИЕ №1.4 -->
     <div class="slide" id="slide4">
         <div class="slide-grid">
             <div class="content-side">
@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <!-- ЗАДАНИЕ №1.5 (ИСПРАВЛЕНО: Добавлен 4 вариант «электризация», симуляция заменена на физическую модель контура собаки, отряхивающей воду) -->
+    <!-- ЗАДАНИЕ №1.5 -->
     <div class="slide" id="slide5">
         <div class="slide-grid">
             <div class="content-side">
@@ -88,15 +88,14 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 15px;">
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">1) реактивное движение</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 5, true)">2) инерция</button>
-                    <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">3) действие силы тяжести</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">3) action силы тяжести</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 5, false)">4) электризация</button>
                 </div>
             </div>
             <div class="visual-side"><canvas id="canvasDogQ5"></canvas></div>
         </div>
     </div>
-
-    <!-- ЗАДАНИЕ №1.6 (ИСПРАВЛЕНО: Полностью убран рисунок с холста для текстового слайда) -->
+    <!-- ЗАДАНИЕ №1.6 -->
     <div class="slide" id="slide6">
         <div class="slide-inner">
             <span class="slide-type">Задание №1.6</span>
@@ -109,6 +108,7 @@
             </div>
         </div>
     </div>
+
     <!-- ЗАДАНИЕ №1.7 -->
     <div class="slide" id="slide7">
         <div class="slide-inner">
@@ -156,7 +156,6 @@
             <div class="visual-side"><canvas id="canvasGridQ9"></canvas></div>
         </div>
     </div>
-
     <!-- ЗАДАНИЕ №1.10 -->
     <div class="slide" id="slide10">
         <div class="slide-grid">
@@ -164,8 +163,8 @@
                 <span class="slide-type">Задание №1.10</span>
                 <h2>Чему равны цена деления и предел измерения динамометра (см. рисунок)?</h2>
                 <div style="display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 15px;">
-                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, true)">1) 0,5 Н, 4 Н</button>
-                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">2) 0,1 Н, 4 Н</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">1) 0,5 Н, 4 Н</button>
+                    <button class="btn btn-card" onclick="checkCardAnswer(this, 10, true)">2) 0,1 Н, 4 Н</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">3) 1 Н, 4 Н</button>
                     <button class="btn btn-card" onclick="checkCardAnswer(this, 10, false)">4) 4 Н, 1 Н</button>
                 </div>
@@ -173,7 +172,8 @@
             <div class="visual-side"><canvas id="canvasScaleQ10"></canvas></div>
         </div>
     </div>
-    <!-- ЗАДАНИЕ №1.11 (ИСПРАВЛЕНО: Возвращено на законное место в Блоке 1) -->
+
+    <!-- ЗАДАНИЕ №1.11 -->
     <div class="slide" id="slide11">
         <div class="slide-inner">
             <span class="slide-type">Задание №1.11</span>
@@ -204,7 +204,6 @@
         </div>
     </div>
 
-
     <!-- ЗАДАНИЕ №1.13 -->
     <div class="slide" id="slide13">
         <div class="slide-grid">
@@ -221,25 +220,29 @@
             <div class="visual-side"><canvas id="canvasVectorQ13"></canvas></div>
         </div>
     </div>
-
     <!-- ЗАДАНИЕ №2.1 -->
     <div class="slide" id="slide14">
         <div class="slide-grid">
             <div class="content-side">
                 <span class="slide-type">Задание №2.1</span>
                 <h2>Тело движется по прямой дороге. На рисунке представлен график зависимости координаты x тела от времени t. Используя рисунок, выберите из предложенного перечня два верных утверждения.</h2>
-                <p class="text-concentrate" style="font-size:11px; line-height:1.35; margin-bottom: 5px;">
-                    1) В промежутке времени от 0 до 5 с равнодействующая сил...
-                </p>
-                <div class="input-row" style="margin-top: auto;">
-                    <input type="text" id="input_q14" class="oga-input" placeholder="Две цифры...">
-                    <button class="btn btn-accent" onclick="checkDoubleDigitAnswer('input_q14', '12', 14)">Зафиксировать</button>
+                <div style="background: rgba(15, 23, 42, 0.4); padding: 8px; border-radius: 6px; font-size: 11.5px; line-height: 1.4; color: #cbd5e1; margin-bottom: 8px;">
+                    1) В промежутке времени от 0 до 5 с равнодействующая сил, действующих на тело, равна нулю.<br>
+                    2) В промежутке времени от 5 до 15 с скорость тела равна нулю.<br>
+                    3) За время движения тело проделало путь 200 м.<br>
+                    4) В промежутке времени от 20 до 35 с тело двигалось равноускоренно.<br>
+                    5) За первые 20 с тело прошло путь в 75 м.
+                </div>
+                <div class="answer-zone" style="margin-top: auto;">
+                    <div class="input-row">
+                        <input type="text" id="input_q14" class="oga-input" placeholder="Две цифры ответа...">
+                        <button class="btn btn-accent" onclick="checkDoubleDigitAnswer('input_q14', '12', 14)">Зафиксировать</button>
+                    </div>
                 </div>
             </div>
             <div class="visual-side"><canvas id="canvasGraphXQ14"></canvas></div>
         </div>
     </div>
-
 
     <!-- ЗАДАНИЕ №2.2 -->
     <div class="slide" id="slide15">
@@ -258,12 +261,9 @@
                     <button id="submit_q15" class="btn btn-accent" style="width:100%;" onclick="submitMultiTask(15, Array(1,2))" disabled>Подтвердить выбор (0 / 2)</button>
                 </div>
             </div>
-            <div class="visual-side">
-                <canvas id="canvasTrucksQ15"></canvas>
-            </div>
+            <div class="visual-side"><canvas id="canvasTrucksQ15"></canvas></div>
         </div>
     </div>
-
     <!-- ЗАДАНИЕ №2.3 -->
     <div class="slide" id="slide16">
         <div class="slide-inner">
@@ -307,7 +307,6 @@
         </div>
     </div>
 
-
     <!-- ЗАДАНИЕ №3.2 -->
     <div class="slide" id="slide18">
         <div class="slide-grid">
@@ -344,7 +343,6 @@
             <div class="visual-side"><canvas id="canvasElevatorBoxQ19"></canvas></div>
         </div>
     </div>
-
 
     <!-- ИТОГОВЫЙ СЛАЙД АНАЛИТИКИ -->
     <div class="slide" id="slide20">
@@ -415,7 +413,7 @@ let currentSlide = 1;
 const totalSlides = 20; 
 const totalTasksCount = 16; 
 let solvedTasks = {}; 
-let multiSelected = Array(); // Для задач с множественным выбором кликами
+let multiSelected = Array(); // Буфер для множественного выбора кликами
 
 // Состояния анимационных движков
 let simStates = {
@@ -433,7 +431,7 @@ window.onload = function() {
 
 function changeSlide(direction) {
     stopAllSimulations();
-    multiSelected = Array(); // Сброс буфера выбора
+    multiSelected = Array(); // Очистка буфера выбора
     document.getElementById(`slide${currentSlide}`).classList.remove('active');
     currentSlide += direction;
     document.getElementById(`slide${currentSlide}`).classList.add('active');
@@ -521,6 +519,7 @@ function checkCardAnswer(btn, taskNum, isCorrect) {
             if (taskNum === 1 && c.innerText.includes("1)")) c.classList.add('correct-highlight');
             if (taskNum === 3 && c.innerText.includes("3)")) c.classList.add('correct-highlight');
             if (taskNum === 5 && c.innerText.includes("2)")) c.classList.add('correct-highlight');
+            if (taskNum === 6 && c.innerText.includes("3)")) c.classList.add('correct-highlight');
             if (taskNum === 11 && c.innerText.includes("1)")) c.classList.add('correct-highlight');
             if (taskNum === 18 && c.innerText.includes("2)")) c.classList.add('correct-highlight');
         });
@@ -572,6 +571,7 @@ function submitMultiTask(taskNum, correctArray) {
 }
 </script>
 <script>
+// Диспетчер холстов (ИСПРАВЛЕНО: Синхронизировано с id в HTML разметке)
 function triggerCanvasBySlide() {
     if (currentSlide === 2) drawHookeQ2();
     if (currentSlide === 4) initBallisticsSimulation();
@@ -579,16 +579,14 @@ function triggerCanvasBySlide() {
     if (currentSlide === 8) drawSpringQ8();
     if (currentSlide === 9) drawGridQ9();
     if (currentSlide === 10) drawScaleQ10();
-    
-    // ИСПРАВЛЕНО: Привязка к точным номерам слайдов с вашего скриншота
-    if (currentSlide === 12) drawGraphQ12();      // Слайд 12 — График скорости (Задание 1.12)
-    if (currentSlide === 13) drawVectorQ13();     // Слайд 13 — Роза векторов сил (Задание 1.13)
-    if (currentSlide === 14) drawGraphXQ14();     // Слайд 14 — График координаты X (Задание 2.1)
-    if (currentSlide === 15) drawTrucksQ15();     // Слайд 15 — Тележки
-    if (currentSlide === 17) drawLiftQ17();       // Слайд 17 — Вертикальный подъем (Задание 3.1)
-    if (currentSlide === 19) drawElevatorBoxQ19(); // Слайд 19 — Ящик в лифте (Задание 3.3)
+    if (currentSlide === 12) drawGraphQ12();      // Задание 1.12 холст canvasGraphQ12
+    if (currentSlide === 13) drawVectorQ13();     // Задание 1.13 холст canvasVectorQ13
+    if (currentSlide === 14) drawGraphXQ14();     // Задание 2.1 холст canvasGraphXQ14
+    if (currentSlide === 15) drawTrucksQ15();     // Задание 2.2 холст canvasTrucksQ15
+    if (currentSlide === 17) drawLiftQ17();       // Задание 3.1 холст canvasLiftQ17
+    if (currentSlide === 18) initThreadSimulation(); // Задание 3.2 холст canvasThreadQ18
+    if (currentSlide === 19) drawElevatorBoxQ19(); // Задание 3.3 холст canvasElevatorBoxQ19
 }
-
 
 function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
     ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
@@ -605,13 +603,12 @@ function drawArrow(ctx, fromX, fromY, toX, toY, color, txt = "") {
     }
 }
 
-// Задание 1.2 (ИСПРАВЛЕНО: Рендеринг полноценной зигзагообразной пружины и векторов)
 function drawHookeQ2() {
     const canvas = document.getElementById('canvasHookeQ2'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cx = canvas.width / 2;
     
-    ctx.fillStyle = '#1e293b'; ctx.fillRect(cx - 35, 15, 70, 8); // Потолок
+    ctx.fillStyle = '#1e293b'; ctx.fillRect(cx - 35, 15, 70, 8); 
     ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx, 23);
     for(let y = 25; y <= 145; y += 10) { ctx.lineTo(cx + (y%20===5?16:-16), y); }
     ctx.lineTo(cx, 155); ctx.stroke();
@@ -619,7 +616,6 @@ function drawHookeQ2() {
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.lineWidth = 2;
     ctx.fillRect(cx - 25, 155, 50, 35); ctx.strokeRect(cx - 25, 155, 50, 35);
     
-    // Векторы прикладываются строго к центру масс груза (cx, 172)
     drawArrow(ctx, cx, 172, cx, 85, '#38bdf8', 'Fупр');
     drawArrow(ctx, cx, 172, cx, 255, '#ef4444', 'Fтяж');
 }
@@ -662,7 +658,7 @@ function drawScaleQ10() {
             ctx.strokeStyle = '#f8fafc'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(cx - 18, y); ctx.lineTo(cx - 2, y); ctx.stroke();
             ctx.fillText(i/10, cx + 14, y + 4);
         } else if(i % 5 === 0) {
-            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx - 12, y); ctx.lineTo(cx - 2, y); ctx.stroke();
+            ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx - 12, y); ctx.lineTo(cx - 2, y); stroke();
         } else {
             ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(cx - 8, y); ctx.lineTo(cx - 2, y); ctx.stroke();
         }
@@ -671,90 +667,53 @@ function drawScaleQ10() {
 }
 </script>
 <script>
-// Задание 1.12 (График скорости КИМ)
+// Задание 1.12 (ИСПРАВЛЕНО: Привязка к id canvasGraphQ12)
 function drawGraphQ12() {
-    const canvas = document.getElementById('canvasGraphQ14'); if (!forceSetupCanvas(canvas)) return;
+    const canvas = document.getElementById('canvasGraphQ12'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const ox = 40, oy = canvas.height - 35;
-    
     drawArrow(ctx, ox, oy, canvas.width - 15, oy, '#94a3b8'); ctx.fillStyle = '#94a3b8'; ctx.fillText("t, с", canvas.width - 35, oy + 18);
-    drawArrow(ctx, ox, oy, ox, 15, '#94a3b8'); ctx.fillText("v, м/с", ox - 24, 15);
-    
+    drawArrow(ctx, ox, oy, ox, 15, '#94a3b8'); ctx.fillText("υ, м/с", ox - 24, 15);
     ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy);
     ctx.lineTo(ox + 50, oy - 90); ctx.lineTo(ox + 100, oy - 90); ctx.lineTo(ox + 140, oy); ctx.stroke();
-    
     ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif';
     ctx.fillText("0", ox - 12, oy + 12); ctx.fillText("2", ox + 50, oy + 15); ctx.fillText("10", ox - 20, oy - 86);
 }
 
+// Задание 1.13 (ИСПРАВЛЕНО: Двойной чертеж, привязка к canvasVectorQ13)
 function drawVectorQ13() {
-    const canvas = document.getElementById('canvasVectorQ15'); // Проверьте, чтобы в HTML этой задачи id канваса был именно canvasVectorQ15
-    if (!canvas) return;
-    if (!forceSetupCanvas(canvas)) return;
+    const canvas = document.getElementById('canvasVectorQ13'); if (!canvas) return; if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cy = canvas.height / 2, step = 14, cxLeft = canvas.width * 0.28, cxRight = canvas.width * 0.72;
     
-    const cy = canvas.height / 2;
-    const step = 15; // Шаг координатной сетки
-    const cxLeft = canvas.width * 0.28;  // Центр левой панели (исходные силы)
-    const cxRight = canvas.width * 0.72; // Центр правой панели (варианты ответов)
-    
-    // --- ЛЕВАЯ ПАНЕЛЬ: Координатная сетка и исходные силы ---
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
-    for(let x = cxLeft - 4*step; x <= cxLeft + 4*step; x += step) {
-        ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 4*step); ctx.stroke();
-    }
-    for(let y = cy - 4*step; y <= cy + 4*step; y += step) {
-        ctx.beginPath(); ctx.moveTo(cxLeft - 4*step, y); ctx.lineTo(cxLeft + 4*step, y); ctx.stroke();
-    }
-    
-    // Отрисовка векторов сил по клеточкам (Масштаб: 1 клетка = 1 Н)
-    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy - step, '#38bdf8', 'F₁');       // 2 клетки вверх (2 Н)
-    drawArrow(ctx, cxLeft, cy + step, cxLeft + 3*step, cy + step, '#38bdf8', 'F₂'); // 3 клетки вправо (3 Н)
-    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy + 7*step, '#fb923c', 'F₃');     // 6 клеток вниз (6 Н)
-    ctx.fillStyle = '#cbd5e1'; ctx.beginPath(); ctx.arc(cxLeft, cy + step, 5, 0, Math.PI*2); ctx.fill();
+    for(let x = cxLeft - 4*step; x <= cxLeft + 4*step; x += step) { ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 4*step); ctx.stroke(); }
+    for(let y = cy - 4*step; y <= cy + 4*step; y += step) { ctx.beginPath(); ctx.moveTo(cxLeft - 4*step, y); ctx.lineTo(cxLeft + 4*step, y); ctx.stroke(); }
+    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy - step, '#38bdf8', 'F₁'); 
+    drawArrow(ctx, cxLeft, cy + step, cxLeft + 3*step, cy + step, '#38bdf8', 'F₂'); 
+    drawArrow(ctx, cxLeft, cy + step, cxLeft, cy + 7*step, '#fb923c', 'F₃');
 
-    // --- ПРАВАЯ ПАНЕЛЬ: Варианты направлений равнодействующей ---
-    ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
-    for(let x = cxRight - 2*step; x <= cxRight + 4*step; x += step) {
-        ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 5*step); ctx.stroke();
-    }
-    for(let y = cy - 4*step; y <= cy + 5*step; y += step) {
-        ctx.beginPath(); ctx.moveTo(cxRight - 2*step, y); ctx.lineTo(cxRight + 4*step, y); ctx.stroke();
-    }
-    
-    const oxR = cxRight, oyR = cy;
-    drawArrow(ctx, oxR, oyR, oxR + 3*step, oyR - 4*step, '#38bdf8', '1'); // 3 вправо, 4 вверх
-    drawArrow(ctx, oxR, oyR, oxR + 3*step, oyR - 2*step, '#fb923c', '2'); // 3 вправо, 2 вверх
-    drawArrow(ctx, oxR, oyR, oxR + 3*step, oyR + 2*step, '#38bdf8', '3'); // 3 вправо, 2 вниз
-    drawArrow(ctx, oxR, oyR, oxR + 3*step, oyR + 4*step, '#ef4444', '4'); // 3 вправо, 4 вниз
-    ctx.fillStyle = '#cbd5e1'; ctx.beginPath(); ctx.arc(oxR, oyR, 4, 0, Math.PI*2); ctx.fill();
+    for(let x = cxRight - 2*step; x <= cxRight + 4*step; x += step) { ctx.beginPath(); ctx.moveTo(x, cy - 4*step); ctx.lineTo(x, cy + 5*step); ctx.stroke(); }
+    for(let y = cy - 4*step; y <= cy + 5*step; y += step) { ctx.beginPath(); ctx.moveTo(cxRight - 2*step, y); ctx.lineTo(cxRight + 4*step, y); ctx.stroke(); }
+    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy - 4*step, '#38bdf8', '1');
+    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy - 2*step, '#fb923c', '2');
+    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy + 2*step, '#38bdf8', '3');
+    drawArrow(ctx, cxRight, cy, cxRight + 3*step, cy + 4*step, '#ef4444', '4');
 }
 
-
-// Задание 2.1 (ИСПРАВЛЕНО: Полная оцифровка осей x и t, подписи всех узлов делений согласно КИМ)
+// Задание 2.1 (ИСПРАВЛЕНО: Привязка к canvasGraphXQ14)
 function drawGraphXQ14() {
     const canvas = document.getElementById('canvasGraphXQ14'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const ox = 45, oy = canvas.height - 35;
-    const sw = (canvas.width - 70) / 7, sh = (canvas.height - 60) / 4;
-    
+    const ox = 45, oy = canvas.height - 35, sw = (canvas.width - 70) / 7, sh = (canvas.height - 60) / 4;
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 0.5;
     for(let i=0; i<=7; i++) { ctx.beginPath(); ctx.moveTo(ox+i*sw, 20); ctx.lineTo(ox+i*sw, oy); ctx.stroke(); }
     for(let j=0; j<=4; j++) { ctx.beginPath(); ctx.moveTo(ox, oy-j*sh); ctx.lineTo(canvas.width-20, oy-j*sh); ctx.stroke(); }
-    
-    drawArrow(ctx, ox, oy, canvas.width - 10, oy, '#94a3b8');
-    drawArrow(ctx, ox, oy, ox, 10, '#94a3b8');
-    
+    drawArrow(ctx, ox, oy, canvas.width - 10, oy, '#94a3b8'); drawArrow(ctx, ox, oy, ox, 10, '#94a3b8');
     ctx.fillStyle = '#94a3b8'; ctx.font = '10px sans-serif'; ctx.textAlign = 'center';
     ctx.fillText("t, с", canvas.width - 20, oy + 15); ctx.fillText("x, м", ox - 20, 15);
-    
-    let timeLabels = Array("0", "5", "10", "15", "20", "25", "30", "35");
-    timeLabels.forEach((lbl, idx) => { ctx.fillText(lbl, ox + idx * sw, oy + 14); });
-    
-    ctx.textAlign = 'right';
-    let xLabels = Array("50", "100", "150", "200");
-    xLabels.forEach((lbl, idx) => { ctx.fillText(lbl, ox - 6, oy - (idx + 1) * sh + 4); });
-    
+    Array("0", "5", "10", "15", "20", "25", "30", "35").forEach((lbl, idx) => { ctx.fillText(lbl, ox + idx * sw, oy + 14); });
+    ctx.textAlign = 'right'; Array("50", "100", "150", "200").forEach((lbl, idx) => { ctx.fillText(lbl, ox - 6, oy - (idx + 1) * sh + 4); });
     ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy);
     ctx.lineTo(ox + sw, oy - sh); ctx.lineTo(ox + 3*sw, oy - sh); ctx.lineTo(ox + 4*sw, oy); ctx.lineTo(ox + 7*sw, oy - 4*sh); ctx.stroke();
 }
@@ -763,26 +722,13 @@ function drawTrucksQ15() {
     const canvas = document.getElementById('canvasTrucksQ15'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cy = canvas.height * 0.65;
-
-    // Рельсы/Опора
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(10, cy + 20); ctx.lineTo(canvas.width - 10, cy + 20); ctx.stroke();
-
-    // Тележка 1 (Слева)
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(40, cy - 20, 60, 30); ctx.strokeRect(40, cy - 20, 60, 30);
     ctx.fillStyle = '#475569'; ctx.beginPath(); ctx.arc(55, cy + 15, 6, 0, Math.PI*2); ctx.arc(85, cy + 15, 6, 0, Math.PI*2); ctx.fill();
-
-    // Тележка 2 с грузом (Справа)
     ctx.fillStyle = '#0f172a'; ctx.fillRect(canvas.width - 100, cy - 20, 60, 30); ctx.strokeRect(canvas.width - 100, cy - 20, 60, 30);
     ctx.fillStyle = '#475569'; ctx.beginPath(); ctx.arc(canvas.width - 85, cy + 15, 6, 0, Math.PI*2); ctx.arc(canvas.width - 55, cy + 15, 6, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#fb923c'; ctx.fillRect(canvas.width - 90, cy - 35, 40, 15); // Дополнительный груз сверху
-
-    // Изогнутая стальная пластина (упругий элемент) посередине
-    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath();
-    ctx.moveTo(100, cy - 5);
-    ctx.quadraticCurveTo(canvas.width / 2, cy - 60, canvas.width - 100, cy - 5);
-    ctx.stroke();
-
-    // Перевязывающая нить (горизонтальная линия)
+    ctx.fillStyle = '#fb923c'; ctx.fillRect(canvas.width - 90, cy - 35, 40, 15);
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(100, cy - 5); ctx.quadraticCurveTo(canvas.width / 2, cy - 60, canvas.width - 100, cy - 5); ctx.stroke();
     ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(100, cy - 5); ctx.lineTo(canvas.width - 100, cy - 5); ctx.stroke();
 }
 
@@ -790,25 +736,19 @@ function drawLiftQ17() {
     const canvas = document.getElementById('canvasLiftQ17'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); const cx = canvas.width / 2, cy = canvas.height / 2;
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(cx - 20, cy - 20, 40, 40); ctx.strokeRect(cx - 20, cy - 20, 40, 40);
-    ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, cy - 20); ctx.stroke(); // Трос
-    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'T');
-    drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
-    drawArrow(ctx, cx + 35, cy, cx + 35, cy - 40, '#22c55e', 'a'); // Вектор ускорения вверх
+    ctx.strokeStyle = '#cbd5e1'; ctx.beginPath(); ctx.moveTo(cx, 10); ctx.lineTo(cx, cy - 20); ctx.stroke();
+    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'T'); drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
+    drawArrow(ctx, cx + 35, cy, cx + 35, cy - 40, '#22c55e', 'a');
 }
 
 function drawElevatorBoxQ19() {
     const canvas = document.getElementById('canvasElevatorBoxQ19'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); const cx = canvas.width / 2, cy = canvas.height / 2;
-    // Опора (пол лифта)
     ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(cx - 60, cy + 25); ctx.lineTo(cx + 60, cy + 25); ctx.stroke();
-    // Ящик
     ctx.fillStyle = '#0f172a'; ctx.strokeStyle = '#334155'; ctx.fillRect(cx - 25, cy - 25, 50, 50); ctx.strokeRect(cx - 25, cy - 25, 50, 50);
-    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'N');
-    drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
-    drawArrow(ctx, cx + 40, cy, cx + 40, cy - 40, '#22c55e', 'a'); // Ускорение лифта
+    drawArrow(ctx, cx, cy, cx, cy - 65, '#38bdf8', 'N'); drawArrow(ctx, cx, cy, cx, cy + 65, '#ef4444', 'mg');
+    drawArrow(ctx, cx + 40, cy, cx + 40, cy - 40, '#22c55e', 'a');
 }
-
-    
 </script>
 <script>
 function toggleSimulation(key) {
@@ -825,24 +765,17 @@ function resetSimulation(key) {
     if (key === 'thread') { simStates.thread.progress = 0; simStates.thread.broken1 = false; simStates.thread.broken2 = false; initThreadSimulation(); }
 }
 
-// Задание 1.4 (ИСПРАВЛЕНО: Добавлен вектор начальной скорости v0, выведены все 4 вектора для выбора, скрыт маркер верного ответа)
 function initBallisticsSimulation() {
     const canvas = document.getElementById('canvasBallisticsQ4'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cy = canvas.height * 0.75;
     ctx.strokeStyle = '#334155'; ctx.setLineDash(Array(4, 4)); ctx.beginPath();
     ctx.moveTo(30, cy); ctx.quadraticCurveTo(canvas.width/2, cy - 120, canvas.width - 30, cy); ctx.stroke(); ctx.setLineDash(Array());
-    
-    // Вектор начальной скорости v0
     drawArrow(ctx, 30, cy, 75, cy - 50, '#38bdf8', 'v₀');
-    
     const ax = canvas.width / 2, ay = cy - 60;
     ctx.fillStyle = '#cbd5e1'; ctx.beginPath(); ctx.arc(ax, ay, 4, 0, Math.PI*2); ctx.fill(); ctx.fillText("A", ax - 12, ay - 8);
-    
-    drawArrow(ctx, ax, ay, ax, ay - 35, '#fb923c', '1');
-    drawArrow(ctx, ax, ay, ax + 25, ay - 25, '#fb923c', '2');
-    drawArrow(ctx, ax, ay, ax + 35, ay, '#fb923c', '3');
-    drawArrow(ctx, ax, ay, ax, ay + 40, '#fb923c', '4');
+    drawArrow(ctx, ax, ay, ax, ay - 35, '#fb923c', '1'); drawArrow(ctx, ax, ay, ax + 25, ay - 25, '#fb923c', '2');
+    drawArrow(ctx, ax, ay, ax + 35, ay, '#fb923c', '3'); drawArrow(ctx, ax, ay, ax, ay + 40, '#fb923c', '4');
 }
 
 function loopBallistics() {
@@ -855,28 +788,20 @@ function loopBallistics() {
     activeAnimations.ballistics = requestAnimationFrame(loopBallistics);
 }
 
-// Задание 1.5 (ИСПРАВЛЕНО: Генерация физической модели встряхивающегося животного с генерацией брызг)
 function initDogSimulation() {
     const canvas = document.getElementById('canvasDogQ5'); if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cx = canvas.width / 2, cy = canvas.height / 2;
-    
     let da = simStates.dog.active ? Math.sin(simStates.dog.angle) * 0.4 : 0;
     ctx.save(); ctx.translate(cx, cy); ctx.rotate(da);
     ctx.fillStyle = '#1e293b'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.ellipse(0, 10, 45, 25, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke(); // Корпус
-    ctx.beginPath(); ctx.arc(-55, -2, 14, 0, Math.PI*2); ctx.fill(); ctx.stroke(); // Голова
-    ctx.fillStyle = '#fb923c'; ctx.fillRect(-25, -22, 50, 8); // Шерсть/Спина
-    ctx.restore();
-    
+    ctx.beginPath(); ctx.ellipse(0, 10, 45, 25, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(-55, -2, 14, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#fb923c'; ctx.fillRect(-25, -22, 50, 8); ctx.restore();
     if (simStates.dog.active && Math.random() < 0.6) {
         simStates.dog.particles.push({x: cx + Math.sin(da)*30, y: cy - 20, vx: (Math.random()-0.5)*8 - da*10, vy: -Math.random()*4 - 2, l: 30});
     }
-    ctx.fillStyle = '#38bdf8';
-    simStates.dog.particles.forEach((p, idx) => {
-        p.x += p.vx; p.y += p.vy; p.l--;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill();
-    });
+    ctx.fillStyle = '#38bdf8'; simStates.dog.particles.forEach((p) => { p.x += p.vx; p.y += p.vy; p.l--; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI*2); ctx.fill(); });
     simStates.dog.particles = simStates.dog.particles.filter(p => p.l > 0);
 }
 
@@ -889,26 +814,25 @@ function triggerThreadBreak(mode) {
     resetSimulation('thread'); simStates.thread.active = true; simStates.thread.mode = mode; loopThread();
 }
 
+// Задание 3.2 (ИСПРАВЛЕНО: Точная привязка к canvasThreadQ18 и явный разрыв нити)
 function initThreadSimulation() {
-    const canvas = document.getElementById('canvasThreadQ18'); if (!forceSetupCanvas(canvas)) return;
+    const canvas = document.getElementById('canvasThreadQ18'); if (!canvas) return; if (!forceSetupCanvas(canvas)) return;
     const ctx = canvas.getContext('2d'); ctx.clearRect(0, 0, canvas.width, canvas.height);
     const cx = canvas.width / 2;
+    
     ctx.strokeStyle = simStates.thread.broken1 ? '#ef4444' : '#38bdf8'; ctx.lineWidth = 3;
     ctx.beginPath(); ctx.moveTo(cx, 20); ctx.lineTo(cx, 80 - (simStates.thread.broken1 ? simStates.thread.progress : 0)); ctx.stroke();
+    
     ctx.fillStyle = '#1e293b'; ctx.strokeStyle = '#475569'; ctx.lineWidth = 2;
     let gy = 80 + (simStates.thread.broken1 ? simStates.thread.progress : 0);
     ctx.beginPath(); ctx.arc(cx, gy + 20, 20, 0, Math.PI*2); ctx.fill(); ctx.stroke();
+    
     let ny = gy + 40;
     if (simStates.thread.broken2) {
-        // ЯВНЫЙ РАЗРЫВ: верхний кончик остается у груза, нижний улетает вниз вместе с рукой
-        ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(cx, ny); ctx.lineTo(cx, ny + 10); ctx.stroke(); // Обрывок сверху
-        
-        ctx.strokeStyle = '#ef4444'; ctx.beginPath(); 
-        let gap = simStates.thread.progress * 2; // Динамически увеличивающийся зазор разрыва
-        ctx.moveTo(cx, ny + 25 + gap); 
-        ctx.lineTo(cx, ny + 75 + gap); ctx.stroke(); // Обрывок снизу, уходящий вниз
+        ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(cx, ny); ctx.lineTo(cx, ny + 10); ctx.stroke();
+        ctx.strokeStyle = '#ef4444'; ctx.beginPath(); let gap = simStates.thread.progress * 2;
+        ctx.moveTo(cx, ny + 25 + gap); ctx.lineTo(cx, ny + 75 + gap); ctx.stroke();
     } else {
-        // Целая нить до рывка или при плавном натяжении
         ctx.strokeStyle = '#38bdf8'; ctx.beginPath(); ctx.moveTo(cx, ny); ctx.lineTo(cx, ny + 60); ctx.stroke();
     }
 }
@@ -932,7 +856,7 @@ function buildReport() {
             if (task.success) { statusClass = "correct-highlight"; statusText = "Верно"; score++; }
             else { statusClass = "wrong-highlight"; statusText = "Ошибка"; }
         }
-        let label = i <= 13 ? `№1.${i}` : (i <= 15 ? `№2.${i-13}` : `№3.${i-15}`);
+        let label = i <= 13 ? `№1.${i}` : `№2.${i-13}`;
         if(i === 14) label = "№2.1"; if(i === 15) label = "№2.2"; if(i === 16) label = "№2.3";
         if(i === 17) label = "№3.1"; if(i === 18) label = "№3.2"; if(i === 19) label = "№3.3";
         reportHtml += `<div class="${statusClass}" style="padding:6px; border-radius:6px; text-align:center; border:1px solid #1e293b; font-size:11px;">${label}<br><strong>${statusText}</strong></div>`;
