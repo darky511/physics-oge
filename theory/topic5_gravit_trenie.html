@@ -6,127 +6,247 @@
     <title>Тема 5. Гравитация и сила трения скольжения</title>
     <style>
         :root {
-            --brand-dark: #1A252C;
-            --brand-teal: #0D6066;
-            --brand-teal-light: #E6F2F3;
-            --brand-gray: #F4F6F7;
-            --brand-alert: #8C2D19;
-            --brand-accent: #E67E22;
-            --text-main: #2C3E50;
-            --bg-canvas: #ffffff;
+            --bg-outer: #0b1319;
+            --bg-container: #111c24;
+            --bg-panel: #162631;
+            --brand-cyan: #00e5ff;
+            --brand-cyan-muted: rgba(0, 229, 255, 0.15);
+            --brand-orange: #ff9100;
+            --brand-red: #ff3d00;
+            --text-main: #ffffff;
+            --text-muted: #78909c;
+            --border-color: #1e3240;
         }
 
-        * { box-sizing: border-box; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-        body { margin: 0; padding: 0; background-color: var(--brand-dark); color: var(--text-main); overflow: hidden; }
+        * { 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+        }
+        
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-outer); 
+            color: var(--text-main); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 100vw; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
 
         .pres-container {
-            width: 100vw;
-            height: 100vh;
+            width: 95vw;
+            height: 90vh;
+            max-width: 1200px;
+            max-height: 750px;
+            background-color: var(--bg-container);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background-color: #ffffff;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
-
         .pres-header {
-            background: linear-gradient(90deg, var(--brand-dark) 0%, #2C3E50 100%);
-            padding: 15px 30px;
+            padding: 25px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--brand-teal);
-            color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
         }
-        .pres-header h1 { margin: 0; font-size: 1.25rem; font-weight: 700; }
-        .pres-header .meta-tag { font-size: 0.8rem; background: var(--brand-teal); padding: 4px 10px; border-radius: 3px; font-weight: bold; margin-right: 15px; }
-        .pres-header .counter { font-size: 0.95rem; font-weight: 500; color: #cbd5e1; }
-        .pres-body { flex: 1; padding: 30px; overflow-y: auto; background-color: #ffffff; }
-        .slide-content { width: 100%; display: none; flex-direction: column; gap: 20px; }
-        .slide-content.active { display: flex; }
-
-        .slide-type-badge { display: inline-block; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; color: white; width: max-content; }
-        .badge-theory { background-color: var(--brand-teal); }
-        .badge-diagnostic { background-color: var(--brand-accent); }
-        .badge-trap { background-color: var(--brand-alert); }
-
-        h2 { margin: 5px 0 15px 0; font-size: 1.8rem; color: var(--brand-dark); }
-        p { line-height: 1.6; font-size: 1.05rem; margin: 0 0 10px 0; }
-        ul { margin: 0 0 15px 0; padding-left: 20px; line-height: 1.6; }
-        li { margin-bottom: 8px; }
-
-        .two-columns { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; min-height: 400px; }
         
-        .formula-box { background: var(--brand-teal-light); border-left: 5px solid var(--brand-teal); padding: 15px; border-radius: 0 6px 6px 0; font-size: 1.5rem; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: var(--brand-teal); text-align: center; margin: 15px 0; }
-        .alert-box { background: #FDF2F0; border-left: 5px solid var(--brand-alert); padding: 15px; border-radius: 0 6px 6px 0; color: #5C1D10; margin-bottom: 15px; }
-        .alert-box h3 { margin: 0 0 8px 0; color: var(--brand-alert); font-size: 1.15rem; }
+        .pres-header .title-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
 
-        .interactive-panel { background-color: var(--brand-gray); border-radius: 8px; border: 1px solid #e2e8f0; padding: 25px; display: flex; flex-direction: column; gap: 20px; position: relative; }
-        .interactive-panel h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: var(--brand-dark); }
+        .pres-header .meta-tag {
+            font-size: 0.75rem;
+            color: var(--brand-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+        }
+
+        .pres-header h1 { 
+            margin: 0; 
+            font-size: 1.3rem; 
+            font-weight: 600; 
+            color: var(--text-main); 
+        }
+
+        .pres-header .counter-pill { 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            color: var(--brand-cyan); 
+            background-color: rgba(0, 229, 255, 0.08);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .pres-body { 
+            flex: 1; 
+            padding: 0 40px; 
+            display: flex; 
+            align-items: center;
+            overflow-y: auto; 
+        }
+
+        .slide-content { 
+            width: 100%; 
+            display: none; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
         
-        .sim-tabs { display: flex; gap: 2px; border-bottom: 2px solid #cbd5e1; padding-bottom: 5px; margin-bottom: 10px; }
-        .sim-tab-btn { background: none; border: none; padding: 8px 16px; font-weight: bold; cursor: pointer; color: #64748b; border-bottom: 3px solid transparent; margin-bottom: -7px; font-size: 0.9rem; }
-        .sim-tab-btn.active { color: var(--brand-teal); border-bottom-color: var(--brand-teal); }
-        .control-group { display: flex; flex-direction: column; gap: 8px; }
-        .control-group label { font-weight: bold; font-size: 0.95rem; color: #4a5568; display: flex; justify-content: space-between; }
-        .slider-input { width: 100%; accent-color: var(--brand-teal); cursor: pointer; height: 6px; border-radius: 3px; background: #cbd5e1; outline: none; }
-        .vector-canvas { background: var(--bg-canvas); border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; height: 230px; }
-
-        .quiz-option { display: block; background: #ffffff; border: 2px solid #e2e8f0; border-radius: 6px; padding: 14px 20px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; text-align: left; width: 100%; font-size: 1rem; font-weight: 500; color: var(--text-main); }
-        .quiz-option:hover:not(:disabled) { border-color: var(--brand-teal); background-color: var(--brand-teal-light); }
-        .quiz-option.selected { border-color: var(--brand-teal); background-color: var(--brand-teal); color: white; }
-        .quiz-option:disabled { cursor: not-allowed; opacity: 0.8; }
-
-        .quiz-select-wrapper { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
-        .select-label { font-weight: bold; font-size: 1rem; color: var(--brand-dark); }
-        .custom-select { padding: 12px; border-radius: 6px; border: 2px solid #e2e8f0; width: 100%; font-size: 1rem; outline: none; background: white; cursor: pointer; }
-        .custom-select:focus { border-color: var(--brand-teal); }
-
-        .submit-btn { background-color: var(--brand-accent); color: white; border: none; padding: 14px 24px; font-size: 1.05rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 10px; transition: background 0.2s; }
-        .submit-btn:hover:not(:disabled) { background-color: #d35400; }
-        .submit-btn:disabled { background-color: #cbd5e1; cursor: not-allowed; }
-
-        .pres-footer { background-color: #ffffff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; }
-        .nav-btn { background-color: var(--brand-teal); color: white; border: none; padding: 12px 24px; font-size: 1rem; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
-        .nav-btn:hover:not(:disabled) { background-color: #0a494d; }
-        .nav-btn:disabled { background-color: #cbd5e1; cursor: not-allowed; }
+        .slide-content.active { 
+            display: flex; 
+        }
+        .two-columns { 
+            display: grid; 
+            grid-template-columns: 1.15fr 0.85fr; 
+            gap: 40px; 
+            align-items: start;
+        }
         
-        .progress-container { display: flex; align-items: center; gap: 15px; width: 45%; font-weight: bold; font-size: 0.9rem; color: #64748b; }
-        .progress-bar-bg { background-color: #e2e8f0; height: 8px; border-radius: 4px; flex: 1; overflow: hidden; }
-        .progress-bar-fill { background-color: var(--brand-teal); height: 100%; width: 0%; transition: width 0.3s ease; }
+        .theory-panel h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
 
-        @keyframes orbitRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .orbit-animation { animation: orbitRotate 5s linear infinite; transform-origin: center; }
+        .theory-panel p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.98rem;
+            margin: 0 0 15px 0;
+        }
+
+        .formula-box { 
+            background: var(--bg-panel); 
+            border-left: 4px solid var(--brand-cyan); 
+            padding: 16px 20px; 
+            border-radius: 0 8px 8px 0; 
+            font-size: 1.4rem; 
+            font-family: "SF Mono", SFMono-Regular, Consolas, monospace;
+            font-weight: bold; 
+            color: var(--brand-cyan); 
+            margin: 15px 0; 
+        }
+
+        .interactive-panel { 
+            background-color: var(--bg-panel); 
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
+        .sim-tabs { 
+            display: flex; 
+            gap: 8px; 
+            background: var(--bg-container);
+            padding: 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .sim-tab-btn { 
+            flex: 1;
+            background: none; 
+            border: none; 
+            padding: 8px 12px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            color: var(--text-muted); 
+            border-radius: 4px;
+            font-size: 0.82rem;
+            transition: all 0.2s ease;
+        }
+
+        .sim-tab-btn.active { 
+            color: var(--brand-cyan); 
+            background-color: var(--bg-panel);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .control-group { display: flex; flex-direction: column; gap: 6px; margin-top: 5px; }
+        .control-group label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; display: flex; justify-content: space-between; }
+        .control-group label span { color: var(--brand-cyan); font-weight: bold; }
+        
+        .slider-input { 
+            width: 100%; 
+            accent-color: var(--brand-cyan); 
+            cursor: pointer; 
+            height: 4px; 
+            background: var(--bg-container); 
+            border-radius: 2px;
+            outline: none; 
+        }
+
+        .vector-canvas { 
+            background: var(--bg-container); 
+            border: 1px solid var(--border-color); 
+            border-radius: 6px; 
+            width: 100%; 
+            height: 210px; 
+        }
+
+        .quiz-option { display: block; background: var(--bg-container); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; cursor: pointer; color: var(--text-main); text-align: left; width: 100%; font-size: 0.95rem; transition: all 0.2s; }
+        .quiz-option:hover:not(:disabled) { border-color: var(--brand-cyan); background-color: rgba(0, 229, 255, 0.02); }
+        .quiz-option.selected { border-color: var(--brand-cyan); background-color: var(--brand-cyan-muted); color: var(--brand-cyan); font-weight: 600; }
+        
+        .custom-select { padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); width: 100%; font-size: 0.95rem; outline: none; background: var(--bg-container); color: var(--text-main); cursor: pointer; }
+        .custom-select:focus { border-color: var(--brand-cyan); }
+
+        .submit-btn { background-color: transparent; border: 1px solid var(--brand-cyan); color: var(--brand-cyan); padding: 12px; font-size: 0.9rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.2s; }
+        .submit-btn:hover:not(:disabled) { background-color: var(--brand-cyan); color: var(--bg-outer); }
+        .submit-btn:disabled { border-color: var(--border-color); color: var(--text-muted); cursor: not-allowed; }
+
+        .pres-footer { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); }
+        .nav-btn { background: none; border: none; color: var(--brand-cyan); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; opacity: 1; }
+        .nav-btn:hover:not(:disabled) { opacity: 0.7; }
+        .nav-btn:disabled { color: var(--border-color); cursor: not-allowed; }
+
+        .alert-box { background: rgba(255, 61, 0, 0.04); border-left: 4px solid var(--brand-red); padding: 14px 18px; border-radius: 0 8px 8px 0; color: var(--text-muted); margin-bottom: 12px; }
+        .alert-box h3 { margin: 0 0 4px 0; color: var(--brand-red); font-size: 1.05rem; }
     </style>
 </head>
 <body>
 <div class="pres-container">
     <header class="pres-header">
-        <div>
-            <span class="meta-tag">ТЕМА 4. ДИНАМИКА</span>
-            <h1 style="display:inline-block;">Законы Ньютона. Закон Гука</h1>
+        <div class="title-group">
+            <span class="meta-tag">Тема 4. Динамика</span>
+            <h1>Законы Ньютона. Закон Гука</h1>
         </div>
-        <div class="counter" id="slideCounter">0 / 8</div>
+        <div class="counter-pill" id="slideCounter">0 / 4</div>
     </header>
 
     <main class="pres-body">
-        <!-- СЛАЙД 1: СЛОЖЕНИЕ СИЛ -->
+        <!-- СЛАЙД 1: СИЛА ТРЕНИЯ ПОКОЯ -->
         <div class="slide-content active" id="slide-0">
-            <span class="slide-type-badge badge-theory">Теория</span>
-            <h2>Сложение сил и Равнодействующая</h2>
             <div class="two-columns">
                 <div class="theory-panel">
-                    <p>Сила — это векторная физическая величина. Результат одновременного действия на тело абсолютно всех внешних сил называют <strong>равнодействующей силой</strong>.</p>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Сложение сил и Равнодействующая</h2>
                     <div class="formula-box">F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub> + ...</div>
-                    <p>Направление и модуль равнодействующей зависят от взаимного расположения векторов исходных сил. Используйте переключатели в интерактивной модели справа, чтобы изучить классические случаи сложения сил под разными углами.</p>
+                    <p>Сила — вектор. Результат действия абсолютно всех приложенных сил называют <strong>равнодействующей</strong>.</p>
+                    <p style="font-size:0.9rem;">Используйте переключатели в интерактивном модуле справа, чтобы посмотреть, как меняется геометрия векторов и математическая формула расчета.</p>
                 </div>
                 <div class="interactive-panel">
-                    <h3>Интерактивная модель: Геометрия сил</h3>
                     <div class="sim-tabs">
                         <button class="sim-tab-btn active" onclick="setForceDirection('same')">В одну сторону</button>
                         <button class="sim-tab-btn" onclick="setForceDirection('opposite')">В разные стороны</button>
                         <button class="sim-tab-btn" onclick="setForceDirection('angle')">Под углом 90°</button>
                     </div>
-                    <div class="formula-box" id="forceResultFormula" style="font-size:1.2rem; background:#fff; margin:5px 0;">F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub> = 5 Н</div>
+                    <div class="formula-box" id="forceResultFormula" style="font-size:1.1rem; text-align:center; margin:5px 0;">F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub></div>
                     <canvas id="canvasForces" class="vector-canvas"></canvas>
                 </div>
             </div>
@@ -134,42 +254,38 @@
 
         <!-- СЛАЙД 2: I ЗАКОН НЬЮТОНА -->
         <div class="slide-content" id="slide-1">
-            <span class="slide-type-badge badge-theory">Теория</span>
-            <h2>Закон инерции (I закон Ньютона)</h2>
             <div class="two-columns">
                 <div class="theory-panel">
-                    <p>Существуют такие системы отсчета, называемые инерциальными, в которых тела сохраняют свое исходное состояние динамического баланса, если внешние воздействия отсутствуют или скомпенсированы.</p>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Закон инерции (I закон Ньютона)</h2>
                     <div class="formula-box">Если F<sub>равн</sub> = 0 ⇒ v = const или v = 0</div>
-                    <p>Если сумма всех приложенных сил равна нулю, объект либо бесконечно сохраняет состояние <strong>абсолютного покоя (v = 0)</strong>, либо продолжает непрерывное равномерное прямолинейное <strong>движение (v = const)</strong>.</p>
+                    <p>Если внешние силы полностью скомпенсированы, тело либо бесконечно сохраняет состояние <strong>покоя (v = 0)</strong>, либо продолжает двигаться равномерно и прямолинейно <strong>(v = const)</strong>.</p>
                 </div>
                 <div class="interactive-panel">
-                    <h3>Динамика баланса сил</h3>
                     <div class="sim-tabs">
                         <button class="sim-tab-btn active" onclick="setInertiaState('rest')">Покой (v = 0)</button>
                         <button class="sim-tab-btn" onclick="setInertiaState('motion')">Движение (v = const)</button>
                     </div>
-                    <button class="submit-btn" style="margin:0 0 5px 0;" onclick="triggerInertiaImpulse()">Нарушить баланс (Резкое F<sub>тян</sub>)</button>
+                    <button class="submit-btn" onclick="triggerInertiaImpulse()">Нарушить баланс (Резкое F<sub>тян</sub>)</button>
                     <canvas id="canvasInertia" class="vector-canvas"></canvas>
                 </div>
             </div>
         </div>
         <!-- СЛАЙД 3: II ЗАКОН НЬЮТОНА -->
         <div class="slide-content" id="slide-2">
-            <span class="slide-type-badge badge-theory">Теория</span>
-            <h2>Ускорение (II закон Ньютона)</h2>
             <div class="two-columns">
                 <div class="theory-panel">
-                    <p>Ускорение тела прямо пропорционально равнодействующей всех приложенных к нему сил и обратно пропорционально его инертной массе.</p>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Ускорение (II закон Ньютона)</h2>
                     <div class="formula-box">a = F<sub>равн</sub> / m ⇒ F<sub>равн</sub> = m · a</div>
-                    <p>Второй закон жестко связывает массу именно с <strong>равнодействующей силой</strong> (на интерактивной схеме она выделена ярким красным цветом), тогда как второстепенные силы показаны вспомогательным голубым оттенком.</p>
+                    <p>Второй закон Ньютона связывает массу именно с <strong>равнодействующей силой</strong> (показана ярким красным цветом). Второстепенные силы показаны вспомогательным голубым цветом.</p>
                 </div>
                 <div class="interactive-panel">
-                    <h3>Интерактивный регулятор инерции</h3>
                     <div class="control-group">
-                        <label>Масса тела (m): <span id="valMass">2</span> кг</label>
-                        <input type="range" class="slider-input" id="massSlider" min="1" max="5" step="1" value="2" oninput="updateMassSim(this.value)">
+                        <label>Масса тела (m): <span id="valMass">2</span></label>
+                        <input type="range" class="slider-input" id="massSlider" min="1" max="4" step="1" value="2" oninput="updateMassSim(this.value)">
                     </div>
-                    <button class="submit-btn" style="margin:0;" onclick="triggerMassPush()">Толкнуть тело (Замедленно)</button>
+                    <button class="submit-btn" onclick="triggerMassPush()">Толкнуть тело (Замедленно)</button>
                     <canvas id="canvasMass" class="vector-canvas"></canvas>
                 </div>
             </div>
@@ -177,17 +293,15 @@
 
         <!-- СЛАЙД 4: III ЗАКОН НЬЮТОНА -->
         <div class="slide-content" id="slide-3">
-            <span class="slide-type-badge badge-theory">Теория</span>
-            <h2>Взаимодействие (III закон)</h2>
             <div class="two-columns">
                 <div class="theory-panel">
-                    <p>Тела действуют друг на друга с силами, имеющими одинаковую физическую природу, направленными вдоль одной прямой, равными по модулю и противоположными по направлению.</p>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Взаимодействие (III закон)</h2>
                     <div class="formula-box">F<sub>1→2</sub> = - F<sub>2→1</sub></div>
-                    <p><strong>Важнейшее правило экзамена:</strong> Силы действия и противодействия всегда абсолютно равны по модулю и противоположны по направлению, <em>вне зависимости от соотношения масс</em> взаимодействующих тел!</p>
+                    <p>Силы действия и противодействия всегда абсолютно равны по модулю и строго противоположны по направлению, независимо от масс взаимодействующих тел.</p>
                 </div>
                 <div class="interactive-panel">
-                    <h3>Симметрия сил взаимодействия</h3>
-                    <button class="submit-btn" style="margin:0 0 10px 0;" onclick="triggerCollision()">Столкнуть шары</button>
+                    <button class="submit-btn" style="margin-bottom:5px;" onclick="triggerCollision()">Столкнуть шары</button>
                     <canvas id="canvasCollision" class="vector-canvas"></canvas>
                 </div>
             </div>
@@ -195,168 +309,156 @@
 
         <!-- СЛАЙД 5: ЗАКОН ГУКА -->
         <div class="slide-content" id="slide-4">
-            <span class="slide-type-badge badge-theory">Теория</span>
-            <h2>Закон Гука и деформация</h2>
             <div class="two-columns">
                 <div class="theory-panel">
-                    <p>Сила упругости, возникающая при упругой деформации растяжения или сжатия тела, прямо пропорциональна модулю его удлинения.</p>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Закон Гука и деформация</h2>
                     <div class="formula-box">F<sub>упр</sub> = k · |x|</div>
-                    <p>При упругом растяжении векторы сил упругости направлены строго противоположно вектору смещения частиц тела — обратно к центру пружины, противодействуя внешней деформации.</p>
+                    <p>При растяжении или сжатии сила упругости направлена строго к центру исходного положения пружины, противодействуя деформирующему фактору.</p>
                 </div>
                 <div class="interactive-panel">
-                    <h3>Динамика растяжения пружины</h3>
                     <div class="control-group">
-                        <label>Растяжение (|x|): <span id="valHookeX">0</span> см</label>
-                        <input type="range" class="slider-input" id="hookeSlider" min="0" max="4" step="0.5" value="0" oninput="updateHookeSim(this.value)">
+                        <label>Растяжение (|x|): <span id="valHookeX">0</span></label>
+                        <input type="range" class="slider-input" id="hookeSlider" min="0" max="3" step="0.5" value="0" oninput="updateHookeSim(this.value)">
                     </div>
                     <canvas id="canvasHooke" class="vector-canvas"></canvas>
                 </div>
             </div>
         </div>
-        <!-- СЛАЙД 6: ДИАГНОСТИКА 1 (НАПРАВЛЕНИЯ) -->
+        <!-- СЛАЙД 6: ДИАГНОСТИКА 1 -->
         <div class="slide-content" id="slide-5">
-            <span class="slide-type-badge badge-diagnostic">Диагностика (База)</span>
+            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (База)</div>
             <h2>Направления при торможении</h2>
-            <p>Брусок скользит по горизонтальной шероховатой плоскости вправо и экстренно тормозит под действием сил трения. Сопоставьте направления стрелок физических величин.</p>
+            <p>Брусок скользит вправо и экстренно тормозит. Сопоставьте направления стрелок величин.</p>
             <div class="two-columns">
-                <div class="theory-panel">
+                <div class="theory-panel" style="gap: 10px; display: flex; flex-direction: column;">
                     <div class="quiz-select-wrapper">
                         <span class="select-label">Скорость бруска (v)</span>
                         <select class="custom-select" id="task1_ans1">
                             <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="1">Стрелка 1 (Влево)</option>
-                            <option value="2">Стрелка 2 (Вправо)</option>
-                            <option value="3">Стрелка 3 (Вверх)</option>
+                            <option value="left">Стрелка 1 (Влево)</option>
+                            <option value="right">Стрелка 2 (Вправо)</option>
+                            <option value="up">Стрелка 3 (Вверх)</option>
                         </select>
                     </div>
                     <div class="quiz-select-wrapper">
                         <span class="select-label">Сила трения (F<sub>тр</sub>)</span>
                         <select class="custom-select" id="task1_ans2">
                             <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="1">Стрелка 1 (Влево)</option>
-                            <option value="2">Стрелка 2 (Вправо)</option>
-                            <option value="3">Стрелка 3 (Вверх)</option>
+                            <option value="left">Стрелка 1 (Влево)</option>
+                            <option value="right">Стрелка 2 (Вправо)</option>
+                            <option value="up">Стрелка 3 (Вверх)</option>
                         </select>
                     </div>
                     <div class="quiz-select-wrapper">
                         <span class="select-label">Ускорение бруска (a)</span>
                         <select class="custom-select" id="task1_ans3">
                             <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="1">Стрелка 1 (Влево)</option>
-                            <option value="2">Стрелка 2 (Вправо)</option>
-                            <option value="3">Стрелка 3 (Вверх)</option>
+                            <option value="left">Стрелка 1 (Влево)</option>
+                            <option value="right">Стрелка 2 (Вправо)</option>
+                            <option value="up">Стрелка 3 (Вверх)</option>
                         </select>
                     </div>
                     <button class="submit-btn" id="btnSubmitTask1" onclick="submitTask1()">Зафиксировать ответ задачи №1</button>
                 </div>
-                <div class="interactive-panel" style="justify-content:center; align-items:center;">
-                    <canvas id="canvasTask1" class="vector-canvas" style="height:250px;"></canvas>
+                <div class="interactive-panel" style="justify-content:center;">
+                    <canvas id="canvasTask1" class="vector-canvas" style="height:240px;"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- СЛАЙД 7: ДИАГНОСТИКА 2 (РАСЧЕТЫ) -->
+        <!-- СЛАЙД 7: ДИАГНОСТИКА 2 -->
         <div class="slide-content" id="slide-6">
-            <span class="slide-type-badge badge-diagnostic">Диагностика (Расчеты)</span>
+            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Расчеты)</div>
             <h2>Задача №2: Расчёт равнодействующей сил</h2>
-            <p>К материальной точке приложены три горизонтальные силы: F<sub>1</sub> = 12 Н (направлена вправо), F<sub>2</sub> = 5 Н (направлена влево), F<sub>3</sub> = 3 Н (направлена влево). Чему равен модуль суммарной равнодействующей силы и куда она ориентирована?</p>
-            <div class="theory-panel" style="gap:5px;">
+            <p>К телу приложены три силы: F<sub>1</sub> = 12 Н (вправо), F<sub>2</sub> = 5 Н (влево), F<sub>3</sub> = 3 Н (влево). Чему равен модуль равнодействующей силы и куда она направлена?</p>
+            <div class="theory-panel" style="gap:5px; margin-top:15px;">
                 <button class="quiz-option" onclick="selectTask2(0)" id="t2_o0">4 Н, направлена влево</button>
                 <button class="quiz-option" onclick="selectTask2(1)" id="t2_o1">4 Н, направлена вправо</button>
                 <button class="quiz-option" onclick="selectTask2(2)" id="t2_o2">20 Н, направлена вправо</button>
                 <button class="quiz-option" onclick="selectTask2(3)" id="t2_o3">10 Н, направлена влево</button>
-                <button class="submit-btn" id="btnSubmitTask2" onclick="submitTask2()" disabled>Зафиксировать ответ задачи №2</button>
+                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask2" onclick="submitTask2()" disabled>Зафиксировать ответ задачи №2</button>
             </div>
         </div>
-        <!-- СЛАЙД 8: ДИАГНОСТИКА 3 (ЛОВУШКА) -->
+        <!-- СЛАЙД 8: ДИАГНОСТИКА 3 -->
         <div class="slide-content" id="slide-7">
-            <span class="slide-type-badge badge-trap">Диагностика (Ловушка ОГЭ)</span>
+            <div style="color:var(--brand-red); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Ловушка ОГЭ)</div>
             <h2>Задача №3: Эксперимент с жесткостью пружины</h2>
-            <p>Пружину жесткостью k = 400 Н/м растянули на 2 см. Затем эту же самую пружину растянули еще дополнительно на 2 см в рамках линейного закона упругости. Как изменилась внутренняя жесткость пружины во второй части опыта?</p>
-            <div class="theory-panel" style="gap:5px;">
+            <p>Пружину жесткостью k = 400 Н/м растянули на 2 см. Затем эту же пружину растянули еще на 2 см. Как изменилась жесткость пружины во второй части опыта?</p>
+            <div class="theory-panel" style="gap:5px; margin-top:15px;">
                 <button class="quiz-option" onclick="selectTask3(0)" id="t3_o0">Увеличилась в 2 раза</button>
                 <button class="quiz-option" onclick="selectTask3(1)" id="t3_o1">Уменьшилась в 2 раза</button>
                 <button class="quiz-option" onclick="selectTask3(2)" id="t3_o2">Абсолютно не изменилась</button>
                 <button class="quiz-option" onclick="selectTask3(3)" id="t3_o3">Стала равна нулю</button>
-                <button class="submit-btn" id="btnSubmitTask3" onclick="submitTask3()" disabled>Зафиксировать ответ задачи №3</button>
+                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask3" onclick="submitTask3()" disabled>Зафиксировать ответ задачи №3</button>
             </div>
         </div>
 
-        <!-- СЛАЙД 9: ДИАГНОСТИКА 4 (СЛОЖНОСТЬ) -->
+        <!-- СЛАЙД 9: ДИАГНОСТИКА 4 -->
         <div class="slide-content" id="slide-8">
-            <span class="slide-type-badge badge-diagnostic">Диагностика (Повышенная сложность)</span>
+            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Повышенная сложность)</div>
             <h2>Задача №4: Взаимодействие тел разной массы</h2>
-            <p>Тяжелый грузовик массой 5 тонн совершает лобовое столкновение с легким легковым автомобилем массой 1 тонна. Мгновенный модуль силы удара грузовика равен F<sub>1</sub>, а модуль силы со стороны легкового авто равен F<sub>2</sub>. Какое соотношение верно?</p>
-            <div class="theory-panel" style="gap:5px;">
+            <p>Грузовик массой 5 тонн сталкивается с легковым автомобилем массой 1 тонна. Сила грузовика равна F<sub>1</sub>, сила легкового авто равна F<sub>2</sub>. Что верно?</p>
+            <div class="theory-panel" style="gap:5px; margin-top:10px;">
                 <button class="quiz-option" onclick="selectTask4(0)" id="t4_o0">F<sub>1</sub> = 5 · F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(1)" id="t4_o1">F<sub>1</sub> = F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(2)" id="t4_o2">F<sub>1</sub> = 0.2 · F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(3)" id="t4_o3">F<sub>1</sub> + F<sub>2</sub> = 0</button>
-                <button class="submit-btn" id="btnSubmitTask4" onclick="submitTask4()" disabled>Зафиксировать ответ задачи №4</button>
+                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask4" onclick="submitTask4()" disabled>Зафиксировать ответ задачи №4</button>
             </div>
         </div>
 
         <!-- СЛАЙД 10: АНАЛИТИКА -->
         <div class="slide-content" id="slide-9">
-            <span class="slide-type-badge badge-theory">Аналитика сессии</span>
+            <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Аналитика сессии</div>
             <h2>Диагностическая карта</h2>
-            <p>Нажмите кнопку ниже для автоматического сбора результатов тестирования и вычисления индекса усвоения законов динамики Ньютона.</p>
-            <div class="interactive-panel" style="align-items:center; text-align:center; padding:40px; gap:20px;">
-                <button class="submit-btn" style="width:280px; margin:0;" onclick="calculateTotalResults()">Сформировать итог</button>
-                <div style="font-size:3.5rem; font-weight:bold; color:var(--brand-teal); margin-top:15px;" id="totalScoreText">-- / 4</div>
-                <div class="progress-bar-bg" style="width:60%; height:12px; border-radius:6px;">
-                    <div class="progress-bar-fill" id="resultProgressBar" style="width:0%; background-color:var(--brand-accent);"></div>
-                </div>
-                <p style="color:#64748b; font-size:0.95rem; max-width:450px;" id="analyticsFeedback">Зафиксируйте ответы на предыдущих диагностических слайдах, чтобы система сформировала подробный академический отчет.</p>
+            <div class="interactive-panel" style="align-items:center; text-align:center; padding:35px 20px; gap:20px;">
+                <p style="color:var(--text-main); margin:0;">Нажмите кнопку для расчёта результатов.</p>
+                <button class="submit-btn" style="width:240px;" onclick="calculateTotalResults()">Сформировать итог</button>
+                <div style="font-size:3.5rem; font-weight:bold; color:var(--brand-cyan); margin-top:10px;" id="totalScoreText">-- / 4</div>
             </div>
         </div>
     </main>
 
     <footer class="pres-footer">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Назад</button>
-        <div class="progress-container">
-            <span>Прогресс темы</span>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="mainProgressBar"></div>
-            </div>
-        </div>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Вперед →</button>
     </footer>
 </div>
 <script>
-    // ========================================================================
-    // НАВИГАЦИОННЫЙ ДВИЖОК И ДИНАМИЧЕСКОЕ СОСТОЯНИЕ
-    // ========================================================================
     let currentSlide = 0;
     const totalSlides = 10;
 
-    // Глобальные структуры ответов
-    let answers = {
+    let quizData = {
         task1: { a1: null, a2: null, a3: null, submitted: false },
         task2: { selected: null, submitted: false },
         task3: { selected: null, submitted: false },
         task4: { selected: null, submitted: false }
     };
 
-    function changeSlide(direction) {
+    function changeSlide(dir) {
         document.getElementById(`slide-${currentSlide}`).classList.remove('active');
-        currentSlide += direction;
+        currentSlide += dir;
         document.getElementById(`slide-${currentSlide}`).classList.add('active');
 
-        // Обновление кнопок
         document.getElementById('prevBtn').disabled = (currentSlide === 0);
         document.getElementById('nextBtn').disabled = (currentSlide === totalSlides - 1);
         
-        // Счетчик и прогресс-бар
-        document.getElementById('slideCounter').textContent = `${currentSlide} / 4`;
-        const progress = (currentSlide / (totalSlides - 1)) * 100;
-        document.getElementById('mainProgressBar').style.width = `${progress}%`;
-
-        // Ленивый рендеринг холстов при переходе
-        initSlideCanvases();
+        // Маппинг счетчика под формат ОГЭ: 0/4 до 4/4 на основе решенных задач
+        updateScoreIndicator();
+        renderActiveCanvas();
     }
 
-    function initSlideCanvases() {
+    function updateScoreIndicator() {
+        let completedTasks = 0;
+        if (quizData.task1.submitted) completedTasks++;
+        if (quizData.task2.submitted) completedTasks++;
+        if (quizData.task3.submitted) completedTasks++;
+        if (quizData.task4.submitted) completedTasks++;
+        document.getElementById('slideCounter').textContent = `${completedTasks} / 4`;
+    }
+
+    function renderActiveCanvas() {
         if (currentSlide === 0) drawForces();
         if (currentSlide === 1) drawInertia();
         if (currentSlide === 2) drawMass();
@@ -365,223 +467,173 @@
         if (currentSlide === 5) drawTask1Canvas();
     }
 
-    // Вспомогательная функция рисования стрелок векторов
-    function drawArrow(ctx, fromx, fromy, tox, toy, color, label) {
-        const headlen = 10;
+    function drawArrow(ctx, fromx, fromy, tox, toy, color, text) {
+        const headlen = 8;
         const angle = Math.atan2(toy - fromy, tox - fromx);
-        ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+        ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2.5;
         ctx.beginPath(); ctx.moveTo(fromx, fromy); ctx.lineTo(tox, toy); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(tox, toy);
         ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
         ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
         ctx.fill();
-        if (label) { ctx.font = "bold 13px sans-serif"; ctx.fillText(label, tox + 5 * Math.cos(angle), toy + 4 * Math.sin(angle) - 5); }
+        if (text) { ctx.font = "600 11px sans-serif"; ctx.fillText(text, tox + 6 * Math.cos(angle), toy + 4 * Math.sin(angle) - 4); }
     }
 
-    // ========================================================================
     // СИМУЛЯЦИЯ 1: СЛОЖЕНИЕ СИЛ
-    // ========================================================================
-    let forceDir = 'same';
+    let forceDirectionMode = 'same';
     function setForceDirection(mode) {
-        forceDir = mode;
-        const btns = document.querySelectorAll('#slide-0 .sim-tab-btn');
-        btns.forEach(b => b.classList.remove('active'));
+        forceDirectionMode = mode;
+        const tabs = document.querySelectorAll('#slide-0 .sim-tab-btn');
+        tabs.forEach(t => t.classList.remove('active'));
         event.target.classList.add('active');
         
-        const fFormula = document.getElementById('forceResultFormula');
-        if (mode === 'same') fFormula.innerHTML = "F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub> = 3 + 2 = 5 Н";
-        if (mode === 'opposite') fFormula.innerHTML = "F<sub>равн</sub> = F<sub>1</sub> - F<sub>2</sub> = 3 - 2 = 1 Н";
-        if (mode === 'angle') fFormula.innerHTML = "F<sub>равн</sub> = √(F<sub>1</sub>² + F<sub>2</sub>²) = √(3² + 2²) ≈ 3.6 Н";
-        
+        const formula = document.getElementById('forceResultFormula');
+        if (mode === 'same') formula.innerHTML = "F<sub>равн</sub> = F<sub>1</sub> + F<sub>2</sub>";
+        if (mode === 'opposite') formula.innerHTML = "F<sub>равн</sub> = F<sub>1</sub> - F<sub>2</sub>";
+        if (mode === 'angle') formula.innerHTML = "F<sub>равн</sub> = √(F<sub>1</sub>² + F<sub>2</sub>²)";
         drawForces();
     }
+
     function drawForces() {
         const canvas = document.getElementById('canvasForces'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        const cX = canvas.width / 2 - 20; const cY = canvas.height / 2 + 10;
+        const cX = canvas.width / 2 - 30; const cY = canvas.height / 2 + 10;
         
-        ctx.fillStyle = '#E67E22'; ctx.beginPath(); ctx.arc(cX, cY, 8, 0, Math.PI*2); ctx.fill(); // Точка
-        if (forceDir === 'same') {
-            drawArrow(ctx, cX, cY, cX + 70, cY, '#0D6066', 'F₂ (2Н)');
-            drawArrow(ctx, cX, cY, cX + 110, cY, '#64748b', 'F₁ (3Н)');
-            drawArrow(ctx, cX, cY - 25, cX + 180, cY - 25, '#8C2D19', 'Fравн (5Н)');
-        } else if (forceDir === 'opposite') {
-            drawArrow(ctx, cX, cY, cX - 70, cY, '#0D6066', 'F₂ (2Н)');
-            drawArrow(ctx, cX, cY, cX + 110, cY, '#64748b', 'F₁ (3Н)');
-            drawArrow(ctx, cX, cY - 25, cX + 40, cY - 25, '#8C2D19', 'Fравн (1Н)');
-        } else if (forceDir === 'angle') {
-            drawArrow(ctx, cX, cY, cX + 110, cY, '#64748b', 'F₁ (3Н)');
-            drawArrow(ctx, cX, cY, cX, cY - 80,  '#0D6066', 'F₂ (2Н)');
-            drawArrow(ctx, cX, cY, cX + 110, cY - 80, '#8C2D19', 'Fравн (~3.6Н)');
-            ctx.strokeStyle = '#cbd5e1'; ctx.setLineDash([4,4]);
-            ctx.beginPath(); ctx.moveTo(cX + 110, cY); ctx.lineTo(cX + 110, cY - 80); ctx.lineTo(cX, cY - 80); ctx.stroke(); ctx.setLineDash([]);
+        // Тело
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 1.5; ctx.strokeRect(cX - 30, cY - 20, 60, 40);
+        
+        if (forceDirectionMode === 'same') {
+            drawArrow(ctx, cX, cY, cX + 50, cY, '#ff3d00', 'F₁');
+            drawArrow(ctx, cX, cY, cX + 90, cY, '#ff9100', 'F₂');
+            drawArrow(ctx, cX, cY - 30, cX + 140, cY - 30, '#00e5ff', 'Fравн');
+        } else if (forceDirectionMode === 'opposite') {
+            drawArrow(ctx, cX, cY, cX + 80, cY, '#ff3d00', 'F₁');
+            drawArrow(ctx, cX, cY, cX - 50, cY, '#ff9100', 'F₂');
+            drawArrow(ctx, cX, cY - 30, cX + 30, cY - 30, '#00e5ff', 'Fравн');
+        } else if (forceDirectionMode === 'angle') {
+            drawArrow(ctx, cX, cY, cX + 80, cY, '#ff3d00', 'F₁');
+            drawArrow(ctx, cX, cY, cX, cY - 60, '#ff9100', 'F₂');
+            drawArrow(ctx, cX, cY, cX + 80, cY - 60, '#00e5ff', 'Fравн');
         }
     }
-    // ========================================================================
-    // СИМУЛЯЦИЯ 2: ЗАКОН ИНЕРЦИИ (I ЗАКОН)
-    // ========================================================================
-    let inertiaState = 'rest'; let inertiaX = 50; let inertiaVel = 0; let inertiaAnim = null;
+    // СИМУЛЯЦИЯ 2: ЗАКОН ИНЕРЦИИ
+    let inertiaState = 'rest'; let inertiaX = 60; let inertiaVel = 0; let inertiaAnim = null;
     function setInertiaState(mode) {
         inertiaState = mode; cancelAnimationFrame(inertiaAnim);
-        const btns = document.querySelectorAll('#slide-1 .sim-tab-btn');
-        btns.forEach(b => b.classList.remove('active'));
+        const tabs = document.querySelectorAll('#slide-1 .sim-tab-btn');
+        tabs.forEach(t => t.classList.remove('active'));
         event.target.classList.add('active');
-        inertiaX = (mode === 'rest') ? 140 : 50; inertiaVel = (mode === 'rest') ? 0 : 1.5;
-        runInertiaLoop();
+        inertiaX = (mode === 'rest') ? 120 : 40; inertiaVel = (mode === 'rest') ? 0 : 1.2;
+        runInertiaEngine();
     }
-    function triggerInertiaImpulse() {
-        inertiaVel = 5; inertiaState = 'impulse';
-    }
-    function runInertiaLoop() {
+    function triggerInertiaImpulse() { inertiaVel = 4.5; inertiaState = 'impulse'; }
+    function runInertiaEngine() {
         const canvas = document.getElementById('canvasInertia'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(10, 150); ctx.lineTo(canvas.width-10, 150); ctx.stroke();
         
-        // Линия дороги
-        ctx.strokeStyle = varColor('--brand-dark'); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(10,160); ctx.lineTo(canvas.width-10,160); ctx.stroke();
+        inertiaX += inertiaVel; if(inertiaX > canvas.width - 70) inertiaX = 20;
+        if(inertiaState === 'impulse') { inertiaVel *= 0.97; if(inertiaVel < 0.05) { inertiaVel = 0; inertiaState = 'rest'; } }
         
-        inertiaX += inertiaVel;
-        if(inertiaX > canvas.width - 70) { inertiaX = 20; }
-        if(inertiaState === 'impulse') { inertiaVel *= 0.96; if(inertiaVel < 0.05) { inertiaVel = 0; inertiaState = 'rest'; } }
-        
-        // Брусок
-        ctx.fillStyle = varColor('--brand-teal-light'); ctx.fillRect(inertiaX, 110, 60, 50); ctx.strokeRect(inertiaX, 110, 60, 50);
-        
+        ctx.fillStyle = '#162631'; ctx.strokeStyle = '#1e3240'; ctx.fillRect(inertiaX, 105, 50, 45); ctx.strokeRect(inertiaX, 105, 50, 45);
         if (inertiaState === 'rest') {
-            ctx.fillStyle = '#64748b'; ctx.font = "13px sans-serif"; ctx.fillText("v = 0 (Покой)", inertiaX, 95);
+            ctx.fillStyle = '#78909c'; ctx.font = "11px sans-serif"; ctx.fillText("v = 0 (Покой)", inertiaX, 95);
         } else if (inertiaState === 'motion') {
-            drawArrow(ctx, inertiaX + 60, 135, inertiaX + 100, 135, varColor('--brand-accent'), 'v = const');
+            drawArrow(ctx, inertiaX + 50, 127, inertiaX + 90, 127, '#00e5ff', 'v = const');
         } else if (inertiaState === 'impulse') {
-            drawArrow(ctx, inertiaX, 135, inertiaX - 45, 135, varColor('--brand-alert'), 'Fтян');
-            drawArrow(ctx, inertiaX + 30, 110, inertiaX + 65, 80, varColor('--brand-accent'), 'a ↑');
+            drawArrow(ctx, inertiaX, 127, inertiaX - 35, 127, '#ff3d00', 'Fтян');
         }
-        inertiaAnim = requestAnimationFrame(runInertiaLoop);
+        inertiaAnim = requestAnimationFrame(runInertiaEngine);
     }
 
-    // ========================================================================
-    // СИМУЛЯЦИЯ 3: УСКОРЕНИЕ (II ЗАКОН) И СИМУЛЯЦИЯ 4 (III ЗАКОН)
-    // ========================================================================
-    let simMass = 2; let massX = 30; let massVel = 0; let massAcc = 0; let massAnim = null;
-    function updateMassSim(v) { simMass = parseFloat(v); document.getElementById('valMass').textContent = v; drawMass(); }
-    function triggerMassPush() { massVel = 12 / simMass; drawMassLoop(); }
+    // СИМУЛЯЦИЯ 3: УСКОРЕНИЕ
+    let mSize = 2; let massX = 30; let massVel = 0; let massAnim = null;
+    function updateMassSim(v) { mSize = parseInt(v); document.getElementById('valMass').textContent = v; drawMass(); }
+    function triggerMassPush() { massVel = 10 / mSize; drawMassLoop(); }
     function drawMass() {
         const canvas = document.getElementById('canvasMass'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#1A252C'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(10,160); ctx.lineTo(canvas.width-10,160); ctx.stroke();
-        
-        let size = 35 + simMass * 8;
-        ctx.fillStyle = '#F4F6F7'; ctx.fillRect(massX, 160 - size, size, size); ctx.strokeRect(massX, 160 - size, size, size);
-        ctx.fillStyle = '#1A252C'; ctx.font = "bold 12px sans-serif"; ctx.fillText(`m=${simMass}кг`, massX + size/4, 160 - size/2);
-        
-        drawArrow(ctx, massX, 160 - size/2, massX + 50, 160 - size/2, 'var(--brand-accent)', 'Fравн = 6Н');
+        ctx.strokeStyle = '#1e3240'; ctx.beginPath(); ctx.moveTo(10,150); ctx.lineTo(canvas.width-10,150); ctx.stroke();
+        let s = 30 + mSize * 6;
+        ctx.fillStyle = '#162631'; ctx.fillRect(massX, 150-s, s, s); ctx.strokeRect(massX, 150-s, s, s);
+        drawArrow(ctx, massX, 150 - s/2, massX + 45, 150 - s/2, '#ff3d00', 'Fравн');
     }
     function drawMassLoop() {
-        massX += massVel; massVel *= 0.95;
+        massX += massVel; massVel *= 0.94;
         if(massVel < 0.1) { massVel = 0; massX = 30; cancelAnimationFrame(massAnim); drawMass(); return; }
-        drawMass(); massAnim = requestAnimationFrame(massPushLoopWork);
+        drawMass(); massAnim = requestAnimationFrame(drawMassLoop);
     }
-    function massPushLoopWork() { drawMassLoop(); }
 
-    let colX1 = 40; let colX2 = 260; let colAnim = null; let colState = 'idle';
-    function triggerCollision() { colX1 = 40; colX2 = 260; colState = 'move'; runCollisionLoop(); }
-    function runCollisionLoop() {
+    // СИМУЛЯЦИЯ 4: ВЗАИМОДЕЙСТВИЕ
+    let cX1 = 30, cX2 = 250, cState = 'idle', cAnim = null;
+    function triggerCollision() { cX1 = 30; cX2 = 250; cState = 'move'; runColLoop(); }
+    function runColLoop() {
         const canvas = document.getElementById('canvasCollision'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.beginPath(); ctx.moveTo(10,150); ctx.lineTo(canvas.width-10,150); ctx.stroke();
-
-        if(colState === 'move') { colX1 += 3; colX2 -= 1.5; if(colX1 + 25 >= colX2 - 40) { colState = 'hit'; } }
-        
-        // Шар 1 (Легкий)
-        ctx.fillStyle = 'var(--brand-teal)'; ctx.beginPath(); ctx.arc(colX1, 130, 15, 0, Math.PI*2); ctx.fill();
-        // Шар 2 (Тяжелый)
-        ctx.fillStyle = 'var(--brand-dark)'; ctx.beginPath(); ctx.arc(colX2, 120, 25, 0, Math.PI*2); ctx.fill();
-
-        if (colState === 'hit') {
-            drawArrow(ctx, colX1 + 15, 130, colX1 + 75, 130, 'var(--brand-alert)', 'F₁→₂');
-            drawArrow(ctx, colX2 - 25, 120, colX2 - 85, 120, 'var(--brand-alert)', 'F₂→₁');
-            ctx.fillStyle = 'red'; ctx.font = "bold 14px sans-serif"; ctx.fillText("СИЛЫ УДАРОВ РАВНЫ!", canvas.width/2 - 70, 60);
+        if(cState === 'move') { cX1 += 2.5; cX2 -= 1.2; if(cX1+15 >= cX2-22) cState = 'hit'; }
+        ctx.fillStyle = '#ff9100'; ctx.beginPath(); ctx.arc(cX1, 120, 12, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#ff3d00'; ctx.beginPath(); ctx.arc(cX2, 120, 22, 0, Math.PI*2); ctx.fill();
+        if(cState === 'hit') {
+            drawArrow(ctx, cX1+12, 120, cX1 + 65, 120, '#00e5ff', 'F₁→₂');
+            drawArrow(ctx, cX2-22, 120, cX2 - 75, 120, '#00e5ff', '-F₂→₁');
         }
-        if(colState === 'move') colAnim = requestAnimationFrame(runCollisionLoop);
+        if(cState === 'move') cAnim = requestAnimationFrame(runColLoop);
     }
-    // ========================================================================
-    // СИМУЛЯЦИЯ 5 (ЗАКОН ГУКА) И ДИАГНОСТИКА
-    // ========================================================================
+
+    // СИМУЛЯЦИЯ 5: ДЕФОРМАЦИЯ ПРУЖИНЫ
     function updateHookeSim(v) {
         document.getElementById('valHookeX').textContent = v;
         const canvas = document.getElementById('canvasHooke'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        
-        let ext = parseFloat(v) * 25; let startX = 30; let endX = 140 + ext;
-        // Опора слева
-        ctx.fillStyle = '#1A252C'; ctx.fillRect(10, 40, 20, 80);
-        // Рисование витков пружины
-        ctx.strokeStyle = '#64748b'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(startX, 80);
-        let loops = 12; let step = (endX - startX) / loops;
-        for(let i=0; i<loops; i++) {
-            let x = startX + i * step + step/2; let y = (i % 2 === 0) ? 60 : 100;
-            ctx.lineTo(x, y);
+        let ext = parseFloat(v) * 28; let startX = 25; let endX = 110 + ext;
+        ctx.fillStyle = '#1e3240'; ctx.fillRect(5, 40, 20, 70);
+        ctx.strokeStyle = '#78909c'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(startX, 75);
+        for(let i=0; i<10; i++) {
+            let x = startX + i*((endX-startX)/10) + ((endX-startX)/20);
+            let y = (i%2===0)?55:95; ctx.lineTo(x, y);
         }
-        ctx.lineTo(endX, 80); ctx.stroke();
-        // Груз
-        ctx.fillStyle = 'var(--brand-teal)'; ctx.fillRect(endX, 60, 40, 40); ctx.strokeRect(endX, 60, 40, 40);
-        if(v > 0) {
-            drawArrow(ctx, endX, 80, endX - v * 25, 80, 'var(--brand-alert)', `Fупр = ${v*100}Н`);
-        }
+        ctx.lineTo(endX, 75); ctx.stroke();
+        ctx.fillStyle = '#162631'; ctx.fillRect(endX, 55, 40, 40); ctx.strokeRect(endX, 55, 40, 40);
+        if(v > 0) drawArrow(ctx, endX, 75, endX - ext, 75, '#00e5ff', 'Fупр');
     }
 
     function drawTask1Canvas() {
         const canvas = document.getElementById('canvasTask1'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#1A252C'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(20,170); ctx.lineTo(canvas.width-20,170); ctx.stroke();
-        ctx.fillStyle = 'var(--brand-gray)'; ctx.fillRect(130, 110, 90, 60); ctx.strokeRect(130, 110, 90, 60);
-        ctx.fillStyle = 'black'; ctx.font = "bold 14px sans-serif"; ctx.fillText("Брусок", 150, 145);
-        
-        drawArrow(ctx, 60, 50, 20, 50, '#64748b', 'Стрелка 1');
-        drawArrow(ctx, 270, 50, 310, 50, '#64748b', 'Стрелка 2');
-        drawArrow(ctx, 175, 50, 175, 20, '#64748b', 'Стрелка 3');
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.strokeRect(100, 100, 90, 50);
+        drawArrow(ctx, 50, 40, 15, 40, '#ff9100', 'Стрелка 1');
+        drawArrow(ctx, 240, 40, 275, 40, '#ff3d00', 'Стрелка 2');
+        drawArrow(ctx, 145, 40, 145, 15, '#00e5ff', 'Стрелка 3');
     }
 
-    // ЛОГИКА ДИАГНОСТИЧЕСКИХ ОТВЕТОВ
+    // ДИАГНОСТИЧЕСКАЯ ВАЛИДАЦИЯ
     function submitTask1() {
-        answers.task1.a1 = document.getElementById('task1_ans1').value;
-        answers.task1.a2 = document.getElementById('task1_ans2').value;
-        answers.task1.a3 = document.getElementById('task1_ans3').value;
-        answers.task1.submitted = true;
-        document.getElementById('btnSubmitTask1').textContent = "Ответ сохранен";
-        document.getElementById('btnSubmitTask1').disabled = true;
+        quizData.task1.a1 = document.getElementById('task1_ans1').value;
+        quizData.task1.a2 = document.getElementById('task1_ans2').value;
+        quizData.task1.a3 = document.getElementById('task1_ans3').value;
+        quizData.task1.submitted = true; freezeElement('btnSubmitTask1'); updateScoreIndicator();
     }
-    function selectTask2(idx) { selectOption('slide-6', 't2_o', idx); answers.task2.selected = idx; document.getElementById('btnSubmitTask2').disabled = false; }
-    function submitTask2() { answers.task2.submitted = true; freezeOptions('slide-6', 'btnSubmitTask2'); }
-    function selectTask3(idx) { selectOption('slide-7', 't3_o', idx); answers.task3.selected = idx; document.getElementById('btnSubmitTask3').disabled = false; }
-    function submitTask3() { answers.task3.submitted = true; freezeOptions('slide-7', 'btnSubmitTask3'); }
-    function selectTask4(idx) { selectOption('slide-8', 't4_o', idx); answers.task4.selected = idx; document.getElementById('btnSubmitTask4').disabled = false; }
-    function submitTask4() { answers.task4.submitted = true; freezeOptions('slide-8', 'btnSubmitTask4'); }
-
-    function selectOption(slideId, prefix, idx) {
-        const opts = document.querySelectorAll(`#${slideId} .quiz-option`);
-        opts.forEach(o => o.classList.remove('selected'));
-        document.getElementById(`${prefix}${idx}`).classList.add('selected');
-    }
-    function freezeOptions(slideId, btnId) {
-        document.getElementById(btnId).textContent = "Ответ зафиксирован";
-        document.getElementById(btnId).disabled = true;
-        document.querySelectorAll(`#${slideId} .quiz-option`).forEach(o => o.disabled = true);
-    }
+    function selectTask2(idx) { resetSelection('slide-6'); document.getElementById(`t2_o${idx}`).classList.add('selected'); quizData.task2.selected = idx; document.getElementById('btnSubmitTask2').disabled = false; }
+    function submitTask2() { quizData.task2.submitted = true; freezeQuizOptions('slide-6', 'btnSubmitTask2'); updateScoreIndicator(); }
+    function selectTask3(idx) { resetSelection('slide-7'); document.getElementById(`t3_o${idx}`).classList.add('selected'); quizData.task3.selected = idx; document.getElementById('btnSubmitTask3').disabled = false; }
+    function submitTask3() { quizData.task3.submitted = true; freezeQuizOptions('slide-7', 'btnSubmitTask3'); updateScoreIndicator(); }
+    function selectTask4(idx) { resetSelection('slide-8'); document.getElementById(`t4_o${idx}`).classList.add('selected'); quizData.task4.selected = idx; document.getElementById('btnSubmitTask4').disabled = false; }
+    function submitTask4() { quizData.task4.submitted = true; freezeQuizOptions('slide-8', 'btnSubmitTask4'); updateScoreIndicator(); }
+    
+    function resetSelection(sId) { document.querySelectorAll(`#${sId} .quiz-option`).forEach(o => o.classList.remove('selected')); }
+    function freezeElement(id) { let el = document.getElementById(id); el.textContent = "Ответ зафиксирован"; el.disabled = true; }
+    function freezeQuizOptions(sId, btnId) { freezeElement(btnId); document.querySelectorAll(`#${sId} .quiz-option`).forEach(o => o.disabled = true); }
 
     function calculateTotalResults() {
         let score = 0;
-        if(answers.task1.submitted && answers.task1.a1 === "2" && answers.task1.a2 === "1" && answers.task1.a3 === "1") score++;
-        if(answers.task2.submitted && answers.task2.selected === 1) score++;
-        if(answers.task3.submitted && answers.task3.selected === 2) score++;
-        if(answers.task4.submitted && answers.task4.selected === 1) score++;
-        
+        if(quizData.task1.submitted && quizData.task1.a1==='right' && quizData.task1.a2==='left' && quizData.task1.a3==='left') score++;
+        if(quizData.task2.submitted && quizData.task2.selected === 1) score++;
+        if(quizData.task3.submitted && quizData.task3.selected === 2) score++;
+        if(quizData.task4.submitted && quizData.task4.selected === 1) score++;
         document.getElementById('totalScoreText').textContent = `${score} / 4`;
-        const percentage = (score / 4) * 100;
-        document.getElementById('resultProgressBar').style.width = `${percentage}%`;
-        document.getElementById('analyticsFeedback').textContent = `Тест завершен! Коэффициент усвоения законов динамики Ньютона равен ${percentage}%.`;
     }
 
-    function varColor(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-    window.addEventListener('DOMContentLoaded', () => { changeSlide(0); setInertiaState('rest'); });
+    window.addEventListener('DOMContentLoaded', () => { drawForces(); });
 </script>
 </body>
 </html>
