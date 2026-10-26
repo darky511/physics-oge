@@ -20,12 +20,11 @@
 
         * { 
             box-sizing: border-box; 
+            margin: 0; padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
         }
         
         body { 
-            margin: 0; 
-            padding: 0; 
             background-color: var(--bg-outer); 
             color: var(--text-main); 
             display: flex; 
@@ -37,72 +36,73 @@
         }
 
         .pres-container {
-            width: 95vw;
-            height: 90vh;
-            max-width: 1200px;
-            max-height: 750px;
+            width: 96vw;
+            height: 92vh;
+            max-width: 1100px;
+            max-height: 680px;
             background-color: var(--bg-container);
             border-radius: 12px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: hidden;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            position: relative;
         }
         .pres-header {
-            padding: 25px 40px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--border-color);
+            height: 75px;
+            flex-shrink: 0;
         }
         
         .pres-header .title-group {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .pres-header .meta-tag {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--brand-cyan);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             font-weight: bold;
         }
 
         .pres-header h1 { 
-            margin: 0; 
-            font-size: 1.3rem; 
+            font-size: 1.15rem; 
             font-weight: 600; 
             color: var(--text-main); 
         }
 
         .pres-header .counter-pill { 
-            font-size: 0.85rem; 
+            font-size: 0.8rem; 
             font-weight: bold; 
             color: var(--brand-cyan); 
             background-color: rgba(0, 229, 255, 0.08);
             border: 1px solid rgba(0, 229, 255, 0.3);
-            padding: 4px 14px;
+            padding: 4px 12px;
             border-radius: 20px;
-            letter-spacing: 0.5px;
         }
 
         .pres-body { 
             flex: 1; 
-            padding: 0 40px; 
+            padding: 20px 30px; 
             display: flex; 
-            align-items: center;
-            overflow-y: auto; 
+            align-items: stretch;
+            overflow: hidden; /* Предотвращаем общие баги скролла */
         }
 
         .slide-content { 
             width: 100%; 
             display: none; 
             flex-direction: column; 
-            gap: 20px; 
+            height: 100%;
+            justify-content: center;
         }
         
         .slide-content.active { 
@@ -110,113 +110,133 @@
         }
         .two-columns { 
             display: grid; 
-            grid-template-columns: 1.15fr 0.85fr; 
-            gap: 40px; 
-            align-items: start;
+            grid-template-columns: 1.1fr 0.9fr; 
+            gap: 25px; 
+            align-items: center;
+            height: 100%;
+            max-height: 480px;
         }
         
+        .theory-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            overflow-y: auto; /* Защита: длинный текст скроллится локально */
+            padding-right: 10px;
+        }
+
         .theory-panel h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.6rem;
+            margin-bottom: 8px;
+            font-size: 1.45rem;
             font-weight: 600;
+            line-height: 1.2;
         }
 
         .theory-panel p {
             color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 0.98rem;
-            margin: 0 0 15px 0;
+            line-height: 1.5;
+            font-size: 0.92rem;
+            margin-bottom: 12px;
         }
 
         .formula-box { 
             background: var(--bg-panel); 
             border-left: 4px solid var(--brand-cyan); 
-            padding: 16px 20px; 
+            padding: 12px 16px; 
             border-radius: 0 8px 8px 0; 
-            font-size: 1.4rem; 
+            font-size: 1.25rem; 
             font-family: "SF Mono", SFMono-Regular, Consolas, monospace;
             font-weight: bold; 
             color: var(--brand-cyan); 
-            margin: 15px 0; 
+            margin: 10px 0; 
+            text-align: center;
         }
-
         .interactive-panel { 
             background-color: var(--bg-panel); 
             border-radius: 8px; 
             border: 1px solid var(--border-color); 
-            padding: 20px; 
+            padding: 16px; 
             display: flex; 
             flex-direction: column; 
-            gap: 15px; 
+            gap: 12px; 
+            height: 100%;
+            max-height: 430px;
+            justify-content: center;
+            overflow: hidden; /* Полное подавление вылетов элементов наружу */
         }
 
         .sim-tabs { 
             display: flex; 
-            gap: 8px; 
+            gap: 6px; 
             background: var(--bg-container);
             padding: 4px;
             border-radius: 6px;
             border: 1px solid var(--border-color);
+            flex-shrink: 0;
         }
 
         .sim-tab-btn { 
             flex: 1;
-            background: none; 
-            border: none; 
-            padding: 8px 12px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            color: var(--text-muted); 
-            border-radius: 4px;
-            font-size: 0.82rem;
-            transition: all 0.2s ease;
+            background: none; border: none; 
+            padding: 6px 8px; 
+            font-weight: 600; cursor: pointer; 
+            color: var(--text-muted); border-radius: 4px;
+            font-size: 0.78rem; transition: all 0.2s ease;
         }
 
         .sim-tab-btn.active { 
             color: var(--brand-cyan); 
             background-color: var(--bg-panel);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        .control-group { display: flex; flex-direction: column; gap: 6px; margin-top: 5px; }
-        .control-group label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; display: flex; justify-content: space-between; }
+
+        .control-group { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+        .control-group label { font-size: 0.8rem; color: var(--text-muted); display: flex; justify-content: space-between; }
         .control-group label span { color: var(--brand-cyan); font-weight: bold; }
         
-        .slider-input { 
-            width: 100%; 
-            accent-color: var(--brand-cyan); 
-            cursor: pointer; 
-            height: 4px; 
-            background: var(--bg-container); 
-            border-radius: 2px;
-            outline: none; 
-        }
+        .slider-input { width: 100%; accent-color: var(--brand-cyan); cursor: pointer; height: 4px; background: var(--bg-container); }
 
         .vector-canvas { 
             background: var(--bg-container); 
             border: 1px solid var(--border-color); 
             border-radius: 6px; 
             width: 100%; 
-            height: 210px; 
+            height: 100%;
+            max-height: 220px; /* Жесткое ограничение симуляции по вертикали */
+            flex-grow: 1;
+        }
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 440px;
+            overflow-y: auto;
+            width: 100%;
         }
 
-        .quiz-option { display: block; background: var(--bg-container); border: 1px solid var(--border-color); border-radius: 6px; padding: 12px 16px; margin-bottom: 10px; cursor: pointer; color: var(--text-main); text-align: left; width: 100%; font-size: 0.95rem; transition: all 0.2s; }
-        .quiz-option:hover:not(:disabled) { border-color: var(--brand-cyan); background-color: rgba(0, 229, 255, 0.02); }
+        .quiz-option { display: block; background: var(--bg-container); border: 1px solid var(--border-color); border-radius: 6px; padding: 10px 14px; cursor: pointer; color: var(--text-main); text-align: left; width: 100%; font-size: 0.9rem; transition: all 0.15s; }
+        .quiz-option:hover:not(:disabled) { border-color: var(--brand-cyan); background-color: rgba(0, 229, 255, 0.01); }
         .quiz-option.selected { border-color: var(--brand-cyan); background-color: var(--brand-cyan-muted); color: var(--brand-cyan); font-weight: 600; }
         
-        .custom-select { padding: 12px; border-radius: 6px; border: 1px solid var(--border-color); width: 100%; font-size: 0.95rem; outline: none; background: var(--bg-container); color: var(--text-main); cursor: pointer; }
-        .custom-select:focus { border-color: var(--brand-cyan); }
+        .quiz-select-wrapper { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+        .select-label { font-weight: 600; font-size: 0.88rem; color: var(--text-main); }
+        .custom-select { padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); width: 100%; font-size: 0.9rem; background: var(--bg-container); color: var(--text-main); }
 
-        .submit-btn { background-color: transparent; border: 1px solid var(--brand-cyan); color: var(--brand-cyan); padding: 12px; font-size: 0.9rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.2s; }
+        .submit-btn { background-color: transparent; border: 1px solid var(--brand-cyan); color: var(--brand-cyan); padding: 10px; font-size: 0.88rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; transition: all 0.2s; flex-shrink: 0; }
         .submit-btn:hover:not(:disabled) { background-color: var(--brand-cyan); color: var(--bg-outer); }
         .submit-btn:disabled { border-color: var(--border-color); color: var(--text-muted); cursor: not-allowed; }
 
-        .pres-footer { padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); }
-        .nav-btn { background: none; border: none; color: var(--brand-cyan); font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; opacity: 1; }
+        .pres-footer { padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); height: 65px; flex-shrink: 0; }
+        .nav-btn { background: none; border: none; color: var(--brand-cyan); font-size: 0.9rem; font-weight: 600; cursor: pointer; opacity: 1; }
         .nav-btn:hover:not(:disabled) { opacity: 0.7; }
         .nav-btn:disabled { color: var(--border-color); cursor: not-allowed; }
 
-        .alert-box { background: rgba(255, 61, 0, 0.04); border-left: 4px solid var(--brand-red); padding: 14px 18px; border-radius: 0 8px 8px 0; color: var(--text-muted); margin-bottom: 12px; }
-        .alert-box h3 { margin: 0 0 4px 0; color: var(--brand-red); font-size: 1.05rem; }
+        .alert-box { background: rgba(255, 61, 0, 0.03); border-left: 4px solid var(--brand-red); padding: 10px 14px; border-radius: 0 6px 6px 0; color: var(--text-muted); margin-bottom: 10px; }
+        .alert-box h3 { margin: 0 0 2px 0; color: var(--brand-red); font-size: 0.95rem; }
+        
+        .orbit-container { display: flex; justify-content: center; align-items: center; height: 100%; max-height: 200px; }
+        @keyframes orbitRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .orbit-animation { animation: orbitRotate 5s linear infinite; transform-origin: center; }
     </style>
 </head>
 <body>
@@ -234,18 +254,16 @@
         <div class="slide-content active" id="slide-0">
             <div class="two-columns">
                 <div class="theory-panel">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
                     <h2>Трение покоя: Закон компенсации</h2>
                     <div class="formula-box">F<sub>тр.пок</sub> = F<sub>внеш</sub></div>
-                    <p>Сила трения покоя возникает между неподвижными поверхностями. Она <strong>всегда равна</strong> по модулю внешней сдвигающей силе и растет вместе с ней от нуля до критического порога страгивания.</p>
-                    <p style="font-size:0.9rem; color:var(--text-muted);">Перемещайте ползунок внешней силы в модуле справа. Сила трения покоя будет идеально подстраиваться под неё, удерживая брусок.</p>
+                    <p>Возникает между неподвижными телами. Сила трения покоя <strong>всегда равна</strong> по модулю внешней сдвигающей силе и растет вместе с ней до критического порога.</p>
                 </div>
                 <div class="interactive-panel">
                     <div class="control-group">
                         <label>Внешняя сила тяги (F<sub>внеш</sub>): <span id="valForceX">1.0</span> Н</label>
                         <input type="range" class="slider-input" id="sim1ForceSlider" min="0" max="4" step="0.5" value="1" oninput="updateFrictionSim1(this.value)">
                     </div>
-                    <div style="font-size:0.82rem; color:var(--text-muted); text-align:center;">Максимальный порог покоя (&mu;N) = 4.0 Н</div>
                     <canvas id="frictionCanvas1" class="vector-canvas"></canvas>
                 </div>
             </div>
@@ -255,17 +273,17 @@
         <div class="slide-content" id="slide-1">
             <div class="two-columns">
                 <div class="theory-panel">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
                     <h2>Трение скольжения и реакция опоры</h2>
                     <div class="formula-box">F<sub>тр</sub> = &mu; · N</div>
-                    <p>Когда поверхности начинают скользить, зазубрины ломаются. Модуль силы трения скольжения прямо пропорционален силе нормальной реакции опоры <strong>N</strong> и безразмерному коэффициенту <strong>&mu;</strong>.</p>
+                    <p>Модуль силы трения скольжения прямо пропорционален силе нормальной реакции опоры <strong>N</strong> и безразмерному коэффициенту трения <strong>&mu;</strong>.</p>
                 </div>
                 <div class="interactive-panel">
                     <div class="control-group">
                         <label>Коэффициент трения (&mu;): <span id="valMu">0.20</span></label>
                         <input type="range" class="slider-input" id="sim2MuSlider" min="0.1" max="0.5" step="0.05" value="0.2" oninput="updateFrictionSim2(this.value)">
                     </div>
-                    <div style="font-size:0.85rem; color:var(--brand-cyan); text-align:center; font-weight:bold;" id="sim2FormulaText">F<sub>тр</sub> = 0.20 × 20 = 4.0 Н</div>
+                    <div style="font-size:0.8rem; color:var(--brand-cyan); text-align:center; font-weight:bold;" id="sim2FormulaText">F<sub>тр</sub> = 0.20 × 20 = 4.0 Н</div>
                     <canvas id="frictionCanvas2" class="vector-canvas"></canvas>
                 </div>
             </div>
@@ -275,10 +293,10 @@
         <div class="slide-content" id="slide-2">
             <div class="two-columns">
                 <div class="theory-panel">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
                     <h2>Закон всемирного тяготения</h2>
                     <div class="formula-box">F = G · (m₁ · m₂) / R²</div>
-                    <p>Два тела притягиваются друг к другу с силами, прямо пропорциональными произведению их масс и <strong>обратно пропорциональными квадрату расстояния (R²)</strong> между ними.</p>
+                    <p>Сила взаимного гравитационного притяжения прямо пропорциональна произведению масс тел и <strong>обратно пропорциональна квадрату расстояния (R²)</strong>.</p>
                 </div>
                 <div class="interactive-panel">
                     <div class="control-group">
@@ -289,157 +307,134 @@
                 </div>
             </div>
         </div>
-        <!-- СЛАЙД 4: СИЛА ТЯЖЕСТИ И ИСКУССТВЕННЫЕ СПУТНИКИ -->
+        <!-- СЛАЙД 4: ПЕРВАЯ КОСМИЧЕСКАЯ СКОРОСТЬ -->
         <div class="slide-content" id="slide-3">
             <div class="two-columns">
                 <div class="theory-panel">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
                     <h2>Первая космическая скорость</h2>
-                    <div class="formula-box">v₁ = &radic;(G · M / R) = &radic;(g · R)</div>
-                    <p><strong>Сила тяжести (F<sub>тяж</sub> = mg)</strong> — это сила гравитационного притяжения к Земле у её поверхности. При достижении первой космической скорости (v₁ &asymp; 7.9 км/с) тело начинает падать на Землю бесконечно, превращаясь в спутник.</p>
+                    <div class="formula-box">v₁ = &radic;(g · R) &asymp; 7.9 км/с</div>
+                    <p>Это минимальная скорость, которую нужно сообщить телу у поверхности планеты, чтобы запустить его по круговой орбите в режиме вечного свободного падения.</p>
                 </div>
-                <div class="interactive-panel" style="justify-content:center; align-items:center; background:#0b1319;">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.85rem; margin-bottom:10px;">Орбитальное круговое движение</div>
-                    <svg width="160" height="160" viewBox="0 0 160 160">
-                        <circle cx="80" cy="80" r="35" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
-                        <circle cx="80" cy="80" r="60" fill="none" stroke="#1e3240" stroke-dasharray="4 4"/>
-                        <g class="orbit-animation">
-                            <circle cx="80" cy="20" r="6" fill="#ff9100"/>
-                        </g>
-                    </svg>
-                    <div style="color:var(--text-muted); font-size:0.75rem; text-align:center; margin-top:5px;">Спутник удерживается на круговой орбите исключительно силой тяжести!</div>
+                <div class="interactive-panel" style="justify-content:center; align-items:center;">
+                    <div class="orbit-container">
+                        <svg width="140" height="140" viewBox="0 0 160 160">
+                            <circle cx="80" cy="80" r="32" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+                            <circle cx="80" cy="80" r="58" fill="none" stroke="#1e3240" stroke-dasharray="4 4"/>
+                            <g class="orbit-animation">
+                                <circle cx="80" cy="22" r="5" fill="#ff9100"/>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- СЛАЙД 5: НЕВЕСОМОСТЬ И ПЕРЕГРУЗКА -->
+        <!-- СЛАЙД 5: СОСТОЯНИЯ ВЕСА В ЛИФТЕ -->
         <div class="slide-content" id="slide-4">
             <div class="two-columns">
                 <div class="theory-panel">
-                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
-                    <h2>Разница состояний: Вес в лифте</h2>
-                    <p>Критически важно разделять понятия для экзамена:</p>
-                    <ul>
-                        <li><strong>Сила тяжести (mg):</strong> Приложена к <em>самому телу</em> со стороны планеты. Не исчезает на орбите!</li>
-                        <li><strong>Вес тела (P):</strong> Сила, с которой тело давит на <em>опору или подвес</em>. Зависит от ускорения.</li>
-                    </ul>
+                    <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Теория</div>
+                    <h2>Вес тела при ускоренном движении</h2>
+                    <p><strong>Сила тяжести (mg)</strong> приложена к самому телу. <strong>Вес (P)</strong> — упругая сила, приложенная строго к горизонтальной опоре или вертикальному подвесу.</p>
                     <div class="formula-box" id="elevatorFormula">P = m · g</div>
                 </div>
                 <div class="interactive-panel">
                     <div class="sim-tabs">
                         <button class="sim-tab-btn active" id="tabElevRest" onclick="setElevatorState('rest')">Покой (a=0)</button>
-                        <button class="sim-tab-btn" id="tabElevOver" onclick="setElevatorState('overload')">Перегрузка (a&uarr;)</button>
+                        <button class="sim-tab-btn" id="tabElevOver" onclick="setElevatorState('overload')">Перегрузка</button>
                         <button class="sim-tab-btn" id="tabElevZero" onclick="setElevatorState('zero-g')">Невесомость</button>
                     </div>
-                    <canvas id="elevatorCanvas" class="vector-canvas" style="height:190px;"></canvas>
+                    <canvas id="elevatorCanvas" class="vector-canvas"></canvas>
                 </div>
-            </div>
-        </div>
-        <!-- СЛАЙД 6: ЧЕК-ЛИСТ ЛОВУШЕК -->
-        <div class="slide-content" id="slide-5">
-            <div style="color:var(--brand-red); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Чек-лист методических ловушек</div>
-            <h2>Экзаменационные капканы динамики</h2>
-            <div class="alert-box">
-                <h3>Ловушка 1. Путаница с формулой силы трения</h3>
-                <p>Помни: сила трения покоя <strong>НЕ РАВНА &mu;N</strong>. Если предельный порог &mu;N = 2 Н, а тело толкают силой 1 Н — оно останется на месте, а сила трения будет равна ровно 1 Н!</p>
-            </div>
-            <div class="alert-box">
-                <h3>Ловушка 2. Главный миф про невесомость</h3>
-                <p>На МКС действует огромная гравитация Земли (всего на 10% меньше наземной). Невесомость возникает исключительно из-за перманентного совместного падения корабля и космонавта.</p>
             </div>
         </div>
 
-        <!-- СЛАЙД 7: ДИАГНОСТИКА 1 -->
-        <div class="slide-content" id="slide-6">
-            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (База)</div>
-            <h2>Направления при торможении</h2>
-            <p>Брусок скользит вправо и экстренно тормозит. Сопоставьте направления стрелок величин.</p>
-            <div class="two-columns">
-                <div class="theory-panel" style="gap:10px; display:flex; flex-direction:column;">
-                    <div class="quiz-select-wrapper">
-                        <span class="select-label">Скорость бруска (v)</span>
-                        <select class="custom-select" id="task1_ans1">
-                            <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="left">Стрелка 1 (Влево)</option>
-                            <option value="right">Стрелка 2 (Вправо)</option>
-                            <option value="up">Стрелка 3 (Вверх)</option>
-                        </select>
-                    </div>
-                    <div class="quiz-select-wrapper">
-                        <span class="select-label">Сила трения (F<sub>тр</sub>)</span>
-                        <select class="custom-select" id="task1_ans2">
-                            <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="left">Стрелка 1 (Влево)</option>
-                            <option value="right">Стрелка 2 (Вправо)</option>
-                            <option value="up">Стрелка 3 (Вверх)</option>
-                        </select>
-                    </div>
-                    <div class="quiz-select-wrapper">
-                        <span class="select-label">Ускорение бруска (a)</span>
-                        <select class="custom-select" id="task1_ans3">
-                            <option value="" disabled selected>Выберите ответ...</option>
-                            <option value="left">Стрелка 1 (Влево)</option>
-                            <option value="right">Стрелка 2 (Вправо)</option>
-                            <option value="up">Стрелка 3 (Вверх)</option>
-                        </select>
-                    </div>
-                    <button class="submit-btn" id="btnSubmitTask1" onclick="submitTask1()">Зафиксировать ответ задачи №1</button>
+        <!-- СЛАЙД 6: МЕТОДИЧЕСКИЙ ЧЕК-ЛИСТ ЛОВУШЕК -->
+        <div class="slide-content" id="slide-5">
+            <div style="color:var(--brand-red); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Чек-лист методических ловушек</div>
+            <h2>Экзаменационные капканы ОГЭ по динамике</h2>
+            <div class="theory-panel" style="justify-content:flex-start;">
+                <div class="alert-box">
+                    <h3>Ловушка 1. Путаница с формулой силы трения</h3>
+                    <p>Сила трения покоя не рассчитывается через &mu;N. Она подстраивается под внешнюю сдвигающую силу до достижения предела.</p>
                 </div>
-                <div class="interactive-panel" style="justify-content:center;">
-                    <canvas id="canvasTask1" class="vector-canvas" style="height:230px;"></canvas>
+                <div class="alert-box">
+                    <h3>Ловушка 2. Иллюзия отсутствия притяжения</h3>
+                    <p>На МКС действует мощнейшее притяжение Земли. Невесомость возникает из-за того, что станция и космонавт падают синхронно.</p>
                 </div>
             </div>
         </div>
-        <!-- СЛАЙД 8: ДИАГНОСТИКА 2 -->
+        <!-- СЛАЙД 7: ДИАГНОСТИЧЕСКАЯ ЗАДАЧА №1 -->
+        <div class="slide-content" id="slide-6">
+            <div class="two-columns">
+                <div class="theory-panel">
+                    <div style="color:var(--brand-orange); font-weight:bold; font-size:0.75rem; text-transform:uppercase;">Диагностика (База)</div>
+                    <h2 style="font-size:1.25rem;">Направления при торможении</h2>
+                    <div class="quiz-select-wrapper"><span class="select-label">Скорость бруска (v)</span>
+                        <select class="custom-select" id="task1_ans1"><option value="" disabled selected>Выберите...</option><option value="left">Влево</option><option value="right">Вправо</option><option value="up">Вверх</option></select>
+                    </div>
+                    <div class="quiz-select-wrapper"><span class="select-label">Сила трения (F<sub>тр</sub>)</span>
+                        <select class="custom-select" id="task1_ans2"><option value="" disabled selected>Выберите...</option><option value="left">Влево</option><option value="right">Вправо</option><option value="up">Вверх</option></select>
+                    </div>
+                    <div class="quiz-select-wrapper"><span class="select-label">Ускорение (a)</span>
+                        <select class="custom-select" id="task1_ans3"><option value="" disabled selected>Выберите...</option><option value="left">Влево</option><option value="right">Вправо</option><option value="up">Вверх</option></select>
+                    </div>
+                    <button class="submit-btn" id="btnSubmitTask1" onclick="submitTask1()">Зафиксировать ответ задачи №1</button>
+                </div>
+                <div class="interactive-panel"><canvas id="canvasTask1" class="vector-canvas"></canvas></div>
+            </div>
+        </div>
+
+        <!-- СЛАЙД 8: ДИАГНОСТИЧЕСКАЯ ЗАДАЧА №2 -->
         <div class="slide-content" id="slide-7">
-            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Расчеты)</div>
+            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Диагностика (Расчеты)</div>
             <h2>Задача №2: Расчёт равнодействующей сил</h2>
-            <p>К телу приложены три силы: F<sub>1</sub> = 12 Н (вправо), F<sub>2</sub> = 5 Н (влево), F<sub>3</sub> = 3 Н (влево). Чему равен модуль равнодействующей силы и куда она направлена?</p>
-            <div class="theory-panel" style="gap:5px; margin-top:15px;">
+            <p>К телу приложены силы: F<sub>1</sub>=12 Н (вправо), F<sub>2</sub>=5 Н (влево), F<sub>3</sub>=3 Н (влево). Чему равен модуль равнодействующей силы?</p>
+            <div class="quiz-container">
                 <button class="quiz-option" onclick="selectTask2(0)" id="t2_o0">4 Н, направлена влево</button>
                 <button class="quiz-option" onclick="selectTask2(1)" id="t2_o1">4 Н, направлена вправо</button>
                 <button class="quiz-option" onclick="selectTask2(2)" id="t2_o2">20 Н, направлена вправо</button>
                 <button class="quiz-option" onclick="selectTask2(3)" id="t2_o3">10 Н, направлена влево</button>
-                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask2" onclick="submitTask2()" disabled>Зафиксировать ответ задачи №2</button>
+                <button class="submit-btn" id="btnSubmitTask2" onclick="submitTask2()" disabled>Зафиксировать ответ задачи №2</button>
             </div>
         </div>
 
-        <!-- СЛАЙД 9: ДИАГНОСТИКА 3 -->
+        <!-- СЛАЙД 9: ДИАГНОСТИЧЕСКАЯ ЗАДАЧА №3 -->
         <div class="slide-content" id="slide-8">
-            <div style="color:var(--brand-red); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Ловушка ОГЭ)</div>
+            <div style="color:var(--brand-red); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Диагностика (Ловушка ОГЭ)</div>
             <h2>Задача №3: Эксперимент с жесткостью пружины</h2>
-            <p>Пружину жесткостью k = 400 Н/м растянули на 2 см. Затем эту же пружину растянули еще на 2 см. Как изменилась жесткость пружины во второй части опыта?</p>
-            <div class="theory-panel" style="gap:5px; margin-top:15px;">
+            <p>Пружину жесткостью k=400 Н/м растянули на 2 см, а затем еще на 2 см. Как изменилась внутренняя жесткость пружины?</p>
+            <div class="quiz-container">
                 <button class="quiz-option" onclick="selectTask3(0)" id="t3_o0">Увеличилась в 2 раза</button>
                 <button class="quiz-option" onclick="selectTask3(1)" id="t3_o1">Уменьшилась в 2 раза</button>
                 <button class="quiz-option" onclick="selectTask3(2)" id="t3_o2">Абсолютно не изменилась</button>
                 <button class="quiz-option" onclick="selectTask3(3)" id="t3_o3">Стала равна нулю</button>
-                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask3" onclick="submitTask3()" disabled>Зафиксировать ответ задачи №3</button>
+                <button class="submit-btn" id="btnSubmitTask3" onclick="submitTask3()" disabled>Зафиксировать ответ задачи №3</button>
             </div>
         </div>
 
-        <!-- СЛАЙД 10: ДИАГНОСТИКА 4 -->
+        <!-- СЛАЙД 10: ДИАГНОСТИЧЕСКАЯ ЗАДАЧА №4 -->
         <div class="slide-content" id="slide-9">
-            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Диагностика (Повышенная сложность)</div>
-            <h2>Задача №4: Взаимодействие тел разной массы</h2>
-            <p>Грузовик массой 5 тонн сталкивается с легковым автомобилем массой 1 тонна. Сила грузовика равна F<sub>1</sub>, сила легкового авто равна F<sub>2</sub>. Что верно?</p>
-            <div class="theory-panel" style="gap:5px; margin-top:10px;">
+            <div style="color:var(--brand-orange); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Диагностика (Повышенная сложность)</div>
+            <h2>Задача №4: Столкновение тел разной массы</h2>
+            <p>Грузовик массой 5 тонн сталкивается с легковым автомобилем массой 1 тонна. Модули мгновенных сил соотносятся как:</p>
+            <div class="quiz-container">
                 <button class="quiz-option" onclick="selectTask4(0)" id="t4_o0">F<sub>1</sub> = 5 · F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(1)" id="t4_o1">F<sub>1</sub> = F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(2)" id="t4_o2">F<sub>1</sub> = 0.2 · F<sub>2</sub></button>
                 <button class="quiz-option" onclick="selectTask4(3)" id="t4_o3">F<sub>1</sub> + F<sub>2</sub> = 0</button>
-                <button class="submit-btn" style="margin-top:15px;" id="btnSubmitTask4" onclick="submitTask4()" disabled>Зафиксировать ответ задачи №4</button>
+                <button class="submit-btn" id="btnSubmitTask4" onclick="submitTask4()" disabled>Зафиксировать ответ задачи №4</button>
             </div>
         </div>
 
-        <!-- СЛАЙД 11: АНАЛИТИКА -->
+        <!-- СЛАЙД 11: ФИНАЛЬНАЯ АНАЛИТИКА СЕССИИ -->
         <div class="slide-content" id="slide-10">
-            <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.8rem; text-transform:uppercase; margin-bottom:2px;">Аналитика сессии</div>
-            <h2>Диагностическая карта</h2>
-            <div class="interactive-panel" style="align-items:center; text-align:center; padding:35px 20px; gap:20px;">
-                <p style="color:var(--text-main); margin:0;">Нажмите кнопку для расчёта результатов.</p>
-                <button class="submit-btn" style="width:240px;" onclick="calculateTotalResults()">Сформировать итог</button>
-                <div style="font-size:3.5rem; font-weight:bold; color:var(--brand-cyan); margin-top:10px;" id="totalScoreText">-- / 4</div>
+            <div style="color:var(--brand-cyan); font-weight:bold; font-size:0.75rem; text-transform:uppercase; margin-bottom:4px;">Аналитика сессии</div>
+            <h2>Диагностическая карта результатов</h2>
+            <div class="interactive-panel" style="align-items:center; text-align:center; justify-content:center; gap:15px;">
+                <button class="submit-btn" style="width:200px;" onclick="calculateTotalResults()">Сформировать итог</button>
+                <div style="font-size:2.8rem; font-weight:bold; color:var(--brand-cyan);" id="totalScoreText">-- / 4</div>
             </div>
         </div>
     </main>
@@ -473,12 +468,12 @@
     }
 
     function updateScoreIndicator() {
-        let completedTasks = 0;
-        if (quizData.task1.submitted) completedTasks++;
-        if (quizData.task2.submitted) completedTasks++;
-        if (quizData.task3.submitted) completedTasks++;
-        if (quizData.task4.submitted) completedTasks++;
-        document.getElementById('slideCounter').textContent = `${completedTasks} / 4`;
+        let completed = 0;
+        if (quizData.task1.submitted) completed++;
+        if (quizData.task2.submitted) completed++;
+        if (quizData.task3.submitted) completed++;
+        if (quizData.task4.submitted) completed++;
+        document.getElementById('slideCounter').textContent = `${completed} / 4`;
     }
 
     function renderActiveCanvas() {
@@ -493,34 +488,29 @@
         const headlen = 8;
         const angle = Math.atan2(toy - fromy, tox - fromx);
         ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 2.5;
-        ctx.beginPath(); ctx.moveTo(fromx, fromy); ctx.lineTo(tox, toy); strokeAndArrow(ctx, tox, toy, headlen, angle, text);
-    }
-    
-    function strokeAndArrow(ctx, tox, toy, headlen, angle, text) {
-        ctx.stroke(); ctx.beginPath(); ctx.moveTo(tox, toy);
+        ctx.beginPath(); ctx.moveTo(fromx, fromy); ctx.lineTo(tox, toy); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(tox, toy);
         ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
         ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
         ctx.fill();
-        if (text) { ctx.font = "600 11px sans-serif"; ctx.fillText(text, tox + 6 * Math.cos(angle), toy + 4 * Math.sin(angle) - 4); }
+        if (text) { ctx.font = "600 11px sans-serif"; ctx.fillText(text, tox + 5 * Math.cos(angle), toy + 4 * Math.sin(angle) - 4); }
     }
 
-    // СИМУЛЯЦИЯ 1: ТРЕНИЕ ПОКОЯ
     function updateFrictionSim1(val) {
         const fv = parseFloat(val); document.getElementById('valForceX').textContent = fv.toFixed(1);
         const canvas = document.getElementById('frictionCanvas1'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        const cX = canvas.width / 2; const cY = canvas.height / 2 + 10;
+        const cX = canvas.width / 2; const cY = canvas.height / 2;
         
-        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(20, cY+30); ctx.lineTo(canvas.width-20, cY+30); ctx.stroke();
-        ctx.fillStyle = '#162631'; ctx.fillRect(cX - 45, cY - 30, 90, 60); ctx.strokeRect(cX - 45, cY - 30, 90, 60);
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(10, cY+20); ctx.lineTo(canvas.width-10, cY+20); ctx.stroke();
+        ctx.fillStyle = '#162631'; ctx.fillRect(cX - 35, cY - 20, 70, 40); ctx.strokeRect(cX - 35, cY - 20, 70, 40);
         
         if (fv > 0) {
-            drawArrow(ctx, cX, cY, cX + fv * 30, cY, '#ff9100', 'Fвнеш');
-            drawArrow(ctx, cX, cY, cX - fv * 30, cY, '#ff3d00', 'Fтр.пок');
+            drawArrow(ctx, cX, cY, cX + fv * 22, cY, '#ff9100', 'Fвнеш');
+            drawArrow(ctx, cX, cY, cX - fv * 22, cY, '#ff3d00', 'Fтр.пок');
         }
     }
 
-    // СИМУЛЯЦИЯ 2: ТРЕНИЕ СКОЛЬЖЕНИЯ
     function updateFrictionSim2(val) {
         const mu = parseFloat(val); document.getElementById('valMu').textContent = mu.toFixed(2);
         const fTr = (mu * 20).toFixed(1);
@@ -528,33 +518,30 @@
         
         const canvas = document.getElementById('frictionCanvas2'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        const cX = canvas.width / 2; const cY = canvas.height / 2 + 20;
+        const cX = canvas.width / 2; const cY = canvas.height / 2;
         
-        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(20, cY+30); ctx.lineTo(canvas.width-20, cY+30); ctx.stroke();
-        ctx.fillStyle = '#162631'; ctx.fillRect(cX - 45, cY - 30, 90, 60); ctx.strokeRect(cX - 45, cY - 30, 90, 60);
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(10, cY+20); ctx.lineTo(canvas.width-10, cY+20); ctx.stroke();
+        ctx.fillStyle = '#162631'; ctx.fillRect(cX - 35, cY - 20, 70, 40); ctx.strokeRect(cX - 35, cY - 20, 70, 40);
         
-        drawArrow(ctx, cX, cY, cX + 60, cY, '#00e5ff', 'v');
-        drawArrow(ctx, cX, cY, cX - fTr * 15, cY, '#ff3d00', 'Fтр');
-        drawArrow(ctx, cX, cY, cX, cY - 55, '#ffffff', 'N');
-        drawArrow(ctx, cX, cY, cX, cY + 55, '#78909c', 'mg');
+        drawArrow(ctx, cX, cY, cX + 45, cY, '#00e5ff', 'v');
+        drawArrow(ctx, cX, cY, cX - fTr * 10, cY, '#ff3d00', 'Fтр');
+        drawArrow(ctx, cX, cY, cX, cY - 40, '#ffffff', 'N');
+        drawArrow(ctx, cX, cY, cX, cY + 40, '#78909c', 'mg');
     }
-    // СИМУЛЯЦИЯ 3: ГРАВИТАЦИЯ (ОБРАТНЫЕ КВАДРАТЫ)
     function updateGravitySim(val) {
         const dist = parseInt(val); document.getElementById('valDistance').textContent = dist;
         const canvas = document.getElementById('gravityCanvas'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        const cY = canvas.height / 2;
-        const x1 = 50; const x2 = x1 + dist * 35;
+        const cY = canvas.height / 2; const x1 = 40; const x2 = x1 + dist * 26;
         
-        ctx.fillStyle = '#00e5ff'; ctx.beginPath(); ctx.arc(x1, cY, 15, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = '#ff9100'; ctx.beginPath(); ctx.arc(x2, cY, 10, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#00e5ff'; ctx.beginPath(); ctx.arc(x1, cY, 12, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#ff9100'; ctx.beginPath(); ctx.arc(x2, cY, 8, 0, Math.PI*2); ctx.fill();
         
-        const fLen = (1 / (dist * dist)) * 320;
+        const fLen = (1 / (dist * dist)) * 260;
         drawArrow(ctx, x1, cY, x1 + fLen, cY, '#ffffff', 'F₁');
         drawArrow(ctx, x2, cY, x2 - fLen, cY, '#ffffff', 'F₂');
     }
 
-    // СИМУЛЯЦИЯ 4: ЛИФТ
     let activeElevatorState = 'rest';
     function setElevatorState(state) {
         activeElevatorState = state;
@@ -567,38 +554,37 @@
         const formula = document.getElementById('elevatorFormula');
         const canvas = document.getElementById('elevatorCanvas'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
+        const cX = canvas.width / 2;
         
-        ctx.strokeStyle = '#1e3240'; ctx.strokeRect(40, 20, 70, 150); // Шахта
-        ctx.fillStyle = '#162631'; ctx.fillRect(45, 45, 60, 100); ctx.strokeRect(45, 45, 60, 100); // Кабина
-        ctx.fillStyle = '#00e5ff'; ctx.fillRect(63, 115, 24, 30); // Груз
+        ctx.strokeStyle = '#1e3240'; ctx.strokeRect(cX - 30, 20, 60, 110);
+        ctx.fillStyle = '#162631'; ctx.fillRect(cX - 25, 40, 50, 80); ctx.strokeRect(cX - 25, 40, 50, 80);
+        ctx.fillStyle = '#00e5ff'; ctx.fillRect(cX - 10, 95, 20, 25);
         
         if (state === 'rest') {
             formula.innerHTML = "P = m · g = 10 Н";
-            drawArrow(ctx, 75, 130, 75, 75, '#00e5ff', 'N');
-            drawArrow(ctx, 75, 130, 75, 185, '#ffffff', 'mg');
+            drawArrow(ctx, cX, 105, cX, 60, '#00e5ff', 'N');
+            drawArrow(ctx, cX, 105, cX, 145, '#ffffff', 'mg');
         } else if (state === 'overload') {
             formula.innerHTML = "P = m · (g + a) > mg";
-            drawArrow(ctx, 75, 130, 75, 55, '#00e5ff', 'N');
-            drawArrow(ctx, 75, 130, 75, 185, '#ffffff', 'mg');
-            drawArrow(ctx, 150, 80, 150, 45, '#ff9100', 'a &uarr;');
+            drawArrow(ctx, cX, 105, cX, 45, '#00e5ff', 'N');
+            drawArrow(ctx, cX, 105, cX, 145, '#ffffff', 'mg');
         } else if (state === 'zero-g') {
-            formula.innerHTML = "P = m · (g - g) = 0 Н";
-            drawArrow(ctx, 75, 130, 75, 185, '#ffffff', 'mg');
-            drawArrow(ctx, 150, 80, 150, 115, '#ff3d00', 'a=g &darr;');
-            ctx.fillStyle = '#ff3d00'; ctx.font = "bold 11px sans-serif"; ctx.fillText("N = 0 (Невесомость)", 125, 40);
+            formula.innerHTML = "P = 0 (Невесомость)";
+            drawArrow(ctx, cX, 105, cX, 145, '#ffffff', 'mg');
+            ctx.fillStyle = '#ff3d00'; ctx.font = "bold 10px sans-serif"; ctx.fillText("N = 0", cX - 12, 32);
         }
     }
 
     function drawTask1Canvas() {
         const canvas = document.getElementById('canvasTask1'); if(!canvas) return;
         const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.strokeRect(100, 100, 90, 50);
-        drawArrow(ctx, 50, 40, 15, 40, '#ff9100', 'Стрелка 1');
-        drawArrow(ctx, 240, 40, 275, 40, '#ff3d00', 'Стрелка 2');
-        drawArrow(ctx, 145, 40, 145, 15, '#00e5ff', 'Стрелка 3');
+        const cX = canvas.width / 2; const cY = canvas.height / 2;
+        ctx.strokeStyle = '#1e3240'; ctx.lineWidth = 2; ctx.strokeRect(cX - 45, cY - 20, 90, 40);
+        drawArrow(ctx, cX - 60, 40, cX - 90, 40, '#ff9100', 'Стр.1');
+        drawArrow(ctx, cX + 60, 40, cX + 90, 40, '#ff3d00', 'Стр.2');
+        drawArrow(ctx, cX, 40, cX, 15, '#00e5ff', 'Стр.3');
     }
 
-    // ТЕСТИРОВАНИЕ И ФИКСАЦИЯ ОТВЕТОВ
     function submitTask1() {
         quizData.task1.a1 = document.getElementById('task1_ans1').value;
         quizData.task1.a2 = document.getElementById('task1_ans2').value;
@@ -613,7 +599,7 @@
     function submitTask4() { quizData.task4.submitted = true; freezeQuizOptions('slide-9', 'btnSubmitTask4'); updateScoreIndicator(); }
     
     function resetSelection(sId) { document.querySelectorAll(`#${sId} .quiz-option`).forEach(o => o.classList.remove('selected')); }
-    function freezeElement(id) { let el = document.getElementById(id); el.textContent = "Ответ зафиксирован"; el.disabled = true; }
+    function freezeElement(id) { let el = document.getElementById(id); el.textContent = "Зафиксировано"; el.disabled = true; }
     function freezeQuizOptions(sId, btnId) { freezeElement(btnId); document.querySelectorAll(`#${sId} .quiz-option`).forEach(o => o.disabled = true); }
 
     function calculateTotalResults() {
